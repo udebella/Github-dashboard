@@ -1,4 +1,5 @@
-const {absolutePath} = require("./helpers")
+const {absolutePath} = require('./helpers')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const commonConfig = {
     resolve: {
@@ -12,6 +13,11 @@ const commonConfig = {
     module: {
         rules: [],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: absolutePath('/src/index.html')
+        })
+    ]
 }
 
 module.exports = commonConfig
