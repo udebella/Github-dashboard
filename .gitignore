@@ -1,3 +1,9 @@
 # IntelliJ project files
-.idea
+.idea/
 *.iml
+
+# Build files
+dist/
+
+# NPM
+node_modules/
