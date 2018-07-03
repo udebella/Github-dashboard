@@ -1,15 +1,16 @@
 <template>
-    <div>Ceci est un exemple</div>
+    <div>
+        <starred-repos></starred-repos>
+    </div>
 </template>
 
-<style>
-    div {
-        background-color: red;
-    }
-</style>
-
 <script>
+    import starredRepos from './starred-repos/starred-repos.vue'
+
     export default {
-        name: 'App'
+        name: 'App',
+        components: {
+            starredRepos
+        }
     }
 </script>
