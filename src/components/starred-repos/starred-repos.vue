@@ -1,6 +1,6 @@
 <template>
     <div>
-        List of starred repo
+        List of starred repo for {{ username }}
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <starred-repos></starred-repos>
+        <starred-repos username="udebella"></starred-repos>
     </div>
 </template>
 
