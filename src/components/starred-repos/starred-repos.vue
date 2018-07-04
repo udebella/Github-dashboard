@@ -2,8 +2,10 @@
     <div>
         List of starred repo for {{ username }} :
         <ul>
-            <li v-for="repository in repositories">
-                <slot v-bind:repository="repository"></slot>
+            <li 
+                v-for="repository in repositories"
+                :key="repository.name">
+                <slot :repository="repository"/>
             </li>
         </ul>
     </div>

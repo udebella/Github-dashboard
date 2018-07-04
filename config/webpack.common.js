@@ -15,7 +15,7 @@ const commonConfig = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|vue)$/,
                 enforce: 'pre',
                 exclude: /node_modules/,
                 loader: 'eslint-loader',

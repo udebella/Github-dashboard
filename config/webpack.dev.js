@@ -14,15 +14,15 @@ const config = {
             '/users': {
                 target: 'https://api.github.com/',
                 secure: false,
-                changeOrigin: true
+                changeOrigin: true,
             },
-        }
+        },
     },
     plugins: [
         ...commonConfig.plugins,
         new HotModuleReplacementPlugin(),
         new NamedModulesPlugin(),
-    ]
+    ],
 }
 
 module.exports = config

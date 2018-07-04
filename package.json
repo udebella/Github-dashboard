@@ -7,7 +7,8 @@
     "start": "webpack-dev-server --config config/webpack.dev.js",
     "blop": "webpack-dev-server",
     "build": "webpack-cli --config config/webpack.prod.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix ./src"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "css-loader": "^0.28.11",
     "eslint": "^5.0.1",
     "eslint-loader": "^2.0.0",
+    "eslint-plugin-vue": "^4.5.0",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.21.0",
     "vue": "^2.5.16",
