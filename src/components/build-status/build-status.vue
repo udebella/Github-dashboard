@@ -3,4 +3,4 @@
 </template>
 
 <script src="./build-status.js"></script>
-<style src="./build-status.scss"></style>
+<style src="./build-status.scss" scoped></style>
