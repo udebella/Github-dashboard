@@ -1,5 +1,5 @@
 <template>
-    <div>{{ repository.name }} : {{ repository.default_branch }}</div>
+    <a :href="repository.url">{{ repository.name }}</a>
 </template>
 
 <script src="./repository-link.js"></script>
