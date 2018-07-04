@@ -10,6 +10,13 @@ const config = {
         port: 3000,
         hot: true,
         open: true,
+        proxy: {
+            '/users': {
+                target: 'https://api.github.com/',
+                secure: false,
+                changeOrigin: true
+            },
+        }
     },
     plugins: [
         ...commonConfig.plugins,
