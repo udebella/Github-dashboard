@@ -15,24 +15,33 @@ const commonConfig = {
     module: {
         rules: [
             {
+                test: /\.js$/,
+                enforce: 'pre',
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    fix: true,
+                },
+            },
+            {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
             },
             {
                 test: /\.css$/,
                 loader: [
                     'style-loader',
                     'css-loader',
-                ]
-            }
+                ],
+            },
         ],
     },
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            template: absolutePath('/src/index.html')
+            template: absolutePath('/src/index.html'),
         }),
-    ]
+    ],
 }
 
 module.exports = commonConfig

@@ -2,8 +2,8 @@ export default {
     props: {
         repository: {
             type: Object,
-            required: true
-        }
+            required: true,
+        },
     },
-    name: 'repository-link'
+    name: 'repository-link',
 }

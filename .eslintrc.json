@@ -1,0 +1,11 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "semi": ["error", "never"],
+    "comma-dangle": ["error", "always-multiline"]
+  }
+}

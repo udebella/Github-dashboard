@@ -4,12 +4,12 @@ export default {
     props: {
         username: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
     data() {
         return {
-            repositories: []
+            repositories: [],
         }
     },
     mounted() {
@@ -18,5 +18,5 @@ export default {
             .then(repositories => this.repositories = repositories.map(({name, default_branch}) => ({name, default_branch})))
             .catch(console.error)
     },
-    name: 'starred-repos'
+    name: 'starred-repos',
 }
