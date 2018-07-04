@@ -11,7 +11,7 @@ const config = {
         hot: true,
         open: true,
         proxy: {
-            '/users': {
+            '/': {
                 target: 'https://api.github.com/',
                 secure: false,
                 changeOrigin: true,

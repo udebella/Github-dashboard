@@ -15,7 +15,7 @@ export default {
     mounted() {
         axios.get(`/users/${this.username}/starred`)
             .then(({data}) => data)
-            .then(repositories => this.repositories = repositories.map(({name, url, default_branch}) => ({name, url, default_branch})))
+            .then(repositories => this.repositories = repositories.map(({name, url, owner, default_branch}) => ({name, url, owner, default_branch})))
             .catch(console.error)
     },
     name: 'starred-repos',
