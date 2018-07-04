@@ -28,10 +28,11 @@ const commonConfig = {
                 loader: 'vue-loader',
             },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 loader: [
                     'style-loader',
                     'css-loader',
+                    'sass-loader',
                 ],
             },
         ],
