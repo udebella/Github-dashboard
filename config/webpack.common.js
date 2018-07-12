@@ -4,7 +4,7 @@ const {VueLoaderPlugin} = require('vue-loader')
 
 const commonConfig = {
     resolve: {
-        extensions: ['.js', '.vue', '.css'],
+        extensions: ['.js', '.vue', '.scss'],
     },
     entry: absolutePath('/src/main.js'),
     output: {
@@ -30,9 +30,8 @@ const commonConfig = {
             {
                 test: /\.scss$/,
                 loader: [
-                    'style-loader',
+                    'vue-style-loader',
                     'css-loader',
-                    'postcss-loader',
                     'sass-loader',
                 ],
             },
