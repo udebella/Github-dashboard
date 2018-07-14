@@ -1,4 +1,5 @@
-import axios from 'axios'
+import {request} from "../../services/graphql-client";
+import {query} from "./starred-repo.query";
 
 export default {
     props: {
@@ -13,10 +14,16 @@ export default {
         }
     },
     mounted() {
-        axios.get(`/users/${this.username}/starred`)
-            .then(({data}) => data)
-            .then(repositories => this.repositories = repositories.map(({name, url, owner, default_branch}) => ({name, url, owner, default_branch})))
-            .catch(console.error)
+        request(query)
+            .then(({viewer}) => viewer)
+            .then(({starredRepositories}) => starredRepositories)
+            .then(({nodes}) => this.repositories = nodes
+                .map(({name, owner, url, defaultBranchRef}) => ({
+                    name,
+                    owner: owner.login,
+                    url,
+                    defaultBranch: defaultBranchRef.name
+                })))
     },
     name: 'starred-repos',
 }

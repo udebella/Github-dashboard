@@ -3,10 +3,10 @@
         <starred-repos username="udebella">
             <template slot-scope="{repository}">
                 <repository-link :repository="repository"/>
-                <build-status 
-                    :name="repository.name" 
-                    :owner="repository.owner" 
-                    :branch="repository.default_branch"/>
+                <build-status
+                    :name="repository.name"
+                    :owner="repository.owner"
+                    :branch="repository.defaultBranch"/>
             </template>
         </starred-repos>
     </div>

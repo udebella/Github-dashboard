@@ -11,7 +11,7 @@ const config = {
         hot: true,
         open: true,
         proxy: {
-            '/': {
+            '/graphql': {
                 target: 'https://api.github.com/',
                 secure: false,
                 changeOrigin: true,
