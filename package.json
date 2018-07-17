@@ -8,7 +8,8 @@
     "blop": "webpack-dev-server",
     "build": "webpack-cli --config config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --fix ./src"
+    "lint": "eslint --fix ./src",
+    "plop": "plop"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
+    "plop": "^2.0.0",
     "webpack-dev-server": "^3.1.4"
   }
 }
