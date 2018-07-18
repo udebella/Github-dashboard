@@ -2,7 +2,9 @@
     <a 
         :href="url"
         :title="description"
-        target="_blank">{{ state }}</a>
+        :class="state"
+        class="icon"
+        target="_blank"/>
 </template>
 
 <script src="./build-status.js"></script>

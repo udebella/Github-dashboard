@@ -1,5 +1,36 @@
 @import "../../global";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
 
-a {
+.icon {
+  @include fa-icon;
+  @extend .fas;
+
   padding-right: 5px;
+  text-decoration: none;
+
+  &.SUCCESS {
+    &:before {
+      content: fa-content($fa-var-check-circle);
+    }
+  }
+
+  &.FAILURE {
+    &:before {
+      content: fa-content($fa-var-exclamation-circle);
+    }
+  }
+
+  &.ERROR {
+    &:before {
+      content: fa-content($fa-var-times-circle);
+    }
+  }
+
+  &.PENDING {
+    &:before {
+      content: fa-content($fa-var-clock);
+    }
+  }
 }

@@ -14,11 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.1.1",
     "axios": "^0.18.0",
     "css-loader": "^1.0.0",
     "eslint": "^5.1.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-vue": "^4.5.0",
+    "file-loader": "^1.1.11",
     "graphql-request": "^1.6.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.2",
