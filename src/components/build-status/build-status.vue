@@ -1,8 +1,8 @@
 <template>
     <a 
-        :href="status.targetUrl" 
-        :title="status.description"
-        target="_blank">{{ status.state }}</a>
+        :href="url"
+        :title="description"
+        target="_blank">{{ state }}</a>
 </template>
 
 <script src="./build-status.js"></script>

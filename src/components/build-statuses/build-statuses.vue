@@ -1,9 +1,12 @@
 <template>
     <div>
         <span 
-            v-for="(status, index) in statuses"
+            v-for="({description, targetUrl, state}, index) in statuses"
             :key="index">
-            <build-status :status="status"/>
+            <build-status 
+                :description="description" 
+                :url="targetUrl" 
+                :state="state"/>
         </span>
     </div>
 </template>
