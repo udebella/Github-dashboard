@@ -3,3 +3,4 @@
 </template>
 
 <script src="./repository-link.js"></script>
+<style src="./repository-link.scss"></style>

@@ -12,3 +12,4 @@
 </template>
 
 <script src="./starred-repos.js"></script>
+<style src="./starred-repos.scss"></style>
