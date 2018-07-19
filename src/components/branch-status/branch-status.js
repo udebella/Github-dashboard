@@ -27,20 +27,16 @@ export default {
         state: '',
         contexts: [],
     }),
-    mounted() {
-        request(query({
+    async mounted() {
+        const response = await request(query({
             owner: this.owner,
             branch: this.branch,
             repository: this.name,
         }))
-            .then(extractStatuses)
-            .then(({state, contexts}) => {
-                this.state = state
-                this.contexts = contexts || []
-            })
-            .then(() => {
-                this.$emit('build-status', this.state)
-            })
+        const {state, contexts} = extractStatuses(response)
+        this.state = state
+        this.contexts = contexts || []
+        this.$emit('build-status', this.state)
     },
     components: {
         buildStatuses,

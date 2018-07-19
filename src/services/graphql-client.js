@@ -7,4 +7,4 @@ const client = new GraphQLClient('/graphql', {
     },
 })
 
-export const request = query => client.request(query)
+export const request = async query => client.request(query)
