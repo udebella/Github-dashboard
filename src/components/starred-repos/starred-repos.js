@@ -1,5 +1,5 @@
-import {request} from "../../services/graphql-client";
-import {query} from "./starred-repo.query";
+import {request} from "../../services/graphql-client"
+import {query} from "./starred-repo.query"
 import repositoryList from '../repository-list/repository-list.vue'
 
 export default {
@@ -23,11 +23,11 @@ export default {
                     name,
                     owner: owner.login,
                     url,
-                    defaultBranch: defaultBranchRef.name
+                    defaultBranch: defaultBranchRef.name,
                 })))
     },
     name: 'starred-repos',
     components: {
-        repositoryList
-    }
+        repositoryList,
+    },
 }

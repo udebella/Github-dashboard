@@ -12,6 +12,6 @@ export default {
         state: {
             required: true,
             type: String,
-        }
-    }
+        },
+    },
 }

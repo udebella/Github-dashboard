@@ -45,6 +45,6 @@ export default {
     },
     name: 'build-status',
     components: {
-        buildStatuses
-    }
+        buildStatuses,
+    },
 }

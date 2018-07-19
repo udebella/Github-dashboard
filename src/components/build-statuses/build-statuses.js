@@ -6,9 +6,9 @@ export default {
         statuses: {
             required: true,
             type: Array,
-        }
+        },
     },
     components: {
-        buildStatus
-    }
+        buildStatus,
+    },
 }

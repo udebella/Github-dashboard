@@ -5,10 +5,10 @@ export default {
     props: {
         repositories: {
             required: true,
-            type: Array
-        }
+            type: Array,
+        },
     },
     components: {
-        repositoryLine
-    }
+        repositoryLine,
+    },
 }
