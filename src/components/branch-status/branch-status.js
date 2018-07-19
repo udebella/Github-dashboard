@@ -8,6 +8,7 @@ const extractStatuses = response => {
 }
 
 export default {
+    name: 'build-status',
     props: {
         name: {
             type: String,
@@ -22,12 +23,10 @@ export default {
             required: true,
         },
     },
-    data() {
-       return {
-           state: '',
-           contexts: [],
-       }
-    },
+    data: () => ({
+        state: '',
+        contexts: [],
+    }),
     mounted() {
         request(query({
             owner: this.owner,
@@ -43,7 +42,6 @@ export default {
                 this.$emit('build-status', this.state)
             })
     },
-    name: 'build-status',
     components: {
         buildStatuses,
     },

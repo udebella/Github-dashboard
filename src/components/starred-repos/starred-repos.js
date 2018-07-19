@@ -3,17 +3,16 @@ import {query} from "./starred-repo.query"
 import repositoryList from '../repository-list/repository-list.vue'
 
 export default {
+    name: 'starred-repos',
     props: {
         username: {
             type: String,
             required: true,
         },
     },
-    data() {
-        return {
-            repositories: [],
-        }
-    },
+    data: () => ({
+        repositories: [],
+    }),
     mounted() {
         request(query)
             .then(({viewer}) => viewer)
@@ -26,7 +25,6 @@ export default {
                     defaultBranch: defaultBranchRef.name,
                 })))
     },
-    name: 'starred-repos',
     components: {
         repositoryList,
     },
