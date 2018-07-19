@@ -1,5 +1,6 @@
 import {request} from "../../services/graphql-client";
 import {query} from "./starred-repo.query";
+import repositoryList from '../repository-list/repository-list.vue'
 
 export default {
     props: {
@@ -26,4 +27,7 @@ export default {
                 })))
     },
     name: 'starred-repos',
+    components: {
+        repositoryList
+    }
 }

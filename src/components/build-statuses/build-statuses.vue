@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <span>
         <span 
             v-for="({description, targetUrl, state}, index) in statuses"
             :key="index">
@@ -8,7 +8,7 @@
                 :url="targetUrl" 
                 :state="state"/>
         </span>
-    </div>
+    </span>
 </template>
 
 <script src="./build-statuses.js"></script>

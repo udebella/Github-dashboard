@@ -12,24 +12,28 @@
 
   &.SUCCESS {
     &:before {
+      color: green;
       content: fa-content($fa-var-check-circle);
     }
   }
 
   &.FAILURE {
     &:before {
+      color: orange;
       content: fa-content($fa-var-exclamation-circle);
     }
   }
 
   &.ERROR {
     &:before {
+      color: red;
       content: fa-content($fa-var-times-circle);
     }
   }
 
   &.PENDING {
     &:before {
+      color: blue;
       content: fa-content($fa-var-clock);
     }
   }

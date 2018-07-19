@@ -1,9 +1,8 @@
 <template>
-    <div>
-        <span :class="state">{{ state }}</span>
-        <build-statuses :statuses="contexts"/>
-    </div>
+    <build-statuses
+        :statuses="contexts"
+        class="tooltip"/>
 </template>
 
 <script src="./branch-status.js"></script>
-<style src="./branch-status.scss" scoped></style>
+<style src="./branch-status.scss"></style>

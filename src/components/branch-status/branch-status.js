@@ -39,6 +39,9 @@ export default {
                 this.state = state
                 this.contexts = contexts || []
             })
+            .then(() => {
+                this.$emit('build-status', this.state)
+            })
     },
     name: 'build-status',
     components: {

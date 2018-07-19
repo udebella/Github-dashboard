@@ -1,13 +1,7 @@
 <template>
     <div>
         List of starred repo for {{ username }} :
-        <ul>
-            <li 
-                v-for="repository in repositories"
-                :key="repository.name">
-                <slot :repository="repository"/>
-            </li>
-        </ul>
+        <repository-list :repositories="repositories"/>
     </div>
 </template>
 

@@ -13,8 +13,5 @@ export default {
             required: true,
             type: String,
         }
-    },
-    mounted() {
-        console.log(this.status)
     }
 }

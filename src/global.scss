@@ -1,11 +1,25 @@
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
-* {
+// Colors
+$primary: #6200EE;
+$primaryVariant: #3700B3;
+$secondary: #03DAC6;
+$secondaryVariant: #018786;
+$background: #FFFFFF;
+$surface: #FFFFFF;
+$error: #B00020;
+$onPrimary: #FFFFFF;
+$onSecondary: #000000;
+$onBackground: $onSecondary;
+$onSurface: $onSecondary;
+$onError: $onPrimary;
+
+body {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  color: #333;
+  color: $onBackground;
   font-size: 16px;
 }
 
 a {
-  color: navy;
+  color: $primaryVariant;
 }

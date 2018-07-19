@@ -1,13 +1,5 @@
 @import "../../global";
 
-.success {
-  background-color: lightgreen;
-}
-
-.pending {
-  background-color: lightsalmon;
-}
-
-.failure {
-  background-color: lightcoral;
+.tooltip {
+  white-space: nowrap;
 }
