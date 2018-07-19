@@ -1,7 +1,5 @@
 <template>
-    <build-statuses
-        :statuses="contexts"
-        class="tooltip"/>
+    <build-statuses :statuses="contexts"/>
 </template>
 
 <script src="./branch-status.js"></script>
