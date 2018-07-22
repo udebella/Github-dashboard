@@ -1,9 +1,9 @@
 <template>
-    <div 
-        :class="branchStatus"
+    <div
+        :title="branchStatus"
+        :class="branchStatusClass()"
         class="line">
         <repository-link
-            :title="branchStatus"
             :repository="repository"
             class="repository-link"/>
         <branch-status

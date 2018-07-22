@@ -13,10 +13,16 @@ export default {
         branchStatus: '',
     }),
     methods: {
-        updateBuildStatus(val) {
-            if (val) {
-                this.branchStatus = val
+        updateBuildStatus(branchStatus) {
+            if (branchStatus) {
+                this.branchStatus = branchStatus
             }
+        },
+        branchStatusClass() {
+            if (this.branchStatus) {
+                return this.branchStatus
+            }
+            return 'NO_STATUS'
         },
     },
     components: {

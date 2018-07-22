@@ -1,34 +1,47 @@
 @import "../../global";
 
-.line {
-  display: flex;
-  flex-direction: row;
-  padding: 5px 0;
-
-  &.SUCCESS {
-    background-color: lightgreen;
-  }
-  &.FAILURE {
-    background-color: lightcoral;
-  }
-  &.PENDING {
-    background-color: lightsalmon;
-  }
-}
-
-.branch-status {
-  display: none;
-  padding-left: 5px;
+@mixin darkenOnHover($color) {
+  background-color: $color;
 
   &:hover {
-    display: block;
+    background-color: darken($color, 5%);
   }
 }
 
-.repository-link {
-  text-decoration: none;
+.line {
+  display: flex;
+  padding: 5px;
+  position: relative;
+  max-width: 200px;
+  border-radius: 5px;
+  margin: 1px 0;
 
-  &:hover ~ .branch-status {
-    display: block;
+  &.SUCCESS {
+    @include darkenOnHover(lightgreen);
+  }
+  &.FAILURE {
+    @include darkenOnHover(lightcoral);
+  }
+  &.PENDING {
+    @include darkenOnHover(lightsalmon);
+  }
+  &.NO_STATUS {
+    @include darkenOnHover($surface);
+  }
+
+  .branch-status {
+    visibility: hidden;
+    opacity: 0;
+    transition: 300ms ease;
+  }
+
+  &:hover .branch-status, .branch-status:hover {
+    visibility: visible;
+    opacity: 1;
+    transition: 300ms ease;
+  }
+
+  .repository-link {
+    text-decoration: none;
   }
 }
