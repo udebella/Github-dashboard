@@ -1,7 +1,7 @@
-import repositoryLine from "../repository-line/repository-line.vue"
+import repositoryLine from '../repository-line/repository-line.vue'
 
 export default {
-    name: "repository-list",
+    name: `repository-list`,
     props: {
         repositories: {
             required: true,

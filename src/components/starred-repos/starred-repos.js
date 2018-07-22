@@ -1,5 +1,5 @@
-import {request} from "../../services/graphql-client"
-import {query} from "./starred-repo.query"
+import {request} from '../../services/graphql-client'
+import {query} from './starred-repo.query'
 import repositoryList from '../repository-list/repository-list.vue'
 
 const extractRepositories = data => {
@@ -14,7 +14,7 @@ const extractRepositories = data => {
 }
 
 export default {
-    name: 'starred-repos',
+    name: `starred-repos`,
     props: {
         username: {
             type: String,

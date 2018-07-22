@@ -1,6 +1,6 @@
-import {request} from "../../services/graphql-client"
-import {query} from "./branch-status.query"
-import buildStatuses from "../build-statuses/build-statuses.vue"
+import {request} from '../../services/graphql-client'
+import {query} from './branch-status.query'
+import buildStatuses from '../build-statuses/build-statuses.vue'
 
 const extractStatuses = response => {
     const status = response.repository.ref.target.status
@@ -8,7 +8,7 @@ const extractStatuses = response => {
 }
 
 export default {
-    name: 'build-status',
+    name: `build-status`,
     props: {
         name: {
             type: String,
@@ -24,7 +24,7 @@ export default {
         },
     },
     data: () => ({
-        state: '',
+        state: ``,
         contexts: [],
     }),
     async mounted() {
@@ -36,7 +36,7 @@ export default {
         const {state, contexts} = extractStatuses(response)
         this.state = state
         this.contexts = contexts || []
-        this.$emit('build-status', this.state)
+        this.$emit(`build-status`, this.state)
     },
     components: {
         buildStatuses,

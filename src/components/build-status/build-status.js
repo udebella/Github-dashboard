@@ -1,5 +1,5 @@
 export default {
-    name: "build-status",
+    name: `build-status`,
     props: {
         description: {
             type: String,

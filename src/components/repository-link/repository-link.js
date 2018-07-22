@@ -1,5 +1,5 @@
 export default {
-    name: 'repository-link',
+    name: `repository-link`,
     props: {
         repository: {
             type: Object,

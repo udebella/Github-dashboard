@@ -2,7 +2,7 @@ import repositoryLink from '../repository-link/repository-link.vue'
 import branchStatus from '../branch-status/branch-status.vue'
 
 export default {
-    name: "repository-line",
+    name: `repository-line`,
     props: {
         repository: {
             required: true,
@@ -10,7 +10,7 @@ export default {
         },
     },
     data: () => ({
-        branchStatus: '',
+        branchStatus: ``,
     }),
     methods: {
         updateBuildStatus(branchStatus) {
@@ -22,7 +22,7 @@ export default {
             if (this.branchStatus) {
                 return this.branchStatus
             }
-            return 'NO_STATUS'
+            return `NO_STATUS`
         },
     },
     components: {
