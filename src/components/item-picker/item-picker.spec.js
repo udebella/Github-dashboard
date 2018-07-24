@@ -9,12 +9,6 @@ describe(`Item-picker component`, () => {
 
             expect(wrapper.find(`label`).text()).to.equal(`test`)
         })
-
-        it(`should display the label of the item`, () => {
-            const wrapper = shallowMount(ItemPicker)
-
-            expect(wrapper.find(`label`).text()).to.equal(`test`)
-        })
     })
 
     describe(`notifyParent`, () => {
