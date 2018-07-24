@@ -3,7 +3,6 @@
         <input
             :id="item"
             :value="item"
-            v-model="isChecked"
             type="checkbox"
             @input="notifyParent($event.target)">
         <label :for="item">{{ item }}</label>

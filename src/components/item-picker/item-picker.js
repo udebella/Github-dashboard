@@ -6,9 +6,6 @@ export default {
             type: String,
         },
     },
-    data: () => ({
-        isChecked: false,
-    }),
     methods: {
         notifyParent({value, checked}) {
             const eventToSend = checked ? `tick` : `untick`
