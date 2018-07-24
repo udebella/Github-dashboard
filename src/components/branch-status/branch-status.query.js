@@ -7,7 +7,7 @@ export const query = ({owner, repository, branch}) => `query {
             status {
               contexts {
                 state,
-                description,
+                context,
                 targetUrl
               },
               state

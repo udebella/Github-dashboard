@@ -3,10 +3,10 @@
         v-if="statuses.length" 
         class="popover">
         <span 
-            v-for="({description, targetUrl, state}, index) in statuses"
+            v-for="({context, targetUrl, state}, index) in statuses"
             :key="index">
             <build-status
-                :description="description"
+                :description="context"
                 :url="targetUrl" 
                 :state="state" 
                 class="build-status"/>
