@@ -3,25 +3,18 @@
         <input
             v-model="username"
             type="text">
-        <div>
+        {{ watchedRepositories }}
+        <div v-if="username">
             <h1>{{ username }} repositories</h1>
-            <ul>
-                <li
-                    v-for="repository in userRepositories"
-                    :key="repository.name">
-                    {{ repository.name }}
-                </li>
-            </ul>
+            <list-picker 
+                :list="userRepositories"
+                @update="updateRepositories($event)"/>
         </div>
-        <div>
+        <div v-if="username">
             <h1>{{ username }} starred repositories</h1>
-            <ul>
-                <li
-                    v-for="repository in userStarredRepositories"
-                    :key="repository.name">
-                    {{ repository.name }}
-                </li>
-            </ul>
+            <list-picker 
+                :list="userStarredRepositories"
+                @update="updateStarredRepositories($event)"/>
         </div>
     </div>
 </template>
