@@ -1,54 +1,54 @@
-const {absolutePath} = require('./helpers')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const {VueLoaderPlugin} = require('vue-loader')
+const {absolutePath} = require(`./helpers`)
+const HtmlWebpackPlugin = require(`html-webpack-plugin`)
+const {VueLoaderPlugin} = require(`vue-loader`)
 
 const commonConfig = {
     resolve: {
-        extensions: ['.js', '.vue', '.scss'],
+        extensions: [`.js`, `.vue`, `.scss`],
     },
-    entry: absolutePath('/src/main.js'),
+    entry: absolutePath(`/src/main.js`),
     output: {
         pathinfo: true,
-        path: absolutePath('/dist'),
-        filename: '[name].js',
+        path: absolutePath(`/dist`),
+        filename: `[name].js`,
     },
     module: {
         rules: [
             {
                 test: /\.(js|vue)$/,
-                enforce: 'pre',
+                enforce: `pre`,
                 exclude: /node_modules/,
-                loader: 'eslint-loader',
+                loader: `eslint-loader`,
                 options: {
                     fix: true,
                 },
             },
             {
                 test: /\.vue$/,
-                loader: 'vue-loader',
+                loader: `vue-loader`,
             },
             {
                 test: /\.scss$/,
                 loader: [
-                    'vue-style-loader',
-                    'css-loader',
-                    'sass-loader',
+                    `vue-style-loader`,
+                    `css-loader`,
+                    `sass-loader`,
                 ],
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file-loader',
+                loader: `file-loader`,
                 options: {
-                    name: '[name].[ext]',
-                    outputPath: 'assets/fonts/'
-                }
+                    name: `[name].[ext]`,
+                    outputPath: `assets/fonts/`,
+                },
             },
         ],
     },
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            template: absolutePath('/src/index.html'),
+            template: absolutePath(`/src/index.html`),
         }),
     ],
 }

@@ -4,6 +4,7 @@
 
 # Build files
 dist/
+coverage/
 
 # NPM
 node_modules/

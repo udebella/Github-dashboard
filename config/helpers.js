@@ -1,6 +1,6 @@
-const path = require('path')
+const path = require(`path`)
 
-const PROJECT_ROOT = path.resolve(__dirname, "..")
+const PROJECT_ROOT = path.resolve(__dirname, `..`)
 
 const hasCommandLineArgument = argument => process.argv.find(arg => arg === argument)
 
