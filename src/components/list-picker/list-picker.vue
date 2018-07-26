@@ -4,6 +4,7 @@
             v-for="item in list"
             :key="item"
             :item="item"
+            data-test="item-picker"
             @tick="tick($event)"
             @untick="untick($event)"/>
     </div>

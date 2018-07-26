@@ -21,4 +21,31 @@ describe(`List-picker component`, () => {
             expect(wrapper.vm.$data).to.deep.equals({tickedItems: []})
         })
     })
+
+    describe(`Method: tick`, () => {
+        it(`should send an update event with the new value`, () => {
+            // Given
+            const wrapper = shallowMount(ListPicker, {propsData: {list: [`test`]}})
+
+            // When
+            wrapper.vm.tick(`testValue`)
+
+            // Then
+            expect(wrapper.emitted(`update`).length).to.equal(1)
+            expect(wrapper.emitted(`update`)[0]).to.deep.equal([[`testValue`]])
+        })
+
+        it(`should keep previously set tickedItems`, () => {
+            // Given
+            const wrapper = shallowMount(ListPicker, {propsData: {list: [`test`]}})
+            wrapper.setData({tickedItems: [`previousData`]})
+
+            // When
+            wrapper.vm.tick(`testValue`)
+
+            // Then
+            expect(wrapper.emitted(`update`).length).to.equal(1)
+            expect(wrapper.emitted(`update`)[0]).to.deep.equal([[`previousData`, `testValue`]])
+        })
+    })
 })
