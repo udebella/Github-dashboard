@@ -1,10 +1,8 @@
-const helpers = require(`./helpers`)
 const {SourceMapDevToolPlugin} = require(`webpack`)
 const webpackConfig = require(`./webpack.common`)
 
 const testConfig = {
     ...webpackConfig,
-    entry: helpers.absolutePath(`/src/test.spec.js`),
     module: {
         rules: [
             ...webpackConfig.module.rules,

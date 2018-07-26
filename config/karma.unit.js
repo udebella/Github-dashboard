@@ -6,10 +6,10 @@ module.exports = (config) => {
         basePath: `../`,
         frameworks: [`mocha`, `chai`],
         files: [
-            helpers.absolutePath(`/src/test.spec.js`),
+            helpers.absolutePath(`/src/main.spec.js`),
         ],
         preprocessors: {
-            'src/test.spec.js': [`webpack`],
+            'src/main.spec.js': [`webpack`],
         },
         webpack: webpackConfig,
         webpackServer: {noInfo: true},
