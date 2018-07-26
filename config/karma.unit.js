@@ -4,7 +4,7 @@ const helpers = require(`./helpers`)
 module.exports = (config) => {
     config.set({
         basePath: `../`,
-        frameworks: [`mocha`, `chai`],
+        frameworks: [`mocha`, `chai`, `sinon`],
         files: [
             helpers.absolutePath(`/src/main.spec.js`),
         ],
