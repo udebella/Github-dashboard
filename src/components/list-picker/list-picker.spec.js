@@ -1,4 +1,4 @@
-import {shallowMount} from '@vue/test-utils'
+import {shallowMount, mount} from '@vue/test-utils'
 import ListPicker from './list-picker.vue'
 import {expect} from 'chai'
 
@@ -37,7 +37,7 @@ describe(`List-picker component`, () => {
 
         it(`should keep previously set tickedItems`, () => {
             // Given
-            const wrapper = shallowMount(ListPicker, {propsData: {list: [`test`]}})
+            const wrapper = mount(ListPicker, {propsData: {list: [`test`]}})
             wrapper.setData({tickedItems: [`previousData`]})
 
             // When
@@ -46,6 +46,33 @@ describe(`List-picker component`, () => {
             // Then
             expect(wrapper.emitted(`update`).length).to.equal(1)
             expect(wrapper.emitted(`update`)[0]).to.deep.equal([[`previousData`, `testValue`]])
+        })
+    })
+
+    describe(`Method: untick`, () => {
+        it(`should send an update event with the new value`, () => {
+            // Given
+            const wrapper = shallowMount(ListPicker, {propsData: {list: [`test`]}})
+
+            // When
+            wrapper.vm.untick(`testValue`)
+
+            // Then
+            expect(wrapper.emitted(`update`).length).to.equal(1)
+            expect(wrapper.emitted(`update`)[0]).to.deep.equal([[]])
+        })
+
+        it(`should remove previously set tickedItems`, () => {
+            // Given
+            const wrapper = mount(ListPicker, {propsData: {list: [`test`]}})
+            wrapper.setData({tickedItems: [`previousData`]})
+
+            // When
+            wrapper.vm.untick(`previousData`)
+
+            // Then
+            expect(wrapper.emitted(`update`).length).to.equal(1)
+            expect(wrapper.emitted(`update`)[0]).to.deep.equal([[]])
         })
     })
 })
