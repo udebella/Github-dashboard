@@ -18,6 +18,10 @@ module.exports = plop => {
             type: `add`,
             path: `src/components/{{dashCase componentName}}/{{dashCase componentName}}.js`,
             templateFile: `plop-templates/component/script.hbs`,
+        }, {
+            type: `add`,
+            path: `src/components/{{dashCase componentName}}/{{dashCase componentName}}.spec.js`,
+            templateFile: `plop-templates/component/test.hbs`,
         }],
     })
 }
