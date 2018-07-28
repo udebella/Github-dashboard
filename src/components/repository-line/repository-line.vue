@@ -4,7 +4,8 @@
         :class="branchStatusClass()"
         class="line">
         <repository-link
-            :repository="repository"
+            :name="repository.name"
+            :url="repository.url"
             class="repository-link"/>
         <branch-status
             :name="repository.name"

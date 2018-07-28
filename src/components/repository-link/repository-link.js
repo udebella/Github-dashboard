@@ -1,8 +1,12 @@
 export default {
     name: `repository-link`,
     props: {
-        repository: {
-            type: Object,
+        name: {
+            type: String,
+            required: true,
+        },
+        url: {
+            type: String,
             required: true,
         },
     },
