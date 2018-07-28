@@ -8,7 +8,7 @@ const extractStatuses = response => {
 }
 
 export default {
-    name: `build-status`,
+    name: `branch-status`,
     props: {
         name: {
             type: String,

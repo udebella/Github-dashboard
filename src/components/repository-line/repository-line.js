@@ -14,15 +14,10 @@ export default {
     }),
     methods: {
         updateBuildStatus(branchStatus) {
-            if (branchStatus) {
-                this.branchStatus = branchStatus
-            }
+            this.branchStatus = branchStatus
         },
         branchStatusClass() {
-            if (this.branchStatus) {
-                return this.branchStatus
-            }
-            return `NO_STATUS`
+            return this.branchStatus || `NO_STATUS`
         },
     },
     components: {
