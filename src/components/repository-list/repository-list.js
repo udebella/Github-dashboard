@@ -8,6 +8,11 @@ export default {
             type: Array,
         },
     },
+    computed: {
+        isDisplayed() {
+            return this.repositories.length !== 0
+        },
+    },
     components: {
         repositoryLine,
     },

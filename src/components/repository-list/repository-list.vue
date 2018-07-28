@@ -1,5 +1,7 @@
 <template>
-    <ul class="list">
+    <ul 
+        v-if="isDisplayed"
+        class="list">
         <li 
             v-for="repository in repositories"
             :key="repository.name">
