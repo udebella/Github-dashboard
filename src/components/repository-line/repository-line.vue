@@ -1,7 +1,6 @@
 <template>
     <div
-        :title="branchStatus"
-        :class="branchStatusClass()"
+        :class="branchStatus"
         class="line">
         <repository-link
             :name="repository.name"

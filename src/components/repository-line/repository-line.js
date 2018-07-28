@@ -10,14 +10,11 @@ export default {
         },
     },
     data: () => ({
-        branchStatus: ``,
+        branchStatus: `NO_STATUS`,
     }),
     methods: {
-        updateBuildStatus(branchStatus) {
+        updateBuildStatus(branchStatus = `NO_STATUS`) {
             this.branchStatus = branchStatus
-        },
-        branchStatusClass() {
-            return this.branchStatus || `NO_STATUS`
         },
     },
     components: {

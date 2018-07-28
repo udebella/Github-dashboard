@@ -9,37 +9,66 @@ describe(`RepositoryLine component`, () => {
         repositoryLine = shallowMount(RepositoryLine, {
             propsData: {
                 repository: {
-                    name: ``,
-                    defaultBranch: ``,
-                    owner: ``,
-                    url: ``,
+                    name: `repository name`,
+                    defaultBranch: `branch`,
+                    owner: `owner`,
+                    url: `http://repository`,
                 },
             },
         })
     })
 
     describe(`Initialization`, () => {
-        it(`should have a link to a repository with its branch status`, () => {
-            expect(repositoryLine.find({name: `repository-link`}).exists()).to.be.true
-            expect(repositoryLine.find({name: `branch-status`}).exists()).to.be.true
+        it(`should initiate with a no_status`, () => {
+            expect(repositoryLine.vm.$data.branchStatus).to.equal(`NO_STATUS`)
         })
 
-        it(`should initiate with an empty branch status`, () => {
-            expect(repositoryLine.vm.$data.branchStatus).to.equal(``)
+        it(`should display with the default branch status`, () => {
+            expect(repositoryLine.classes()).to.deep.equal([`line`, `NO_STATUS`])
         })
     })
 
-    describe(`Method: branchStatusClass`, () => {
-        it(`should have be NO_STATUS by default`, () => {
-            expect(repositoryLine.vm.branchStatusClass()).to.equal(`NO_STATUS`)
+    describe(`Repository link`, () => {
+        let repositoryLink
+
+        beforeEach(() => {
+            repositoryLink = repositoryLine.find({name: `repository-link`})
         })
 
-        it(`should use the status as class`, () => {
-            repositoryLine.setData({
-                branchStatus: `FAILURE`,
-            })
+        it(`should display a repository link`, () => {
+            expect(repositoryLink.exists()).to.be.true
+        })
 
-            expect(repositoryLine.vm.branchStatusClass()).to.equal(`FAILURE`)
+        it(`should give a repository name to the component`, () => {
+            expect(repositoryLink.props().name).to.equal(`repository name`)
+        })
+
+        it(`should give a repository url to the component`, () => {
+            expect(repositoryLink.props().url).to.equal(`http://repository`)
+        })
+    })
+
+    describe(`Branch status`, () => {
+        let branchStatus
+
+        beforeEach(() => {
+            branchStatus = repositoryLine.find({name: `branch-status`})
+        })
+
+        it(`should display a branch status`, () => {
+            expect(branchStatus.exists()).to.be.true
+        })
+
+        it(`should give a repository name to the component`, () => {
+            expect(branchStatus.props().name).to.equal(`repository name`)
+        })
+
+        it(`should give a repository owner to the component`, () => {
+            expect(branchStatus.props().owner).to.equal(`owner`)
+        })
+
+        it(`should give a repository branch to the component`, () => {
+            expect(branchStatus.props().branch).to.equal(`branch`)
         })
     })
 
@@ -48,6 +77,12 @@ describe(`RepositoryLine component`, () => {
             repositoryLine.vm.updateBuildStatus(`FAILURE`)
 
             expect(repositoryLine.vm.$data.branchStatus).to.equal(`FAILURE`)
+        })
+
+        it(`should reset build status when nothing is given`, () => {
+            repositoryLine.vm.updateBuildStatus()
+
+            expect(repositoryLine.vm.$data.branchStatus).to.equal(`NO_STATUS`)
         })
     })
 })
