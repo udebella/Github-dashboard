@@ -1,5 +1,5 @@
 <template>
-    <build-statuses :statuses="contexts"/>
+    <build-statuses :statuses="statusesList"/>
 </template>
 
 <script src="./branch-status.js"></script>
