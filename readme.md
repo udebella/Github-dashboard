@@ -1,5 +1,7 @@
 # Github dashboard
 
+[![Build Status](https://travis-ci.org/udebella/Github-dashboard.svg?branch=master)](https://travis-ci.org/udebella/Github-dashboard)
+
 ## Introduction
 
 ## Running the project
