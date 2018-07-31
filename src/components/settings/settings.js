@@ -3,25 +3,17 @@ import {query} from './starred-repo.query'
 import debounce from 'debounce'
 import listPicker from '../list-picker/list-picker.vue'
 
-const retrieveData = async username => await request(query(username))
-
-const extractRepositories = ({user}) => {
-	const {repositories} = user || {}
-	return [...repositories.nodes] || []
+const extract = repositoryType => response => {
+	const repositories = response &&
+		response.user &&
+		response.user[repositoryType] &&
+		response.user[repositoryType].nodes || []
+	return repositories.map(({name}) => name)
 }
 
-const extractStarredRepositories = ({user}) => {
-	const {starredRepositories} = user || {}
-	return [...starredRepositories.nodes] || []
-}
+const extractRepositories = extract(`repositories`)
 
-const blabla = ({repositories, username, newRepos}) => ({
-	...repositories,
-	[username]: {
-		...repositories[username],
-		...newRepos,
-	},
-})
+const extractStarredRepositories = extract(`starredRepositories`)
 
 export default {
 	name: `settings`,
@@ -30,6 +22,7 @@ export default {
 		userRepositories: [],
 		userStarredRepositories: [],
 		watchedRepositories: {},
+		request,
 	}),
 	watch: {
 		username() {
@@ -38,31 +31,28 @@ export default {
 	},
 	created() {
 		const refreshUserRepositories = async () => {
-			const response = await retrieveData(this.username)
-			this.userStarredRepositories = extractStarredRepositories(response).map(({name}) => name)
-			this.userRepositories = extractRepositories(response).map(({name}) => name)
+			const response = await this.request(query(this.username))
+			this.userStarredRepositories = extractStarredRepositories(response)
+			this.userRepositories = extractRepositories(response)
 		}
 
 		this.refreshUserRepositories = debounce(refreshUserRepositories, 1000)
 	},
 	methods: {
-		updateRepositories(array) {
-			this.watchedRepositories = blabla({
-				repositories: this.watchedRepositories,
-				username: this.username,
-				newRepos: {
-					repositories: array,
+		copy(newRepos) {
+			return {
+				...this.watchedRepositories,
+				[this.username]: {
+					...this.watchedRepositories[this.username],
+					...newRepos,
 				},
-			})
+			}
+		},
+		updateRepositories(array) {
+			this.watchedRepositories = this.copy({repositories: array})
 		},
 		updateStarredRepositories(array) {
-			this.watchedRepositories = blabla({
-				repositories: this.watchedRepositories,
-				username: this.username,
-				newRepos: {
-					starredRepositories: array,
-				},
-			})
+			this.watchedRepositories = this.copy({starredRepositories: array})
 		},
 	},
 	components: {
