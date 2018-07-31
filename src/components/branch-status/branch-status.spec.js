@@ -56,30 +56,36 @@ describe(`BranchStatus component`, () => {
 			})
 		})
 
-		it(`should reset default value when github api don't returns values`, (done) => {
-			stubRequest.returns({
-				repository: {
-					ref: {
-						target: {},
+		describe(`without values from github`, () => {
+			beforeEach(() => {
+				stubRequest.reset()
+
+				branchStatus = shallowMount(BranchStatus, {
+					propsData: {
+						name: `repository name`,
+						branch: `branch`,
+						owner: `owner`,
+						request: stubRequest,
 					},
-				},
+				})
 			})
 
-			branchStatus = shallowMount(BranchStatus, {
-				propsData: {
-					name: `repository name`,
-					branch: `branch`,
-					owner: `owner`,
-					request: stubRequest,
-				},
+			it(`should notify parent that no status have been returned by github`, (done) => {
+				branchStatus.vm.$nextTick(() => {
+					expect(branchStatus.emitted()[`build-status`]).to.deep.equals([[`NO_STATUS`]])
+					done()
+				})
 			})
 
-			branchStatus.vm.$nextTick(() => {
-				expect(branchStatus.vm.$data.state).to.equals(``)
-				expect(branchStatus.vm.$data.statusesList).to.deep.equals([])
-				done()
+			it(`should reset default value when github api does not return values`, (done) => {
+				branchStatus.vm.$nextTick(() => {
+					expect(branchStatus.vm.$data.state).to.equals(`NO_STATUS`)
+					expect(branchStatus.vm.$data.statusesList).to.deep.equals([])
+					done()
+				})
 			})
 		})
+
 	})
 
 	describe(`Branch statuses`, () => {

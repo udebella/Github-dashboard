@@ -3,8 +3,12 @@ import {query} from './branch-status.query'
 import buildStatuses from '../build-statuses/build-statuses.vue'
 
 const extractStatuses = response => {
-	const status = response.repository.ref.target.status
-	return status || {}
+	const {state = `NO_STATUS`, contexts = []} = response &&
+		response.repository &&
+		response.repository.ref &&
+		response.repository.ref.target &&
+		response.repository.ref.target.status || {}
+	return {state, statusesList: contexts}
 }
 
 export default {
@@ -37,9 +41,9 @@ export default {
 			branch: this.branch,
 			repository: this.name,
 		}))
-		const {state, contexts} = extractStatuses(response)
-		this.state = state || ``
-		this.statusesList = contexts || []
+		const {state, statusesList} = extractStatuses(response)
+		this.state = state
+		this.statusesList = statusesList
 		this.$emit(`build-status`, this.state)
 	},
 	components: {
