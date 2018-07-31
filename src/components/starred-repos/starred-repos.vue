@@ -1,3 +1,4 @@
+<!-- TODO remove that component -->
 <template>
 	<div>
 		List of starred repo for {{ username }} :
