@@ -1,17 +1,32 @@
 {
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
-  "extends": ["eslint:recommended", "plugin:vue/recommended"],
-  "rules": {
-    "vue/html-indent": ["error", 4],
-    "semi": ["error", "never"],
-    "comma-dangle": ["error", "always-multiline"],
-    "quotes": ["error", "backtick"]
-  },
-  "env": {
-    "node": true,
-    "mocha": true
-  }
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:vue/recommended"
+	],
+	"rules": {
+		"vue/html-indent": [
+			"error",
+			"tab"
+		],
+		"semi": [
+			"error",
+			"never"
+		],
+		"comma-dangle": [
+			"error",
+			"always-multiline"
+		],
+		"quotes": [
+			"error",
+			"backtick"
+		]
+	},
+	"env": {
+		"node": true,
+		"mocha": true
+	}
 }

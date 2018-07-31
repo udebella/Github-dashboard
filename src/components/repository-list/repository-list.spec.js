@@ -3,25 +3,25 @@ import {expect} from 'chai'
 import RepositoryList from './repository-list.vue'
 
 describe(`RepositoryList component`, () => {
-    let repositoryList
+	let repositoryList
 
-    beforeEach(() => {
-        repositoryList = shallowMount(RepositoryList, {
-            propsData: {
-                repositories: [{}],
-            },
-        })
-    })
+	beforeEach(() => {
+		repositoryList = shallowMount(RepositoryList, {
+			propsData: {
+				repositories: [{}],
+			},
+		})
+	})
 
-    describe(`Initialisation`, () => {
-        it(`should display a list of repositories`, () => {
-            expect(repositoryList.contains({name: `repository-line`})).to.be.true
-        })
+	describe(`Initialisation`, () => {
+		it(`should display a list of repositories`, () => {
+			expect(repositoryList.contains({name: `repository-line`})).to.be.true
+		})
 
-        it(`should not display anything if the list is empty`, () => {
-            repositoryList.setProps({repositories: []})
+		it(`should not display anything if the list is empty`, () => {
+			repositoryList.setProps({repositories: []})
 
-            expect(repositoryList.contains(`ul`)).to.be.false
-        })
-    })
+			expect(repositoryList.contains(`ul`)).to.be.false
+		})
+	})
 })

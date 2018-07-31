@@ -4,24 +4,24 @@ import RepositoryLine from './repository-link.vue'
 
 
 describe(`RepositoryLink component`, () => {
-    let repositoryLink
+	let repositoryLink
 
-    beforeEach(() => {
-        repositoryLink = shallowMount(RepositoryLine, {
-            propsData: {
-                name: `repositoryName`,
-                url: `http://repositoryLink`,
-            },
-        })
-    })
+	beforeEach(() => {
+		repositoryLink = shallowMount(RepositoryLine, {
+			propsData: {
+				name: `repositoryName`,
+				url: `http://repositoryLink`,
+			},
+		})
+	})
 
-    describe(`Initialization`, () => {
-        it(`should display the repository name`, () => {
-            expect(repositoryLink.text()).to.equal(`repositoryName`)
-        })
+	describe(`Initialization`, () => {
+		it(`should display the repository name`, () => {
+			expect(repositoryLink.text()).to.equal(`repositoryName`)
+		})
 
-        it(`should have a link to the repository`, () => {
-            expect(repositoryLink.find(`a`).attributes().href).to.equal(`http://repositoryLink`)
-        })
-    })
+		it(`should have a link to the repository`, () => {
+			expect(repositoryLink.find(`a`).attributes().href).to.equal(`http://repositoryLink`)
+		})
+	})
 })

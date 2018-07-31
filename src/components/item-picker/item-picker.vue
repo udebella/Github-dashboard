@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <input
-            :id="item"
-            :value="item"
-            type="checkbox"
-            @input="notifyParent($event.target)">
-        <label :for="item">{{ item }}</label>
-    </div>
+	<div>
+		<input
+			:id="item"
+			:value="item"
+			type="checkbox"
+			@input="notifyParent($event.target)">
+		<label :for="item">{{ item }}</label>
+	</div>
 </template>
 
 <script src="./item-picker.js"></script>

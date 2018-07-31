@@ -1,47 +1,47 @@
 @import "../../global";
 
 @mixin darkenOnHover($color) {
-  background-color: $color;
+	background-color: $color;
 
-  &:hover {
-    background-color: darken($color, 5%);
-  }
+	&:hover {
+		background-color: darken($color, 5%);
+	}
 }
 
 .line {
-  display: flex;
-  padding: 5px;
-  position: relative;
-  max-width: 200px;
-  border-radius: 5px;
-  margin: 1px 0;
+	display: flex;
+	padding: 5px;
+	position: relative;
+	max-width: 200px;
+	border-radius: 5px;
+	margin: 1px 0;
 
-  &.SUCCESS {
-    @include darkenOnHover(lightgreen);
-  }
-  &.FAILURE {
-    @include darkenOnHover(lightcoral);
-  }
-  &.PENDING {
-    @include darkenOnHover(lightsalmon);
-  }
-  &.NO_STATUS {
-    @include darkenOnHover($surface);
-  }
+	&.SUCCESS {
+		@include darkenOnHover(lightgreen);
+	}
+	&.FAILURE {
+		@include darkenOnHover(lightcoral);
+	}
+	&.PENDING {
+		@include darkenOnHover(lightsalmon);
+	}
+	&.NO_STATUS {
+		@include darkenOnHover($surface);
+	}
 
-  .branch-status {
-    visibility: hidden;
-    opacity: 0;
-    transition: 300ms ease;
-  }
+	.branch-status {
+		visibility: hidden;
+		opacity: 0;
+		transition: 300ms ease;
+	}
 
-  &:hover .branch-status, .branch-status:hover {
-    visibility: visible;
-    opacity: 1;
-    transition: 300ms ease;
-  }
+	&:hover .branch-status, .branch-status:hover {
+		visibility: visible;
+		opacity: 1;
+		transition: 300ms ease;
+	}
 
-  .repository-link {
-    text-decoration: none;
-  }
+	.repository-link {
+		text-decoration: none;
+	}
 }

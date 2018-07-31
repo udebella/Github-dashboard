@@ -4,28 +4,28 @@
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
 
 .icon {
-  @include fa-icon;
-  @extend .fas;
+	@include fa-icon;
+	@extend .fas;
 
-  text-decoration: none;
+	text-decoration: none;
 
-  &.SUCCESS:before {
-    color: green;
-    content: fa-content($fa-var-check-circle);
-  }
+	&.SUCCESS:before {
+		color: green;
+		content: fa-content($fa-var-check-circle);
+	}
 
-  &.FAILURE:before {
-    color: orange;
-    content: fa-content($fa-var-exclamation-circle);
-  }
+	&.FAILURE:before {
+		color: orange;
+		content: fa-content($fa-var-exclamation-circle);
+	}
 
-  &.ERROR:before {
-    color: red;
-    content: fa-content($fa-var-times-circle);
-  }
+	&.ERROR:before {
+		color: red;
+		content: fa-content($fa-var-times-circle);
+	}
 
-  &.PENDING:before {
-    color: blue;
-    content: fa-content($fa-var-clock);
-  }
+	&.PENDING:before {
+		color: blue;
+		content: fa-content($fa-var-clock);
+	}
 }

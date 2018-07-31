@@ -7,6 +7,6 @@ const hasCommandLineArgument = argument => process.argv.find(arg => arg === argu
 const absolutePath = relativePath => PROJECT_ROOT + relativePath
 
 module.exports = {
-    absolutePath,
-    hasCommandLineArgument,
+	absolutePath,
+	hasCommandLineArgument,
 }
