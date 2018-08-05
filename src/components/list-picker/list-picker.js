@@ -8,20 +8,12 @@ export default {
 			required: true,
 		},
 	},
-	beforeUpdate() {
-		this.tickedItems = []
-	},
-	data: () => ({
-		tickedItems: [],
-	}),
 	methods: {
 		tick(value) {
-			this.tickedItems = [...this.tickedItems, value]
-			this.$emit(`update`, this.tickedItems)
+			this.$emit(`tick`, value)
 		},
 		untick(value) {
-			this.tickedItems = this.tickedItems.filter(item => item !== value)
-			this.$emit(`update`, this.tickedItems)
+			this.$emit(`untick`, value)
 		},
 	},
 	components: {
