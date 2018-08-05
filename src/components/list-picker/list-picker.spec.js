@@ -1,19 +1,22 @@
-import {mount, shallowMount} from '@vue/test-utils'
+import {shallowMount} from '@vue/test-utils'
 import ListPicker from './list-picker.vue'
 import {expect} from 'chai'
 
 describe(`List-picker component`, () => {
+	let wrapper
+
+	beforeEach(() => {
+		wrapper = shallowMount(ListPicker, {propsData: {list: [`test`]}})
+	})
+
 	describe(`Initialization`, () => {
 		it(`should have list required property`, () => {
-			const wrapper = shallowMount(ListPicker, {propsData: {list: [`test`]}})
-
 			expect(wrapper.props().list).to.exist
 		})
 	})
 
 	describe(`Update`, () => {
 		it(`should reset tickedItems after each props udpate`, () => {
-			const wrapper = shallowMount(ListPicker, {propsData: {list: [`test`]}})
 			wrapper.setData({tickedItems: [`blabla`]})
 
 			wrapper.setProps({list: [`test`]})
@@ -24,9 +27,6 @@ describe(`List-picker component`, () => {
 
 	describe(`Method: tick`, () => {
 		it(`should send an update event with the new value`, () => {
-			// Given
-			const wrapper = shallowMount(ListPicker, {propsData: {list: [`test`]}})
-
 			// When
 			wrapper.vm.tick(`testValue`)
 
@@ -37,7 +37,6 @@ describe(`List-picker component`, () => {
 
 		it(`should keep previously set tickedItems`, () => {
 			// Given
-			const wrapper = mount(ListPicker, {propsData: {list: [`test`]}})
 			wrapper.setData({tickedItems: [`previousData`]})
 
 			// When
@@ -51,9 +50,6 @@ describe(`List-picker component`, () => {
 
 	describe(`Method: untick`, () => {
 		it(`should send an update event with the new value`, () => {
-			// Given
-			const wrapper = shallowMount(ListPicker, {propsData: {list: [`test`]}})
-
 			// When
 			wrapper.vm.untick(`testValue`)
 
@@ -64,7 +60,6 @@ describe(`List-picker component`, () => {
 
 		it(`should remove previously set tickedItems`, () => {
 			// Given
-			const wrapper = mount(ListPicker, {propsData: {list: [`test`]}})
 			wrapper.setData({tickedItems: [`previousData`]})
 
 			// When
