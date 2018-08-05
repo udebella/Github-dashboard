@@ -1,20 +1,19 @@
-const addRepositories = (state, username, repositoryList) => {
-	if (!state[username]) {
-		state[username] = {repositories: []}
+const addRepository = ({watchedRepositories}, {owner, name}) => {
+	if (!watchedRepositories[owner]) {
+		watchedRepositories[owner] = []
 	}
-	state[username] = {
-		repositories: [...state.username.repositories, ...repositoryList],
-	}
+	watchedRepositories[owner] = [
+		...watchedRepositories[owner],
+		name,
+	]
 }
 
-const removeRepositories = (state, username, repositoryList) => {
-	state[username] = {
-		repositories: state.username.repositories
-			.filter(repository => !repositoryList.includes(repository)),
-	}
+const removeRepository = ({watchedRepositories}, {owner, name}) => {
+	watchedRepositories[owner] = watchedRepositories[owner]
+		.filter(repository => repository !== name)
 }
 
 export const mutations = {
-	addRepositories,
-	removeRepositories,
+	addRepository,
+	removeRepository,
 }

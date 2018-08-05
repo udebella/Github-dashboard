@@ -2,42 +2,42 @@ import {expect} from 'chai'
 import {mutations} from './store'
 
 describe(`Store`, () => {
-	describe(`addRepositories`, () => {
-		const {addRepositories} = mutations
-		it(`should set repositories for the username`, () => {
-			const store = {}
+	describe(`addRepository`, () => {
+		const {addRepository} = mutations
+		it(`should add a repository to watch for the username`, () => {
+			const store = {watchedRepositories: {}}
 
-			addRepositories(store, `username`, [`repository`])
+			addRepository(store, {owner: `username`, name: `repository`})
 
-			expect(store.username.repositories).to.deep.equal([`repository`])
+			expect(store.watchedRepositories.username).to.deep.equal([`repository`])
 		})
 
-		it(`should allow to add new repositories for an user`, () => {
-			const store = {username: { repositories: [`another repository`] }}
+		it(`should allow to add multiple repositories for an user`, () => {
+			const store = {watchedRepositories: { username: [`repository`] }}
 
-			addRepositories(store, `username`, [`repository`])
+			addRepository(store, {owner: `username`, name: `another repository`})
 
-			expect(store.username.repositories).to.deep.equal([`another repository`, `repository`])
+			expect(store.watchedRepositories.username).to.deep.equal([`repository`, `another repository`])
 		})
 	})
 
-	describe(`removeRepositories`, () => {
-		const {removeRepositories} = mutations
+	describe(`removeRepository`, () => {
+		const {removeRepository} = mutations
 
-		it(`should remove repositories for the username`, () => {
-			const store = {username: { repositories: [`repository`] }}
+		it(`should remove watched repository for the username`, () => {
+			const store = {watchedRepositories: {username: [`repository`] }}
 
-			removeRepositories(store, `username`, [`repository`])
+			removeRepository(store, {owner: `username`, name: `repository`})
 
-			expect(store.username.repositories).to.deep.equal([])
+			expect(store.watchedRepositories.username).to.deep.equal([])
 		})
 
-		it(`should only remove repositories `, () => {
-			const store = {username: { repositories: [`repository`, `another repository`] }}
+		it(`should only remove the specified repository and keep the others`, () => {
+			const store = {watchedRepositories: {username: [`repository`, `another repository`] }}
 
-			removeRepositories(store, `username`, [`repository`])
+			removeRepository(store, {owner: `username`, name: `repository`})
 
-			expect(store.username.repositories).to.deep.equal([`another repository`])
+			expect(store.watchedRepositories.username).to.deep.equal([`another repository`])
 		})
 	})
 })
