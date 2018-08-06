@@ -2,13 +2,10 @@ import repositoryLine from '../repository-line/repository-line.vue'
 
 export default {
 	name: `repository-list`,
-	props: {
-		repositories: {
-			required: true,
-			type: Array,
-		},
-	},
 	computed: {
+		repositories() {
+			return this.$store.state.watchedRepositories
+		},
 		isDisplayed() {
 			return this.repositories.length !== 0
 		},
