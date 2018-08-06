@@ -1,18 +1,18 @@
 <template>
 	<div>
 		<settings/>
-		<starred-repos username="udebella"/>
+		<repository-list/>
 	</div>
 </template>
 
 <script>
-	import starredRepos from './starred-repos/starred-repos.vue'
 	import settings from './settings/settings.vue'
+	import RepositoryList from "./repository-list/repository-list.vue"
 
 	export default {
 		name: `App`,
 		components: {
-			starredRepos,
+			RepositoryList,
 			settings,
 		},
 	}
