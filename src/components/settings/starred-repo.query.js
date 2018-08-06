@@ -1,6 +1,6 @@
 export const query = username => `{
   user(login: ${username}) {
-    starredRepositories(first: 5) {
+    starredRepositories(first: 20) {
       nodes {
         name
         owner {
@@ -11,7 +11,7 @@ export const query = username => `{
           name
         }
       }
-    }, repositories(first: 5) {
+    }, repositories(first: 20) {
       nodes {
         name
         owner {
