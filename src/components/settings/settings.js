@@ -33,11 +33,6 @@ export default {
 			this.refreshUserRepositories()
 		},
 	},
-	computed: {
-		watchedRepositories() {
-			return this.$store.state.watchedRepositories
-		},
-	},
 	created() {
 		const refreshUserRepositories = async () => {
 			const response = await this.request(query(this.username))
