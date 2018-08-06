@@ -1,16 +1,21 @@
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 // Colors
-$primary: #FDA014;
-$secondaryLight: #1352FE;
-$secondary: #1644C4;
-$secondaryDark: #0A1638;
-$background: #FFFFFF;
-$surface: #FCF7EF;
+$primary: #121212;
+$secondaryLight: #FFF;
+$secondary: #FFFE;
+$secondaryDark: #FFF9;
+$background: #000;
+$surface: #232323;
+
+// Statuses
+$success: green;
+$failure: red;
+$pending: #120262;
 
 body {
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-	color: $secondaryDark;
+	color: $secondaryLight;
 	background-color: $primary;
 	font-size: 16px;
 }

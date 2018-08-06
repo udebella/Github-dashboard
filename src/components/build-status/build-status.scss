@@ -10,22 +10,22 @@
 	text-decoration: none;
 
 	&.SUCCESS:before {
-		color: green;
+		color: $success;
 		content: fa-content($fa-var-check-circle);
 	}
 
 	&.FAILURE:before {
-		color: orange;
+		color: $failure;
 		content: fa-content($fa-var-exclamation-circle);
 	}
 
 	&.ERROR:before {
-		color: red;
+		color: $failure;
 		content: fa-content($fa-var-times-circle);
 	}
 
 	&.PENDING:before {
-		color: blue;
+		color: $pending;
 		content: fa-content($fa-var-clock);
 	}
 }

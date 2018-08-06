@@ -1,9 +1,12 @@
 <template>
-	<div>
-		<input
-			v-model="username"
-			type="text">
-		{{ watchedRepositories }}
+	<div class="settings">
+		<div>
+			<label for="username">Username</label>
+			<input
+				id="username"
+				v-model="username"
+				type="text">
+		</div>
 		<div v-if="userRepositories.length">
 			<h1>{{ username }} repositories</h1>
 			<list-picker

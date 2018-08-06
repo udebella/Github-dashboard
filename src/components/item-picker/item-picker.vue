@@ -5,7 +5,9 @@
 			:value="item"
 			type="checkbox"
 			@input="notifyParent($event.target)">
-		<label :for="item">{{ item }}</label>
+		<label 
+			:for="item" 
+			class="item">{{ item }}</label>
 	</div>
 </template>
 
