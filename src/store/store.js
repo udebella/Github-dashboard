@@ -1,29 +1,29 @@
-import {Store} from 'vuex'
+import Vuex, {Store} from 'vuex'
 import Vue from "vue"
-import Vuex from "vuex"
 
 Vue.use(Vuex)
 
 const state = {
-	watchedRepositories: {},
+	watchedRepositories: [],
 }
 
-const addRepository = (store, {owner, name}) => {
-	const watchedRepositories = {
-		[owner]: [
-			...store.watchedRepositories[owner] || [],
-			name,
-		],
-	}
-	store.watchedRepositories = {
+const addRepository = (store, repository) => {
+	store.watchedRepositories = [
 		...store.watchedRepositories,
-		...watchedRepositories,
-	}
+		repository,
+	]
 }
 
-const removeRepository = ({watchedRepositories}, {owner, name}) => {
-	watchedRepositories[owner] = watchedRepositories[owner]
-		.filter(repository => repository !== name)
+const removeRepository = (store, repository) => {
+	store.watchedRepositories = [
+		...store.watchedRepositories
+			.filter(differentFrom(repository)),
+	]
+}
+
+const differentFrom = first => second => {
+	return first.name !== second.name ||
+		first.owner !== second.owner
 }
 
 export const mutations = {
