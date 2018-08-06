@@ -9,14 +9,16 @@
 			<list-picker
 				:list="formatForListPicker(userRepositories)"
 				data-test="repositories"
-				@tick="selectRepository($event)"/>
+				@tick="selectRepository($event)"
+				@untick="unselectRepository($event)"/>
 		</div>
 		<div v-if="userStarredRepositories.length">
 			<h1>{{ username }} starred repositories</h1>
 			<list-picker
 				:list="formatForListPicker(userStarredRepositories)"
 				data-test="starredRepositories"
-				@tick="selectRepository($event)"/>
+				@tick="selectRepository($event)"
+				@untick="unselectRepository($event)"/>
 		</div>
 	</div>
 </template>

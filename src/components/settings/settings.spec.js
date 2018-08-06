@@ -149,6 +149,20 @@ describe(`Settings component`, () => {
 		})
 	})
 
+	describe(`method unselectRepository`, () => {
+		it(`should remove the repository from the store`, () => {
+			// Given
+			settings.setData({userRepositories: [{owner: `user`, name: `repository`}]})
+
+			// When
+			settings.vm.unselectRepository(`repository`)
+
+			// Then
+			expect(store.commit).to.have.been
+				.calledWith(`removeRepository`, {owner: `user`, name: `repository`})
+		})
+	})
+
 	describe(`method formatForListPicker`, () => {
 		it(`should format the repository array for list picker as a list of string`, () => {
 			const formatted = settings.vm.formatForListPicker([{owner: `other_user`, name: `repository`}])

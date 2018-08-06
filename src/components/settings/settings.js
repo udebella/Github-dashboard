@@ -43,10 +43,17 @@ export default {
 		this.refreshUserRepositories = debounce(refreshUserRepositories, 1000)
 	},
 	methods: {
-		selectRepository(repository) {
-			const toto = [...this.userRepositories, ...this.userStarredRepositories]
+		selectRepository(name) {
+			const repository = this.findRepository(name)
+			this.$store.commit(`addRepository`, repository)
+		},
+		unselectRepository(name) {
+			const repository = this.findRepository(name)
+			this.$store.commit(`removeRepository`, repository)
+		},
+		findRepository(repository) {
+			return [...this.userRepositories, ...this.userStarredRepositories]
 				.find(({name}) => name === repository)
-			this.$store.commit(`addRepository`, toto)
 		},
 		formatForListPicker(repositoryList) {
 			return repositoryList.map(({name}) => name)
