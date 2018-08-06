@@ -8,7 +8,12 @@ const extract = repositoryType => response => {
 		response.user &&
 		response.user[repositoryType] &&
 		response.user[repositoryType].nodes || []
-	return repositories.map(({name, owner}) => ({name, owner: owner.login}))
+	return repositories.map(({name, owner, url, defaultBranchRef}) => ({
+		name,
+		owner: owner.login,
+		url,
+		defaultBranch: defaultBranchRef.name,
+	}))
 }
 
 const extractRepositories = extract(`repositories`)

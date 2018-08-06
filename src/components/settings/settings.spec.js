@@ -72,6 +72,8 @@ describe(`Settings component`, () => {
 						nodes: [{
 							name: `repository`,
 							owner: {login: `other_user`},
+							url: `http://url`,
+							defaultBranchRef: {name: `defaultBranch`},
 						}],
 					},
 				},
@@ -84,6 +86,8 @@ describe(`Settings component`, () => {
 				expect(settings.vm.$data.userStarredRepositories).to.deep.equals([{
 					name: `repository`,
 					owner: `other_user`,
+					url: `http://url`,
+					defaultBranch: `defaultBranch`,
 				}])
 				done()
 			})
@@ -93,7 +97,11 @@ describe(`Settings component`, () => {
 			stubRequest = stub().returns({
 				user: {
 					repositories: {
-						nodes: [{name: `repository`, owner: {login: `user`}}],
+						nodes: [{
+							name: `repository`, owner: {login: `user`},
+							url: `http://url`,
+							defaultBranchRef: {name: `defaultBranch`},
+						}],
 					},
 				},
 			})
@@ -103,7 +111,10 @@ describe(`Settings component`, () => {
 
 			settings.vm.$nextTick(() => {
 				expect(settings.vm.$data.userRepositories).to.deep.equals([{
-					name: `repository`, owner: `user`,
+					name: `repository`,
+					owner: `user`,
+					url: `http://url`,
+					defaultBranch: `defaultBranch`,
 				}])
 				done()
 			})
