@@ -4,12 +4,16 @@ import Settings from './settings.vue'
 import {stub, useFakeTimers} from "sinon"
 
 describe(`Settings component`, () => {
-	let settings, stubRequest, clock
+	let settings, stubRequest, clock, store
 
 	beforeEach(() => {
+		store = {
+			state: {watchedRepositories: {}},
+			commit: stub(),
+		}
 		clock = useFakeTimers()
 
-		settings = shallowMount(Settings)
+		settings = shallowMount(Settings, {store})
 	})
 
 	afterEach(() => {
@@ -22,7 +26,6 @@ describe(`Settings component`, () => {
 				username: ``,
 				userRepositories: [],
 				userStarredRepositories: [],
-				watchedRepositories: {},
 			})
 		})
 	})
@@ -66,7 +69,10 @@ describe(`Settings component`, () => {
 			stubRequest = stub().returns({
 				user: {
 					starredRepositories: {
-						nodes: [{name: `user starred repository`}],
+						nodes: [{
+							name: `repository`,
+							owner: {login: `other_user`},
+						}],
 					},
 				},
 			})
@@ -75,7 +81,10 @@ describe(`Settings component`, () => {
 			clock.tick(1000)
 
 			settings.vm.$nextTick(() => {
-				expect(settings.vm.$data.userStarredRepositories).to.deep.equals([`user starred repository`])
+				expect(settings.vm.$data.userStarredRepositories).to.deep.equals([{
+					name: `repository`,
+					owner: `other_user`,
+				}])
 				done()
 			})
 		})
@@ -84,16 +93,18 @@ describe(`Settings component`, () => {
 			stubRequest = stub().returns({
 				user: {
 					repositories: {
-						nodes: [{name: `user repository`}],
+						nodes: [{name: `repository`, owner: {login: `user`}}],
 					},
 				},
 			})
 
-			settings.setData({username: `username`, request: stubRequest})
+			settings.setData({username: `user`, request: stubRequest})
 			clock.tick(1000)
 
 			settings.vm.$nextTick(() => {
-				expect(settings.vm.$data.userRepositories).to.deep.equals([`user repository`])
+				expect(settings.vm.$data.userRepositories).to.deep.equals([{
+					name: `repository`, owner: `user`,
+				}])
 				done()
 			})
 		})
@@ -101,7 +112,7 @@ describe(`Settings component`, () => {
 		it(`should handle empty responses from github`, (done) => {
 			stubRequest = stub()
 
-			settings.setData({username: `username`, request: stubRequest})
+			settings.setData({username: `user`, request: stubRequest})
 			clock.tick(1000)
 
 			settings.vm.$nextTick(() => {
@@ -112,31 +123,37 @@ describe(`Settings component`, () => {
 		})
 	})
 
-	describe(`method updateRepositories`, () => {
-		it(`should update watched repositories`, () => {
-			settings.setData({username: `username`})
+	describe(`method selectRepository`, () => {
+		it(`should add the repository to the store`, () => {
+			// Given
+			settings.setData({userRepositories: [{owner: `user`, name: `repository`}]})
 
-			settings.vm.updateRepositories([`addedRepository`])
+			// When
+			settings.vm.selectRepository(`repository`)
 
-			expect(settings.vm.$data.watchedRepositories).to.deep.equals({
-				username: {
-					repositories: [`addedRepository`],
-				},
-			})
+			// Then
+			expect(store.commit).to.have.been
+				.calledWith(`addRepository`, {owner: `user`, name: `repository`})
+		})
+
+		it(`should allow to add repositories from starred repositories too`, () => {
+			// Given
+			settings.setData({userStarredRepositories: [{owner: `other_user`, name: `repository`}]})
+
+			// When
+			settings.vm.selectRepository(`repository`)
+
+			// Then
+			expect(store.commit).to.have.been
+				.calledWith(`addRepository`, {owner: `other_user`, name: `repository`})
 		})
 	})
 
-	describe(`method updateStarredRepositories`, () => {
-		it(`should update watched repositories`, () => {
-			settings.setData({username: `username`})
+	describe(`method formatForListPicker`, () => {
+		it(`should format the repository array for list picker as a list of string`, () => {
+			const formatted = settings.vm.formatForListPicker([{owner: `other_user`, name: `repository`}])
 
-			settings.vm.updateStarredRepositories([`addedRepository`])
-
-			expect(settings.vm.$data.watchedRepositories).to.deep.equals({
-				username: {
-					starredRepositories: [`addedRepository`],
-				},
-			})
+			expect(formatted).to.deep.equal([`repository`])
 		})
 	})
 })

@@ -1,6 +1,9 @@
 import * as chai from 'chai'
 import * as sinonChai from 'sinon-chai'
+import Vue from 'vue'
+import Vuex from 'vuex'
 
+Vue.use(Vuex)
 chai.use(sinonChai)
 
 // Require all project javascript files for coverage

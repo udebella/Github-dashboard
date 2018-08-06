@@ -8,7 +8,7 @@ const extract = repositoryType => response => {
 		response.user &&
 		response.user[repositoryType] &&
 		response.user[repositoryType].nodes || []
-	return repositories.map(({name}) => name)
+	return repositories.map(({name, owner}) => ({name, owner: owner.login}))
 }
 
 const extractRepositories = extract(`repositories`)
@@ -21,12 +21,16 @@ export default {
 		username: ``,
 		userRepositories: [],
 		userStarredRepositories: [],
-		watchedRepositories: {},
 		request,
 	}),
 	watch: {
 		username() {
 			this.refreshUserRepositories()
+		},
+	},
+	computed: {
+		watchedRepositories() {
+			return this.$store.state.watchedRepositories
 		},
 	},
 	created() {
@@ -39,20 +43,13 @@ export default {
 		this.refreshUserRepositories = debounce(refreshUserRepositories, 1000)
 	},
 	methods: {
-		copy(newRepos) {
-			return {
-				...this.watchedRepositories,
-				[this.username]: {
-					...this.watchedRepositories[this.username],
-					...newRepos,
-				},
-			}
+		selectRepository(repository) {
+			const toto = [...this.userRepositories, ...this.userStarredRepositories]
+				.find(({name}) => name === repository)
+			this.$store.commit(`addRepository`, toto)
 		},
-		updateRepositories(array) {
-			this.watchedRepositories = this.copy({repositories: array})
-		},
-		updateStarredRepositories(array) {
-			this.watchedRepositories = this.copy({starredRepositories: array})
+		formatForListPicker(repositoryList) {
+			return repositoryList.map(({name}) => name)
 		},
 	},
 	components: {

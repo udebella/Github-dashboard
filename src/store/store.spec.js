@@ -19,6 +19,26 @@ describe(`Store`, () => {
 
 			expect(store.watchedRepositories.username).to.deep.equal([`repository`, `another repository`])
 		})
+
+		it(`should not mutate the store`, () => {
+			// Given
+			const watchedRepositories = { username: [`repository`] }
+			const store = {watchedRepositories}
+
+			// When
+			addRepository(store, {owner: `username`, name: `another repository`})
+
+			// Then
+			expect(store.watchedRepositories).not.to.equal(watchedRepositories)
+		})
+
+		it(`should keep previous watched repositories in the store`, () => {
+			const store = {watchedRepositories: { username: [`repository`] }}
+
+			addRepository(store, {owner: `user`, name: `another repository`})
+
+			expect(store.watchedRepositories.username).to.deep.equal([`repository`])
+		})
 	})
 
 	describe(`removeRepository`, () => {

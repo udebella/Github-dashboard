@@ -7,16 +7,16 @@
 		<div v-if="userRepositories.length">
 			<h1>{{ username }} repositories</h1>
 			<list-picker
-				:list="userRepositories"
+				:list="formatForListPicker(userRepositories)"
 				data-test="repositories"
-				@update="updateRepositories($event)"/>
+				@tick="selectRepository($event)"/>
 		</div>
 		<div v-if="userStarredRepositories.length">
 			<h1>{{ username }} starred repositories</h1>
 			<list-picker
-				:list="userStarredRepositories"
+				:list="formatForListPicker(userStarredRepositories)"
 				data-test="starredRepositories"
-				@update="updateStarredRepositories($event)"/>
+				@tick="selectRepository($event)"/>
 		</div>
 	</div>
 </template>
