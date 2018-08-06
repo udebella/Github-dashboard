@@ -1,6 +1,6 @@
 <template>
-	<div
-		v-if="statuses.length"
+	<popover 
+		v-if="statuses.length" 
 		class="popover">
 		<span
 			v-for="({context, targetUrl, state}, index) in statuses"
@@ -11,7 +11,7 @@
 				:state="state"
 				class="build-status"/>
 		</span>
-	</div>
+	</popover>
 </template>
 
 <script src="./build-statuses.js"></script>

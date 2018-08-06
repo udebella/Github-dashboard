@@ -1,34 +1,8 @@
 @import "../../global";
 
-$borderColor: $secondaryDark;
-$backgroundColor: $surface;
-
 .popover {
-	position: absolute;
-	top: 110%;
-	background-color: $backgroundColor;
-	border: 1px solid $borderColor;
-	border-radius: 5px;
-	z-index: 2;
-	padding: 10px;
-	box-shadow: 3px 3px 3px black;
-
-	&:before, &:after {
-		position: absolute;
-		left: calc(50% - 10px);
-		content: '';
-		border: 10px solid transparent;
-	}
-
-	&:before {
-		top: -21px;
-		border-bottom-color: $borderColor;
-	}
-
-	&:after {
-		top: -20px;
-		border-bottom-color: $backgroundColor;
-	}
+	display: flex;
+	flex-direction: column;
 }
 
 .build-status {
