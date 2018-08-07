@@ -16,13 +16,15 @@
 		@include lightenOnHover($surface);
 	}
 
-	.branch-status {
+	.popover {
+		display: flex;
+		flex-direction: column;
 		visibility: hidden;
 		opacity: 0;
 		transition: 300ms ease;
 	}
 
-	&:hover .branch-status, .branch-status:hover {
+	&:hover .popover, .popover:hover {
 		visibility: visible;
 		opacity: 1;
 		transition: 300ms ease;

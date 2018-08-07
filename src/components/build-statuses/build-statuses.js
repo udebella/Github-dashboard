@@ -1,5 +1,4 @@
 import BuildStatus from '../build-status/build-status.vue'
-import Popover from '../popover/popover.vue'
 
 export default {
 	name: `build-statuses`,
@@ -11,6 +10,5 @@ export default {
 	},
 	components: {
 		BuildStatus,
-		Popover,
 	},
 }

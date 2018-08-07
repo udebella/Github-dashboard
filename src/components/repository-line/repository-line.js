@@ -1,6 +1,7 @@
 import repositoryLink from '../repository-link/repository-link.vue'
 import branchStatus from '../branch-status/branch-status.vue'
 import Badge from '../badge/badge.vue'
+import Popover from '../popover/popover.vue'
 
 export default {
 	name: `repository-line`,
@@ -22,5 +23,6 @@ export default {
 		repositoryLink,
 		branchStatus,
 		Badge,
+		Popover,
 	},
 }

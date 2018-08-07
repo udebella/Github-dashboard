@@ -1,5 +1,5 @@
 <template>
-	<popover 
+	<div
 		v-if="statuses.length" 
 		class="popover">
 		<span
@@ -11,7 +11,7 @@
 				:state="state"
 				class="build-status"/>
 		</span>
-	</popover>
+	</div>
 </template>
 
 <script src="./build-statuses.js"></script>

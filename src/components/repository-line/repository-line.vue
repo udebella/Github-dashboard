@@ -6,12 +6,13 @@
 			:name="repository.name"
 			:url="repository.url"
 			class="repository-link"/>
-		<branch-status
-			:name="repository.name"
-			:owner="repository.owner"
-			:branch="repository.defaultBranch"
-			class="branch-status"
-			@build-status="updateBuildStatus"/>
+		<popover class="popover">
+			<branch-status
+				:name="repository.name"
+				:owner="repository.owner"
+				:branch="repository.defaultBranch"
+				@build-status="updateBuildStatus"/>
+		</popover>
 	</badge>
 </template>
 
