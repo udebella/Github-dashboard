@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="app">
 		<settings/>
 		<repository-list/>
 	</div>
@@ -17,3 +17,4 @@
 		},
 	}
 </script>
+<style src="./App.scss"></style>

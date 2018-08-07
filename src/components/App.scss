@@ -1,0 +1,12 @@
+@import "../global";
+
+body {
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	color: $secondaryLight;
+	background-color: $primary;
+	font-size: 16px;
+
+	a {
+		color: $secondary;
+	}
+}
