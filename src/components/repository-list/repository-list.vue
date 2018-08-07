@@ -1,13 +1,11 @@
 <template>
-	<ul
-		v-if="isDisplayed"
-		class="list">
-		<li
+	<div v-if="isDisplayed">
+		<div
 			v-for="repository in repositories"
 			:key="repository.name">
 			<repository-line :repository="repository"/>
-		</li>
-	</ul>
+		</div>
+	</div>
 </template>
 
 <script src="./repository-list.js"></script>
