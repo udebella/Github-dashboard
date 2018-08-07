@@ -5,9 +5,13 @@ import Popover from './popover.vue'
 describe(`Popover component`, () => {
 	describe(`Initialization`, () => {
 		it(`should display the component`, () => {
-			const wrapper = shallowMount(Popover)
+			const wrapper = shallowMount(Popover, {
+				slots: {
+					default: [`<span>Slot content</span>`],
+				},
+			})
 
-			expect(wrapper.classes()).to.deep.equal([`popover`])
+			expect(wrapper.text()).to.equal(`Slot content`)
 		})
 	})
 })
