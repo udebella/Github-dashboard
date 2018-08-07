@@ -1,5 +1,6 @@
 import repositoryLink from '../repository-link/repository-link.vue'
 import branchStatus from '../branch-status/branch-status.vue'
+import Badge from '../badge/badge.vue'
 
 export default {
 	name: `repository-line`,
@@ -20,5 +21,6 @@ export default {
 	components: {
 		repositoryLink,
 		branchStatus,
+		Badge,
 	},
 }

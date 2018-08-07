@@ -1,5 +1,5 @@
 <template>
-	<div
+	<badge
 		:class="branchStatus"
 		class="line">
 		<repository-link
@@ -12,7 +12,7 @@
 			:branch="repository.defaultBranch"
 			class="branch-status"
 			@build-status="updateBuildStatus"/>
-	</div>
+	</badge>
 </template>
 
 <script src="./repository-line.js"></script>
