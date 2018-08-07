@@ -1,6 +1,7 @@
 <template>
 	<a
 		:href="url"
+		class="link"
 		target="_blank">{{ name }}</a>
 </template>
 

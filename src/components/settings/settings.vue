@@ -11,6 +11,7 @@
 			<h1>{{ username }} repositories</h1>
 			<list-picker
 				:list="formatForListPicker(userRepositories)"
+				class="list-picker"
 				data-test="repositories"
 				@tick="selectRepository($event)"
 				@untick="unselectRepository($event)"/>
@@ -19,6 +20,7 @@
 			<h1>{{ username }} starred repositories</h1>
 			<list-picker
 				:list="formatForListPicker(userStarredRepositories)"
+				class="list-picker"
 				data-test="starredRepositories"
 				@tick="selectRepository($event)"
 				@untick="unselectRepository($event)"/>

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<badge>
 		<input
 			:id="item"
 			:value="item"
@@ -8,7 +8,7 @@
 		<label 
 			:for="item" 
 			class="item">{{ item }}</label>
-	</div>
+	</badge>
 </template>
 
 <script src="./item-picker.js"></script>

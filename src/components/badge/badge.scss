@@ -3,8 +3,7 @@
 .badge {
 	@include lightenOnHover($surface);
 
-	max-width: 200px;
 	border-radius: 5px;
-	margin: 1px 0;
+	margin: 1px;
 	padding: 5px;
 }

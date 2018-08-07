@@ -1,3 +1,5 @@
+import Badge from '../badge/badge.vue'
+
 export default {
 	name: `item-picker`,
 	props: {
@@ -11,5 +13,8 @@ export default {
 			const eventToSend = checked ? `tick` : `untick`
 			this.$emit(eventToSend, value)
 		},
+	},
+	components: {
+		Badge,
 	},
 }

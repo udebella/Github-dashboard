@@ -2,6 +2,11 @@
 
 .settings {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+	flex-direction: column;
+
+	.list-picker {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap
+	}
 }

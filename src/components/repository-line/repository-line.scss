@@ -2,6 +2,8 @@
 
 .line {
 	position: relative;
+	display: flex;
+	max-width: 200px;
 
 	&.SUCCESS {
 		@include lightenOnHover($success);
@@ -31,6 +33,9 @@
 	}
 
 	.repository-link {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 		text-decoration: none;
 	}
 }
