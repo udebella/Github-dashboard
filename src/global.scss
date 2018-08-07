@@ -23,3 +23,11 @@ body {
 a {
 	color: $secondary;
 }
+
+@mixin lightenOnHover($color) {
+	background-color: $color;
+
+	&:hover {
+		background-color: lighten($color, 5%);
+	}
+}

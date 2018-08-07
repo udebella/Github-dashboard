@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="badge">
 		<slot/>
 	</div>
 </template>

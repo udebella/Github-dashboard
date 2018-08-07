@@ -1,13 +1,5 @@
 @import "../../global";
 
-@mixin lightenOnHover($color) {
-	background-color: $color;
-
-	&:hover {
-		background-color: lighten($color, 5%);
-	}
-}
-
 .line {
 	display: flex;
 	padding: 5px;
