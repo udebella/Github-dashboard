@@ -15,18 +15,17 @@ describe(`Item-picker component`, () => {
 		})
 
 		it(`should display the label of the item`, () => {
-			expect(itemPicker.find(`label`).text()).to.equal(`test`)
+			expect(itemPicker.find(`span`).text()).to.equal(`test`)
 		})
 	})
 
-	describe(`notifyParent`, () => {
+	describe(`Event: click`, () => {
 		it(`should send a tick event when item is checked`, () => {
 			// Given
-			const check = itemPicker.find(`input`)
+			itemPicker.setData({state: `untick`})
 
 			// When
-			check.element.checked = true
-			check.trigger(`input`)
+			itemPicker.vm.toggle()
 
 			// Then
 			expect(itemPicker.emitted(`tick`).length).to.equal(1)
@@ -35,11 +34,10 @@ describe(`Item-picker component`, () => {
 
 		it(`should send an untick event when item is not checked`, () => {
 			// Given
-			const check = itemPicker.find(`input`)
+			itemPicker.setData({state: `tick`})
 
 			// When
-			check.element.checked = false
-			check.trigger(`input`)
+			itemPicker.vm.toggle()
 
 			// Then
 			expect(itemPicker.emitted(`untick`).length).to.equal(1)

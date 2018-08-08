@@ -8,10 +8,13 @@ export default {
 			type: String,
 		},
 	},
+	data: () => ({
+		state: `untick`,
+	}),
 	methods: {
-		notifyParent({value, checked}) {
-			const eventToSend = checked ? `tick` : `untick`
-			this.$emit(eventToSend, value)
+		toggle() {
+			this.state = this.state === `tick` ? `untick` : `tick`
+			this.$emit(this.state, this.item)
 		},
 	},
 	components: {

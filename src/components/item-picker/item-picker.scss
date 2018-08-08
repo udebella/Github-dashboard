@@ -1,5 +1,9 @@
 @import "../../global";
 
+.tick {
+	@include lightenOnHover($success)
+}
+
 .item {
 	text-transform: capitalize;
 }
