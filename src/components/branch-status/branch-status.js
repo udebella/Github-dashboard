@@ -1,6 +1,6 @@
 import {request} from '../../services/graphql-client'
 import {query} from './branch-status.query'
-import buildStatuses from '../build-statuses/build-statuses.vue'
+import BuildStatuses from '../build-statuses/build-statuses.vue'
 
 const extractStatuses = response => {
 	const {state = `NO_STATUS`, contexts = []} = response &&
@@ -49,6 +49,6 @@ export default {
 		this.$emit(`build-status`, this.state)
 	},
 	components: {
-		buildStatuses,
+		BuildStatuses,
 	},
 }

@@ -1,5 +1,5 @@
-import repositoryLink from '../repository-link/repository-link.vue'
-import branchStatus from '../branch-status/branch-status.vue'
+import RepositoryLink from '../repository-link/repository-link.vue'
+import BranchStatus from '../branch-status/branch-status.vue'
 import Badge from '../badge/badge.vue'
 import Popover from '../popover/popover.vue'
 
@@ -20,8 +20,8 @@ export default {
 		},
 	},
 	components: {
-		repositoryLink,
-		branchStatus,
+		RepositoryLink,
+		BranchStatus,
 		Badge,
 		Popover,
 	},

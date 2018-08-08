@@ -1,4 +1,4 @@
-import itemPicker from '../item-picker/item-picker.vue'
+import ItemPicker from '../item-picker/item-picker.vue'
 
 export default {
 	name: `list-picker`,
@@ -17,6 +17,6 @@ export default {
 		},
 	},
 	components: {
-		itemPicker,
+		ItemPicker,
 	},
 }

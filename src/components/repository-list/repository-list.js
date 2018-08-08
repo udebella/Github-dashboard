@@ -1,4 +1,4 @@
-import repositoryLine from '../repository-line/repository-line.vue'
+import RepositoryLine from '../repository-line/repository-line.vue'
 
 export default {
 	name: `repository-list`,
@@ -11,6 +11,6 @@ export default {
 		},
 	},
 	components: {
-		repositoryLine,
+		RepositoryLine,
 	},
 }
