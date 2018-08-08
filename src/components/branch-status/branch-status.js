@@ -36,6 +36,8 @@ export default {
 		statusesList: [],
 	}),
 	async created() {
+		// TODO improve perfs by making only one request for all watched repositories
+		// TODO use network-polling component to keep data up to date without refreshing
 		const response = await this.request(query({
 			owner: this.owner,
 			branch: this.branch,

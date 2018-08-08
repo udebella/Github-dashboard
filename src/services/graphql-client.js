@@ -1,5 +1,5 @@
 import {GraphQLClient} from 'graphql-request'
-import {token} from './token.hidden.js' // FIXME use authorized app from github instead : https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow
+import {token} from './token.hidden.js' // TODO make a component that asks the use for a personal token as we cannot use github login in a frontend app (it would need a server)
 
 const defaultClient = new GraphQLClient(`/graphql`, {
 	headers: {
