@@ -52,6 +52,7 @@ export default {
 			this.$store.commit(`removeRepository`, repository)
 		},
 		findRepository(repository) {
+			// FIXME this does not handle properly forks
 			return [...this.userRepositories, ...this.userStarredRepositories]
 				.find(({name}) => name === repository)
 		},
