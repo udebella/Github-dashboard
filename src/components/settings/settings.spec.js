@@ -21,6 +21,10 @@ describe(`Settings component`, () => {
 	})
 
 	describe(`Initialisation`, () => {
+		it(`should have settings name`, () => {
+			expect(settings.name()).to.equals(`settings`)
+		})
+
 		it(`should have default values`, () => {
 			expect(settings.vm.$data).to.deep.include({
 				username: ``,

@@ -4,13 +4,13 @@ import NetworkPolling from './network-polling.vue'
 import {stub, useFakeTimers} from 'sinon'
 
 describe(`NetworkPolling component`, () => {
-	let wrapper, requestStub, clock
+	let networkPolling, requestStub, clock
 
 	beforeEach(() => {
 		requestStub = stub().returns(`response example`)
 		clock = useFakeTimers()
 
-		wrapper = shallowMount(NetworkPolling, {
+		networkPolling = shallowMount(NetworkPolling, {
 			propsData: {
 				query: `http://test-url`,
 				request: requestStub,
@@ -23,8 +23,12 @@ describe(`NetworkPolling component`, () => {
 	})
 
 	describe(`Initialization`, () => {
+		it(`should have network-polling name`, () => {
+			expect(networkPolling.name()).to.equals(`network-polling`)
+		})
+
 		it(`should not display anything`, () => {
-			expect(wrapper.classes()).to.deep.equal([`hidden`])
+			expect(networkPolling.classes()).to.deep.equal([`hidden`])
 		})
 
 		it(`should call the given url`, () => {
@@ -42,14 +46,14 @@ describe(`NetworkPolling component`, () => {
 		it(`should stop calling the url when component is not displayed anymore`, () => {
 			expect(requestStub.callCount).to.equal(1)
 
-			wrapper.destroy()
+			networkPolling.destroy()
 			clock.tick(10000)
 
 			expect(requestStub.callCount).to.equal(1)
 		})
 
 		it(`should call the new url when props change`, () => {
-			wrapper.setProps({
+			networkPolling.setProps({
 				query: `http://new-url`,
 			})
 
@@ -58,8 +62,8 @@ describe(`NetworkPolling component`, () => {
 		})
 
 		it(`should notify parent component with response from the request`, (done) => {
-			wrapper.vm.$nextTick(() => {
-				expect(wrapper.emitted().httpUpdate).to.deep.equal([[`response example`]])
+			networkPolling.vm.$nextTick(() => {
+				expect(networkPolling.emitted().httpUpdate).to.deep.equal([[`response example`]])
 				done()
 			})
 		})

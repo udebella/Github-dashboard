@@ -3,15 +3,23 @@ import {shallowMount} from '@vue/test-utils'
 import Popover from './popover.vue'
 
 describe(`Popover component`, () => {
-	describe(`Initialization`, () => {
-		it(`should display the component`, () => {
-			const wrapper = shallowMount(Popover, {
-				slots: {
-					default: [`<span>Slot content</span>`],
-				},
-			})
+	let popover
 
-			expect(wrapper.text()).to.equal(`Slot content`)
+	beforeEach(() => {
+		popover = shallowMount(Popover, {
+			slots: {
+				default: [`<span>Slot content</span>`],
+			},
+		})
+	})
+
+	describe(`Initialization`, () => {
+		it(`should have popover name`, () => {
+			expect(popover.name()).to.equals(`popover`)
+		})
+
+		it(`should display the component`, () => {
+			expect(popover.text()).to.equal(`Slot content`)
 		})
 	})
 })

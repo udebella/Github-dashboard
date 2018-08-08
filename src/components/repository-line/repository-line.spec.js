@@ -19,6 +19,10 @@ describe(`RepositoryLine component`, () => {
 	})
 
 	describe(`Initialization`, () => {
+		it(`should have repository-line name`, () => {
+			expect(repositoryLine.name()).to.equals(`repository-line`)
+		})
+
 		it(`should initiate with a no_status`, () => {
 			expect(repositoryLine.vm.$data.branchStatus).to.equal(`NO_STATUS`)
 		})

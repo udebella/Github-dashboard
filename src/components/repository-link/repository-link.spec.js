@@ -16,6 +16,10 @@ describe(`RepositoryLink component`, () => {
 	})
 
 	describe(`Initialization`, () => {
+		it(`should have repository-link name`, () => {
+			expect(repositoryLink.name()).to.equals(`repository-link`)
+		})
+
 		it(`should display the repository name`, () => {
 			expect(repositoryLink.text()).to.equal(`repositoryName`)
 		})

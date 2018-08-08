@@ -16,6 +16,10 @@ describe(`BuildStatus component`, () => {
 	})
 
 	describe(`Initialisation`, () => {
+		it(`should have build-status name`, () => {
+			expect(buildStatus.name()).to.equals(`build-status`)
+		})
+
 		it(`should display a link to the build`, () => {
 			expect(buildStatus.attributes().href).to.equal(`http://build-link`)
 		})

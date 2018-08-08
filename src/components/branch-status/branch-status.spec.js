@@ -30,6 +30,10 @@ describe(`BranchStatus component`, () => {
 	})
 
 	describe(`Initialisation`, () => {
+		it(`should have branch-status name`, () => {
+			expect(branchStatus.name()).to.equals(`branch-status`)
+		})
+
 		it(`should have an empty state by default`, () => {
 			expect(branchStatus.vm.$data.state).to.equal(``)
 		})

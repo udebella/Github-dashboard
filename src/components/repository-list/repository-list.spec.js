@@ -3,7 +3,21 @@ import {expect} from 'chai'
 import RepositoryList from './repository-list.vue'
 
 describe(`RepositoryList component`, () => {
+	let repositoryList
+
+	beforeEach(() => {
+		const store = {
+			state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
+		}
+
+		repositoryList = shallowMount(RepositoryList, {store})
+	})
+
 	describe(`Initialisation`, () => {
+		it(`should have repository-list name`, () => {
+			expect(repositoryList.name()).to.equals(`repository-list`)
+		})
+
 		it(`should display a list of repositories`, () => {
 			// Given
 			const store = {
@@ -27,7 +41,7 @@ describe(`RepositoryList component`, () => {
 			const repositoryList = shallowMount(RepositoryList, {store})
 
 			// Then
-			expect(repositoryList.contains(`ul`)).to.be.false
+			expect(repositoryList.contains({name: `repository-line`})).to.be.false
 		})
 	})
 })

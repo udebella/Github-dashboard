@@ -15,6 +15,10 @@ describe(`BuildStatuses component`, () => {
 		})
 
 		describe(`Initialisation`, () => {
+			it(`should have branch-status name`, () => {
+				expect(buildStatuses.name()).to.equals(`build-statuses`)
+			})
+
 			it(`should not display when there is no status`, () => {
 				expect(buildStatuses.contains(`div`)).to.be.false
 			})
