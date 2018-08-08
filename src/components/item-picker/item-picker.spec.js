@@ -19,10 +19,28 @@ describe(`Item-picker component`, () => {
 		})
 	})
 
+	describe(`Ticked`, () => {
+		it(`should be displayed with ticked style`, () => {
+			// When
+			itemPicker.setProps({selected: false})
+
+			// Then
+			expect(itemPicker.classes()).to.deep.equal([])
+		})
+
+		it(`should be displayed with ticked style`, () => {
+			// When
+			itemPicker.setProps({selected: true})
+
+			// Then
+			expect(itemPicker.classes()).to.deep.equal([`ticked`])
+		})
+	})
+
 	describe(`Event: click`, () => {
 		it(`should send a tick event when item is checked`, () => {
 			// Given
-			itemPicker.setData({state: `untick`})
+			itemPicker.setProps({selected: false})
 
 			// When
 			itemPicker.vm.toggle()
@@ -34,7 +52,7 @@ describe(`Item-picker component`, () => {
 
 		it(`should send an untick event when item is not checked`, () => {
 			// Given
-			itemPicker.setData({state: `tick`})
+			itemPicker.setProps({selected: true})
 
 			// When
 			itemPicker.vm.toggle()

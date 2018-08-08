@@ -42,6 +42,11 @@ export default {
 
 		this.refreshUserRepositories = debounce(refreshUserRepositories, 1000)
 	},
+	computed: {
+		watchedRepositories() {
+			return this.$store.state.watchedRepositories
+		},
+	},
 	methods: {
 		selectRepository(name) {
 			const repository = this.findRepository(name)
@@ -51,13 +56,23 @@ export default {
 			const repository = this.findRepository(name)
 			this.$store.commit(`removeRepository`, repository)
 		},
+		/**
+		 * @Deprecated
+		 */
 		findRepository(repository) {
 			// FIXME this does not handle properly forks
 			return [...this.userRepositories, ...this.userStarredRepositories]
 				.find(({name}) => name === repository)
 		},
+		findRepositoryIn(list, repository) {
+			// FIXME this does not handle properly forks
+			return list.find(({name}) => name === repository) !== undefined
+		},
 		formatForListPicker(repositoryList) {
-			return repositoryList.map(({name}) => name)
+			return repositoryList.map(({name}) => ({
+				name,
+				selected: this.findRepositoryIn(this.watchedRepositories, name),
+			}))
 		},
 	},
 	components: {

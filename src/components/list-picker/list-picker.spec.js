@@ -6,7 +6,11 @@ describe(`List-picker component`, () => {
 	let listPicker
 
 	beforeEach(() => {
-		listPicker = shallowMount(ListPicker, {propsData: {list: [`test`]}})
+		listPicker = shallowMount(ListPicker, {
+			propsData: {
+				list: [{name: `test`, selected: false}],
+			},
+		})
 	})
 
 	describe(`Initialization`, () => {
@@ -16,6 +20,13 @@ describe(`List-picker component`, () => {
 
 		it(`should have list required property`, () => {
 			expect(listPicker.props().list).to.exist
+		})
+
+		it(`should display item picker`, () => {
+			const itemPicker = listPicker.find({name: `item-picker`})
+
+			expect(itemPicker.props().item).to.equals(`test`)
+			expect(itemPicker.props().selected).to.be.false
 		})
 	})
 

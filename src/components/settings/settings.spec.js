@@ -8,7 +8,7 @@ describe(`Settings component`, () => {
 
 	beforeEach(() => {
 		store = {
-			state: {watchedRepositories: {}},
+			state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
 			commit: stub(),
 		}
 		clock = useFakeTimers()
@@ -48,6 +48,15 @@ describe(`Settings component`, () => {
 				const userRepositoriesPicker = settings.find(`[data-test=repositories]`)
 
 				expect(userRepositoriesPicker.exists()).to.be.true
+			})
+
+			it(`should provide list picker with right informations`, () => {
+				settings.setData({userRepositories: [{name: `repository`, owner: `user`}]})
+				const userRepositoriesPicker = settings.find(`[data-test=repositories]`)
+
+				expect(userRepositoriesPicker.props()).to.deep.equals({
+					list: [{name: `repository`, selected: true}],
+				})
 			})
 		})
 
@@ -182,7 +191,13 @@ describe(`Settings component`, () => {
 		it(`should format the repository array for list picker as a list of string`, () => {
 			const formatted = settings.vm.formatForListPicker([{owner: `other_user`, name: `repository`}])
 
-			expect(formatted).to.deep.equal([`repository`])
+			expect(formatted).to.deep.equal([{name: `repository`, selected: true}])
+		})
+
+		it(`should compute selected information from given list and store`, () => {
+			const formatted = settings.vm.formatForListPicker([{owner: `user`, name: `other repository`}])
+
+			expect(formatted).to.deep.equals([{name: `other repository`, selected: false}])
 		})
 	})
 })

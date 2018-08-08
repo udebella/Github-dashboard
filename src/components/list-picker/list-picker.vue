@@ -1,9 +1,10 @@
 <template>
 	<div>
 		<item-picker
-			v-for="item in list"
-			:key="item"
-			:item="item"
+			v-for="({name, selected}) in list"
+			:key="name"
+			:item="name"
+			:selected="selected"
 			data-test="item-picker"
 			@tick="tick($event)"
 			@untick="untick($event)"/>

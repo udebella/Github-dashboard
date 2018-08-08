@@ -7,14 +7,20 @@ export default {
 			required: true,
 			type: String,
 		},
+		selected: {
+			type: Boolean,
+			default: false,
+		},
 	},
-	data: () => ({
-		state: `untick`,
-	}),
+	computed: {
+		state() {
+			return this.selected ? `ticked` : ``
+		},
+	},
 	methods: {
 		toggle() {
-			this.state = this.state === `tick` ? `untick` : `tick`
-			this.$emit(this.state, this.item)
+			const eventToEmit = this.selected ? `untick` : `tick`
+			this.$emit(eventToEmit, this.item)
 		},
 	},
 	components: {
