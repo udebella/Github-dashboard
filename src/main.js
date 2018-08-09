@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './components/App'
 import {store} from './store/store'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+Vue.component(`font-awesome-icon`, FontAwesomeIcon)
 
 new Vue({
 	el: `#app`,

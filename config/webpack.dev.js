@@ -1,5 +1,4 @@
 const {HotModuleReplacementPlugin, NamedModulesPlugin} = require(`webpack`)
-const {BundleAnalyzerPlugin} = require(`webpack-bundle-analyzer`)
 const commonConfig = require(`./webpack.common`)
 
 const config = {
@@ -23,7 +22,6 @@ const config = {
 		...commonConfig.plugins,
 		new HotModuleReplacementPlugin(),
 		new NamedModulesPlugin(),
-		new BundleAnalyzerPlugin(),
 	],
 }
 

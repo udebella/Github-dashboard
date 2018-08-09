@@ -1,31 +1,21 @@
 @import "../../global";
-@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-free/scss/solid.scss";
-@import "~@fortawesome/fontawesome-free/scss/brands.scss";
 
 .icon {
-	@include fa-icon;
-	@extend .fas;
-
 	text-decoration: none;
 
-	&.SUCCESS:before {
+	&.SUCCESS {
 		color: $success;
-		content: fa-content($fa-var-check-circle);
 	}
 
-	&.FAILURE:before {
+	&.FAILURE {
 		color: $failure;
-		content: fa-content($fa-var-exclamation-circle);
 	}
 
-	&.ERROR:before {
+	&.ERROR {
 		color: $failure;
-		content: fa-content($fa-var-times-circle);
 	}
 
-	&.PENDING:before {
+	&.PENDING {
 		color: $pending;
-		content: fa-content($fa-var-clock);
 	}
 }
