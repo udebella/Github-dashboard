@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js",
-    "blop": "webpack-dev-server",
     "build": "webpack-cli --config config/webpack.prod.js",
     "test": "karma start config/karma.unit.js",
     "lint": "eslint --fix ./src",
