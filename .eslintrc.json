@@ -25,6 +25,9 @@
 			"backtick"
 		]
 	},
+	"plugins": [
+		"vue"
+	],
 	"env": {
 		"node": true,
 		"mocha": true
