@@ -26,10 +26,10 @@
     "eslint-loader": "^2.1.0",
     "eslint-plugin-vue": "^4.7.1",
     "file-loader": "^1.1.11",
-    "graphql-request": "^1.8.1",
+    "graphql-request": "^1.8.2",
     "html-webpack-plugin": "^3.2.0",
     "istanbul-instrumenter-loader": "^3.0.1",
-    "karma": "^2.0.5",
+    "karma": "^3.0.0",
     "karma-chai": "^0.1.0",
     "karma-coverage-istanbul-reporter": "^2.0.1",
     "karma-firefox-launcher": "^1.1.0",
@@ -38,9 +38,9 @@
     "karma-sinon": "^1.0.5",
     "karma-webpack": "^3.0.0",
     "mocha": "^5.2.0",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
-    "sinon": "^6.1.4",
+    "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0",
     "vue": "^2.5.17",
     "vue-loader": "^15.3.0",
@@ -50,7 +50,7 @@
     "webpack-cli": "^3.1.0"
   },
   "devDependencies": {
-    "plop": "^2.0.0",
+    "plop": "^2.1.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-server": "^3.1.5"
   }
