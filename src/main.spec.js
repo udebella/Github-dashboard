@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 chai.use(sinonChai)
+Vue.component(`font-awesome-icon`, {})
 
 // Require all project javascript files for coverage
 const requireAll = r => r.keys().forEach(r)
