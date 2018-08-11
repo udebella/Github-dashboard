@@ -1,11 +1,11 @@
 import {request} from "./graphql-client"
 import {expect} from 'chai'
-import {spy} from 'sinon'
+import {stub} from 'sinon'
 
 describe(`Service: graphql-client`, () => {
     it(`should call request method from graphql client`, async () => {
         // Given
-        const fakeRequest = spy()
+        const fakeRequest = stub()
 
         // When
         await request(`fakeQuery`, {request: fakeRequest})
