@@ -11,7 +11,7 @@ const testConfig = {
 				loader: `istanbul-instrumenter-loader`,
 				exclude: [
 					/node_modules/,
-					/\.spec\.js$/,
+					/\.(spec|feature)\.js$/,
 				],
 				query: {
 					esModules: true,

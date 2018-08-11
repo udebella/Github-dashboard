@@ -9,4 +9,4 @@ Vue.component(`font-awesome-icon`, {})
 
 // Require all project javascript files for coverage
 const requireAll = r => r.keys().forEach(r)
-requireAll((require).context(`./`, true, /\/(.*)\/(.*)\.js$/))
+requireAll((require).context(`./`, true, /\/(.*)\/(.*)\.(spec|feature)\.js$/))
