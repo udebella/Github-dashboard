@@ -24,7 +24,7 @@ describe(`Session service`, () => {
 		it(`should allow to store user in session`, () => {
 			sessionService.setUser(`token`)
 
-			expect(fakeSessionStorage.setItem).to.have.been.calledWith(`userToken`, `token`)
+			expect(fakeSessionStorage.setItem).to.have.been.called
 		})
 	})
 
