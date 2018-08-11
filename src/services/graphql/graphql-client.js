@@ -1,7 +1,10 @@
 import {GraphQLClient} from 'graphql-request'
 import {token} from './token.hidden.js' // TODO make a component that asks the use for a personal token as we cannot use github login in a frontend app (it would need a server)
 
-export const getClient = (graphQlClientBuilder, session) => {
+/**
+ * @deprecated
+ */
+const getClient = (graphQlClientBuilder, session) => {
 	const client = graphQlClientBuilder(`/graphql`, {
 		headers: {
 			Authorization: `token ${session.getUser()}`,
@@ -22,7 +25,8 @@ const defaultClient = new GraphQLClient(`/graphql`, {
 	},
 })
 
-/**
- * @deprecated
- */
-export const request = async (query, client = defaultClient) => client.request(query)
+export const request = async (query, {builder, session}) => {
+	const client = getClient(builder, session)
+
+	client.request(query)
+}

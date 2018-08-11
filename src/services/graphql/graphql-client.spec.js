@@ -1,32 +1,35 @@
-import {getClient} from "./graphql-client"
+import {request} from "./graphql-client"
 import {expect} from 'chai'
 import {spy, stub} from 'sinon'
 
 describe(`Service: graphql-client`, () => {
-	let graphQlClient, graphQlClientBuilder, fakeRequest, fakeSession
+	let mocks
 
 	beforeEach(() => {
-		fakeSession = {
-			getUser: stub(),
+		mocks = {
+			builder: spy(() => ({
+				request: mocks.fakeRequest,
+			})),
+			fakeRequest: stub(),
+			session: {
+				getUser: stub(),
+			},
 		}
-		fakeRequest = stub()
-		graphQlClientBuilder = spy(() => ({
-			request: fakeRequest,
-		}))
-		graphQlClient = getClient(graphQlClientBuilder, fakeSession)
 	})
 
 	describe(`Initialization`, () => {
 		it(`should retrieve user from session before making a request`, () => {
-			expect(fakeSession.getUser).to.have.been.called
+			request(`someQuery`, mocks)
+
+			expect(mocks.session.getUser).to.have.been.called
 		})
 
 		it(`should build a graphqlClient properly`, () => {
-			fakeSession.getUser.returns(`userToken`)
+			mocks.session.getUser.returns(`userToken`)
 
-			graphQlClient = getClient(graphQlClientBuilder, fakeSession)
+			request(`someQuery`, mocks)
 
-			expect(graphQlClientBuilder).to.have.been.calledWith(`/graphql`, {
+			expect(mocks.builder).to.have.been.calledWith(`/graphql`, {
 				headers: {
 					Authorization: `token userToken`,
 				},
@@ -37,10 +40,10 @@ describe(`Service: graphql-client`, () => {
 	describe(`Method request`, () => {
 		it(`should call request method from graphql client`, () => {
 			// When
-			graphQlClient.request(`fakeQuery`)
+			request(`fakeQuery`, mocks)
 
 			// Then
-			expect(fakeRequest).to.have.been.calledWith(`fakeQuery`)
+			expect(mocks.fakeRequest).to.have.been.calledWith(`fakeQuery`)
 		})
 	})
 })
