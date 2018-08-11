@@ -45,5 +45,15 @@ describe(`Service: graphql-client`, () => {
 			// Then
 			expect(mocks.fakeRequest).to.have.been.calledWith(`fakeQuery`)
 		})
+
+		it(`should return a promise`, async () => {
+			mocks.fakeRequest.returns(Promise.resolve(`value`))
+
+			// When
+			const response = await request(`fakeQuery`, mocks)
+
+			// Then
+			expect(response).to.equal(`value`)
+		})
 	})
 })
