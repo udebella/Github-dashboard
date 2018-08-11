@@ -4,21 +4,6 @@ import {token} from './token.hidden.js' // TODO make a component that asks the u
 /**
  * @deprecated
  */
-const getClient = (graphQlClientBuilder, session) => {
-	const client = graphQlClientBuilder(`/graphql`, {
-		headers: {
-			Authorization: `token ${session.getUser()}`,
-		},
-	})
-
-	return {
-		request: client.request,
-	}
-}
-
-/**
- * @deprecated
- */
 const defaultClient = new GraphQLClient(`/graphql`, {
 	headers: {
 		Authorization: `token ${token}`,
@@ -26,7 +11,11 @@ const defaultClient = new GraphQLClient(`/graphql`, {
 })
 
 export const request = async (query, {builder, session}) => {
-	const client = getClient(builder, session)
+	const client = builder(`/graphql`, {
+		headers: {
+			Authorization: `token ${session.getUser()}`,
+		},
+	})
 
-	client.request(query)
+	return client.request(query)
 }
