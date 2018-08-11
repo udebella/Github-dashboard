@@ -9,6 +9,7 @@ describe(`User service`, () => {
 	beforeEach(() => {
 		fakeGraphQLClient = {
 			request: stub(),
+			setUser: stub(),
 		}
 		userService = buildUserService(fakeGraphQLClient)
 	})
@@ -20,6 +21,14 @@ describe(`User service`, () => {
 	})
 
 	describe(`Login`, () => {
+		it(`should give token to graphql client`, () => {
+			// When
+			userService.login(`token`)
+
+			// Then
+			expect(fakeGraphQLClient.setUser).to.have.been.calledWith(`token`)
+		})
+
 		it(`should validate given token to github api`, async () => {
 			// Given
 			fakeGraphQLClient.request.returns({

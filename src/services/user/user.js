@@ -2,6 +2,7 @@ const query = ``
 
 export const buildUserService = graphqlClient => {
 	const login = async token => {
+		graphqlClient.setUser(token)
 		try {
 			const {data} = await graphqlClient.request(query)
 			return ({
@@ -19,7 +20,6 @@ export const buildUserService = graphqlClient => {
 				},
 			})
 		}
-
 	}
 
 	return {
