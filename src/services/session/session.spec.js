@@ -22,19 +22,19 @@ describe(`Session service`, () => {
 
 	describe(`Store user in session`, () => {
 		it(`should allow to store user in session`, () => {
-			sessionService.setUser(`aaa`)
+			sessionService.setUser(`token`)
 
-			expect(fakeSessionStorage.setItem).to.have.been.calledWith(`userToken`, `aaa`)
+			expect(fakeSessionStorage.setItem).to.have.been.calledWith(`userToken`, `token`)
 		})
 	})
 
 	describe(`Retrieve user from session`, () => {
 		it(`should allow to retrieve user in session`, () => {
-			fakeSessionStorage.getItem.returns(`aaa`)
+			fakeSessionStorage.getItem.returns(`token`)
 
 			const token = sessionService.getUser()
 
-			expect(token).to.equal(`aaa`)
+			expect(token).to.equal(`token`)
 		})
 
 		it(`should handle the case where there is no logged user in session`, () => {
