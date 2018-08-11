@@ -17,7 +17,7 @@ describe(`Service: graphql-client`, () => {
 		}
 	})
 
-	describe(`Initialization`, () => {
+	describe(`Method request`, () => {
 		it(`should retrieve user from session before making a request`, () => {
 			request(`someQuery`, mocks)
 
@@ -35,9 +35,7 @@ describe(`Service: graphql-client`, () => {
 				},
 			})
 		})
-	})
 
-	describe(`Method request`, () => {
 		it(`should call request method from graphql client`, () => {
 			// When
 			request(`fakeQuery`, mocks)
