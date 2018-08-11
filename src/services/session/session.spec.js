@@ -3,17 +3,27 @@ import {stub} from 'sinon'
 import {buildSessionService} from "./session"
 
 describe(`Session service`, () => {
-	let fakeSessionStorage
+	let sessionService, fakeSessionStorage
 
 	beforeEach(() => {
-		fakeSessionStorage = stub()
+		fakeSessionStorage = {
+			setItem: stub(),
+		}
+
+		sessionService = buildSessionService(fakeSessionStorage)
 	})
 
 	describe(`Initialization`, () => {
 		it(`should work`, () => {
-			const sessionService = buildSessionService(fakeSessionStorage)
-
 			expect(sessionService).to.exist
+		})
+	})
+
+	describe(`Store data in session`, () => {
+		it(`should allow to store user in session`, () => {
+			sessionService.setUser(`aaa`)
+
+			expect(fakeSessionStorage.setItem).to.have.been.calledWith(`userToken`, `aaa`)
 		})
 	})
 })
