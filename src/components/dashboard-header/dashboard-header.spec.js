@@ -19,8 +19,13 @@ describe(`Dashboard Header component`, () => {
 		})
 
 		it(`should display a link to the sources`, () => {
-			expect(dashboardHeader.find(`[data-test=sources]`).attributes().href).to.equal(`https://github.com/udebella/Github-dashboard`)
-			expect(dashboardHeader.find(`[data-test=sources]`).text()).to.equal(`View sources`)
+			const sources = dashboardHeader.find(`[data-test=sources]`)
+			const icon = sources.find({name: `font-awesome-icon`})
+
+			expect(sources.attributes().href).to.equal(`https://github.com/udebella/Github-dashboard`)
+			expect(sources.attributes().title).to.equal(`View sources`)
+			expect(icon.exists()).to.be.true
+			expect(icon.attributes().icon).to.be.equal(`code`)
 		})
 	})
 })

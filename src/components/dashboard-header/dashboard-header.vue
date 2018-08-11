@@ -6,9 +6,10 @@
 			Github Dashboard
 		</div>
 		<a
+			title="View sources"
 			target="_blank"
 			href="https://github.com/udebella/Github-dashboard" 
-			data-test="sources">View sources</a>
+			data-test="sources"><font-awesome-icon icon="code"/></a>
 	</div>
 </template>
 
