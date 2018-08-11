@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
-import {buildSessionService} from "./session"
+import {NO_TOKEN, buildSessionService} from "./session"
 
 describe(`Session service`, () => {
 	let sessionService, fakeSessionStorage
@@ -35,6 +35,14 @@ describe(`Session service`, () => {
 			const token = sessionService.getUser()
 
 			expect(token).to.equal(`aaa`)
+		})
+
+		it(`should handle the case where there is no logged user in session`, () => {
+			fakeSessionStorage.getItem.returns(null)
+
+			const token = sessionService.getUser()
+
+			expect(token).to.equal(NO_TOKEN)
 		})
 	})
 })
