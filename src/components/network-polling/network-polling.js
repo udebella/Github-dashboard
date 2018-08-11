@@ -1,4 +1,4 @@
-import {request} from "../../services/graphql-client"
+import {request} from "../../services/graphql/graphql-client"
 
 export default {
 	name: `network-polling`,

@@ -1,4 +1,4 @@
-import {request} from '../../services/graphql-client'
+import {request} from '../../services/graphql/graphql-client'
 import {query} from './branch-status.query'
 import BuildStatuses from '../build-statuses/build-statuses.vue'
 
