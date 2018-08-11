@@ -3,7 +3,10 @@ export const buildSessionService = (sessionStorage) => {
 		sessionStorage.setItem(`userToken`, token)
 	}
 
+	const getUser = () => sessionStorage.getItem(`userToken`)
+
 	return {
 		setUser,
+		getUser,
 	}
 }
