@@ -15,7 +15,7 @@ describe(`Session service`, () => {
 	})
 
 	describe(`Initialization`, () => {
-		it(`should work`, () => {
+		it(`should init properly`, () => {
 			expect(sessionService).to.exist
 		})
 	})
