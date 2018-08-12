@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<font-awesome-icon icon="user"/>
-		<input 
+		<input
+			v-if="displayInputToken"
 			data-test="input-token" 
 			type="text">
 	</div>
