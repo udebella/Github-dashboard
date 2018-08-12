@@ -9,6 +9,7 @@ describe(`Session service`, () => {
 		fakeSessionStorage = {
 			setItem: stub(),
 			getItem: stub(),
+			removeItem: stub(),
 		}
 
 		sessionService = buildSessionService(fakeSessionStorage)
@@ -43,6 +44,14 @@ describe(`Session service`, () => {
 			const token = sessionService.getUser()
 
 			expect(token).to.equal(NO_USER)
+		})
+	})
+
+	describe(`Remove user from session`, () => {
+		it(`should remove item from session`, () => {
+			sessionService.removeUser()
+
+			expect(fakeSessionStorage.removeItem).to.have.been.called
 		})
 	})
 })

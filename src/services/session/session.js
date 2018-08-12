@@ -9,8 +9,11 @@ export const buildSessionService = (storage = sessionStorage) => {
 
 	const getUser = () => JSON.parse(storage.getItem(USER_KEY)) || NO_USER
 
+	const removeUser = () => storage.removeItem(USER_KEY)
+
 	return {
 		setUser,
 		getUser,
+		removeUser,
 	}
 }
