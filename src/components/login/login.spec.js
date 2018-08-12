@@ -20,5 +20,11 @@ describe(`Login component`, () => {
 			expect(icon.exists()).to.be.true
 			expect(icon.attributes().icon).to.equals(`user`)
 		})
+
+		it(`should display an input text to enter token`, () => {
+			const inputToken = login.find(`[data-test=input-token]`)
+
+			expect(inputToken.exists()).to.be.true
+		})
 	})
 })

@@ -1,5 +1,10 @@
 <template>
-	<div><font-awesome-icon icon="user"/></div>
+	<div>
+		<font-awesome-icon icon="user"/>
+		<input 
+			data-test="input-token" 
+			type="text">
+	</div>
 </template>
 
 <script src="./login.js"></script>
