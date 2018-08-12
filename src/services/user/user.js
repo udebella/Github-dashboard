@@ -1,8 +1,17 @@
-const query = ``
+import {buildSessionService} from "../session/session"
 
-export const buildUserService = graphqlClient => {
+// TODO find a way to test this
+const query = `{ 
+  viewer {
+  	login,
+  }
+}`
+
+export const buildUserService = ({sessionBuilder = buildSessionService, request} = {}) => {
+	const {setUser} = sessionBuilder()
+
 	const login = async token => {
-		graphqlClient.setUser(token)
+		setUser(token)
 		try {
 			return await performLogin(token)
 		} catch ({response}) {
@@ -13,7 +22,7 @@ export const buildUserService = graphqlClient => {
 	const connectedUser = () => ({})
 
 	const performLogin = async token => {
-		const {data} = await graphqlClient.request(query)
+		const {data} = await request(query)
 		return ({
 			success: {
 				login: data.viewer.login,

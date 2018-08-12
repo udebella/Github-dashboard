@@ -4,14 +4,17 @@ import {buildUserService} from "./user"
 
 
 describe(`User service`, () => {
-	let userService, fakeGraphQLClient
+	let userService, mocks
 
 	beforeEach(() => {
-		fakeGraphQLClient = {
+		mocks = {
+			sessionBuilder: () => ({
+				setUser: mocks.fakeSetUser,
+			}),
+			fakeSetUser: stub(),
 			request: stub(),
-			setUser: stub(),
 		}
-		userService = buildUserService(fakeGraphQLClient)
+		userService = buildUserService(mocks)
 	})
 
 	describe(`Initialization`, () => {
@@ -21,17 +24,17 @@ describe(`User service`, () => {
 	})
 
 	describe(`Login`, () => {
-		it(`should give token to graphql client`, () => {
+		it(`should save token to session`, () => {
 			// When
 			userService.login(`token`)
 
 			// Then
-			expect(fakeGraphQLClient.setUser).to.have.been.calledWith(`token`)
+			expect(mocks.fakeSetUser).to.have.been.calledWith(`token`)
 		})
 
 		it(`should validate given token to github api`, async () => {
 			// Given
-			fakeGraphQLClient.request.returns({
+			mocks.request.returns({
 				data: {
 					viewer: {
 						login: `user`,
@@ -53,7 +56,7 @@ describe(`User service`, () => {
 
 		it(`should handle wrong token`, async () => {
 			// Given
-			fakeGraphQLClient.request.throws({response:{message:`Bad credentials`,status:401}})
+			mocks.request.throws({response:{message:`Bad credentials`,status:401}})
 
 			// When
 			const loggedUser = await userService.login(`token`)
