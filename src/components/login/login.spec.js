@@ -3,6 +3,7 @@ import {stub} from 'sinon'
 import {shallowMount} from '@vue/test-utils'
 import Login from './login.vue'
 import {NO_USER} from "../../services/session/session"
+import flushPromises from 'flush-promises'
 
 describe(`Login component`, () => {
 	let mocks
@@ -11,7 +12,7 @@ describe(`Login component`, () => {
 		mocks = {
 			userService: {
 				login: stub(),
-				connectedUser: stub(),
+				connectedUser: stub().returns(NO_USER),
 			},
 		}
 	})
@@ -32,7 +33,6 @@ describe(`Login component`, () => {
 		})
 
 		it(`should display an input text to enter token when there is no connected user in session`, () => {
-			mocks.userService.connectedUser.returns(NO_USER)
 			const login = shallowMount(Login, {propsData: mocks})
 
 			const inputToken = login.find(`[data-test=input-token]`)
@@ -55,12 +55,28 @@ describe(`Login component`, () => {
 
 	describe(`Login`, () => {
 		it(`should trigger a login when updating input data`, () => {
-			mocks.userService.connectedUser.returns(NO_USER)
 			const login = shallowMount(Login, {propsData: mocks})
 
 			login.find(`[data-test=input-token]`).setValue(`test`)
 
 			expect(mocks.userService.login).to.have.been.calledWith(`test`)
+		})
+
+		it(`should hide input and display username as title on the icon when successfully logged in`, async () => {
+			// Given
+			mocks.userService.connectedUser
+				.onCall(0).returns(NO_USER)
+				.returns({login: `user`, token: `token`})
+			mocks.userService.login.returns(Promise.resolve({success: {login: `user`, token: `token`}}))
+			const login = shallowMount(Login, {propsData: mocks, attachToDocument: true})
+
+			// When
+			login.find(`[data-test=input-token]`).setValue(`token`)
+			await flushPromises()
+
+			// Then
+			expect(login.find(`[data-test=input-token]`).exists()).to.be.false
+			expect(login.find(`[data-test=icon]`).attributes().title).to.equals(`user`)
 		})
 	})
 })

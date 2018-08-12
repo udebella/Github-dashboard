@@ -1,5 +1,5 @@
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {faUser} from '@fortawesome/free-solid-svg-icons'
 import {buildUserService} from "../../services/user/user"
 import {NO_USER} from "../../services/session/session"
 
@@ -12,17 +12,21 @@ export default {
 			default: buildUserService,
 		},
 	},
-	data: () => ({
-		inputToken: ``,
-	}),
+	data() {
+		return {
+			inputToken: ``,
+			connectedUser: this.userService.connectedUser(),
+		}
+	},
 	computed: {
 		displayInputToken() {
-			return this.userService.connectedUser() === NO_USER
+			return this.connectedUser === NO_USER
 		},
 	},
 	methods: {
-		performLogin() {
-			this.userService.login(this.inputToken)
+		async performLogin() {
+			await this.userService.login(this.inputToken)
+			this.connectedUser = this.userService.connectedUser()
 		},
 	},
 }
