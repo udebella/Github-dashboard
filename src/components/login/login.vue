@@ -6,6 +6,7 @@
 		<input
 			v-if="displayInputToken"
 			v-model="inputToken"
+			placeholder="Github token"
 			data-test="input-token"
 			type="text"
 			@input="performLogin">
