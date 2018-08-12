@@ -23,9 +23,9 @@ export const buildUserService = ({sessionBuilder = buildSessionService, request 
 	const connectedUser = () => getUser()
 
 	const performLogin = async token => {
-		const {data} = await request(query)
+		const response = await request(query)
 		const loggedUser = {
-			login: data.viewer.login,
+			login: response.viewer.login,
 			token: token,
 		}
 		setUser(loggedUser)

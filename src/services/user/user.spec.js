@@ -37,10 +37,8 @@ describe(`User service`, () => {
 		it(`should validate given token to github api`, async () => {
 			// Given
 			mocks.request.returns({
-				data: {
-					viewer: {
-						login: `user`,
-					},
+				viewer: {
+					login: `user`,
 				},
 			})
 
@@ -59,10 +57,8 @@ describe(`User service`, () => {
 		it(`should save user data in session when validated through github api`, async () => {
 			// Given
 			mocks.request.returns({
-				data: {
-					viewer: {
-						login: `user`,
-					},
+				viewer: {
+					login: `user`,
 				},
 			})
 
