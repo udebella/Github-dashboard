@@ -77,5 +77,23 @@ describe(`User service`, () => {
 
 			expect(user).to.deep.equal({})
 		})
+
+		it(`should return the user after performing a login`, async () => {
+			mocks.request.returns({
+				data: {
+					viewer: {
+						login: `user`,
+					},
+				},
+			})
+
+			await userService.login(`token`)
+			const user = userService.connectedUser()
+
+			expect(user).to.deep.equal({
+				login: `user`,
+				token: `token`,
+			})
+		})
 	})
 })

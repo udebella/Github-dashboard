@@ -10,6 +10,8 @@ const query = `{
 export const buildUserService = ({sessionBuilder = buildSessionService, request} = {}) => {
 	const {setUser} = sessionBuilder()
 
+	let user = {}
+
 	const login = async token => {
 		setUser(token)
 		try {
@@ -19,15 +21,16 @@ export const buildUserService = ({sessionBuilder = buildSessionService, request}
 		}
 	}
 
-	const connectedUser = () => ({})
+	const connectedUser = () => user
 
 	const performLogin = async token => {
 		const {data} = await request(query)
+		user = {
+			login: data.viewer.login,
+			token: token,
+		}
 		return ({
-			success: {
-				login: data.viewer.login,
-				token: token,
-			},
+			success: user,
 		})
 	}
 
