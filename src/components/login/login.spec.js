@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {stub} from 'sinon'
+import {stub, useFakeTimers} from 'sinon'
 import {shallowMount} from '@vue/test-utils'
 import Login from './login.vue'
 import {NO_USER} from "../../services/session/session"
@@ -14,7 +14,12 @@ describe(`Login component`, () => {
 				login: stub(),
 				connectedUser: stub().returns(NO_USER),
 			},
+			clock: useFakeTimers(),
 		}
+	})
+
+	afterEach(() => {
+		mocks.clock.restore()
 	})
 
 	describe(`Initialization`, () => {
@@ -61,11 +66,14 @@ describe(`Login component`, () => {
 	})
 
 	describe(`Login`, () => {
-		it(`should trigger a login when updating input data`, () => {
+		it(`should trigger a login after a while when updating input data`, () => {
 			const login = shallowMount(Login, {propsData: mocks})
 
 			login.find(`[data-test=input-token]`).setValue(`test`)
 
+			mocks.clock.tick(999)
+			expect(mocks.userService.login).to.have.callCount(0)
+			mocks.clock.tick(1)
 			expect(mocks.userService.login).to.have.been.calledWith(`test`)
 		})
 
@@ -79,6 +87,7 @@ describe(`Login component`, () => {
 
 			// When
 			login.find(`[data-test=input-token]`).setValue(`token`)
+			mocks.clock.tick(1000)
 			await flushPromises()
 
 			// Then

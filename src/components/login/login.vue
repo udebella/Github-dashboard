@@ -10,8 +10,7 @@
 			v-model="inputToken"
 			placeholder="Github token"
 			data-test="input-token"
-			type="text"
-			@input="performLogin">
+			type="text">
 	</div>
 </template>
 
