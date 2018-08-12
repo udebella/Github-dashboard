@@ -22,6 +22,9 @@ export default {
 		displayInputToken() {
 			return this.connectedUser === NO_USER
 		},
+		title() {
+			return this.displayInputToken ? `You are not logged in` : `Logged in as ${this.connectedUser.login}`
+		},
 	},
 	methods: {
 		async performLogin() {

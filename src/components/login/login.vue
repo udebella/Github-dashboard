@@ -1,5 +1,5 @@
 <template>
-	<div :title="connectedUser.login">
+	<div :title="title">
 		<font-awesome-icon
 			data-test="icon" 
 			icon="user"/>

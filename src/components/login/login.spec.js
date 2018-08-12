@@ -51,6 +51,12 @@ describe(`Login component`, () => {
 
 			expect(inputToken.exists()).to.be.false
 		})
+
+		it(`should display a title indicating that user is not logged in by default`, () => {
+			const login = shallowMount(Login, {propsData: mocks})
+
+			expect(login.attributes().title).to.equals(`You are not logged in`)
+		})
 	})
 
 	describe(`Login`, () => {
@@ -76,7 +82,7 @@ describe(`Login component`, () => {
 
 			// Then
 			expect(login.find(`[data-test=input-token]`).exists()).to.be.false
-			expect(login.attributes().title).to.equals(`user`)
+			expect(login.attributes().title).to.equals(`Logged in as user`)
 		})
 	})
 })
