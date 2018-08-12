@@ -27,5 +27,11 @@ describe(`Dashboard Header component`, () => {
 			expect(icon.exists()).to.be.true
 			expect(icon.attributes().icon).to.be.equal(`code`)
 		})
+
+		it(`should display the login component`, () => {
+			const login = dashboardHeader.find(`[data-test=login]`)
+
+			expect(login.exists()).to.be.true
+		})
 	})
 })

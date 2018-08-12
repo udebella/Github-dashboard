@@ -5,11 +5,16 @@
 			data-test="title">
 			Github Dashboard
 		</div>
-		<a
-			title="View sources"
-			target="_blank"
-			href="https://github.com/udebella/Github-dashboard" 
-			data-test="sources"><font-awesome-icon icon="code"/></a>
+		<div class="right">
+			<login 
+				class="login" 
+				data-test="login"/>
+			<a
+				title="View sources"
+				target="_blank"
+				href="https://github.com/udebella/Github-dashboard"
+				data-test="sources"><font-awesome-icon icon="code"/></a>
+		</div>
 	</div>
 </template>
 

@@ -9,7 +9,7 @@ export default {
 	name: `login`,
 	props: {
 		userService: {
-			default: buildUserService(),
+			default: buildUserService,
 		},
 	},
 	computed: {

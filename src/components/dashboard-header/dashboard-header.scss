@@ -8,6 +8,16 @@
 	padding: 10px 10px;
 	background-color: $surface;
 
+	.right {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		.login {
+			margin-right: 10px;
+		}
+	}
+
 	.title {
 		font-size: 18px;
 		font-weight: bold;
