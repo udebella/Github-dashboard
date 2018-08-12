@@ -11,9 +11,11 @@ describe(`User service`, () => {
 			sessionBuilder: () => ({
 				setUser: mocks.fakeSetUser,
 				getUser: mocks.fakeGetUser,
+				removeUser: mocks.fakeRemoveUser,
 			}),
 			fakeSetUser: stub(),
 			fakeGetUser: stub(),
+			fakeRemoveUser: stub(),
 			request: stub(),
 		}
 		userService = buildUserService(mocks)
@@ -66,6 +68,7 @@ describe(`User service`, () => {
 			await userService.login(`token`)
 
 			// Then
+			expect(mocks.fakeRemoveUser).to.have.callCount(0)
 			expect(mocks.fakeSetUser).to.have.been.calledWith({
 				login: `user`,
 				token: `token`,
@@ -86,6 +89,17 @@ describe(`User service`, () => {
 					message: `Bad credentials`,
 				},
 			})
+		})
+
+		it(`should reset session when token is invalid`, async () => {
+			// Given
+			mocks.request.throws({response: {message: `Bad credentials`, status: 401}})
+
+			// When
+			await userService.login(`token`)
+
+			// Then
+			expect(mocks.fakeRemoveUser).to.have.been.called
 		})
 	})
 

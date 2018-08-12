@@ -9,7 +9,7 @@ const query = `{
 }`
 
 export const buildUserService = ({sessionBuilder = buildSessionService, request = defaultRequest} = {}) => {
-	const {setUser, getUser} = sessionBuilder()
+	const {setUser, getUser, removeUser} = sessionBuilder()
 
 	const login = async token => {
 		setUser({token})
@@ -35,6 +35,7 @@ export const buildUserService = ({sessionBuilder = buildSessionService, request 
 	}
 
 	const handleError = ({message, status}) => {
+		removeUser()
 		return ({
 			error: {
 				message,
