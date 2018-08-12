@@ -11,4 +11,19 @@ describe(`Session component test`, () => {
 
 		expect(token).to.equals(`token`)
 	})
+
+	it(`should allow to save objects in session`, () => {
+		const sessionService = buildSessionService()
+
+		sessionService.setUser({
+			login: `user`,
+			token: `token`,
+		})
+		const token = sessionService.getUser()
+
+		expect(token).to.deep.equals({
+			login: `user`,
+			token: `token`,
+		})
+	})
 })

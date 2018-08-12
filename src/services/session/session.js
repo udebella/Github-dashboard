@@ -1,13 +1,13 @@
-export const NO_TOKEN = ``
+export const NO_USER = {}
 
-const USER_KEY = `userToken`
+const USER_KEY = `user`
 
 export const buildSessionService = (storage = sessionStorage) => {
-	const setUser = token => {
-		storage.setItem(USER_KEY, token)
+	const setUser = item => {
+		storage.setItem(USER_KEY, JSON.stringify(item))
 	}
 
-	const getUser = () => storage.getItem(USER_KEY) || NO_TOKEN
+	const getUser = () => JSON.parse(storage.getItem(USER_KEY)) || NO_USER
 
 	return {
 		setUser,
