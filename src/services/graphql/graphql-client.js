@@ -1,16 +1,10 @@
 import {GraphQLClient} from 'graphql-request'
-import {token} from './token.hidden.js' // TODO make a component that asks the use for a personal token as we cannot use github login in a frontend app (it would need a server)
+import {buildSessionService} from "../session/session"
 
-/**
- * @deprecated
- */
-const defaultClient = new GraphQLClient(`/graphql`, {
-	headers: {
-		Authorization: `token ${token}`,
-	},
-})
+// TODO Is it possible to test that?
+const defaultBuilder = (...args) => new GraphQLClient(args)
 
-export const request = async (query, {builder, session}) => {
+export const request = async (query, {builder = defaultBuilder, session = buildSessionService()} = {}) => {
 	const client = builder(`/graphql`, {
 		headers: {
 			Authorization: `token ${session.getUser()}`,
