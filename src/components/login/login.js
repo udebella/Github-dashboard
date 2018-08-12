@@ -12,9 +12,17 @@ export default {
 			default: buildUserService,
 		},
 	},
+	data: () => ({
+		inputToken: ``,
+	}),
 	computed: {
 		displayInputToken() {
 			return this.userService.connectedUser() === NO_USER
+		},
+	},
+	methods: {
+		performLogin() {
+			this.userService.login(this.inputToken)
 		},
 	},
 }

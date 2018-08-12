@@ -1,10 +1,14 @@
 <template>
 	<div>
-		<font-awesome-icon icon="user"/>
+		<font-awesome-icon 
+			data-test="icon" 
+			icon="user"/>
 		<input
 			v-if="displayInputToken"
-			data-test="input-token" 
-			type="text">
+			v-model="inputToken"
+			data-test="input-token"
+			type="text"
+			@input="performLogin">
 	</div>
 </template>
 

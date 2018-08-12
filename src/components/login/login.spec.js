@@ -25,7 +25,7 @@ describe(`Login component`, () => {
 
 		it(`should display a login icon`, () => {
 			const login = shallowMount(Login, {propsData: mocks})
-			const icon = login.find({name: `font-awesome-icon`})
+			const icon = login.find(`[data-test=icon]`)
 
 			expect(icon.exists()).to.be.true
 			expect(icon.attributes().icon).to.equals(`user`)
@@ -50,6 +50,17 @@ describe(`Login component`, () => {
 			const inputToken = login.find(`[data-test=input-token]`)
 
 			expect(inputToken.exists()).to.be.false
+		})
+	})
+
+	describe(`Login`, () => {
+		it(`should trigger a login when updating input data`, () => {
+			mocks.userService.connectedUser.returns(NO_USER)
+			const login = shallowMount(Login, {propsData: mocks})
+
+			login.find(`[data-test=input-token]`).setValue(`test`)
+
+			expect(mocks.userService.login).to.have.been.calledWith(`test`)
 		})
 	})
 })
