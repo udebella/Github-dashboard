@@ -76,7 +76,7 @@ describe(`Login component`, () => {
 
 			// Then
 			expect(login.find(`[data-test=input-token]`).exists()).to.be.false
-			expect(login.find(`[data-test=icon]`).attributes().title).to.equals(`user`)
+			expect(login.attributes().title).to.equals(`user`)
 		})
 	})
 })

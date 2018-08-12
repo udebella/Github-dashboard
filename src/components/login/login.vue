@@ -1,7 +1,6 @@
 <template>
-	<div>
+	<div :title="connectedUser.login">
 		<font-awesome-icon
-			:title="connectedUser.login"
 			data-test="icon" 
 			icon="user"/>
 		<input
