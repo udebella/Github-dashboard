@@ -67,4 +67,12 @@ describe(`User service`, () => {
 			})
 		})
 	})
+
+	describe(`connectedUser`, () => {
+		it(`should return an empty object when there is no connected user`, () => {
+			const user = userService.connectedUser()
+
+			expect(user).to.deep.equal({})
+		})
+	})
 })

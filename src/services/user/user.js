@@ -10,6 +10,8 @@ export const buildUserService = graphqlClient => {
 		}
 	}
 
+	const connectedUser = () => ({})
+
 	const performLogin = async token => {
 		const {data} = await graphqlClient.request(query)
 		return ({
@@ -31,5 +33,6 @@ export const buildUserService = graphqlClient => {
 
 	return {
 		login,
+		connectedUser,
 	}
 }
