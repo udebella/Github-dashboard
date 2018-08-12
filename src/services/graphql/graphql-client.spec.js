@@ -1,6 +1,7 @@
 import {request} from "./graphql-client"
 import {expect} from 'chai'
 import {spy, stub} from 'sinon'
+import {NO_USER} from "../session/session"
 
 describe(`Service: graphql-client`, () => {
 	let mocks
@@ -12,7 +13,7 @@ describe(`Service: graphql-client`, () => {
 			})),
 			fakeRequest: stub(),
 			session: {
-				getUser: stub(),
+				getUser: stub().returns(NO_USER),
 			},
 		}
 	})
@@ -25,7 +26,7 @@ describe(`Service: graphql-client`, () => {
 		})
 
 		it(`should build a graphqlClient properly`, () => {
-			mocks.session.getUser.returns(`userToken`)
+			mocks.session.getUser.returns({token: `userToken`})
 
 			request(`someQuery`, mocks)
 

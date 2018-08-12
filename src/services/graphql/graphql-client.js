@@ -5,9 +5,10 @@ import {buildSessionService} from "../session/session"
 const defaultBuilder = (...args) => new GraphQLClient(args)
 
 export const request = async (query, {builder = defaultBuilder, session = buildSessionService()} = {}) => {
+	const {token} = session.getUser()
 	const client = builder(`/graphql`, {
 		headers: {
-			Authorization: `token ${session.getUser()}`,
+			Authorization: `token ${token}`,
 		},
 	})
 
