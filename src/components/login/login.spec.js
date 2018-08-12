@@ -56,6 +56,7 @@ describe(`Login component`, () => {
 			const login = shallowMount(Login, {propsData: mocks})
 
 			expect(login.attributes().title).to.equals(`You are not logged in`)
+			expect(login.classes()).to.deep.equals([`login-failed`])
 		})
 	})
 
@@ -83,6 +84,7 @@ describe(`Login component`, () => {
 			// Then
 			expect(login.find(`[data-test=input-token]`).exists()).to.be.false
 			expect(login.attributes().title).to.equals(`Logged in as user`)
+			expect(login.classes()).to.deep.equals([`login-success`])
 		})
 	})
 })
