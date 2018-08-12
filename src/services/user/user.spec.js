@@ -10,8 +10,10 @@ describe(`User service`, () => {
 		mocks = {
 			sessionBuilder: () => ({
 				setUser: mocks.fakeSetUser,
+				getUser: mocks.fakeGetUser,
 			}),
 			fakeSetUser: stub(),
+			fakeGetUser: stub(),
 			request: stub(),
 		}
 		userService = buildUserService(mocks)
@@ -24,12 +26,12 @@ describe(`User service`, () => {
 	})
 
 	describe(`Login`, () => {
-		it(`should save token to session`, () => {
+		it(`should save token to session for validation`, () => {
 			// When
 			userService.login(`token`)
 
 			// Then
-			expect(mocks.fakeSetUser).to.have.been.calledWith(`token`)
+			expect(mocks.fakeSetUser).to.have.been.calledWith({token: `token`})
 		})
 
 		it(`should validate given token to github api`, async () => {
@@ -54,9 +56,29 @@ describe(`User service`, () => {
 			})
 		})
 
+		it(`should save user data in session when validated through github api`, async () => {
+			// Given
+			mocks.request.returns({
+				data: {
+					viewer: {
+						login: `user`,
+					},
+				},
+			})
+
+			// When
+			await userService.login(`token`)
+
+			// Then
+			expect(mocks.fakeSetUser).to.have.been.calledWith({
+				login: `user`,
+				token: `token`,
+			})
+		})
+
 		it(`should handle wrong token`, async () => {
 			// Given
-			mocks.request.throws({response:{message:`Bad credentials`,status:401}})
+			mocks.request.throws({response: {message: `Bad credentials`, status: 401}})
 
 			// When
 			const loggedUser = await userService.login(`token`)
@@ -73,21 +95,19 @@ describe(`User service`, () => {
 
 	describe(`connectedUser`, () => {
 		it(`should return an empty object when there is no connected user`, () => {
+			mocks.fakeGetUser.returns({})
+
 			const user = userService.connectedUser()
 
 			expect(user).to.deep.equal({})
 		})
 
-		it(`should return the user after performing a login`, async () => {
-			mocks.request.returns({
-				data: {
-					viewer: {
-						login: `user`,
-					},
-				},
+		it(`should return the user after performing a login`, () => {
+			mocks.fakeGetUser.returns({
+				login: `user`,
+				token: `token`,
 			})
 
-			await userService.login(`token`)
 			const user = userService.connectedUser()
 
 			expect(user).to.deep.equal({

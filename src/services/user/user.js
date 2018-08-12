@@ -8,12 +8,10 @@ const query = `{
 }`
 
 export const buildUserService = ({sessionBuilder = buildSessionService, request} = {}) => {
-	const {setUser} = sessionBuilder()
-
-	let user = {}
+	const {setUser, getUser} = sessionBuilder()
 
 	const login = async token => {
-		setUser(token)
+		setUser({token})
 		try {
 			return await performLogin(token)
 		} catch ({response}) {
@@ -21,16 +19,17 @@ export const buildUserService = ({sessionBuilder = buildSessionService, request}
 		}
 	}
 
-	const connectedUser = () => user
+	const connectedUser = () => getUser()
 
 	const performLogin = async token => {
 		const {data} = await request(query)
-		user = {
+		const loggedUser = {
 			login: data.viewer.login,
 			token: token,
 		}
+		setUser(loggedUser)
 		return ({
-			success: user,
+			success: loggedUser,
 		})
 	}
 
