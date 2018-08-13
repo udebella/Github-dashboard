@@ -17,6 +17,11 @@ const extract = repositoryType => response => {
 	}))
 }
 
+const findRepositoryIn = (list, repository) => {
+	// FIXME this does not handle properly forks
+	return list.find(({name}) => name === repository)
+}
+
 const extractRepositories = extract(`repositories`)
 
 const extractStarredRepositories = extract(`starredRepositories`)
@@ -50,29 +55,17 @@ export default {
 	},
 	methods: {
 		selectRepository(name) {
-			const repository = this.findRepository(name)
+			const repository = findRepositoryIn([...this.userRepositories, ...this.userStarredRepositories], name)
 			this.$store.commit(`addRepository`, repository)
 		},
 		unselectRepository(name) {
-			const repository = this.findRepository(name)
+			const repository = findRepositoryIn([...this.userRepositories, ...this.userStarredRepositories], name)
 			this.$store.commit(`removeRepository`, repository)
-		},
-		/**
-		 * @Deprecated
-		 */
-		findRepository(repository) {
-			// FIXME this does not handle properly forks
-			return [...this.userRepositories, ...this.userStarredRepositories]
-				.find(({name}) => name === repository)
-		},
-		findRepositoryIn(list, repository) {
-			// FIXME this does not handle properly forks
-			return list.find(({name}) => name === repository) !== undefined
 		},
 		formatForListPicker(repositoryList) {
 			return repositoryList.map(({name}) => ({
 				name,
-				selected: this.findRepositoryIn(this.watchedRepositories, name),
+				selected: findRepositoryIn(this.watchedRepositories, name) !== undefined,
 			}))
 		},
 	},
