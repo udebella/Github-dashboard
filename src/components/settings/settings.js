@@ -8,6 +8,7 @@ const extract = repositoryType => response => {
 		response.user &&
 		response.user[repositoryType] &&
 		response.user[repositoryType].nodes || []
+	// FIXME defaultBranchRef can be null on new projects
 	return repositories.map(({name, owner, url, defaultBranchRef}) => ({
 		name,
 		owner: owner.login,
