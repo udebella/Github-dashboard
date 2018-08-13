@@ -5,7 +5,10 @@ const config = {
 	...commonConfig,
 	plugins: [
 		...commonConfig.plugins,
-		new BundleAnalyzerPlugin(),
+		new BundleAnalyzerPlugin({
+			analyzerMode: `disabled`,
+			generateStatsFile: true,
+		}),
 	],
 	mode: `production`,
 }
