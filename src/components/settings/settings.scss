@@ -1,0 +1,12 @@
+@import "../../global";
+
+.settings {
+	display: flex;
+	flex-direction: column;
+
+	.list-picker {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap
+	}
+}

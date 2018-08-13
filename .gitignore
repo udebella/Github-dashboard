@@ -1,0 +1,13 @@
+# IntelliJ project files
+.idea/
+*.iml
+
+# Build files
+dist/
+coverage/
+
+# NPM
+node_modules/
+
+# Hidden files
+*.hidden.*

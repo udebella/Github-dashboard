@@ -1,0 +1,8 @@
+@import "../../global";
+
+.link {
+	text-transform: capitalize;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

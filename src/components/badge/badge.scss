@@ -1,0 +1,11 @@
+@import "../../global";
+
+.badge {
+	@include lightenOnHover($surface);
+
+	border-radius: 5px;
+	margin: 1px;
+	padding: 5px;
+	display: flex;
+	align-items: center;
+}

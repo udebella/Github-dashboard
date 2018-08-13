@@ -1,0 +1,21 @@
+@import "../../global";
+
+.icon {
+	text-decoration: none;
+
+	&.SUCCESS {
+		color: $success;
+	}
+
+	&.FAILURE {
+		color: $failure;
+	}
+
+	&.ERROR {
+		color: $failure;
+	}
+
+	&.PENDING {
+		color: $pending;
+	}
+}
