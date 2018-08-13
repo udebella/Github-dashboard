@@ -1,1 +1,0 @@
-export const token = `YOUR_TOKEN_HERE`
