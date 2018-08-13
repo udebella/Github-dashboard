@@ -30,7 +30,7 @@ describe(`Service: graphql-client`, () => {
 
 			request(`someQuery`, mocks)
 
-			expect(mocks.builder).to.have.been.calledWith(`/graphql`, {
+			expect(mocks.builder).to.have.been.calledWith(`https://api.github.com/graphql`, {
 				headers: {
 					Authorization: `token userToken`,
 				},

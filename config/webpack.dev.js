@@ -10,13 +10,6 @@ const config = {
 		port: 3000,
 		hot: true,
 		open: true,
-		proxy: {
-			'/graphql': {
-				target: `https://api.github.com/`,
-				secure: false,
-				changeOrigin: true,
-			},
-		},
 	},
 	plugins: [
 		...commonConfig.plugins,
