@@ -29,11 +29,11 @@ describe(`Local storage store`, () => {
 		})
 
 		it(`should replace the state with retrieved value from local storage`, () => {
-			fakeLocalStorage.getItem.returns(`this is the store`)
+			fakeLocalStorage.getItem.returns(`{"state": "this is the store"}`)
 
 			localStorageStore(fakeStore, fakeLocalStorage)
 
-			expect(fakeStore.replaceState).to.have.been.calledWith(`this is the store`)
+			expect(fakeStore.replaceState).to.have.been.calledWith({state: `this is the store`})
 		})
 
 		it(`should not replace the state when there is no value in the local storage`, () => {
