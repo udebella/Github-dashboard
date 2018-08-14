@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
-import LocalStorageStore from './local-storage-store'
+import LocalStorageStore from './local-storage-plugin'
 
 describe(`Local storage store`, () => {
 	let localStorageStore, fakeStore, fakeLocalStorage
