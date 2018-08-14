@@ -7,10 +7,13 @@ describe(`Local storage store`, () => {
 
 	beforeEach(() => {
 		fakeStore = {
+			mutate: null,
 			replaceState: stub(),
+			subscribe: stub().callsFake(fn => fakeStore.mutate = fn),
 		}
 		fakeLocalStorage = {
 			getItem: stub(),
+			setItem: stub(),
 		}
 		localStorageStore = LocalStorageStore
 	})
@@ -42,6 +45,21 @@ describe(`Local storage store`, () => {
 			localStorageStore(fakeStore, fakeLocalStorage)
 
 			expect(fakeStore.replaceState).not.to.have.been.called
+		})
+	})
+
+	describe(`Save store to local storage after every mutation`, () => {
+		it(`should subscribe to store mutations`, () => {
+			localStorageStore(fakeStore, fakeLocalStorage)
+
+			expect(fakeStore.subscribe).to.have.been.called
+		})
+
+		it(`should put store in local storage after subscription`, () => {
+			localStorageStore(fakeStore, fakeLocalStorage)
+			fakeStore.mutate(`mutation`, {state: `this is the new store`})
+
+			expect(fakeLocalStorage.setItem).to.have.been.calledWith(`github-dashboard-store`, `{"state":"this is the new store"}`)
 		})
 	})
 })
