@@ -1,5 +1,7 @@
 <template>
-	<input type="text">
+	<input 
+		v-model="input" 
+		type="text">
 </template>
 
 <script src="./debounced-input.js"></script>
