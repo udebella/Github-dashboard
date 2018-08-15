@@ -39,5 +39,16 @@ describe(`DebouncedInput component`, () => {
 
 			expect(debouncedInput.emitted(`input`)).to.deep.equals([[`test`]])
 		})
+
+		it(`should send event only once when there is less 1 sec between updates`, () => {
+			const debouncedInput = shallowMount(DebouncedInput)
+
+			debouncedInput.setValue(`test`)
+			clock.tick(500)
+			debouncedInput.setValue(`another test`)
+			clock.tick(1000)
+
+			expect(debouncedInput.emitted(`input`)).to.deep.equals([[`another test`]])
+		})
 	})
 })

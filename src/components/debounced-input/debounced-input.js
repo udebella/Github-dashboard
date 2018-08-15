@@ -12,7 +12,7 @@ export default {
 	},
 	created() {
 		const notifyParent = () => {
-			this.$emit(`input`, `test`)
+			this.$emit(`input`, this.input)
 		}
 
 		this.debouncedInput = debounce(notifyParent, 1000)
