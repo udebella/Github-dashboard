@@ -1,5 +1,6 @@
 import Vuex, {Store} from 'vuex'
 import Vue from "vue"
+import localStoragePlugin from './local-storage-plugin'
 
 Vue.use(Vuex)
 
@@ -34,4 +35,5 @@ export const mutations = {
 export const store = new Store({
 	state,
 	mutations,
+	plugins: [localStoragePlugin],
 })
