@@ -66,14 +66,11 @@ describe(`Login component`, () => {
 	})
 
 	describe(`Login`, () => {
-		it(`should trigger a login after a while when updating input data`, () => {
+		it(`should trigger a login when input changes`, () => {
 			const login = shallowMount(Login, {propsData: mocks})
 
-			login.find(`[data-test=input-token]`).setValue(`test`)
+			login.find(`[data-test=input-token]`).vm.$emit(`input`, {value:`test`})
 
-			mocks.clock.tick(999)
-			expect(mocks.userService.login).to.have.callCount(0)
-			mocks.clock.tick(1)
 			expect(mocks.userService.login).to.have.been.calledWith(`test`)
 		})
 
@@ -83,11 +80,10 @@ describe(`Login component`, () => {
 				.onCall(0).returns(NO_USER)
 				.returns({login: `user`, token: `token`})
 			mocks.userService.login.returns(Promise.resolve({success: {login: `user`, token: `token`}}))
-			const login = shallowMount(Login, {propsData: mocks, attachToDocument: true})
+			const login = shallowMount(Login, {propsData: mocks})
 
 			// When
-			login.find(`[data-test=input-token]`).setValue(`token`)
-			mocks.clock.tick(1000)
+			login.find(`[data-test=input-token]`).vm.$emit(`input`, {value:`test`})
 			await flushPromises()
 
 			// Then

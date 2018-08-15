@@ -3,6 +3,7 @@ import {faUser} from '@fortawesome/free-solid-svg-icons'
 import {buildUserService} from "../../services/user/user"
 import {NO_USER} from "../../services/session/session"
 import debounce from "debounce"
+import DebouncedInput from '../debounced-input/debounced-input.vue'
 
 library.add(faUser)
 
@@ -37,9 +38,12 @@ export default {
 		},
 	},
 	methods: {
-		async performLogin() {
-			await this.userService.login(this.inputToken)
+		async performLogin({value}) {
+			await this.userService.login(value)
 			this.connectedUser = this.userService.connectedUser()
 		},
+	},
+	components: {
+		DebouncedInput,
 	},
 }

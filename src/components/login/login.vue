@@ -5,12 +5,13 @@
 		<font-awesome-icon
 			data-test="icon" 
 			icon="user"/>
-		<input
+		<debounced-input
 			v-if="displayInputToken"
 			v-model="inputToken"
 			placeholder="Github token"
 			data-test="input-token"
-			type="text">
+			type="text"
+			@input="performLogin"/>
 	</div>
 </template>
 
