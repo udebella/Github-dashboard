@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {stub, useFakeTimers} from 'sinon'
+import {stub} from 'sinon'
 import {shallowMount} from '@vue/test-utils'
 import Login from './login.vue'
 import {NO_USER} from "../../services/session/session"
@@ -14,12 +14,7 @@ describe(`Login component`, () => {
 				login: stub(),
 				connectedUser: stub().returns(NO_USER),
 			},
-			clock: useFakeTimers(),
 		}
-	})
-
-	afterEach(() => {
-		mocks.clock.restore()
 	})
 
 	describe(`Initialization`, () => {
