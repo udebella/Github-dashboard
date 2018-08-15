@@ -10,7 +10,7 @@ const commonConfig = {
 	output: {
 		pathinfo: true,
 		path: absolutePath(`/dist`),
-		filename: `[name].js`,
+		filename: `[name]-[hash].js`,
 	},
 	module: {
 		rules: [
