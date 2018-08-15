@@ -14,8 +14,11 @@ describe(`DebouncedInput component`, () => {
 			expect(debouncedInput.name()).to.equal(`debounced-input`)
 		})
 
-		it(`should display the component`, () => {
-			expect(debouncedInput.find(`div`).text()).to.equal(`Test component`)
+		it(`should display a text input`, () => {
+			const input = debouncedInput.find(`input`)
+
+			expect(input.exists()).to.be.true
+			expect(input.attributes().type).to.equals(`text`)
 		})
 	})
 })

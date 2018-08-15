@@ -1,5 +1,5 @@
 <template>
-	<div>Test component</div>
+	<input type="text">
 </template>
 
 <script src="./debounced-input.js"></script>
