@@ -1,6 +1,6 @@
 import {request} from '../../services/graphql/graphql-client'
 import {query} from './starred-repo.query'
-import debounce from 'debounce'
+import {debounce} from 'debounce'
 import ListPicker from '../list-picker/list-picker.vue'
 
 const extract = repositoryType => response => {
