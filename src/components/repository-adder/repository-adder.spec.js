@@ -14,8 +14,11 @@ describe(`RepositoryAdder component`, () => {
 			expect(repositoryAdder.name()).to.equal(`repository-adder`)
 		})
 
-		it(`should display the component`, () => {
-			expect(repositoryAdder.find(`div`).text()).to.equal(`Test component`)
+		it(`should display an add icon`, () => {
+			const icon = repositoryAdder.find(`[data-test=icon]`)
+
+			expect(icon.exists()).to.be.true
+			expect(icon.attributes().icon).to.equals(`plus-circle`)
 		})
 	})
 })

@@ -1,5 +1,11 @@
 <template>
-	<div>Test component</div>
+	<badge 
+		title="Watch a new repository" 
+		class="icon">
+		<font-awesome-icon
+			data-test="icon"
+			icon="plus-circle"/>
+	</badge>
 </template>
 
 <script src="./repository-adder.js"></script>
