@@ -64,7 +64,7 @@ describe(`Login component`, () => {
 		it(`should trigger a login when input changes`, () => {
 			const login = shallowMount(Login, {propsData: mocks})
 
-			login.find(`[data-test=input-token]`).vm.$emit(`input`, {value:`test`})
+			login.find(`[data-test=input-token]`).vm.$emit(`input`, `test`)
 
 			expect(mocks.userService.login).to.have.been.calledWith(`test`)
 		})
@@ -78,7 +78,7 @@ describe(`Login component`, () => {
 			const login = shallowMount(Login, {propsData: mocks})
 
 			// When
-			login.find(`[data-test=input-token]`).vm.$emit(`input`, {value:`test`})
+			login.find(`[data-test=input-token]`).vm.$emit(`input`, `test`)
 			await flushPromises()
 
 			// Then

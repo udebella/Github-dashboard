@@ -27,7 +27,7 @@ export default {
 		},
 	},
 	methods: {
-		async performLogin({value}) {
+		async performLogin(value) {
 			await this.userService.login(value)
 			this.connectedUser = this.userService.connectedUser()
 		},
