@@ -1,4 +1,5 @@
 import RepositoryLine from '../repository-line/repository-line.vue'
+import RepositoryAdder from '../repository-adder/repository-adder.vue'
 
 export default {
 	name: `repository-list`,
@@ -9,5 +10,6 @@ export default {
 	},
 	components: {
 		RepositoryLine,
+		RepositoryAdder,
 	},
 }

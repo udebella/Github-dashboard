@@ -43,5 +43,9 @@ describe(`RepositoryList component`, () => {
 			// Then
 			expect(repositoryList.contains({name: `repository-line`})).to.be.false
 		})
+
+		it(`should display a repository adder component`, () => {
+			expect(repositoryList.find({name: `repository-adder`}).exists()).to.be.true
+		})
 	})
 })

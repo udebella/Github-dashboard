@@ -5,6 +5,7 @@
 			:key="repository.name">
 			<repository-line :repository="repository"/>
 		</div>
+		<repository-adder/>
 	</div>
 </template>
 
