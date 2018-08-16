@@ -2,7 +2,7 @@
 	<div class="app">
 		<dashboard-header/>
 		<settings/>
-		<repository-list/>
+		<repository-list class="repository-list"/>
 	</div>
 </template>
 
@@ -20,4 +20,5 @@
 		},
 	}
 </script>
+<style src="./App.scoped.scss" scoped></style>
 <style src="./App.scss"></style>

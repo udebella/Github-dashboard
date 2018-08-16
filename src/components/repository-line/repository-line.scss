@@ -3,7 +3,6 @@
 .line {
 	position: relative;
 	display: flex;
-	max-width: 200px;
 
 	&.SUCCESS {
 		@include lightenOnHover($success);
