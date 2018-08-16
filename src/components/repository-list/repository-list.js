@@ -6,9 +6,6 @@ export default {
 		repositories() {
 			return this.$store.state.watchedRepositories
 		},
-		isDisplayed() {
-			return this.repositories.length !== 0
-		},
 	},
 	components: {
 		RepositoryLine,

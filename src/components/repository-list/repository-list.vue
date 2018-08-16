@@ -1,5 +1,5 @@
 <template>
-	<div v-if="isDisplayed">
+	<div>
 		<div
 			v-for="repository in repositories"
 			:key="repository.name">
