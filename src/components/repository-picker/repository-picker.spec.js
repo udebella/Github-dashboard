@@ -14,8 +14,8 @@ describe(`RepositoryPicker component`, () => {
 			expect(repositoryPicker.name()).to.equal(`repository-picker`)
 		})
 
-		it(`should display the component`, () => {
-			expect(repositoryPicker.find(`div`).text()).to.equal(`Test component`)
+		it(`should display a input to enter repository owner`, () => {
+			expect(repositoryPicker.find(`[data-test=repository-owner]`).exists()).to.be.true
 		})
 	})
 })

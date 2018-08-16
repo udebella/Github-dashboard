@@ -1,5 +1,5 @@
 <template>
-	<div>Test component</div>
+	<debounced-input data-test="repository-owner"/>
 </template>
 
 <script src="./repository-picker.js"></script>
