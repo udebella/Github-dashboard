@@ -4,7 +4,7 @@
 			placeholder="Repository owner"
 			data-test="owner-input"
 			@input="retrieveRepositoriesFor"/>
-		<select>
+		<select @input="pickRepository">
 			<option
 				v-for="{name} in repositories"
 				:key="name"

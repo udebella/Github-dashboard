@@ -25,13 +25,16 @@ const fakeResponse = {
 }
 
 describe(`RepositoryPicker component`, () => {
-	let repositoryPicker, mocks
+	let repositoryPicker, mocks, store
 
 	beforeEach(() => {
+		store = {
+			commit: stub(),
+		},
 		mocks = {
 			request: stub(),
-		},
-			repositoryPicker = shallowMount(RepositoryPicker, {propsData: mocks})
+		}
+		repositoryPicker = shallowMount(RepositoryPicker, {propsData: mocks, store})
 	})
 
 	describe(`Initialization`, () => {
@@ -75,6 +78,18 @@ describe(`RepositoryPicker component`, () => {
 
 			expect(mocks.request).not.to.have.been.called
 			expect(repositoryPicker.find(`[data-test=repository-input]`).exists()).to.be.false
+		})
+	})
+
+	describe(`Pick a repository`, () => {
+		it(`should put in the store the repository picked`, () => {
+			const first = {name: `first repository`}
+			const second = {name: `second repository`}
+			repositoryPicker.setData({repositories: [first, second]})
+
+			repositoryPicker.find(`select`).trigger(`input`, {value: `second repository`})
+
+			expect(store.commit).to.have.been.calledWith(`addRepository`, second)
 		})
 	})
 })

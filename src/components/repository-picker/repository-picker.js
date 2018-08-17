@@ -33,6 +33,10 @@ export default {
 				this.repositories = extract(response)
 			}
 		},
+		pickRepository({value}) {
+			const selectedRepository = this.repositories.find(({name}) => name === value)
+			this.$store.commit(`addRepository`, selectedRepository)
+		},
 	},
 	components: {
 		DebouncedInput,
