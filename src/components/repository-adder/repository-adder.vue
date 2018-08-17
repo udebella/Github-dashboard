@@ -7,9 +7,8 @@
 			data-test="icon"
 			icon="plus-circle"
 			@click="clickIcon"/>
-		<debounced-input
+		<repository-picker
 			v-if="displayInput"
-			placeholder="Repository owner"
 			data-test="owner-input"/>
 	</badge>
 </template>
