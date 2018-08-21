@@ -1,5 +1,5 @@
 export const query = username => `{
-  user(login: ${username}) {
+  repositoryOwner(login: ${username}) {
   	repositories(first: 20) {
       nodes {
         name

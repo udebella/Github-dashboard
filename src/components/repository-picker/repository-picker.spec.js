@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import {stub} from 'sinon'
 import {shallowMount} from '@vue/test-utils'
 import RepositoryPicker from './repository-picker.vue'
-import {query} from "./user-repositories.query"
+import {query} from "./repository-picker.query"
 import flushPromises from 'flush-promises'
 
 const fakeResponse = {

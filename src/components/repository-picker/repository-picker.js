@@ -1,6 +1,6 @@
 import {request} from "../../services/graphql/graphql-client"
 import DebouncedInput from '../debounced-input/debounced-input.vue'
-import {query} from "./user-repositories.query"
+import {query} from "./repository-picker.query"
 
 const extract = response => {
 	const repositories = response &&
