@@ -4,7 +4,9 @@
 		v-model="selected"
 		data-test="select"
 		@change="notify">
-		<option value=""/>
+		<option 
+			disabled 
+			value=""/>
 		<option 
 			v-for="item in items" 
 			:key="item"
