@@ -6,4 +6,13 @@ export default {
 			default: () => [],
 		},
 	},
+	data: () => ({
+		selected: ``,
+	}),
+	methods: {
+		notify() {
+			console.log(this.selected); // eslint-disable-line
+			this.$emit(`selected`, this.selected)
+		},
+	},
 }
