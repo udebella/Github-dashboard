@@ -1,12 +1,13 @@
 import {request} from "../../services/graphql/graphql-client"
 import DebouncedInput from '../debounced-input/debounced-input.vue'
+import CustomSelect from '../custom-select/custom-select.vue'
 import {query} from "./repository-picker.query"
 
 const extract = response => {
 	const repositories = response &&
-		response.user &&
-		response.user.repositories &&
-		response.user.repositories.nodes || []
+		response.repositoryOwner &&
+		response.repositoryOwner.repositories &&
+		response.repositoryOwner.repositories.nodes || []
 	// FIXME defaultBranchRef can be null on new projects
 	return repositories.map(({name, owner, url, defaultBranchRef}) => ({
 		name,
@@ -26,6 +27,11 @@ export default {
 	data: () => ({
 		repositories: [],
 	}),
+	computed: {
+		repositoriesNames() {
+			return this.repositories.map(({name}) => name)
+		},
+	},
 	methods: {
 		async retrieveRepositoriesFor(ownerName) {
 			if (ownerName) {
@@ -33,12 +39,13 @@ export default {
 				this.repositories = extract(response)
 			}
 		},
-		pickRepository({value}) {
+		pickRepository(value) {
 			const selectedRepository = this.repositories.find(({name}) => name === value)
 			this.$store.commit(`addRepository`, selectedRepository)
 		},
 	},
 	components: {
 		DebouncedInput,
+		CustomSelect,
 	},
 }

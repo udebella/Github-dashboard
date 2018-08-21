@@ -6,7 +6,7 @@ import {query} from "./repository-picker.query"
 import flushPromises from 'flush-promises'
 
 const fakeResponse = {
-	user: {
+	repositoryOwner: {
 		repositories: {
 			nodes: [
 				{
@@ -45,10 +45,6 @@ describe(`RepositoryPicker component`, () => {
 		it(`should display a input to enter repository owner`, () => {
 			expect(repositoryPicker.find(`[data-test=owner-input]`).exists()).to.be.true
 		})
-
-		it(`should not display the select for the repository while the owner has not been entered`, () => {
-			expect(repositoryPicker.find(`[data-test=repository-input]`).exists()).to.be.false
-		})
 	})
 
 	describe(`Enter repository owner`, () => {
@@ -68,16 +64,13 @@ describe(`RepositoryPicker component`, () => {
 			repositoryPicker.find(`[data-test=owner-input]`).vm.$emit(`input`, `test`)
 
 			await flushPromises()
-			expect(repositoryPicker.findAll(`[data-test=repository-input]`).length).to.equals(1)
-			expect(repositoryPicker.findAll(`[data-test=repository-input]`).at(0).text()).to.equals(`gameFinder`)
-			expect(repositoryPicker.findAll(`[data-test=repository-input]`).at(0).attributes().value).to.equals(`gameFinder`)
+			expect(repositoryPicker.find(`[data-test=repository-input]`).attributes().items).to.deep.equals(`gameFinder`)
 		})
 
 		it(`should not make queries when update value is empty`, () => {
 			repositoryPicker.find(`[data-test=owner-input]`).vm.$emit(`input`, ``)
 
 			expect(mocks.request).not.to.have.been.called
-			expect(repositoryPicker.find(`[data-test=repository-input]`).exists()).to.be.false
 		})
 	})
 
@@ -87,7 +80,7 @@ describe(`RepositoryPicker component`, () => {
 			const second = {name: `second repository`}
 			repositoryPicker.setData({repositories: [first, second]})
 
-			repositoryPicker.find(`select`).trigger(`input`, {value: `second repository`})
+			repositoryPicker.find(`[data-test=repository-input]`).vm.$emit(`selected`, `second repository`)
 
 			expect(store.commit).to.have.been.calledWith(`addRepository`, second)
 		})

@@ -4,15 +4,10 @@
 			placeholder="Repository owner"
 			data-test="owner-input"
 			@input="retrieveRepositoriesFor"/>
-		<select @input="pickRepository">
-			<option
-				v-for="{name} in repositories"
-				:key="name"
-				:value="name"
-				data-test="repository-input">
-				{{ name }}
-			</option>
-		</select>
+		<custom-select
+			:items="repositoriesNames"
+			data-test="repository-input"
+			@selected="pickRepository"/>
 	</div>
 </template>
 
