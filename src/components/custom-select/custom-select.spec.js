@@ -29,5 +29,11 @@ describe(`CustomSelect component`, () => {
 			expect(customSelect.findAll(`[data-test=select] option`).at(1).text()).to.equals(`example`)
 			expect(customSelect.findAll(`[data-test=select] option`).at(1).attributes().value).to.equals(`example`)
 		})
+
+		it(`should not display anything when there is no items in the list`, () => {
+			const customSelect = shallowMount(CustomSelect)
+
+			expect(customSelect.find(`[data-test=select]`).exists()).to.be.false
+		})
 	})
 })

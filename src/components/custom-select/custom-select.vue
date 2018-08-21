@@ -1,5 +1,7 @@
 <template>
-	<select data-test="select">
+	<select 
+		v-if="items.length" 
+		data-test="select">
 		<option value=""/>
 		<option 
 			v-for="item in items" 
