@@ -3,6 +3,7 @@
 .line {
 	position: relative;
 	display: flex;
+	justify-content: space-between;
 
 	&.SUCCESS {
 		@include lightenOnHover($success);
