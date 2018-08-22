@@ -1,5 +1,7 @@
 <template>
-	<div>Test component</div>
+	<font-awesome-icon 
+		icon="trash" 
+		data-test="icon"/>
 </template>
 
 <script src="./repository-remover.js"></script>

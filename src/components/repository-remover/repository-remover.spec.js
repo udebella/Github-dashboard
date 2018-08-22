@@ -14,8 +14,9 @@ describe(`RepositoryRemover component`, () => {
 			expect(repositoryRemover.name()).to.equal(`repository-remover`)
 		})
 
-		it(`should display the component`, () => {
-			expect(repositoryRemover.find(`div`).text()).to.equal(`Test component`)
+		it(`should a remove icon`, () => {
+			expect(repositoryRemover.find(`[data-test=icon]`).exists()).to.be.true
+			expect(repositoryRemover.find(`[data-test=icon]`).attributes().icon).to.equals(`trash`)
 		})
 	})
 })
