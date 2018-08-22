@@ -1,14 +1,12 @@
 <template>
 	<div class="app">
 		<dashboard-header/>
-		<settings/>
 		<repository-list class="repository-list"/>
 	</div>
 </template>
 
 <script>
 	import DashboardHeader from './dashboard-header/dashboard-header.vue'
-	import Settings from './settings/settings.vue'
 	import RepositoryList from "./repository-list/repository-list.vue"
 
 	export default {
@@ -16,7 +14,6 @@
 		components: {
 			DashboardHeader,
 			RepositoryList,
-			Settings,
 		},
 	}
 </script>
