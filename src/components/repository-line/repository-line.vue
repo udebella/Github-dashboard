@@ -6,6 +6,10 @@
 			:name="repository.name"
 			:url="repository.url"
 			class="repository-link"/>
+		<repository-remover
+			:name="repository.name"
+			:owner="repository.owner" 
+			data-test="trash"/>
 		<popover class="popover">
 			<branch-status
 				:name="repository.name"

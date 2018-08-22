@@ -30,6 +30,10 @@ describe(`RepositoryLine component`, () => {
 		it(`should display with the default branch status`, () => {
 			expect(repositoryLine.classes()).to.deep.equal([`line`, `NO_STATUS`])
 		})
+
+		it(`should display a way to remove the repository from watched repositories`, () => {
+			expect(repositoryLine.find(`[data-test=trash]`).exists()).to.be.true
+		})
 	})
 
 	describe(`Repository link`, () => {
