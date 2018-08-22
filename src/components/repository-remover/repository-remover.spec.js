@@ -1,12 +1,16 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import RepositoryRemover from './repository-remover.vue'
+import {stub} from "sinon"
 
 describe(`RepositoryRemover component`, () => {
-	let repositoryRemover
+	let repositoryRemover, store
 
 	beforeEach(() => {
-		repositoryRemover = shallowMount(RepositoryRemover)
+		store = {
+			commit: stub(),
+		},
+		repositoryRemover = shallowMount(RepositoryRemover, {propsData: {name: `example`, owner: `user`}, store})
 	})
 
 	describe(`Initialization`, () => {
@@ -17,6 +21,14 @@ describe(`RepositoryRemover component`, () => {
 		it(`should a remove icon`, () => {
 			expect(repositoryRemover.find(`[data-test=icon]`).exists()).to.be.true
 			expect(repositoryRemover.find(`[data-test=icon]`).attributes().icon).to.equals(`trash`)
+		})
+	})
+
+	describe(`Removing a repository`, () => {
+		it(`should remove the repository from watched repository when clicked`, () => {
+			repositoryRemover.find({name: `font-awesome-icon`}).vm.$emit(`click`)
+
+			expect(store.commit).to.have.been.calledWith(`removeRepository`, {name: `example`, owner: `user`})
 		})
 	})
 })
