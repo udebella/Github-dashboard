@@ -14,8 +14,8 @@ describe(`GithubApiConfig component`, () => {
 			expect(githubApiConfig.name()).to.equal(`github-api-config`)
 		})
 
-		it(`should display the component`, () => {
-			expect(githubApiConfig.find(`div`).text()).to.equal(`Test component`)
+		it(`should display an input`, () => {
+			expect(githubApiConfig.find(`input`).exists()).to.be.true
 		})
 	})
 })
