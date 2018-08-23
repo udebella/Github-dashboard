@@ -15,6 +15,11 @@ describe(`Service: graphql-client`, () => {
 			session: {
 				getUser: stub().returns(NO_USER),
 			},
+			store: {
+				state: {
+					githubApi: `http://github-api`,
+				},
+			},
 		}
 	})
 
@@ -30,7 +35,7 @@ describe(`Service: graphql-client`, () => {
 
 			request(`someQuery`, mocks)
 
-			expect(mocks.builder).to.have.been.calledWith(`https://api.github.com/graphql`, {
+			expect(mocks.builder).to.have.been.calledWith(`http://github-api`, {
 				headers: {
 					Authorization: `token userToken`,
 				},
