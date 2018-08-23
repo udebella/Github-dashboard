@@ -1,7 +1,13 @@
 import {expect} from 'chai'
-import {mutations} from './store'
+import {mutations, store} from './store'
 
 describe(`Store`, () => {
+	describe(`Initial state`, () => {
+		it(`should have an empty watched repository list by default`, () => {
+			expect(store.state.watchedRepositories).to.deep.equals([])
+		})
+	})
+
 	describe(`addRepository`, () => {
 		const {addRepository} = mutations
 		it(`should add a repository to watch for the username`, () => {
