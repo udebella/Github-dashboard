@@ -5,6 +5,7 @@ import localStoragePlugin from './local-storage-plugin'
 Vue.use(Vuex)
 
 const state = {
+	githubApi: `https://api.github.com/graphql`,
 	watchedRepositories: [],
 }
 

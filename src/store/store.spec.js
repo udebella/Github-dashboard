@@ -6,6 +6,10 @@ describe(`Store`, () => {
 		it(`should have an empty watched repository list by default`, () => {
 			expect(store.state.watchedRepositories).to.deep.equals([])
 		})
+
+		it(`should use the public github api by default`, () => {
+			expect(store.state.githubApi).to.equals(`https://api.github.com/graphql`)
+		})
 	})
 
 	describe(`addRepository`, () => {
