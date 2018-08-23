@@ -22,6 +22,10 @@ const removeRepository = (store, repository) => {
 	]
 }
 
+const updateGithubApi = (store, url) => {
+	store.githubApi = `${url}/graphql`
+}
+
 const differentFrom = first => second => {
 	return first.name !== second.name ||
 		first.owner !== second.owner
@@ -30,6 +34,7 @@ const differentFrom = first => second => {
 export const mutations = {
 	addRepository,
 	removeRepository,
+	updateGithubApi,
 }
 
 export const store = new Store({

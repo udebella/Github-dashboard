@@ -77,4 +77,16 @@ describe(`Store`, () => {
 			expect(store.watchedRepositories).to.deep.equal([secondRepository])
 		})
 	})
+
+	describe(`updateGithubApi`, () => {
+		const {updateGithubApi} = mutations
+
+		it(`should update the github api in the store`, () => {
+			const store = {}
+
+			updateGithubApi(store, `http://new-api`)
+
+			expect(store.githubApi).to.equals(`http://new-api/graphql`)
+		})
+	})
 })
