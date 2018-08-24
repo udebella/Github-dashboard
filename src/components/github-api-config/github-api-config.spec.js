@@ -9,6 +9,9 @@ describe(`GithubApiConfig component`, () => {
 	beforeEach(() => {
 		store = {
 			commit: stub(),
+			state: {
+				githubApi: `http://github-api`,
+			},
 		}
 
 		githubApiConfig = shallowMount(GithubApiConfig, {store})
@@ -21,6 +24,10 @@ describe(`GithubApiConfig component`, () => {
 
 		it(`should display an input`, () => {
 			expect(githubApiConfig.find(`input`).exists()).to.be.true
+		})
+
+		it(`should display as default value the one from the store`, () => {
+			expect(githubApiConfig.find(`[data-test=input]`).element.value).to.equals(`http://github-api`)
 		})
 	})
 
