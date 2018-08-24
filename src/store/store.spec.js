@@ -96,7 +96,7 @@ describe(`Store`, () => {
 
 			updateGithubApi(store, `http://new-api`)
 
-			expect(store.githubApi).to.equals(`http://new-api/graphql`)
+			expect(store.githubApi).to.equals(`http://new-api`)
 		})
 	})
 })

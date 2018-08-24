@@ -24,7 +24,7 @@ const removeRepository = (store, repository) => {
 }
 
 const updateGithubApi = (store, url) => {
-	store.githubApi = `${url}/graphql`
+	store.githubApi = url
 }
 
 const differentFrom = first => second => {
