@@ -28,9 +28,7 @@ describe(`RepositoryAdder component`, () => {
 
 	describe(`Adding a repository`, () => {
 		it(`should display a debounced input when clicked`, () => {
-			const icon = repositoryAdder.find(`[data-test=icon]`)
-
-			icon.vm.$emit(`click`)
+			repositoryAdder.find({name: `badge`}).vm.$emit(`click`)
 
 			expect(repositoryAdder.find(`[data-test=owner-input]`).exists()).to.be.true
 		})
@@ -38,7 +36,7 @@ describe(`RepositoryAdder component`, () => {
 		it(`should hide the icon when clicked`, () => {
 			const icon = repositoryAdder.find(`[data-test=icon]`)
 
-			icon.vm.$emit(`click`)
+			repositoryAdder.find({name: `badge`}).vm.$emit(`click`)
 
 			expect(icon.exists()).to.be.false
 		})

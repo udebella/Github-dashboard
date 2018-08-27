@@ -1,12 +1,13 @@
 <template>
-	<badge 
+	<badge
+		data-test="button"
 		title="Watch a new repository" 
-		class="icon">
+		class="icon"
+		@click="clickIcon">
 		<font-awesome-icon
 			v-if="!displayInput"
 			data-test="icon"
-			icon="plus-circle"
-			@click="clickIcon"/>
+			icon="plus-circle"/>
 		<repository-picker
 			v-if="displayInput"
 			data-test="owner-input"/>
