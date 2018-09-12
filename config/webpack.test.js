@@ -1,5 +1,6 @@
 const {SourceMapDevToolPlugin} = require(`webpack`)
 const webpackConfig = require(`./webpack.common`)
+const nodeExternals = require(`webpack-node-externals`)
 
 const testConfig = {
 	...webpackConfig,
@@ -26,6 +27,7 @@ const testConfig = {
 			test: /\.(js)($|\?)/i,
 		}),
 	],
+	externals: [nodeExternals()],
 	devtool: `inline-source-map`,
 	mode: `development`,
 }

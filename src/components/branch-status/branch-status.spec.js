@@ -30,6 +30,18 @@ describe(`BranchStatus component`, () => {
 	})
 
 	describe(`Initialisation`, () => {
+		beforeEach(() => {
+			stubRequest.returns(new Promise(() => {}))
+			branchStatus = shallowMount(BranchStatus, {
+				propsData: {
+					name: `repository name`,
+					branch: `branch`,
+					owner: `owner`,
+					request: stubRequest,
+				},
+			})
+		})
+
 		it(`should have branch-status name`, () => {
 			expect(branchStatus.name()).to.equals(`branch-status`)
 		})
@@ -39,7 +51,7 @@ describe(`BranchStatus component`, () => {
 		})
 
 		it(`should have an empty statuses list by default`, () => {
-			expect(branchStatus.vm.$data.statusesList).to.deep.equal([])
+			expect(branchStatus.vm.$data.statusesList).to.deep.equals([])
 		})
 	})
 
@@ -48,7 +60,7 @@ describe(`BranchStatus component`, () => {
 			branchStatus.vm.$nextTick(() => {
 				expect(stubRequest).to.have.been.called
 				expect(branchStatus.vm.$data.state).to.equals(`SUCCESS`)
-				expect(branchStatus.vm.$data.statusesList).to.deep.equals([{}])
+				expect(branchStatus.findAll(`[data-test=statuses]`).length).to.equals(1)
 				done()
 			})
 		})
@@ -101,10 +113,6 @@ describe(`BranchStatus component`, () => {
 
 		it(`should display a list of build statuses`, () => {
 			expect(buildStatuses.exists()).to.be.true
-		})
-
-		it(`should have an empty list of statuses to display by default`, () => {
-			expect(buildStatuses.props().statuses).to.deep.equals([])
 		})
 	})
 })

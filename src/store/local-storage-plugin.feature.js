@@ -17,7 +17,7 @@ describe(`Local storage store feature`, () => {
 	})
 
 	afterEach(() => {
-		localStorage.clear()
+		window.localStorage.clear()
 	})
 
 	it(`should save mutation and reload them into a new store`, () => {
