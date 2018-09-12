@@ -12,8 +12,8 @@
     "lint": "eslint --fix ./src",
     "plop": "plop"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "udebella",
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.4",
     "@fortawesome/free-solid-svg-icons": "^5.3.1",
