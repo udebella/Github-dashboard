@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js",
-    "prebuild": "npm run test",
+    "prebuild": "npm run test-ci",
     "build": "webpack-cli --progress --config config/webpack.prod.js",
     "bundle-analyzer": "webpack-bundle-analyzer ./dist/stats.json ./dist",
-    "test": "ENV=test mocha-webpack --webpack-config config/webpack.test.js \"src/**/*.spec.js\" --require src/test-setup.js",
-    "lint": "eslint --fix ./src",
+    "test": "mocha-webpack --webpack-config config/webpack.test.js \"src/**/*.js\" --require src/test-setup.js",
+    "test-ci": "nyc --reporter=lcov --reporter=text npm test",
     "plop": "plop"
   },
   "author": "udebella",
@@ -46,6 +46,7 @@
     "mocha": "^5.2.0",
     "mocha-webpack": "^2.0.0-beta.0",
     "node-sass": "^4.9.3",
+    "nyc": "^13.0.1",
     "sass-loader": "^7.1.0",
     "sinon": "^6.2.0",
     "sinon-chai": "^3.2.0",
@@ -61,5 +62,12 @@
     "plop": "^2.1.0",
     "webpack-bundle-analyzer": "^3.0.2",
     "webpack-dev-server": "^3.1.8"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "instrument": false,
+    "sourceMap": false
   }
 }
