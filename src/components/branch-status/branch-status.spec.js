@@ -1,7 +1,8 @@
 import {shallowMount} from '@vue/test-utils'
 import {expect} from 'chai'
-import BranchStatus from './branch-status.vue'
 import {stub} from 'sinon'
+import flushPromises from 'flush-promises'
+import BranchStatus from './branch-status.vue'
 
 describe(`BranchStatus component`, () => {
 	let branchStatus, stubRequest
@@ -47,7 +48,7 @@ describe(`BranchStatus component`, () => {
 		})
 
 		it(`should have an empty state by default`, () => {
-			expect(branchStatus.vm.$data.state).to.equal(``)
+			expect(branchStatus.vm.$data.state).to.equals(``)
 		})
 
 		it(`should have an empty statuses list by default`, () => {
@@ -56,20 +57,17 @@ describe(`BranchStatus component`, () => {
 	})
 
 	describe(`On creation`, () => {
-		it(`should make a request to the github api to retrieve data`, (done) => {
-			branchStatus.vm.$nextTick(() => {
-				expect(stubRequest).to.have.been.called
-				expect(branchStatus.vm.$data.state).to.equals(`SUCCESS`)
-				expect(branchStatus.findAll(`[data-test=statuses]`).length).to.equals(1)
-				done()
-			})
+		it(`should make a request to the github api to retrieve data`, async () => {
+			await flushPromises()
+
+			expect(stubRequest).to.have.been.called
+			expect(branchStatus.vm.$data.state).to.equals(`SUCCESS`)
+			expect(branchStatus.findAll(`[data-test=statuses]`).length).to.equals(1)
 		})
 
-		it(`should notify parent component of the build status`, (done) => {
-			branchStatus.vm.$nextTick(() => {
-				expect(branchStatus.emitted()[`build-status`]).to.deep.equals([[`SUCCESS`]])
-				done()
-			})
+		it(`should notify parent component of the build status`, async () => {
+			await flushPromises()
+			expect(branchStatus.emitted()[`build-status`]).to.deep.equals([[`SUCCESS`]])
 		})
 
 		describe(`without values from github`, () => {
@@ -86,19 +84,17 @@ describe(`BranchStatus component`, () => {
 				})
 			})
 
-			it(`should notify parent that no status have been returned by github`, (done) => {
-				branchStatus.vm.$nextTick(() => {
-					expect(branchStatus.emitted()[`build-status`]).to.deep.equals([[`NO_STATUS`]])
-					done()
-				})
+			it(`should notify parent that no status have been returned by github`, async () => {
+				await flushPromises()
+
+				expect(branchStatus.emitted()[`build-status`]).to.deep.equals([[`NO_STATUS`]])
 			})
 
-			it(`should reset default value when github api does not return values`, (done) => {
-				branchStatus.vm.$nextTick(() => {
-					expect(branchStatus.vm.$data.state).to.equals(`NO_STATUS`)
-					expect(branchStatus.vm.$data.statusesList).to.deep.equals([])
-					done()
-				})
+			it(`should reset default value when github api does not return values`, async () => {
+				await flushPromises()
+
+				expect(branchStatus.vm.$data.state).to.equals(`NO_STATUS`)
+				expect(branchStatus.vm.$data.statusesList).to.deep.equals([])
 			})
 		})
 

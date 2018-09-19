@@ -1,7 +1,8 @@
-import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
-import NetworkPolling from './network-polling.vue'
+import {expect} from 'chai'
 import {stub, useFakeTimers} from 'sinon'
+import flushPomises from 'flush-promises'
+import NetworkPolling from './network-polling.vue'
 
 describe(`NetworkPolling component`, () => {
 	let networkPolling, requestStub, clock
@@ -61,11 +62,10 @@ describe(`NetworkPolling component`, () => {
 			expect(requestStub).to.have.been.calledWith(`http://new-url`)
 		})
 
-		it(`should notify parent component with response from the request`, (done) => {
-			networkPolling.vm.$nextTick(() => {
-				expect(networkPolling.emitted().httpUpdate).to.deep.equal([[`response example`]])
-				done()
-			})
+		it(`should notify parent component with response from the request`, async () => {
+			await flushPomises()
+
+			expect(networkPolling.emitted().httpUpdate).to.deep.equal([[`response example`]])
 		})
 	})
 })
