@@ -5,6 +5,7 @@
 # Build files
 dist/
 coverage/
+.nyc_output/
 
 # NPM
 node_modules/
