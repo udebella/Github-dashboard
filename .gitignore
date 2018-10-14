@@ -9,6 +9,3 @@ coverage/
 
 # NPM
 node_modules/
-
-# Hidden files
-*.hidden.*
