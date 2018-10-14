@@ -23,11 +23,25 @@ describe(`BuildStatus component`, () => {
 		it(`should display a link to the build`, () => {
 			expect(buildStatus.attributes().href).to.equal(`http://build-link`)
 		})
+
 		it(`should display a short description of the build as tooltip`, () => {
 			expect(buildStatus.attributes().title).to.equal(`a short description`)
 		})
+
 		it(`should use the state to display an icon`, () => {
 			expect(buildStatus.classes()).to.deep.equal([`icon`, `SUCCESS`])
+		})
+
+		it(`should allow some build status to not have an url (some bot don't add url to statuses on github)`, () => {
+			buildStatus = shallowMount(BuildStatus, {
+				propsData: {
+					description: `a short description`,
+					state: `SUCCESS`,
+				},
+			})
+
+			expect(buildStatus.attributes().title).to.equals(`a short description`)
+			expect(buildStatus.classes()).to.contains(`SUCCESS`)
 		})
 	})
 

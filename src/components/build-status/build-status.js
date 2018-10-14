@@ -21,7 +21,6 @@ export default {
 			required: true,
 		},
 		url: {
-			required: true,
 			type: String,
 		},
 		state: {
