@@ -33,5 +33,11 @@ describe(`Dashboard Header component`, () => {
 
 			expect(login.exists()).to.be.true
 		})
+
+		it(`should display a way to toggle configuration mode`, () => {
+			const configuration = dashboardHeader.find(`[data-test=configuration]`)
+
+			expect(configuration.exists()).to.be.true
+		})
 	})
 })

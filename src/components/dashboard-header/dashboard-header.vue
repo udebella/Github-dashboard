@@ -6,6 +6,7 @@
 			Github Dashboard
 		</div>
 		<div class="right">
+			<configuration data-test="configuration"/>
 			<login 
 				class="login" 
 				data-test="login"/>
