@@ -4,7 +4,7 @@ export default {
 		return {inputValue: this.$store.state.githubApi}
 	},
 	computed: {
-		configurationMode() {
+		configurationEnabled() {
 			return this.$store.state.configurationEnabled
 		},
 	},
