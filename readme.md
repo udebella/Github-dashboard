@@ -22,7 +22,7 @@ To run tests, you need to
 
 You can also pass arguments to that command to run tests continuously (by default it will run once)
 ```bash
-# npm test -- watch
+# npm test -- --watch
 ```
 
 It will automatically generate a coverage report in `/coverage` repository
