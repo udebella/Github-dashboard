@@ -1,5 +1,6 @@
 <template>
-	<input 
+	<input
+		v-if="configurationMode"
 		v-model="inputValue"
 		type="text"
 		data-test="input"

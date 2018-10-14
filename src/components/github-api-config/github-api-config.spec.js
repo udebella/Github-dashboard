@@ -10,6 +10,7 @@ describe(`GithubApiConfig component`, () => {
 		store = {
 			commit: stub(),
 			state: {
+				configurationEnabled: true,
 				githubApi: `http://github-api`,
 			},
 		}
@@ -28,6 +29,17 @@ describe(`GithubApiConfig component`, () => {
 
 		it(`should display as default value the one from the store`, () => {
 			expect(githubApiConfig.find(`[data-test=input]`).element.value).to.equals(`http://github-api`)
+		})
+
+		it(`should be displayed when configuration mode is enabled`, () => {
+			expect(githubApiConfig.find(`[data-test=input]`).exists()).to.be.true
+		})
+
+		it(`should not be displayed when configuration mode is disabled`, () => {
+			store.state.configurationEnabled = false
+			githubApiConfig = shallowMount(GithubApiConfig, {store})
+
+			expect(githubApiConfig.find(`[data-test=input]`).exists()).to.be.false
 		})
 	})
 
