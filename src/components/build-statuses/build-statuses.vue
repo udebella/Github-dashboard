@@ -1,14 +1,13 @@
 <template>
 	<div
-		v-if="statuses.length" 
-		class="popover">
+		v-if="statuses.length">
 		<span
-			v-for="({context, targetUrl, state}, index) in statuses"
+			v-for="({description, jobUrl, jobStatus}, index) in statuses"
 			:key="index">
 			<build-status
-				:description="context"
-				:url="targetUrl"
-				:state="state"
+				:description="description"
+				:url="jobUrl"
+				:state="jobStatus"
 				class="build-status"/>
 		</span>
 	</div>

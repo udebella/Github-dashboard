@@ -29,8 +29,8 @@ describe(`RepositoryLine component`, () => {
 			expect(repositoryLine.name()).to.equals(`repository-line`)
 		})
 
-		it(`should display with the default branch status`, () => {
-			expect(repositoryLine.classes()).to.deep.equal([`line`, `SUCCESS`])
+		it(`should use the color on the line according to the branch status`, () => {
+			expect(repositoryLine.classes()).to.contains(`SUCCESS`)
 		})
 
 		it(`should display a way to remove the repository from watched repositories`, () => {
@@ -58,27 +58,23 @@ describe(`RepositoryLine component`, () => {
 		})
 	})
 
-	describe(`Branch status`, () => {
-		let branchStatus
+	describe(`Build statuses`, () => {
+		let buildStatuses
 
 		beforeEach(() => {
-			branchStatus = repositoryLine.find({name: `branch-status`})
+			buildStatuses = repositoryLine.find({name: `build-statuses`})
 		})
 
-		it(`should display a branch status`, () => {
-			expect(branchStatus.exists()).to.be.true
+		it(`should display build statuses`, () => {
+			expect(buildStatuses.exists()).to.be.true
 		})
 
-		it(`should give a repository name to the component`, () => {
-			expect(branchStatus.props().name).to.equal(`repository`)
-		})
-
-		it(`should give a repository owner to the component`, () => {
-			expect(branchStatus.props().owner).to.equal(`user`)
-		})
-
-		it(`should give a repository branch to the component`, () => {
-			expect(branchStatus.props().branch).to.equal(`master`)
+		it(`should give the list of statuses to the component`, () => {
+			expect(buildStatuses.props().statuses).to.deep.equal([{
+				jobStatus: `SUCCESS`,
+				description: `build description`,
+				jobUrl: `http://build-target-url`,
+			}])
 		})
 	})
 })

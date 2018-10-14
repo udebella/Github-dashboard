@@ -11,10 +11,7 @@
 			:owner="repository.owner"
 			data-test="trash"/>
 		<popover class="popover">
-			<branch-status
-				:name="repository.name"
-				:owner="repository.owner"
-				:branch="repository.defaultBranch"/>
+			<build-statuses :statuses="repository.statusesList"/>
 		</popover>
 	</badge>
 </template>
