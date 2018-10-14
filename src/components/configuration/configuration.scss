@@ -1,0 +1,15 @@
+@import "../../global";
+
+.clickableIcon {
+	@include lightenOnHover($surface);
+	padding: 5px;
+	cursor: pointer;
+}
+
+.enabled {
+	color: $success;
+}
+
+.disabled {
+	color: $failure
+}
