@@ -7,7 +7,7 @@
     "prebuild": "npm run test-ci",
     "build": "webpack-cli --progress --config config/webpack.prod.js",
     "bundle-analyzer": "webpack-bundle-analyzer ./dist/stats.json ./dist",
-    "test": "mocha-webpack --webpack-config config/webpack.test.js \"src/**/*.js\" --require src/test-setup.js",
+    "test": "mocha-webpack --webpack-config config/webpack.test.js \"src/**/*.spec.js\" --require src/test-setup.js",
     "test-ci": "nyc --reporter=lcov --reporter=text npm test",
     "plop": "plop"
   },
