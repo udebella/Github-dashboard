@@ -99,4 +99,24 @@ describe(`Store`, () => {
 			expect(store.githubApi).to.equals(`http://new-api`)
 		})
 	})
+
+	describe(`toggleConfiguration`, () => {
+		const {toggleConfiguration} = mutations
+
+		it(`should enable configuration mode when configuration is disabled`, () => {
+			const store = {}
+
+			toggleConfiguration(store)
+
+			expect(store.configurationEnabled).to.be.true
+		})
+
+		it(`should disable configuration mode when configuration is enabled`, () => {
+			const store = { configurationEnabled: true }
+
+			toggleConfiguration(store)
+
+			expect(store.configurationEnabled).to.be.false
+		})
+	})
 })

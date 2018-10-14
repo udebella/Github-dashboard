@@ -27,6 +27,10 @@ const updateGithubApi = (store, url) => {
 	store.githubApi = url
 }
 
+const toggleConfiguration = (store) => {
+	store.configurationEnabled = !store.configurationEnabled
+}
+
 const differentFrom = first => second => {
 	return first.name !== second.name ||
 		first.owner !== second.owner
@@ -36,6 +40,7 @@ export const mutations = {
 	addRepository,
 	removeRepository,
 	updateGithubApi,
+	toggleConfiguration,
 }
 
 export const store = new Store({
