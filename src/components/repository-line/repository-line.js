@@ -12,14 +12,6 @@ export default {
 			type: Object,
 		},
 	},
-	data: () => ({
-		branchStatus: `NO_STATUS`,
-	}),
-	methods: {
-		updateBuildStatus(branchStatus = `NO_STATUS`) {
-			this.branchStatus = branchStatus
-		},
-	},
 	components: {
 		RepositoryLink,
 		BranchStatus,

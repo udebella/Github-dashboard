@@ -1,6 +1,6 @@
 <template>
 	<badge
-		:class="branchStatus"
+		:class="repository.branchStatus"
 		class="line">
 		<repository-link
 			:name="repository.name"
@@ -8,14 +8,13 @@
 			class="repository-link"/>
 		<repository-remover
 			:name="repository.name"
-			:owner="repository.owner" 
+			:owner="repository.owner"
 			data-test="trash"/>
 		<popover class="popover">
 			<branch-status
 				:name="repository.name"
 				:owner="repository.owner"
-				:branch="repository.defaultBranch"
-				@build-status="updateBuildStatus"/>
+				:branch="repository.defaultBranch"/>
 		</popover>
 	</badge>
 </template>

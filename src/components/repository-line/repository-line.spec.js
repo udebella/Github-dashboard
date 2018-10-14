@@ -9,10 +9,16 @@ describe(`RepositoryLine component`, () => {
 		repositoryLine = shallowMount(RepositoryLine, {
 			propsData: {
 				repository: {
-					name: `repository name`,
-					defaultBranch: `branch`,
-					owner: `owner`,
-					repositoryUrl: `http://repository`,
+					name: `repository`,
+					owner: `user`,
+					repositoryUrl: `http://repository-url`,
+					branchStatus: `SUCCESS`,
+					defaultBranch: `master`,
+					statusesList: [{
+						jobStatus: `SUCCESS`,
+						description: `build description`,
+						jobUrl: `http://build-target-url`,
+					}],
 				},
 			},
 		})
@@ -23,12 +29,8 @@ describe(`RepositoryLine component`, () => {
 			expect(repositoryLine.name()).to.equals(`repository-line`)
 		})
 
-		it(`should initiate with a no_status`, () => {
-			expect(repositoryLine.vm.$data.branchStatus).to.equal(`NO_STATUS`)
-		})
-
 		it(`should display with the default branch status`, () => {
-			expect(repositoryLine.classes()).to.deep.equal([`line`, `NO_STATUS`])
+			expect(repositoryLine.classes()).to.deep.equal([`line`, `SUCCESS`])
 		})
 
 		it(`should display a way to remove the repository from watched repositories`, () => {
@@ -48,11 +50,11 @@ describe(`RepositoryLine component`, () => {
 		})
 
 		it(`should give a repository name to the component`, () => {
-			expect(repositoryLink.props().name).to.equal(`repository name`)
+			expect(repositoryLink.props().name).to.equal(`repository`)
 		})
 
 		it(`should give a repository url to the component`, () => {
-			expect(repositoryLink.props().url).to.equal(`http://repository`)
+			expect(repositoryLink.props().url).to.equal(`http://repository-url`)
 		})
 	})
 
@@ -68,29 +70,15 @@ describe(`RepositoryLine component`, () => {
 		})
 
 		it(`should give a repository name to the component`, () => {
-			expect(branchStatus.props().name).to.equal(`repository name`)
+			expect(branchStatus.props().name).to.equal(`repository`)
 		})
 
 		it(`should give a repository owner to the component`, () => {
-			expect(branchStatus.props().owner).to.equal(`owner`)
+			expect(branchStatus.props().owner).to.equal(`user`)
 		})
 
 		it(`should give a repository branch to the component`, () => {
-			expect(branchStatus.props().branch).to.equal(`branch`)
-		})
-	})
-
-	describe(`Method: updateBuildStatus`, () => {
-		it(`should update build status`, () => {
-			repositoryLine.vm.updateBuildStatus(`FAILURE`)
-
-			expect(repositoryLine.vm.$data.branchStatus).to.equal(`FAILURE`)
-		})
-
-		it(`should reset build status when nothing is given`, () => {
-			repositoryLine.vm.updateBuildStatus()
-
-			expect(repositoryLine.vm.$data.branchStatus).to.equal(`NO_STATUS`)
+			expect(branchStatus.props().branch).to.equal(`master`)
 		})
 	})
 })

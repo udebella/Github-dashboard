@@ -14,9 +14,6 @@
 	&.PENDING {
 		@include lightenOnHover($pending);
 	}
-	&.NO_STATUS {
-		@include lightenOnHover($surface);
-	}
 
 	.popover {
 		display: flex;
