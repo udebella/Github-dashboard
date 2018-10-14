@@ -29,6 +29,11 @@ describe(`User service`, () => {
 
 	describe(`Login`, () => {
 		it(`should save token to session for validation`, () => {
+			// Given
+			mocks.request.returns({
+				viewer: {login: `user`},
+			})
+
 			// When
 			userService.login(`token`)
 
@@ -39,9 +44,7 @@ describe(`User service`, () => {
 		it(`should validate given token to github api`, async () => {
 			// Given
 			mocks.request.returns({
-				viewer: {
-					login: `user`,
-				},
+				viewer: {login: `user`},
 			})
 
 			// When
@@ -59,9 +62,7 @@ describe(`User service`, () => {
 		it(`should save user data in session when validated through github api`, async () => {
 			// Given
 			mocks.request.returns({
-				viewer: {
-					login: `user`,
-				},
+				viewer: {login: `user`},
 			})
 
 			// When
