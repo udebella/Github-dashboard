@@ -10,6 +10,11 @@ export default {
 	data: () => ({
 		displayInput: false,
 	}),
+	computed: {
+		configurationEnabled() {
+			return this.$store.state.configurationEnabled
+		},
+	},
 	methods: {
 		clickIcon() {
 			this.displayInput = true

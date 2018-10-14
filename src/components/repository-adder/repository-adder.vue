@@ -1,5 +1,6 @@
 <template>
 	<badge
+		v-if="configurationEnabled"
 		data-test="button"
 		title="Watch a new repository" 
 		class="icon"

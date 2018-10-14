@@ -3,10 +3,13 @@ import {shallowMount} from '@vue/test-utils'
 import RepositoryAdder from './repository-adder.vue'
 
 describe(`RepositoryAdder component`, () => {
-	let repositoryAdder
+	let repositoryAdder, store
 
 	beforeEach(() => {
-		repositoryAdder = shallowMount(RepositoryAdder)
+		store = {
+			state: {configurationEnabled: true},
+		}
+		repositoryAdder = shallowMount(RepositoryAdder, {store})
 	})
 
 	describe(`Initialization`, () => {
@@ -23,6 +26,13 @@ describe(`RepositoryAdder component`, () => {
 
 		it(`should not display owner input by default`, () => {
 			expect(repositoryAdder.find(`[data-test=owner-input]`).exists()).to.be.false
+		})
+
+		it(`should hide the component when configuration mode is disabled`, () => {
+			store.state.configurationEnabled = false
+			repositoryAdder = shallowMount(RepositoryAdder, {store})
+
+			expect(repositoryAdder.find(`[data-test=button]`).exists()).to.be.false
 		})
 	})
 
