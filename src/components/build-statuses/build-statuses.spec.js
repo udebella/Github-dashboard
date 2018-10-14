@@ -30,9 +30,9 @@ describe(`BuildStatuses component`, () => {
 			buildStatuses = shallowMount(BuildStatuses, {
 				propsData: {
 					statuses: [{
-						context: `description`,
-						targetUrl: `http://build-url`,
-						state: `SUCCESS`,
+						description: `description`,
+						jobUrl: `http://build-url`,
+						jobStatus: `SUCCESS`,
 					}],
 				},
 			})
