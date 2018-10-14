@@ -1,5 +1,6 @@
 <template>
 	<font-awesome-icon
+		v-if="configurationEnabled"
 		icon="trash"
 		data-test="icon"
 		@click="remove"/>

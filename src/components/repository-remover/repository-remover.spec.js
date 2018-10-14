@@ -8,6 +8,7 @@ describe(`RepositoryRemover component`, () => {
 
 	beforeEach(() => {
 		store = {
+			state: {configurationEnabled: true},
 			commit: stub(),
 		},
 		repositoryRemover = shallowMount(RepositoryRemover, {propsData: {name: `example`, owner: `user`}, store})
@@ -18,9 +19,16 @@ describe(`RepositoryRemover component`, () => {
 			expect(repositoryRemover.name()).to.equal(`repository-remover`)
 		})
 
-		it(`should a remove icon`, () => {
+		it(`should display a remove icon`, () => {
 			expect(repositoryRemover.find(`[data-test=icon]`).exists()).to.be.true
 			expect(repositoryRemover.find(`[data-test=icon]`).attributes().icon).to.equals(`trash`)
+		})
+
+		it(`should hide the remove icon when configuration mode is disabled`, () => {
+			store.state.configurationEnabled = false
+			repositoryRemover = shallowMount(RepositoryRemover, {propsData: {name: `example`, owner: `user`}, store})
+
+			expect(repositoryRemover.find(`[data-test=icon]`).exists()).to.be.false
 		})
 	})
 

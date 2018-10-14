@@ -15,6 +15,11 @@ export default {
 			required: true,
 		},
 	},
+	computed: {
+		configurationEnabled() {
+			return this.$store.state.configurationEnabled
+		},
+	},
 	methods: {
 		remove() {
 			this.$store.commit(`removeRepository`, {name: this.name, owner: this.owner})
