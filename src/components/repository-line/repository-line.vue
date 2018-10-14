@@ -4,7 +4,7 @@
 		class="line">
 		<repository-link
 			:name="repository.name"
-			:url="repository.url"
+			:url="repository.repositoryUrl"
 			class="repository-link"/>
 		<repository-remover
 			:name="repository.name"

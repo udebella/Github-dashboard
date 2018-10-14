@@ -12,7 +12,7 @@ describe(`RepositoryLine component`, () => {
 					name: `repository name`,
 					defaultBranch: `branch`,
 					owner: `owner`,
-					url: `http://repository`,
+					repositoryUrl: `http://repository`,
 				},
 			},
 		})

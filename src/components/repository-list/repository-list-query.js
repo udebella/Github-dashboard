@@ -3,8 +3,9 @@ export const query = repositoryList => {
 		return ``
 	}
 
+	let counter = 0
 	const repositories = repositoryList.reduce((previous, {owner, name}) => `${previous}
-  ${owner}_${name}: repository(owner: "${owner}", name: "${name}") {
+  rep_${counter++}: repository(owner: "${owner}", name: "${name}") {
     ...repository
   },`, ``)
 
@@ -16,7 +17,13 @@ query {
 }
 
 const fragment = `fragment repository on Repository {
+  name,
+  owner {
+    login
+  },
+  url,
   defaultBranchRef {
+  	name,
 	target {
 	  ... on Commit {
 		status {
@@ -36,7 +43,7 @@ export const simpleQuery = `${fragment}
 
 query {
   
-  facebook_react: repository(owner: "facebook", name: "react") {
+  rep_0: repository(owner: "facebook", name: "react") {
     ...repository
   },
 }`
@@ -45,10 +52,10 @@ export const multipleRepositoryQuery = `${fragment}
 
 query {
   
-  facebook_react: repository(owner: "facebook", name: "react") {
+  rep_0: repository(owner: "facebook", name: "react") {
     ...repository
   },
-  angular_angular: repository(owner: "angular", name: "angular") {
+  rep_1: repository(owner: "angular", name: "angular") {
     ...repository
   },
 }`
