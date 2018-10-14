@@ -19,7 +19,6 @@ describe(`RepositoryList component`, () => {
 				owner: {login: `user`},
 				url: `http://repository-url`,
 				defaultBranchRef: {
-					name: `master`,
 					target: {
 						status: {
 							contexts: [
@@ -58,7 +57,6 @@ describe(`RepositoryList component`, () => {
 				owner: `user`,
 				repositoryUrl: `http://repository-url`,
 				branchStatus: `SUCCESS`,
-				defaultBranch: `master`,
 				statusesList: [{
 					jobStatus: `SUCCESS`,
 					description: `build description`,

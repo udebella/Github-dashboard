@@ -23,7 +23,6 @@ const fragment = `fragment repository on Repository {
   },
   url,
   defaultBranchRef {
-  	name,
 	target {
 	  ... on Commit {
 		status {

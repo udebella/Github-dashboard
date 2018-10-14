@@ -15,7 +15,6 @@ const extractHttpData = ({httpData}) => {
 			name: data.name,
 			owner: data.owner.login,
 			repositoryUrl: data.url,
-			defaultBranch: data.defaultBranchRef.name, // TODO remove when branchStatus component won't need that anymore
 			branchStatus: repositoryData.state,
 			statusesList: repositoryData.contexts.map(statusMapper),
 		}
