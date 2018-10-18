@@ -1,3 +1,5 @@
+import {rateLimitFragment} from "../../services/graphql/fragments"
+
 export const query = repositoryList => {
 	if (repositoryList.length === 0) {
 		return ``
@@ -9,9 +11,11 @@ export const query = repositoryList => {
     ...repository
   },`, ``)
 
-	return `${fragment}
+	return `${rateLimitFragment}
+${fragment}
 
 query {
+  ...rateLimit
   ${repositories}
 }`
 }
@@ -38,18 +42,22 @@ const fragment = `fragment repository on Repository {
   }
 }`
 
-export const simpleQuery = `${fragment}
+export const simpleQuery = `${rateLimitFragment}
+${fragment}
 
 query {
+  ...rateLimit
   
   rep_0: repository(owner: "facebook", name: "react") {
     ...repository
   },
 }`
 
-export const multipleRepositoryQuery = `${fragment}
+export const multipleRepositoryQuery = `${rateLimitFragment}
+${fragment}
 
 query {
+  ...rateLimit
   
   rep_0: repository(owner: "facebook", name: "react") {
     ...repository
