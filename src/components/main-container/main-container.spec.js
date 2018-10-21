@@ -21,5 +21,9 @@ describe(`MainContainer component`, () => {
 		it(`should display repository list component`, () => {
 			expect(mainContainer.find({name: `repository-list`}).exists()).to.be.true
 		})
+
+		it(`should display pull request list component`, () => {
+			expect(mainContainer.find({name: `pull-request-list`}).exists()).to.be.true
+		})
 	})
 })

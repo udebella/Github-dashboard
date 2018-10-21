@@ -2,6 +2,7 @@
 	<div>
 		<github-api-config/>
 		<repository-list/>
+		<pull-request-list/>
 	</div>
 </template>
 
