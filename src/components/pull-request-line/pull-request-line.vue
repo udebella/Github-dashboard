@@ -2,6 +2,7 @@
 	<a
 		:href="url"
 		data-test="link"
+		target="_blank"
 		class="link">
 		<badge data-test="name">{{ title }}</badge>
 	</a>
