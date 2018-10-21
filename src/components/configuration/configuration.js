@@ -1,3 +1,4 @@
+import CustomButton from '../custom-button/custom-button.vue'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {faCog} from '@fortawesome/free-solid-svg-icons'
 
@@ -14,5 +15,8 @@ export default {
 		toggleConfiguration() {
 			this.$store.commit(`toggleConfiguration`)
 		},
+	},
+	components: {
+		CustomButton,
 	},
 }
