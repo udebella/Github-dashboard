@@ -1,1 +1,29 @@
 @import "../../global";
+
+.container {
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+
+	.configuration {
+		margin-bottom: 10px;
+	}
+
+	.columns {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		.repository-list {
+			width: 19%;
+		}
+
+		.pull-request-list {
+			width: 39%;
+		}
+
+		.future {
+			width: 39%;
+		}
+	}
+}
