@@ -30,13 +30,15 @@ export default {
 			default: defaultRequest,
 		},
 	},
-	data: () => ({
-		pullRequests: [],
-	}),
-	async created() {
-		const watchedRepositories = this.$store.state.watchedRepositories
-		const httpResponse = await this.request(query(watchedRepositories))
-		this.pullRequests = extractHttp(httpResponse)
+	asyncComputed: {
+		pullRequests: {
+			async get() {
+				const watchedRepositories = this.$store.state.watchedRepositories
+				const httpResponse = await this.request(query(watchedRepositories))
+				return extractHttp(httpResponse)
+			},
+			default: [],
+		},
 	},
 	components: {
 		PullRequestLine,
