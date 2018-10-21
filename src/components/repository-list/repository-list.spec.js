@@ -29,6 +29,12 @@ describe(`RepositoryList component`, () => {
 					},
 				},
 			},
+			rateLimit: {
+				cost: 1,
+				limit: 5000,
+				remaining: 4999,
+				resetAt: `2018-10-21T14:33:46Z`,
+			},
 		}))
 
 		repositoryList = shallowMount(RepositoryList, {store, propsData: {request}})
