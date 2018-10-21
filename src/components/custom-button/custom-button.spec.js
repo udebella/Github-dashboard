@@ -22,4 +22,23 @@ describe(`CustomButton component`, () => {
 			expect(customButton.text()).to.equal(`Slot content`)
 		})
 	})
+
+	describe(`Link`, () => {
+		it(`should have a link when an url is given`, () => {
+			customButton = shallowMount(CustomButton, {
+				propsData: { url: `http://url` },
+			})
+
+			const link = customButton.find(`[data-test=link]`)
+			expect(link.exists()).to.be.true
+			expect(link.attributes().href).to.equals(`http://url`)
+		})
+
+		it(`should not display the link when no url is given`, () => {
+			customButton = shallowMount(CustomButton)
+
+			const link = customButton.find(`[data-test=link]`)
+			expect(link.exists()).to.be.false
+		})
+	})
 })

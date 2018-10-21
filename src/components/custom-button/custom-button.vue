@@ -1,6 +1,13 @@
 <template>
 	<div class="button">
-		<slot/>
+		<a
+			v-if="url"
+			:href="url"
+			target="_blank"
+			data-test="link">
+			<slot/>
+		</a>
+		<slot v-else/>
 	</div>
 </template>
 
