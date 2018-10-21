@@ -31,13 +31,15 @@ export default {
 			default: request,
 		},
 	},
-	data: () => ({
-		repositories: [],
-	}),
-	async created() {
-		const watchedRepositories = this.$store.state.watchedRepositories
-		const httpData = await this.request(query(watchedRepositories))
-		this.repositories = extractHttpData({httpData})
+	asyncComputed: {
+		repositories: {
+			async get() {
+				const watchedRepositories = this.$store.state.watchedRepositories
+				const httpData = await this.request(query(watchedRepositories))
+				return extractHttpData({httpData})
+			},
+			default: [],
+		},
 	},
 	components: {
 		RepositoryLine,

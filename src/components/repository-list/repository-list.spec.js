@@ -71,7 +71,7 @@ describe(`RepositoryList component`, () => {
 			})
 		})
 
-		it(`should call graphql api to retrieve data over the list of repositories`, () => {
+		it(`should call graphql api to retrieve data over the list of repositories`, async () => {
 			// Given
 			const store = {
 				state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
@@ -81,6 +81,7 @@ describe(`RepositoryList component`, () => {
 			shallowMount(RepositoryList, {store, propsData: {request}})
 
 			// Then
+			await flushPromises()
 			expect(request).to.have.been.calledWith(query(store.state.watchedRepositories))
 		})
 
