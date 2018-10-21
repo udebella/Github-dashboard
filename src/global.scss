@@ -20,3 +20,15 @@ $pending: #120262;
 		background-color: lighten($color, 5%);
 	}
 }
+
+@mixin on-desktop {
+	@media (min-width: 1200px) { @content; }
+}
+
+@mixin on-tablet {
+	@media (max-width: 1200px) { @content; }
+}
+
+@mixin on-mobile {
+	@media (max-width: 640px) { @content; }
+}

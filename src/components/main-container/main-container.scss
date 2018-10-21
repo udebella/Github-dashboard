@@ -14,16 +14,30 @@
 		flex-direction: row;
 		justify-content: space-between;
 
-		.repository-list {
-			width: 19%;
+		@include on-mobile {
+			flex-direction: column;
+
+			.repository-list {
+				margin-bottom: 10px;
+			}
+
+			.pull-request-list {
+				margin-bottom: 10px;
+			}
 		}
 
-		.pull-request-list {
-			width: 39%;
-		}
+		@include on-desktop {
+			.repository-list {
+				width: 19%;
+			}
 
-		.future {
-			width: 39%;
+			.pull-request-list {
+				width: 39%;
+			}
+
+			.future {
+				width: 39%;
+			}
 		}
 	}
 }
