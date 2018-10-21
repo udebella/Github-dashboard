@@ -1,5 +1,8 @@
 <template>
-	<github-api-config/>
+	<div>
+		<github-api-config/>
+		<repository-list/>
+	</div>
 </template>
 
 <script src="./main-container.js"></script>

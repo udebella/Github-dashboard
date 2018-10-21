@@ -14,8 +14,12 @@ describe(`MainContainer component`, () => {
 			expect(mainContainer.name()).to.equal(`main-container`)
 		})
 
-		it(`should display the component`, () => {
-			expect(mainContainer.find({name: 'github-api-config'}).exists()).to.be.true
+		it(`should display configuration component`, () => {
+			expect(mainContainer.find({name: `github-api-config`}).exists()).to.be.true
+		})
+
+		it(`should display repository list component`, () => {
+			expect(mainContainer.find({name: `repository-list`}).exists()).to.be.true
 		})
 	})
 })
