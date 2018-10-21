@@ -63,6 +63,7 @@ describe(`PullRequestList component`, () => {
 			expect(pullRequestList.find(`[data-test=line]`).props()).to.deep.equals({
 				title: `Fix wheel/touch browser locking in IE and Safari`,
 				url: `https://github.com/facebook/react/pull/9333`,
+				buildStatus: `FAILURE`,
 			})
 		})
 	})

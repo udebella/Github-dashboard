@@ -5,6 +5,7 @@
 			:key="pullRequest.id"
 			:title="pullRequest.prTitle"
 			:url="pullRequest.prUrl"
+			:build-status="pullRequest.buildStatus"
 			data-test="line"/>
 	</div>
 </template>
