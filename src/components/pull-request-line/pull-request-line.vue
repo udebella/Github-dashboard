@@ -1,7 +1,8 @@
 <template>
 	<a
 		:href="url"
-		data-test="link">
+		data-test="link"
+		class="link">
 		<badge data-test="name">{{ title }}</badge>
 	</a>
 </template>
