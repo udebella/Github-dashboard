@@ -6,7 +6,12 @@ describe(`PullRequestLine component`, () => {
 	let pullRequestLine
 
 	beforeEach(() => {
-		pullRequestLine = shallowMount(PullRequestLine)
+		pullRequestLine = shallowMount(PullRequestLine, {
+			propsData: {
+				title: `Pull request name`,
+				url: `http://pull-request-url`,
+			},
+		})
 	})
 
 	describe(`Initialization`, () => {
@@ -14,8 +19,12 @@ describe(`PullRequestLine component`, () => {
 			expect(pullRequestLine.name()).to.equal(`pull-request-line`)
 		})
 
-		it(`should display the component`, () => {
-			expect(pullRequestLine.find(`div`).text()).to.equal(`Test component`)
+		it(`should display the pull request name`, () => {
+			expect(pullRequestLine.find(`[data-test=name]`).text()).to.equal(`Pull request name`)
+		})
+
+		it(`should display a link to the pull request`, () => {
+			expect(pullRequestLine.find(`[data-test=link]`).attributes().href).to.equal(`http://pull-request-url`)
 		})
 	})
 })

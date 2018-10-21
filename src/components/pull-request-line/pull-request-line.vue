@@ -1,5 +1,9 @@
 <template>
-	<div>Test component</div>
+	<a
+		:href="url"
+		data-test="link">
+		<span data-test="name">{{ title }}</span>
+	</a>
 </template>
 
 <script src="./pull-request-line.js"></script>
