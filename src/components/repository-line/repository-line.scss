@@ -15,16 +15,6 @@
 		text-decoration: none;
 		text-transform: capitalize;
 
-		& .SUCCESS {
-			@include lightenOnHover($success);
-		}
-		& .FAILURE {
-			@include lightenOnHover($failure);
-		}
-		& .PENDING {
-			@include lightenOnHover($pending);
-		}
-
 		.popover {
 			display: flex;
 			flex-direction: column;
