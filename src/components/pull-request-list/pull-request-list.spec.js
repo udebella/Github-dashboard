@@ -21,10 +21,6 @@ describe(`PullRequestList component`, () => {
 			expect(pullRequestList.name()).to.equal(`pull-request-list`)
 		})
 
-		it(`should display the component`, () => {
-			expect(pullRequestList.find(`div`).text()).to.equal(`Test component`)
-		})
-
 		it(`should display a list of pull request`, async () => {
 			// Given
 			request.returns(Promise.resolve({

@@ -1,6 +1,5 @@
 <template>
 	<div>
-		Test component
 		<pull-request-line
 			data-test="line"
 			v-for="pullRequest in pullRequests"
