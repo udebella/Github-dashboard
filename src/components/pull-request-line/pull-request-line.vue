@@ -2,7 +2,7 @@
 	<a
 		:href="url"
 		data-test="link">
-		<span data-test="name">{{ title }}</span>
+		<badge data-test="name">{{ title }}</badge>
 	</a>
 </template>
 

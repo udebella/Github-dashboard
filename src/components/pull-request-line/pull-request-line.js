@@ -1,3 +1,5 @@
+import Badge from '../badge/badge.vue'
+
 export default {
 	name: `pull-request-line`,
 	props: {
@@ -9,5 +11,8 @@ export default {
 			type: String,
 			required: true,
 		},
+	},
+	components: {
+		Badge,
 	},
 }
