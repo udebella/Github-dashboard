@@ -1,25 +1,19 @@
 <template>
 	<div class="app">
 		<dashboard-header/>
-		<github-api-config/>
-		<repository-list class="repository-list"/>
-		<pull-request-list/>
+		<main-container/>
 	</div>
 </template>
 
 <script>
 	import DashboardHeader from './dashboard-header/dashboard-header.vue'
-	import RepositoryList from './repository-list/repository-list.vue'
-	import GithubApiConfig from './github-api-config/github-api-config.vue'
-	import PullRequestList from './pull-request-list/pull-request-list.vue'
+	import MainContainer from './main-container/main-container.vue'
 
 	export default {
 		name: `App`,
 		components: {
-			PullRequestList,
+			MainContainer,
 			DashboardHeader,
-			RepositoryList,
-			GithubApiConfig,
 		},
 	}
 </script>
