@@ -1,9 +1,11 @@
 <template>
-	<font-awesome-icon
+	<custom-button
 		v-if="configurationEnabled"
-		icon="trash"
-		data-test="icon"
-		@click="remove"/>
+		@click="remove">
+		<font-awesome-icon
+			icon="trash"
+			data-test="icon"/>
+	</custom-button>
 </template>
 
 <script src="./repository-remover.js"></script>

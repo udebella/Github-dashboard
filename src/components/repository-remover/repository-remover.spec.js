@@ -34,7 +34,7 @@ describe(`RepositoryRemover component`, () => {
 
 	describe(`Removing a repository`, () => {
 		it(`should remove the repository from watched repository when clicked`, () => {
-			repositoryRemover.find({name: `font-awesome-icon`}).vm.$emit(`click`)
+			repositoryRemover.find({name: `custom-button`}).vm.$emit(`click`)
 
 			expect(store.commit).to.have.been.calledWith(`removeRepository`, {name: `example`, owner: `user`})
 		})
