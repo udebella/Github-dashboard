@@ -10,11 +10,11 @@
 			<login 
 				class="login" 
 				data-test="login"/>
-			<a
+			<custom-button
 				title="View sources"
 				target="_blank"
 				href="https://github.com/udebella/Github-dashboard"
-				data-test="sources"><font-awesome-icon icon="code"/></a>
+				data-test="sources"><font-awesome-icon icon="code"/></custom-button>
 		</div>
 	</div>
 </template>
