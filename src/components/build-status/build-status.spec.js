@@ -19,17 +19,25 @@ describe(`BuildStatus component`, () => {
 		it(`should have build-status name`, () => {
 			expect(buildStatus.name()).to.equals(`build-status`)
 		})
+	})
+
+	describe(`Link`, () => {
+		let link
+
+		beforeEach(() => {
+			link = buildStatus.find(`[data-test=link]`)
+		})
 
 		it(`should display a link to the build`, () => {
-			expect(buildStatus.attributes().href).to.equal(`http://build-link`)
+			expect(link.attributes().href).to.equal(`http://build-link`)
 		})
 
 		it(`should display a short description of the build as tooltip`, () => {
-			expect(buildStatus.attributes().title).to.equal(`a short description`)
+			expect(link.attributes().title).to.equal(`a short description`)
 		})
 
 		it(`should use the state to display an icon`, () => {
-			expect(buildStatus.classes()).to.deep.equal([`icon`, `SUCCESS`])
+			expect(link.classes()).to.deep.equal([`icon`, `SUCCESS`])
 		})
 
 		it(`should allow some build status to not have an url (some bot don't add url to statuses on github)`, () => {
@@ -40,8 +48,8 @@ describe(`BuildStatus component`, () => {
 				},
 			})
 
-			expect(buildStatus.attributes().title).to.equals(`a short description`)
-			expect(buildStatus.classes()).to.contains(`SUCCESS`)
+			expect(link.attributes().title).to.equals(`a short description`)
+			expect(link.classes()).to.contains(`SUCCESS`)
 		})
 	})
 
