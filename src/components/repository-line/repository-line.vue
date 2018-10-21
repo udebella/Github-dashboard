@@ -1,19 +1,24 @@
 <template>
-	<badge
-		:class="repository.branchStatus"
-		class="line">
-		<repository-link
-			:name="repository.name"
-			:url="repository.repositoryUrl"
-			class="repository-link"/>
+	<div class="line">
 		<repository-remover
 			:name="repository.name"
 			:owner="repository.owner"
-			data-test="trash"/>
-		<popover class="popover">
-			<build-statuses :statuses="repository.statusesList"/>
-		</popover>
-	</badge>
+			data-test="trash"
+			class="repository-remover"/>
+		<a
+			:href="repository.repositoryUrl"
+			data-test="link"
+			class="link">
+			<badge 
+				:class="repository.branchStatus"
+				data-test="badge">
+				<span>{{ repository.name }}</span>
+				<popover class="popover">
+					<build-statuses :statuses="repository.statusesList"/>
+				</popover>
+			</badge>
+		</a>
+	</div>
 </template>
 
 <script src="./repository-line.js"></script>

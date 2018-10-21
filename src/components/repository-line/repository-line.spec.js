@@ -30,7 +30,7 @@ describe(`RepositoryLine component`, () => {
 		})
 
 		it(`should use the color on the line according to the branch status`, () => {
-			expect(repositoryLine.classes()).to.contains(`SUCCESS`)
+			expect(repositoryLine.find(`[data-test=badge]`).classes()).to.contains(`SUCCESS`)
 		})
 
 		it(`should display a way to remove the repository from watched repositories`, () => {
@@ -42,7 +42,7 @@ describe(`RepositoryLine component`, () => {
 		let repositoryLink
 
 		beforeEach(() => {
-			repositoryLink = repositoryLine.find({name: `repository-link`})
+			repositoryLink = repositoryLine.find(`[data-test=link]`)
 		})
 
 		it(`should display a repository link`, () => {
@@ -50,11 +50,11 @@ describe(`RepositoryLine component`, () => {
 		})
 
 		it(`should give a repository name to the component`, () => {
-			expect(repositoryLink.props().name).to.equal(`repository`)
+			expect(repositoryLink.text()).to.equal(`repository`)
 		})
 
 		it(`should give a repository url to the component`, () => {
-			expect(repositoryLink.props().url).to.equal(`http://repository-url`)
+			expect(repositoryLink.attributes().href).to.equal(`http://repository-url`)
 		})
 	})
 

@@ -5,34 +5,39 @@
 	display: flex;
 	justify-content: space-between;
 
-	&.SUCCESS {
-		@include lightenOnHover($success);
-	}
-	&.FAILURE {
-		@include lightenOnHover($failure);
-	}
-	&.PENDING {
-		@include lightenOnHover($pending);
+	.repository-remover {
+		margin-right: 5px;
+		align-self: center;
 	}
 
-	.popover {
-		display: flex;
-		flex-direction: column;
-		visibility: hidden;
-		opacity: 0;
-		transition: 300ms ease;
-	}
-
-	&:hover .popover, .popover:hover {
-		visibility: visible;
-		opacity: 1;
-		transition: 300ms ease;
-	}
-
-	.repository-link {
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+	.link {
+		width: 100%;
 		text-decoration: none;
+		text-transform: capitalize;
+
+		& .SUCCESS {
+			@include lightenOnHover($success);
+		}
+		& .FAILURE {
+			@include lightenOnHover($failure);
+		}
+		& .PENDING {
+			@include lightenOnHover($pending);
+		}
+
+		.popover {
+			display: flex;
+			flex-direction: column;
+			visibility: hidden;
+			opacity: 0;
+			transition: 300ms ease;
+		}
+
+		& :hover .popover, .popover:hover {
+			visibility: visible;
+			opacity: 1;
+			transition: 300ms ease;
+		}
 	}
+
 }
