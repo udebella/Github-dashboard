@@ -1,8 +1,13 @@
 export default {
 	name: `custom-button`,
 	props: {
-		url: {
+		href: {
 			type: String,
+		},
+	},
+	methods: {
+		onClick(event) {
+			this.$emit(`click`, event)
 		},
 	},
 }

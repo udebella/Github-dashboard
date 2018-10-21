@@ -1,13 +1,17 @@
 <template>
-	<div class="button">
-		<a
-			v-if="url"
-			:href="url"
-			target="_blank"
-			data-test="link">
-			<slot/>
-		</a>
-		<slot v-else/>
+	<a
+		v-if="href"
+		:href="href"
+		class="button"
+		target="_blank"
+		data-test="link">
+		<slot/>
+	</a>
+	<div 
+		v-else
+		class="button"
+		@click="onClick">
+		<slot />
 	</div>
 </template>
 
