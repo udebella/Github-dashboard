@@ -11,6 +11,10 @@ export default {
 			type: String,
 			required: true,
 		},
+		buildStatus: {
+			type: String,
+			required: true,
+		},
 	},
 	components: {
 		Badge,

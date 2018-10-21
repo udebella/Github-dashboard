@@ -10,6 +10,7 @@ describe(`PullRequestLine component`, () => {
 			propsData: {
 				title: `Pull request name`,
 				url: `http://pull-request-url`,
+				buildStatus: `SUCCESS`,
 			},
 		})
 	})
@@ -25,6 +26,10 @@ describe(`PullRequestLine component`, () => {
 
 		it(`should display a link to the pull request`, () => {
 			expect(pullRequestLine.find(`[data-test=link]`).attributes().href).to.equal(`http://pull-request-url`)
+		})
+
+		it(`should display the build status of the pull request`, () => {
+			expect(pullRequestLine.find(`[data-test=name]`).classes()).to.deep.equal([`SUCCESS`])
 		})
 	})
 })
