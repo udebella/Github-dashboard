@@ -76,5 +76,23 @@ describe(`RepositoryLine component`, () => {
 				jobUrl: `http://build-target-url`,
 			}])
 		})
+
+		it(`should not display build statuses when there is no build status associated with the commit`, () => {
+			repositoryLine = shallowMount(RepositoryLine, {
+				propsData: {
+					repository: {
+						name: `repository`,
+						owner: `user`,
+						repositoryUrl: `http://repository-url`,
+						branchStatus: `SUCCESS`,
+						defaultBranch: `master`,
+						statusesList: [],
+					},
+				},
+			})
+
+			buildStatuses = repositoryLine.find({name: `build-statuses`})
+			expect(buildStatuses.exists()).to.be.false
+		})
 	})
 })

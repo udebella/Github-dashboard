@@ -14,7 +14,9 @@
 				:class="repository.branchStatus"
 				data-test="badge">
 				<span>{{ repository.name }}</span>
-				<popover class="popover">
+				<popover 
+					v-if="repository.statusesList.length"
+					class="popover">
 					<build-statuses :statuses="repository.statusesList"/>
 				</popover>
 			</badge>
