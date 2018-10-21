@@ -1,11 +1,11 @@
 <template>
 	<div>
 		<pull-request-line
-			data-test="line"
 			v-for="pullRequest in pullRequests"
 			:key="pullRequest.id"
 			:title="pullRequest.prTitle"
-			:url="pullRequest.prUrl"/>
+			:url="pullRequest.prUrl"
+			data-test="line"/>
 	</div>
 </template>
 
