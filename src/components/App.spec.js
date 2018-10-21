@@ -25,5 +25,9 @@ describe(`Component App`, () => {
 		it(`should display the list of repositories`, () => {
 			expect(app.find({name: `repository-list`}).exists()).to.be.true
 		})
+
+		it(`should display the list of pull requests`, () => {
+			expect(app.find({name: `pull-request-list`}).exists()).to.be.true
+		})
 	})
 })
