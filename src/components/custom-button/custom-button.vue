@@ -10,6 +10,7 @@
 	<div 
 		v-else
 		class="button"
+		data-test="button"
 		@click="onClick">
 		<slot />
 	</div>

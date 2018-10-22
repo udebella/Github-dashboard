@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import CustomButton from './custom-button.vue'
-import {stub, spy} from 'sinon'
 
 describe(`CustomButton component`, () => {
 	let customButton
@@ -41,15 +40,15 @@ describe(`CustomButton component`, () => {
 			const link = customButton.find(`[data-test=link]`)
 			expect(link.exists()).to.be.false
 		})
+	})
 
+	describe(`Button`, () => {
 		it(`should emit a click event when the component is clicked`, () => {
-			const clickHanlder = stub()
-			customButton = shallowMount(CustomButton, {propsData: {click: clickHanlder}})
+			customButton = shallowMount(CustomButton)
 
-			const test = spy(customButton.vm.onClick)
-			customButton.trigger(`click`)
+			customButton.find(`[data-test=button]`).trigger(`click`)
 
-			expect(test).to.have.been.called
+			expect(customButton.emitted().click.length).to.equals(1)
 		})
 	})
 })

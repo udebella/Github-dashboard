@@ -43,7 +43,7 @@ describe(`Configuration component`, () => {
 
 	describe(`Toggling configuration mode`, () => {
 		it(`should toggle configuration mode when clicking the icon`, () => {
-			configuration.find({name: `font-awesome-icon`}).vm.$emit(`click`)
+			configuration.find({name: `custom-button`}).vm.$emit(`click`)
 
 			expect(store.commit).to.have.been.calledWith(`toggleConfiguration`)
 		})
