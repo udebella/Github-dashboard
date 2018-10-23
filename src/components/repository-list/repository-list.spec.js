@@ -77,6 +77,42 @@ describe(`RepositoryList component`, () => {
 			})
 		})
 
+		it(`should display list of repositories even without build status`, async () => {
+			// Given
+			const store = {
+				state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
+			}
+			stubs.request.returns(Promise.resolve({
+				rep_0: {
+					name: `repository`,
+					owner: {login: `user`},
+					url: `http://repository-url`,
+					defaultBranchRef: {target: {status: null}},
+				},
+				rateLimit: {
+					cost: 1,
+					limit: 5000,
+					remaining: 4999,
+					resetAt: `2018-10-21T14:33:46Z`,
+				},
+			}))
+
+			// When
+			const repositoryList = shallowMount(RepositoryList, {store, propsData: stubs})
+
+			// Then
+			await flushPromises()
+			const repositoryLine = repositoryList.find({name: `repository-line`})
+			expect(repositoryLine.exists()).to.be.true
+			expect(repositoryLine.props().repository).to.deep.equal({
+				name: `repository`,
+				owner: `user`,
+				repositoryUrl: `http://repository-url`,
+				branchStatus: `NO_STATUS`,
+				statusesList: [],
+			})
+		})
+
 		it(`should call graphql api to retrieve data over the list of repositories`, async () => {
 			// Given
 			const store = {

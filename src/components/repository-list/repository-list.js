@@ -7,7 +7,7 @@ const extractHttpData = ({httpData}) => {
 	return Object.values(httpData)
 		.filter(({defaultBranchRef}) => defaultBranchRef)
 		.map(({name, owner, url, defaultBranchRef}) => {
-			const repositoryData = defaultBranchRef.target.status
+			const repositoryData = defaultBranchRef.target.status || {}
 			const statusMapper = ({state, context, targetUrl}) => ({
 				jobStatus: state,
 				description: context,
@@ -17,8 +17,8 @@ const extractHttpData = ({httpData}) => {
 				name: name,
 				owner: owner.login,
 				repositoryUrl: url,
-				branchStatus: repositoryData.state,
-				statusesList: repositoryData.contexts.map(statusMapper),
+				branchStatus: repositoryData.state || `NO_STATUS`,
+				statusesList: repositoryData.contexts && repositoryData.contexts.map(statusMapper) || [],
 			}
 		})
 }
