@@ -6,21 +6,20 @@ import {query} from "./repository-picker.query"
 import flushPromises from 'flush-promises'
 
 const fakeResponse = {
-	repositoryOwner: {
-		repositories: {
-			nodes: [
-				{
-					name: `gameFinder`,
-					owner: {
-						login: `udebella`,
-					},
-					url: `https://github.com/udebella/gameFinder`,
-					defaultBranchRef: {
-						name: `master`,
-					},
+	search: {
+		nodes: [
+			{
+				nameWithOwner: `facebook/react`,
+				name: `react`,
+				owner: {
+					login: `facebook`,
 				},
-			],
-		},
+				url: `https://github.com/facebook/react`,
+				defaultBranchRef: {
+					name: `master`,
+				},
+			},
+		],
 	},
 }
 
@@ -43,14 +42,14 @@ describe(`RepositoryPicker component`, () => {
 		})
 
 		it(`should display a input to enter repository owner`, () => {
-			expect(repositoryPicker.find(`[data-test=owner-input]`).exists()).to.be.true
+			expect(repositoryPicker.find(`[data-test=search-input]`).exists()).to.be.true
 		})
 	})
 
 	describe(`Enter repository owner`, () => {
 		it(`should make a request to retrieve repositories of the owner`, () => {
 			expect(mocks.request).not.to.have.been.called
-			repositoryPicker.find(`[data-test=owner-input]`).vm.$emit(`input`, `test`)
+			repositoryPicker.find(`[data-test=search-input]`).vm.$emit(`input`, `test`)
 
 			expect(mocks.request).to.have.been.calledWith(query(`test`))
 		})
@@ -61,14 +60,14 @@ describe(`RepositoryPicker component`, () => {
 				propsData: mocks,
 			})
 
-			repositoryPicker.find(`[data-test=owner-input]`).vm.$emit(`input`, `test`)
+			repositoryPicker.find(`[data-test=search-input]`).vm.$emit(`input`, `test`)
 
 			await flushPromises()
-			expect(repositoryPicker.find(`[data-test=repository-input]`).attributes().items).to.deep.equals(`gameFinder`)
+			expect(repositoryPicker.find(`[data-test=repository-input]`).attributes().items).to.deep.equals(`react`)
 		})
 
 		it(`should not make queries when update value is empty`, () => {
-			repositoryPicker.find(`[data-test=owner-input]`).vm.$emit(`input`, ``)
+			repositoryPicker.find(`[data-test=search-input]`).vm.$emit(`input`, ``)
 
 			expect(mocks.request).not.to.have.been.called
 		})

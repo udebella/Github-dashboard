@@ -1,7 +1,8 @@
-export const query = username => `{
-  repositoryOwner(login: "${username}") {
-  	repositories(first: 20, orderBy: {field: STARGAZERS, direction: DESC}) {
-      nodes {
+export const query = searchQuery => `{
+  search(query: "${searchQuery}", type: REPOSITORY, first: 5) {
+    nodes {
+      ... on Repository {
+        nameWithOwner
         name
         owner {
           login

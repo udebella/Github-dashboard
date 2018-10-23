@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<debounced-input
-			placeholder="Repository owner"
-			data-test="owner-input"
+			placeholder="Search query"
+			data-test="search-input"
 			@input="retrieveRepositoriesFor"/>
 		<custom-select
 			:items="repositoriesNames"

@@ -4,10 +4,7 @@ import CustomSelect from '../custom-select/custom-select.vue'
 import {query} from "./repository-picker.query"
 
 const extract = response => {
-	const repositories = response &&
-		response.repositoryOwner &&
-		response.repositoryOwner.repositories &&
-		response.repositoryOwner.repositories.nodes || []
+	const repositories = response && response.search && response.search.nodes || []
 	// FIXME defaultBranchRef can be null on new projects
 	return repositories.map(({name, owner, url, defaultBranchRef}) => ({
 		name,
@@ -33,9 +30,9 @@ export default {
 		},
 	},
 	methods: {
-		async retrieveRepositoriesFor(ownerName) {
-			if (ownerName) {
-				const response = await this.request(query(ownerName))
+		async retrieveRepositoriesFor(searchQuery) {
+			if (searchQuery) {
+				const response = await this.request(query(searchQuery))
 				this.repositories = extract(response)
 			}
 		},
