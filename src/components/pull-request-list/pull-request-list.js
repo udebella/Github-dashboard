@@ -8,7 +8,7 @@ const extractBuildStatus = commits => {
 		commits.nodes[0] &&
 		commits.nodes[0].commit &&
 		commits.nodes[0].commit.status &&
-		commits.nodes[0].commit.status.state || `UNKNOWN`
+		commits.nodes[0].commit.status.state || `NO_STATUS`
 }
 
 const extractHttp = httpResponse => {
