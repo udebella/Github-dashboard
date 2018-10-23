@@ -1,7 +1,7 @@
 import RepositoryLine from '../repository-line/repository-line.vue'
 import RepositoryAdder from '../repository-adder/repository-adder.vue'
 import {request} from "../../services/graphql/graphql-client"
-import {query} from "./repository-list-query"
+import {buildRepositoriesQuery} from "../../services/graphql/query-builder"
 
 const extractHttpData = ({httpData}) => {
 	return Object.values(httpData)
@@ -23,6 +23,28 @@ const extractHttpData = ({httpData}) => {
 		})
 }
 
+export const repositoryListFragment = `fragment repository on Repository {
+  name,
+  owner {
+    login
+  },
+  url,
+  defaultBranchRef {
+	target {
+	  ... on Commit {
+		status {
+		  contexts {
+			state
+			context
+			targetUrl
+		  }
+		  state
+		}
+	  }
+	}
+  }
+}`
+
 export default {
 	name: `repository-list`,
 	props: {
@@ -30,12 +52,16 @@ export default {
 			type: Function,
 			default: request,
 		},
+		queryBuilder: {
+			type: Function,
+			default: buildRepositoriesQuery(repositoryListFragment),
+		},
 	},
 	asyncComputed: {
 		repositories: {
 			async get() {
 				const watchedRepositories = this.$store.state.watchedRepositories
-				const httpData = await this.request(query(watchedRepositories))
+				const httpData = await this.request(this.queryBuilder(watchedRepositories))
 				return extractHttpData({httpData})
 			},
 			default: [],

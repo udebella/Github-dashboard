@@ -2,42 +2,48 @@ import {shallowMount} from '@vue/test-utils'
 import {expect} from 'chai'
 import {stub} from 'sinon'
 import RepositoryList from './repository-list.vue'
-import {query} from './repository-list-query'
 import flushPromises from 'flush-promises'
 
 describe(`RepositoryList component`, () => {
 	let repositoryList
-	let request
+	let stubs
 
 	beforeEach(() => {
 		const store = {
 			state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
 		}
-		request = stub().returns(Promise.resolve({
-			rep_0: {
-				name: `repository`,
-				owner: {login: `user`},
-				url: `http://repository-url`,
-				defaultBranchRef: {
-					target: {
-						status: {
-							contexts: [
-								{state: `SUCCESS`, context: `build description`, targetUrl: `http://build-target-url`},
-							],
-							state: `SUCCESS`,
+		stubs = {
+			queryBuilder: stub(),
+			request: stub().returns(Promise.resolve({
+				rep_0: {
+					name: `repository`,
+					owner: {login: `user`},
+					url: `http://repository-url`,
+					defaultBranchRef: {
+						target: {
+							status: {
+								contexts: [
+									{
+										state: `SUCCESS`,
+										context: `build description`,
+										targetUrl: `http://build-target-url`
+									},
+								],
+								state: `SUCCESS`,
+							},
 						},
 					},
 				},
-			},
-			rateLimit: {
-				cost: 1,
-				limit: 5000,
-				remaining: 4999,
-				resetAt: `2018-10-21T14:33:46Z`,
-			},
-		}))
+				rateLimit: {
+					cost: 1,
+					limit: 5000,
+					remaining: 4999,
+					resetAt: `2018-10-21T14:33:46Z`,
+				},
+			})),
+		}
 
-		repositoryList = shallowMount(RepositoryList, {store, propsData: {request}})
+		repositoryList = shallowMount(RepositoryList, {store, propsData: stubs})
 	})
 
 	describe(`Initialisation`, () => {
@@ -52,7 +58,7 @@ describe(`RepositoryList component`, () => {
 			}
 
 			// When
-			const repositoryList = shallowMount(RepositoryList, {store, propsData: {request}})
+			const repositoryList = shallowMount(RepositoryList, {store, propsData: stubs})
 
 			// Then
 			await flushPromises()
@@ -76,13 +82,14 @@ describe(`RepositoryList component`, () => {
 			const store = {
 				state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
 			}
+			stubs.queryBuilder.returns(`queryBuilt`)
 
 			// When
-			shallowMount(RepositoryList, {store, propsData: {request}})
+			shallowMount(RepositoryList, {store, propsData: stubs})
 
 			// Then
 			await flushPromises()
-			expect(request).to.have.been.calledWith(query(store.state.watchedRepositories))
+			expect(stubs.request).to.have.been.calledWith(`queryBuilt`)
 		})
 
 		it(`should not display anything if the list is empty`, () => {
@@ -92,7 +99,7 @@ describe(`RepositoryList component`, () => {
 			}
 
 			// When
-			const repositoryList = shallowMount(RepositoryList, {store, propsData: {request}})
+			const repositoryList = shallowMount(RepositoryList, {store, propsData: stubs})
 
 			// Then
 			expect(repositoryList.contains({name: `repository-line`})).to.be.false
