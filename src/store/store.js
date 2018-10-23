@@ -7,6 +7,7 @@ Vue.use(Vuex)
 const state = {
 	githubApi: `https://api.github.com/graphql`,
 	watchedRepositories: [],
+	configurationEnabled: true,
 }
 
 const addRepository = (store, repository) => {

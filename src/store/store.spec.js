@@ -10,6 +10,10 @@ describe(`Store`, () => {
 		it(`should use the public github api by default`, () => {
 			expect(store.state.githubApi).to.equals(`https://api.github.com/graphql`)
 		})
+
+		it(`should have configuration mode enabled by default`, () => {
+			expect(store.state.configurationEnabled).to.be.true
+		})
 	})
 
 	describe(`addRepository`, () => {
