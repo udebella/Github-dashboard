@@ -1,6 +1,6 @@
 import {request as defaultRequest} from '../../services/graphql/graphql-client'
-import {query} from "./pull-request-list.query"
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
+import {buildRepositoriesQuery} from "../../services/graphql/query-builder"
 
 const extractBuildStatus = commits => {
 	return commits &&
@@ -22,6 +22,36 @@ const extractHttp = httpResponse => {
 		.map(({title, url, commits}) => ({prTitle: title, prUrl: url, buildStatus: extractBuildStatus(commits)}))
 }
 
+const pullRequestFragment = `fragment repository on Repository {
+  name
+  owner {
+    login
+  }
+  url
+  pullRequests(states: OPEN, last: 5) {
+    nodes {
+      title
+      url
+      comments {
+        totalCount
+      }
+      reviews(first: 1) {
+        totalCount
+      }
+      state
+      commits(last: 1) {
+        nodes {
+          commit {
+            status {
+              state
+            }
+          }
+        }
+      }
+    }
+  }
+}`
+
 export default {
 	name: `pull-request-list`,
 	props: {
@@ -29,12 +59,16 @@ export default {
 			type: Function,
 			default: defaultRequest,
 		},
+		queryBuilder: {
+			type: Function,
+			default: buildRepositoriesQuery(pullRequestFragment),
+		},
 	},
 	asyncComputed: {
 		pullRequests: {
 			async get() {
 				const watchedRepositories = this.$store.state.watchedRepositories
-				const httpResponse = await this.request(query(watchedRepositories))
+				const httpResponse = await this.request(this.queryBuilder(watchedRepositories))
 				return extractHttp(httpResponse)
 			},
 			default: [],

@@ -5,15 +5,18 @@ import PullRequestList from './pull-request-list.vue'
 import flushPromises from 'flush-promises'
 
 describe(`PullRequestList component`, () => {
-	let pullRequestList, request
+	let pullRequestList, stubs
 
 	beforeEach(() => {
-		request = stub()
+		stubs = {
+			request: stub(),
+			queryBuilder: stub(),
+		}
 		const store = {
 			state: {watchedRepositories: []},
 		}
 
-		pullRequestList = shallowMount(PullRequestList, {store, propsData: {request}})
+		pullRequestList = shallowMount(PullRequestList, {store, propsData: stubs})
 	})
 
 	describe(`Initialization`, () => {
@@ -23,7 +26,7 @@ describe(`PullRequestList component`, () => {
 
 		it(`should display a list of pull request`, async () => {
 			// Given
-			request.returns(Promise.resolve({
+			stubs.request.returns(Promise.resolve({
 				"rep_0": {
 					name: `react`,
 					owner: {login: `facebook`},
@@ -55,7 +58,7 @@ describe(`PullRequestList component`, () => {
 			}
 
 			// When
-			const pullRequestList = shallowMount(PullRequestList, {store, propsData: {request}})
+			const pullRequestList = shallowMount(PullRequestList, {store, propsData: stubs})
 
 			// Then
 			await flushPromises()
@@ -65,6 +68,21 @@ describe(`PullRequestList component`, () => {
 				url: `https://github.com/facebook/react/pull/9333`,
 				buildStatus: `FAILURE`,
 			})
+		})
+
+		it(`should call graphql api to retrieve data over the list of repositories`, async () => {
+			// Given
+			const store = {
+				state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
+			}
+			stubs.queryBuilder.returns(`queryBuilt`)
+
+			// When
+			shallowMount(PullRequestList, {store, propsData: stubs})
+
+			// Then
+			await flushPromises()
+			expect(stubs.request).to.have.been.calledWith(`queryBuilt`)
 		})
 	})
 })
