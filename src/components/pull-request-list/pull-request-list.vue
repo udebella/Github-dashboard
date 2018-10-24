@@ -2,7 +2,7 @@
 	<div>
 		<pull-request-line
 			v-for="pullRequest in pullRequests"
-			:key="pullRequest.id"
+			:key="pullRequest.prTitle"
 			:title="pullRequest.prTitle"
 			:url="pullRequest.prUrl"
 			:build-status="pullRequest.buildStatus"
