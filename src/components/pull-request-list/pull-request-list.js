@@ -16,7 +16,7 @@ const extractHttp = httpResponse => {
 		return []
 	}
 	return Object.values(httpResponse)
-		.filter(({pullRequests}) => pullRequests)
+		.filter(repositories => repositories && repositories.pullRequests)
 		.map(({pullRequests}) => pullRequests.nodes)
 		.reduce((previousValue, currentValue) => [...previousValue, ...currentValue], [])
 		.map(({title, url, commits}) => ({prTitle: title, prUrl: url, buildStatus: extractBuildStatus(commits)}))
