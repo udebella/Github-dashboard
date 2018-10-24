@@ -1,10 +1,11 @@
 <template>
 	<div>
-		<repository-line 
+		<repository-line
+			data-test="repository-line"
 			v-for="repository in repositories"
 			:key="repository.name"
 			:repository="repository"/>
-		<repository-adder/>
+		<repository-adder data-test="repository-adder"/>
 	</div>
 </template>
 

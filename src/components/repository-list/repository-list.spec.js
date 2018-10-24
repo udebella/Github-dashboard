@@ -12,35 +12,38 @@ describe(`RepositoryList component`, () => {
 		const store = {
 			state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
 		}
-		stubs = {
-			queryBuilder: stub(),
-			request: stub().returns(Promise.resolve({
-				rep_0: {
-					name: `repository`,
-					owner: {login: `user`},
-					url: `http://repository-url`,
-					defaultBranchRef: {
-						target: {
-							status: {
-								contexts: [
-									{
-										state: `SUCCESS`,
-										context: `build description`,
-										targetUrl: `http://build-target-url`
-									},
-								],
-								state: `SUCCESS`,
-							},
+		const fakeGraphQlResponse = {
+			rep_0: {
+				name: `repository`,
+				owner: {login: `user`},
+				url: `http://repository-url`,
+				defaultBranchRef: {
+					target: {
+						status: {
+							contexts: [
+								{
+									state: `SUCCESS`,
+									context: `build description`,
+									targetUrl: `http://build-target-url`,
+								},
+							],
+							state: `SUCCESS`,
 						},
 					},
 				},
-				rateLimit: {
-					cost: 1,
-					limit: 5000,
-					remaining: 4999,
-					resetAt: `2018-10-21T14:33:46Z`,
-				},
-			})),
+			},
+			rateLimit: {
+				cost: 1,
+				limit: 5000,
+				remaining: 4999,
+				resetAt: `2018-10-21T14:33:46Z`,
+			},
+		}
+		stubs = {
+			queryBuilder: stub(),
+			request: stub().returns(Promise.resolve(fakeGraphQlResponse)),
+			fakeGraphQlResponse,
+			store,
 		}
 
 		repositoryList = shallowMount(RepositoryList, {store, propsData: stubs})
@@ -52,17 +55,12 @@ describe(`RepositoryList component`, () => {
 		})
 
 		it(`should display a list of repositories`, async () => {
-			// Given
-			const store = {
-				state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
-			}
-
 			// When
-			const repositoryList = shallowMount(RepositoryList, {store, propsData: stubs})
+			const repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
 			await flushPromises()
-			const repositoryLine = repositoryList.find({name: `repository-line`})
+			const repositoryLine = repositoryList.find(`[data-test=repository-line]`)
 			expect(repositoryLine.exists()).to.be.true
 			expect(repositoryLine.props().repository).to.deep.equal({
 				name: `repository`,
@@ -79,30 +77,14 @@ describe(`RepositoryList component`, () => {
 
 		it(`should display list of repositories even without build status`, async () => {
 			// Given
-			const store = {
-				state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
-			}
-			stubs.request.returns(Promise.resolve({
-				rep_0: {
-					name: `repository`,
-					owner: {login: `user`},
-					url: `http://repository-url`,
-					defaultBranchRef: {target: {status: null}},
-				},
-				rateLimit: {
-					cost: 1,
-					limit: 5000,
-					remaining: 4999,
-					resetAt: `2018-10-21T14:33:46Z`,
-				},
-			}))
+			stubs.fakeGraphQlResponse.rep_0.defaultBranchRef.target.status = null
 
 			// When
-			const repositoryList = shallowMount(RepositoryList, {store, propsData: stubs})
+			const repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
 			await flushPromises()
-			const repositoryLine = repositoryList.find({name: `repository-line`})
+			const repositoryLine = repositoryList.find(`[data-test=repository-line]`)
 			expect(repositoryLine.exists()).to.be.true
 			expect(repositoryLine.props().repository).to.deep.equal({
 				name: `repository`,
@@ -115,44 +97,22 @@ describe(`RepositoryList component`, () => {
 
 		it(`should display list of repositories even without build status`, async () => {
 			// Given
-			const store = {
-				state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
-			}
-			stubs.request.returns(Promise.resolve({
-				rep_0: {
-					name: `repository`,
-					owner: {login: `user`},
-					url: `http://repository-url`,
-					defaultBranchRef: {target: {status: null}},
-				},
-				rateLimit: null,
-			}))
+			stubs.fakeGraphQlResponse.rateLimit = null
 
 			// When
-			const repositoryList = shallowMount(RepositoryList, {store, propsData: stubs})
+			const repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
 			await flushPromises()
-			const repositoryLine = repositoryList.find({name: `repository-line`})
-			expect(repositoryLine.exists()).to.be.true
-			expect(repositoryLine.props().repository).to.deep.equal({
-				name: `repository`,
-				owner: `user`,
-				repositoryUrl: `http://repository-url`,
-				branchStatus: `NO_STATUS`,
-				statusesList: [],
-			})
+			expect(repositoryList.contains(`[data-test=repository-line]`)).to.be.true
 		})
 
 		it(`should call graphql api to retrieve data over the list of repositories`, async () => {
 			// Given
-			const store = {
-				state: {watchedRepositories: [{name: `repository`, owner: `user`}]},
-			}
 			stubs.queryBuilder.returns(`queryBuilt`)
 
 			// When
-			shallowMount(RepositoryList, {store, propsData: stubs})
+			shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
 			await flushPromises()
@@ -161,19 +121,17 @@ describe(`RepositoryList component`, () => {
 
 		it(`should not display anything if the list is empty`, () => {
 			// Given
-			const store = {
-				state: {watchedRepositories: []},
-			}
+			stubs.store.state.watchedRepositories = []
 
 			// When
-			const repositoryList = shallowMount(RepositoryList, {store, propsData: stubs})
+			const repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			expect(repositoryList.contains({name: `repository-line`})).to.be.false
+			expect(repositoryList.contains(`[data-test=repository-line]`)).to.be.false
 		})
 
 		it(`should display a repository adder component`, () => {
-			expect(repositoryList.find({name: `repository-adder`}).exists()).to.be.true
+			expect(repositoryList.find(`[data-test=repository-adder]`).exists()).to.be.true
 		})
 	})
 })
