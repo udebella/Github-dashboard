@@ -5,7 +5,7 @@ import {buildRepositoriesQuery} from "../../services/graphql/query-builder"
 
 const extractHttpData = ({httpData}) => {
 	return Object.values(httpData)
-		.filter(({defaultBranchRef}) => defaultBranchRef)
+		.filter(repositories => repositories && repositories.defaultBranchRef)
 		.map(({name, owner, url, defaultBranchRef}) => {
 			const repositoryData = defaultBranchRef.target.status || {}
 			const statusMapper = ({state, context, targetUrl}) => ({
