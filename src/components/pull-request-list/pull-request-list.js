@@ -12,9 +12,6 @@ const extractBuildStatus = commits => {
 }
 
 const extractHttp = httpResponse => {
-	if (!httpResponse) {
-		return []
-	}
 	return Object.values(httpResponse)
 		.filter(repositories => repositories && repositories.pullRequests)
 		.map(({pullRequests}) => pullRequests.nodes)
