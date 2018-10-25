@@ -16,8 +16,8 @@
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-transform-runtime": "^7.1.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.6",
-    "@fortawesome/free-solid-svg-icons": "^5.4.1",
+	  "@fortawesome/fontawesome-svg-core": "^1.2.7",
+	  "@fortawesome/free-solid-svg-icons": "^5.4.2",
     "@fortawesome/vue-fontawesome": "^0.1.1",
     "@vue/test-utils": "^1.0.0-beta.25",
     "babel-loader": "^8.0.4",
@@ -39,21 +39,21 @@
     "node-sass": "^4.9.4",
     "nyc": "^13.1.0",
     "sass-loader": "^7.1.0",
-    "sinon": "^7.0.0",
+	  "sinon": "^7.1.0",
     "sinon-chai": "^3.2.0",
     "vue": "^2.5.17",
     "vue-async-computed": "^3.4.1",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.17",
     "vuex": "^3.0.1",
-    "webpack": "^4.22.0",
+	  "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2",
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "plop": "^2.1.0",
     "webpack-bundle-analyzer": "^3.0.3",
-    "webpack-dev-server": "^3.1.9"
+	  "webpack-dev-server": "^3.1.10"
   },
   "nyc": {
     "include": [
