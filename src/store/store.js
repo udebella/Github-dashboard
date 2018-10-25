@@ -15,6 +15,7 @@ const addRepository = (store, repository) => {
 		...store.watchedRepositories,
 		repository,
 	]
+		.sort(({name: first}, {name: second}) => first.localeCompare(second))
 }
 
 const removeRepository = (store, repository) => {

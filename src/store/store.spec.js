@@ -27,14 +27,14 @@ describe(`Store`, () => {
 			expect(store.watchedRepositories).to.deep.equal([repository])
 		})
 
-		it(`should allow to add multiple repositories for an user`, () => {
+		it(`should allow to add multiple repositories for an user ordered by name`, () => {
 			const firstRepository = {owner: `user`, name: `repository`}
 			const store = {watchedRepositories: [firstRepository]}
 
 			const repository = {owner: `username`, name: `another repository`}
 			addRepository(store, repository)
 
-			expect(store.watchedRepositories).to.deep.equal([firstRepository, repository])
+			expect(store.watchedRepositories).to.deep.equal([repository, firstRepository])
 		})
 
 		it(`should not mutate the store`, () => {
