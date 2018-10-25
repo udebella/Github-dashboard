@@ -69,6 +69,12 @@ describe(`Login component`, () => {
 			expect(mocks.userService.login).to.have.been.calledWith(`test`)
 		})
 
+		it(`should use an input of type password to allow autocomplete from password managers`, () => {
+			const login = shallowMount(Login, {propsData: mocks})
+
+			expect(login.find(`[data-test=input-token]`).attributes().type).to.equals('password')
+		})
+
 		it(`should hide input and display username as title on the icon when successfully logged in`, async () => {
 			// Given
 			mocks.userService.connectedUser

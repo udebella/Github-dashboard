@@ -9,6 +9,7 @@
 			v-if="displayInputToken"
 			placeholder="Github token"
 			data-test="input-token"
+			type="password"
 			@input="performLogin"/>
 	</div>
 </template>
