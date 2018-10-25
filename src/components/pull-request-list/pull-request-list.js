@@ -16,6 +16,7 @@ const extractHttp = httpResponse => {
 		.filter(repositories => repositories && repositories.pullRequests)
 		.map(({pullRequests}) => pullRequests.nodes)
 		.reduce((previousValue, currentValue) => [...previousValue, ...currentValue], [])
+		.sort(({updatedAt: first}, {updatedAt: second}) => new Date(second).getTime() - new Date(first).getTime())
 		.map(({title, url, commits}) => ({prTitle: title, prUrl: url, buildStatus: extractBuildStatus(commits)}))
 }
 
@@ -32,6 +33,7 @@ const pullRequestFragment = `fragment repository on Repository {
       comments {
         totalCount
       }
+      updatedAt
       reviews(first: 1) {
         totalCount
       }

@@ -24,6 +24,7 @@ describe(`PullRequestList component`, () => {
 							url: `https://github.com/facebook/react/pull/9333`,
 							comments: {totalCount: 36},
 							reviews: {totalCount: 39},
+							updatedAt: `2018-10-25T01:36:27Z`,
 							state: `OPEN`,
 							commits: {
 								nodes: [{commit: {status: {state: `FAILURE`}}}],
@@ -60,7 +61,7 @@ describe(`PullRequestList component`, () => {
 
 			// Then
 			await flushPromises()
-			const pullRequestLine = pullRequestList.find(`[data-test=line]`);
+			const pullRequestLine = pullRequestList.find(`[data-test=line]`)
 			expect(pullRequestLine.exists()).to.be.true
 			expect(pullRequestLine.props()).to.deep.equals({
 				title: `Fix wheel/touch browser locking in IE and Safari`,
@@ -90,13 +91,38 @@ describe(`PullRequestList component`, () => {
 
 			// Then
 			await flushPromises()
-			const pullRequestLine = pullRequestList.find(`[data-test=line]`);
+			const pullRequestLine = pullRequestList.find(`[data-test=line]`)
 			expect(pullRequestLine.exists()).to.be.true
 			expect(pullRequestLine.props()).to.deep.equals({
 				title: `Fix wheel/touch browser locking in IE and Safari`,
 				url: `https://github.com/facebook/react/pull/9333`,
 				buildStatus: `NO_STATUS`,
 			})
+		})
+
+		it(`should sort pull request with last updated first`, async () => {
+			// Given
+			stubs.fakeGraphqlResponse.rep_0.pullRequests.nodes.push({
+				title: `16.4.2 dev`,
+				url: `https://github.com/facebook/react/pull/13966`,
+				comments: {
+					totalCount: 1,
+				},
+				updatedAt: `2018-10-25T15:53:24Z`,
+				reviews: {
+					totalCount: 0,
+				},
+				state: `CLOSED`,
+			})
+
+			// When
+			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
+
+			// Then
+			await flushPromises()
+			const pullRequestLine = pullRequestList.findAll(`[data-test=line]`)
+			expect(pullRequestLine.at(0).props().title).to.deep.equals(`16.4.2 dev`)
+			expect(pullRequestLine.at(1).props().title).to.equals(`Fix wheel/touch browser locking in IE and Safari`)
 		})
 
 		it(`should work on api that are not limited`, async () => {
