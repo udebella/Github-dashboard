@@ -26,7 +26,7 @@ const pullRequestFragment = `fragment repository on Repository {
     login
   }
   url
-  pullRequests(states: OPEN, last: 5) {
+  pullRequests(states: OPEN, last: 20) {
     nodes {
       title
       url
