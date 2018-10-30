@@ -1,4 +1,9 @@
 import {differenceInWeeks, distanceInWordsToNow} from 'date-fns'
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faHeart, faSkull} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faHeart)
+library.add(faSkull)
 
 export default {
 	name: `living-icon`,
