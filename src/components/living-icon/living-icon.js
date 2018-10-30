@@ -1,4 +1,4 @@
-import {differenceInWeeks} from 'date-fns'
+import {differenceInWeeks, distanceInWordsToNow} from 'date-fns'
 
 export default {
 	name: `living-icon`,
@@ -9,6 +9,9 @@ export default {
 		},
 	},
 	computed: {
+		title() {
+			return distanceInWordsToNow(this.date, { addSuffix: true })
+		},
 		icon() {
 			return differenceInWeeks(new Date(), this.date) < 1 ? `heart` : `skull`
 		},

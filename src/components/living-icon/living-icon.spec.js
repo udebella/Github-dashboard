@@ -25,5 +25,13 @@ describe(`LivingIcon component`, () => {
 
 			expect(icon.attributes().icon).to.equal(`skull`)
 		})
+
+		it(`should display a title indicating time since given date`, () => {
+			const lastWeekDate = subWeeks(new Date(), 1)
+			const livingIcon = shallowMount(LivingIcon, {propsData: { date: lastWeekDate }})
+			const icon = livingIcon.find(`[data-test=icon]`)
+
+			expect(icon.attributes().title).to.equal(`7 days ago`)
+		})
 	})
 })
