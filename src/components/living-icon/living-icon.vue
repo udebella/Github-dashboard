@@ -1,5 +1,7 @@
 <template>
-	<div>Test component</div>
+	<font-awesome-icon 
+		:icon="icon"
+		data-test="icon"/>
 </template>
 
 <script src="./living-icon.js"></script>

@@ -23,6 +23,7 @@
     "babel-loader": "^8.0.4",
     "chai": "^4.2.0",
     "css-loader": "^1.0.1",
+    "date-fns": "^1.29.0",
     "debounce": "^1.2.0",
     "eslint": "^5.8.0",
     "eslint-loader": "^2.1.1",
