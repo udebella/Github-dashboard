@@ -1,4 +1,5 @@
 import Badge from '../badge/badge.vue'
+import LivingIcon from '../living-icon/living-icon.vue'
 
 export default {
 	name: `pull-request-line`,
@@ -15,8 +16,13 @@ export default {
 			type: String,
 			required: true,
 		},
+		lastUpdateDate: {
+			type: Date,
+			required: true,
+		},
 	},
 	components: {
 		Badge,
+		LivingIcon,
 	},
 }

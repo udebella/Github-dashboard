@@ -4,6 +4,7 @@ import PullRequestLine from './pull-request-line.vue'
 
 describe(`PullRequestLine component`, () => {
 	let pullRequestLine
+	const today = new Date()
 
 	beforeEach(() => {
 		pullRequestLine = shallowMount(PullRequestLine, {
@@ -11,6 +12,7 @@ describe(`PullRequestLine component`, () => {
 				title: `Pull request name`,
 				url: `http://pull-request-url`,
 				buildStatus: `SUCCESS`,
+				lastUpdateDate: today,
 			},
 		})
 	})
@@ -29,7 +31,14 @@ describe(`PullRequestLine component`, () => {
 		})
 
 		it(`should display the build status of the pull request`, () => {
-			expect(pullRequestLine.find(`[data-test=name]`).classes()).to.deep.equal([`SUCCESS`])
+			expect(pullRequestLine.find(`[data-test=name]`).classes()).to.deep.equal([`line`, `SUCCESS`])
+		})
+
+		it(`should display a living icon`, () => {
+			const livingIcon = pullRequestLine.find(`[data-test=living-icon]`)
+
+			expect(livingIcon.exists()).to.be.true
+			expect(livingIcon.props().date).to.equals(today)
 		})
 	})
 })

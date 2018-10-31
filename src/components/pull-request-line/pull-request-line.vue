@@ -4,9 +4,15 @@
 		data-test="link"
 		target="_blank"
 		class="link">
-		<badge 
+		<badge
 			:class="buildStatus"
-			data-test="name">{{ title }}</badge>
+			class="line"
+			data-test="name">
+			<div>{{ title }}</div>
+			<living-icon 
+				:date="lastUpdateDate" 
+				data-test="living-icon"/>
+		</badge>
 	</a>
 </template>
 

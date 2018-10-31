@@ -1,8 +1,9 @@
 <template>
-	<font-awesome-icon
-		:title="title"
-		:icon="icon"
-		data-test="icon"/>
+	<div :title="title">
+		<font-awesome-icon
+			:icon="icon"
+			data-test="icon"/>
+	</div>
 </template>
 
 <script src="./living-icon.js"></script>

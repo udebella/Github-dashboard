@@ -3,3 +3,9 @@
 .link {
 	text-decoration: none;
 }
+
+.line {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
