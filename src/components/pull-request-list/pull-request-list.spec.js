@@ -25,6 +25,7 @@ describe(`PullRequestList component`, () => {
 							comments: {totalCount: 36},
 							reviews: {totalCount: 39},
 							updatedAt: `2018-10-25T01:36:27Z`,
+							createdAt: `2018-10-20T00:00:00Z`,
 							state: `OPEN`,
 							commits: {
 								nodes: [{commit: {status: {state: `FAILURE`}}}],
@@ -67,7 +68,7 @@ describe(`PullRequestList component`, () => {
 				title: `Fix wheel/touch browser locking in IE and Safari`,
 				url: `https://github.com/facebook/react/pull/9333`,
 				buildStatus: `FAILURE`,
-				lastUpdateDate: new Date(`2018-10-25T01:36:27Z`),
+				creationDate: new Date(`2018-10-20T00:00:00Z`),
 			})
 		})
 
@@ -98,7 +99,7 @@ describe(`PullRequestList component`, () => {
 				title: `Fix wheel/touch browser locking in IE and Safari`,
 				url: `https://github.com/facebook/react/pull/9333`,
 				buildStatus: `NO_STATUS`,
-				lastUpdateDate: new Date(`2018-10-25T01:36:27Z`),
+				creationDate: new Date(`2018-10-20T00:00:00Z`),
 			})
 		})
 

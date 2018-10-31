@@ -12,7 +12,7 @@ describe(`PullRequestLine component`, () => {
 				title: `Pull request name`,
 				url: `http://pull-request-url`,
 				buildStatus: `SUCCESS`,
-				lastUpdateDate: today,
+				creationDate: today,
 			},
 		})
 	})

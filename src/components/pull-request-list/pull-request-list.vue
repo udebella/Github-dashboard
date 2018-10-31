@@ -6,7 +6,7 @@
 			:title="pullRequest.prTitle"
 			:url="pullRequest.prUrl"
 			:build-status="pullRequest.buildStatus"
-			:last-update-date="pullRequest.lastUpdateDate"
+			:creation-date="pullRequest.creationDate"
 			data-test="line"/>
 	</div>
 </template>

@@ -17,7 +17,12 @@ const extractHttp = httpResponse => {
 		.map(({pullRequests}) => pullRequests.nodes)
 		.reduce((previousValue, currentValue) => [...previousValue, ...currentValue], [])
 		.sort(({updatedAt: first}, {updatedAt: second}) => new Date(second).getTime() - new Date(first).getTime())
-		.map(({title, url, commits, updatedAt}) => ({prTitle: title, prUrl: url, lastUpdateDate: new Date(updatedAt), buildStatus: extractBuildStatus(commits)}))
+		.map(({title, url, commits, createdAt}) => ({
+			prTitle: title,
+			prUrl: url,
+			creationDate: new Date(createdAt),
+			buildStatus: extractBuildStatus(commits),
+		}))
 }
 
 const pullRequestFragment = `fragment repository on Repository {

@@ -16,7 +16,7 @@ export default {
 			type: String,
 			required: true,
 		},
-		lastUpdateDate: {
+		creationDate: {
 			type: Date,
 			required: true,
 		},

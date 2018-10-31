@@ -10,7 +10,7 @@
 			data-test="name">
 			<div>{{ title }}</div>
 			<living-icon 
-				:date="lastUpdateDate" 
+				:date="creationDate"
 				data-test="living-icon"/>
 		</badge>
 	</a>
