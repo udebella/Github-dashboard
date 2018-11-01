@@ -1,5 +1,6 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
+import {faHeart, faSkull} from "@fortawesome/free-solid-svg-icons";
 import LivingIcon from './living-icon.vue'
 import {subWeeks} from 'date-fns'
 
@@ -15,7 +16,7 @@ describe(`LivingIcon component`, () => {
 			const livingIcon = shallowMount(LivingIcon, {propsData: { date: new Date() }})
 			const icon = livingIcon.find(`[data-test=icon]`)
 
-			expect(icon.attributes().icon).to.equal(`heart`)
+			expect(icon.vm.$attrs.icon).to.deep.equal(faHeart)
 		})
 
 		it(`should display a skull icon when date is one week before today`, () => {
@@ -23,7 +24,7 @@ describe(`LivingIcon component`, () => {
 			const livingIcon = shallowMount(LivingIcon, {propsData: { date: lastWeekDate }})
 			const icon = livingIcon.find(`[data-test=icon]`)
 
-			expect(icon.attributes().icon).to.equal(`skull`)
+			expect(icon.vm.$attrs.icon).to.deep.equal(faSkull)
 		})
 
 		it(`should display a title indicating time since given date`, () => {
