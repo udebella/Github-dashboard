@@ -1,4 +1,5 @@
 import {shallowMount} from '@vue/test-utils'
+import { faCheckCircle, faExclamationCircle, faTimesCircle, faClock } from '@fortawesome/free-solid-svg-icons'
 import {expect} from 'chai'
 import BuildStatus from './build-status.vue'
 
@@ -59,7 +60,7 @@ describe(`BuildStatus component`, () => {
 			const icon = buildStatus.find(`[data-test=icon]`)
 
 			expect(icon.exists()).to.be.true
-			expect(icon.attributes().icon).to.equal(`check-circle`)
+			expect(icon.vm.$attrs.icon).to.deep.equal(faCheckCircle)
 		})
 
 		it(`should map failure status to exclamation-circle icon`, () => {
@@ -67,7 +68,7 @@ describe(`BuildStatus component`, () => {
 			const icon = buildStatus.find(`[data-test=icon]`)
 
 			expect(icon.exists()).to.be.true
-			expect(icon.attributes().icon).to.equal(`exclamation-circle`)
+			expect(icon.vm.$attrs.icon).to.deep.equal(faExclamationCircle)
 		})
 
 		it(`should map error status to times-circle icon`, () => {
@@ -75,7 +76,7 @@ describe(`BuildStatus component`, () => {
 			const icon = buildStatus.find(`[data-test=icon]`)
 
 			expect(icon.exists()).to.be.true
-			expect(icon.attributes().icon).to.equal(`times-circle`)
+			expect(icon.vm.$attrs.icon).to.deep.equal(faTimesCircle)
 		})
 
 		it(`should map pending status to clock icon`, () => {
@@ -83,7 +84,7 @@ describe(`BuildStatus component`, () => {
 			const icon = buildStatus.find(`[data-test=icon]`)
 
 			expect(icon.exists()).to.be.true
-			expect(icon.attributes().icon).to.equal(`clock`)
+			expect(icon.vm.$attrs.icon).to.deep.equal(faClock)
 		})
 	})
 })
