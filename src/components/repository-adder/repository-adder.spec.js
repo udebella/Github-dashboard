@@ -17,17 +17,6 @@ describe(`RepositoryAdder component`, () => {
 			expect(repositoryAdder.name()).to.equal(`repository-adder`)
 		})
 
-		it(`should display an add icon`, () => {
-			const icon = repositoryAdder.find(`[data-test=icon]`)
-
-			expect(icon.exists()).to.be.true
-			expect(icon.attributes().icon).to.equals(`plus-circle`)
-		})
-
-		it(`should not display owner input by default`, () => {
-			expect(repositoryAdder.find(`[data-test=owner-input]`).exists()).to.be.false
-		})
-
 		it(`should hide the component when configuration mode is disabled`, () => {
 			store.state.configurationEnabled = false
 			repositoryAdder = shallowMount(RepositoryAdder, {store})
@@ -37,9 +26,7 @@ describe(`RepositoryAdder component`, () => {
 	})
 
 	describe(`Adding a repository`, () => {
-		it(`should display a debounced input when clicked`, () => {
-			repositoryAdder.find({name: `badge`}).vm.$emit(`click`)
-
+		it(`should display a debounced input`, () => {
 			expect(repositoryAdder.find(`[data-test=owner-input]`).exists()).to.be.true
 		})
 

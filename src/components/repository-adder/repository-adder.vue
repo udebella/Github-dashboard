@@ -3,15 +3,8 @@
 		v-if="configurationEnabled"
 		data-test="button"
 		title="Watch a new repository" 
-		class="icon"
-		@click="clickIcon">
-		<font-awesome-icon
-			v-if="!displayInput"
-			data-test="icon"
-			icon="plus-circle"/>
-		<repository-picker
-			v-if="displayInput"
-			data-test="owner-input"/>
+		class="icon">
+		<repository-picker data-test="owner-input"/>
 	</badge>
 </template>
 
