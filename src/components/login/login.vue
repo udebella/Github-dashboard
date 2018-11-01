@@ -3,8 +3,8 @@
 		:title="title" 
 		:class="displayInputToken ? 'login-failed' : 'login-success'">
 		<font-awesome-icon
-			data-test="icon" 
-			icon="user"/>
+			:icon="icon" 
+			data-test="icon"/>
 		<debounced-input
 			v-if="displayInputToken"
 			placeholder="Github token"

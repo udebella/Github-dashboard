@@ -1,6 +1,7 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
 import {shallowMount} from '@vue/test-utils'
+import {faUser} from '@fortawesome/free-solid-svg-icons'
 import Login from './login.vue'
 import {NO_USER} from "../../services/session/session"
 import flushPromises from 'flush-promises'
@@ -29,7 +30,7 @@ describe(`Login component`, () => {
 			const icon = login.find(`[data-test=icon]`)
 
 			expect(icon.exists()).to.be.true
-			expect(icon.attributes().icon).to.equals(`user`)
+			expect(icon.vm.$attrs.icon).to.deep.equals(faUser)
 		})
 
 		it(`should display an input text to enter token when there is no connected user in session`, () => {
