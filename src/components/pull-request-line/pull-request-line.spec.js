@@ -73,13 +73,11 @@ describe(`PullRequestLine component`, () => {
 					url: `http://pull-request-url`,
 					buildStatus: `SUCCESS`,
 					creationDate: today,
-					statusesList: [],
 				},
 			})
 
 			buildStatuses = pullRequestLine.find({name: `build-statuses`})
 			expect(buildStatuses.exists()).to.be.false
-
 		})
 	})
 })
