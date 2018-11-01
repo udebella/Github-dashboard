@@ -1,6 +1,7 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
 import {shallowMount} from '@vue/test-utils'
+import {faCog} from '@fortawesome/free-solid-svg-icons'
 import Configuration from './configuration.vue'
 
 describe(`Configuration component`, () => {
@@ -23,7 +24,7 @@ describe(`Configuration component`, () => {
 			const icon = configuration.find(`[data-test=icon]`)
 
 			expect(icon.exists()).to.be.true
-			expect(icon.attributes().icon).to.equals(`cog`)
+			expect(icon.vm.$attrs.icon).to.deep.equals(faCog)
 		})
 
 		it(`should display the icon as green when the configuration mode is enabled`, () => {

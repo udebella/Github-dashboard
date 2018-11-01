@@ -1,8 +1,5 @@
 import CustomButton from '../custom-button/custom-button.vue'
-import {library} from '@fortawesome/fontawesome-svg-core'
 import {faCog} from '@fortawesome/free-solid-svg-icons'
-
-library.add(faCog)
 
 export default {
 	name: `configuration`,
@@ -11,6 +8,9 @@ export default {
 			return this.$store.state.configurationEnabled ? `enabled` : `disabled`
 		},
 	},
+	data: () => ({
+		icon: faCog,
+	}),
 	methods: {
 		toggleConfiguration() {
 			this.$store.commit(`toggleConfiguration`)

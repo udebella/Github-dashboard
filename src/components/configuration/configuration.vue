@@ -2,8 +2,8 @@
 	<custom-button @click="toggleConfiguration">
 		<font-awesome-icon
 			:class="configurationMode"
-			data-test="icon"
-			icon="cog"/>
+			:icon="icon"
+			data-test="icon"/>
 	</custom-button>
 </template>
 
