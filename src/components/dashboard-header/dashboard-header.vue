@@ -14,7 +14,7 @@
 				title="View sources"
 				target="_blank"
 				href="https://github.com/udebella/Github-dashboard"
-				data-test="sources"><font-awesome-icon icon="code"/></custom-button>
+				data-test="sources"><font-awesome-icon :icon="icon"/></custom-button>
 		</div>
 	</div>
 </template>

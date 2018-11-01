@@ -1,4 +1,5 @@
 import {expect} from 'chai'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import {shallowMount} from '@vue/test-utils'
 import DashboardHeader from './dashboard-header.vue'
 
@@ -25,7 +26,7 @@ describe(`Dashboard Header component`, () => {
 			expect(sources.attributes().href).to.equal(`https://github.com/udebella/Github-dashboard`)
 			expect(sources.attributes().title).to.equal(`View sources`)
 			expect(icon.exists()).to.be.true
-			expect(icon.attributes().icon).to.be.equal(`code`)
+			expect(icon.vm.$attrs.icon).to.deep.equal(faGithub)
 		})
 
 		it(`should display the login component`, () => {
