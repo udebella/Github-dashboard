@@ -1,12 +1,13 @@
 <template>
 	<div>
 		<pull-request-line
-			v-for="({prTitle, prUrl, buildStatus, creationDate}) in pullRequests"
+			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses}) in pullRequests"
 			:key="prTitle"
 			:title="prTitle"
 			:url="prUrl"
 			:build-status="buildStatus"
 			:creation-date="creationDate"
+			:statuses-list="statuses"
 			data-test="line"/>
 	</div>
 </template>

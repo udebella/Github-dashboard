@@ -12,6 +12,11 @@
 			<living-icon 
 				:date="creationDate"
 				data-test="living-icon"/>
+			<popover
+				v-if="statusesList.length"
+				class="popover">
+				<build-statuses :statuses="statusesList"/>
+			</popover>
 		</badge>
 	</a>
 </template>

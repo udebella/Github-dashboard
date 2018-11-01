@@ -2,10 +2,25 @@
 
 .link {
 	text-decoration: none;
-}
 
-.line {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+	.line {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		.popover {
+			display: flex;
+			flex-direction: column;
+			visibility: hidden;
+			opacity: 0;
+			transition: 300ms ease;
+		}
+
+		&:hover .popover, .popover:hover {
+			visibility: visible;
+			opacity: 1;
+			transition: 300ms ease;
+		}
+	}
 }

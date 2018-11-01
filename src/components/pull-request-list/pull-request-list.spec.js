@@ -28,7 +28,18 @@ describe(`PullRequestList component`, () => {
 							createdAt: `2018-10-20T00:00:00Z`,
 							state: `OPEN`,
 							commits: {
-								nodes: [{commit: {status: {state: `FAILURE`}}}],
+								nodes: [{
+									commit: {
+										status: {
+											contexts: [{
+												state: `SUCCESS`,
+												context: `build description`,
+												targetUrl: `http://build-target-url`,
+											}],
+											state: `FAILURE`,
+										},
+									},
+								}],
 							},
 						},
 					],
@@ -69,6 +80,11 @@ describe(`PullRequestList component`, () => {
 				url: `https://github.com/facebook/react/pull/9333`,
 				buildStatus: `FAILURE`,
 				creationDate: new Date(`2018-10-20T00:00:00Z`),
+				statusesList: [{
+					jobStatus: `SUCCESS`,
+					description: `build description`,
+					jobUrl: `http://build-target-url`,
+				}],
 			})
 		})
 
@@ -95,12 +111,7 @@ describe(`PullRequestList component`, () => {
 			await flushPromises()
 			const pullRequestLine = pullRequestList.find(`[data-test=line]`)
 			expect(pullRequestLine.exists()).to.be.true
-			expect(pullRequestLine.props()).to.deep.equals({
-				title: `Fix wheel/touch browser locking in IE and Safari`,
-				url: `https://github.com/facebook/react/pull/9333`,
-				buildStatus: `NO_STATUS`,
-				creationDate: new Date(`2018-10-20T00:00:00Z`),
-			})
+			expect(pullRequestLine.props().buildStatus).to.equals(`NO_STATUS`)
 		})
 
 		it(`should sort pull request with last updated first`, async () => {

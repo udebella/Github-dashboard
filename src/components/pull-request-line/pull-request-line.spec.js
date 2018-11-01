@@ -13,6 +13,11 @@ describe(`PullRequestLine component`, () => {
 				url: `http://pull-request-url`,
 				buildStatus: `SUCCESS`,
 				creationDate: today,
+				statusesList: [{
+					jobStatus: `SUCCESS`,
+					description: `build description`,
+					jobUrl: `http://build-target-url`,
+				}],
 			},
 		})
 	})
@@ -39,6 +44,42 @@ describe(`PullRequestLine component`, () => {
 
 			expect(livingIcon.exists()).to.be.true
 			expect(livingIcon.props().date).to.equals(today)
+		})
+	})
+
+	describe(`Build statuses`, () => {
+		let buildStatuses
+
+		beforeEach(() => {
+			buildStatuses = pullRequestLine.find({name: `build-statuses`})
+		})
+
+		it(`should display build statuses`, () => {
+			expect(buildStatuses.exists()).to.be.true
+		})
+
+		it(`should give the list of statuses to the component`, () => {
+			expect(buildStatuses.props().statuses).to.deep.equal([{
+				jobStatus: `SUCCESS`,
+				description: `build description`,
+				jobUrl: `http://build-target-url`,
+			}])
+		})
+
+		it(`should not display build statuses when there is no build status associated with the commit`, () => {
+			pullRequestLine = shallowMount(PullRequestLine, {
+				propsData: {
+					title: `Pull request name`,
+					url: `http://pull-request-url`,
+					buildStatus: `SUCCESS`,
+					creationDate: today,
+					statusesList: [],
+				},
+			})
+
+			buildStatuses = pullRequestLine.find({name: `build-statuses`})
+			expect(buildStatuses.exists()).to.be.false
+
 		})
 	})
 })
