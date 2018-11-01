@@ -1,6 +1,7 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import RepositoryRemover from './repository-remover.vue'
+import {faTrash} from '@fortawesome/free-solid-svg-icons'
 import {stub} from "sinon"
 
 describe(`RepositoryRemover component`, () => {
@@ -20,8 +21,9 @@ describe(`RepositoryRemover component`, () => {
 		})
 
 		it(`should display a remove icon`, () => {
-			expect(repositoryRemover.find(`[data-test=icon]`).exists()).to.be.true
-			expect(repositoryRemover.find(`[data-test=icon]`).attributes().icon).to.equals(`trash`)
+			let icon = repositoryRemover.find(`[data-test=icon]`);
+			expect(icon.exists()).to.be.true
+			expect(icon.vm.$attrs.icon).to.deep.equals(faTrash)
 		})
 
 		it(`should hide the remove icon when configuration mode is disabled`, () => {

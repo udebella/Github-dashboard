@@ -3,7 +3,7 @@
 		v-if="configurationEnabled"
 		@click="remove">
 		<font-awesome-icon
-			icon="trash"
+			:icon="icon"
 			data-test="icon"/>
 	</custom-button>
 </template>

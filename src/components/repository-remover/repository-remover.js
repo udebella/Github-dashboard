@@ -1,8 +1,5 @@
-import {library} from '@fortawesome/fontawesome-svg-core'
 import {faTrash} from '@fortawesome/free-solid-svg-icons'
 import CustomButton from '../custom-button/custom-button.vue'
-
-library.add(faTrash)
 
 export default {
 	name: `repository-remover`,
@@ -16,6 +13,9 @@ export default {
 			required: true,
 		},
 	},
+	data: () => ({
+		icon: faTrash,
+	}),
 	computed: {
 		configurationEnabled() {
 			return this.$store.state.configurationEnabled
