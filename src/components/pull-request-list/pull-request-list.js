@@ -38,6 +38,7 @@ const pullRequestFragment = `fragment repository on Repository {
       comments {
         totalCount
       }
+      createdAt
       updatedAt
       reviews(first: 1) {
         totalCount
