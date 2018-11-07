@@ -8,8 +8,8 @@
 			:class="buildStatus"
 			class="line"
 			data-test="name">
-			<div>{{ title }}</div>
-			<living-icon 
+			<div class="title">{{ title }}</div>
+			<living-icon
 				:date="creationDate"
 				data-test="living-icon"/>
 			<popover
