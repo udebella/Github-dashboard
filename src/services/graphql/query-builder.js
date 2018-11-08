@@ -4,6 +4,8 @@ export const buildRepositoriesQuery = fragment => repositoryList => {
 	return `${rateLimitFragment}${fragments}\n\nquery {\n\t...rateLimit${query}\n}`
 }
 
+export const buildViewerQuery = () => `${rateLimitFragment}\n\nquery {\n\t...rateLimit\n}`
+
 const rateLimitFragment = `fragment rateLimit on Query {
 	rateLimit {
 		cost,

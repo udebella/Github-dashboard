@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {buildRepositoriesQuery} from "./query-builder"
+import {buildRepositoriesQuery, buildViewerQuery} from "./query-builder"
 
 describe(`Query builder`, () => {
 	describe(`buildRepositoriesQuery`, () => {
@@ -10,6 +10,7 @@ describe(`Query builder`, () => {
 				expect(buildRepositoriesQuery(emptyFragment)).to.be.a(`function`)
 			})
 		})
+
 		describe(`Repository Query generation`, () => {
 			let queryGenerator
 
@@ -30,6 +31,14 @@ describe(`Query builder`, () => {
 					{owner: `facebook`, name: `react`},
 					{owner: `angular`, name: `angular`},
 				])).to.equals(multipleRepositoryQuery)
+			})
+		})
+
+		describe(`Viewer Query generation`, () => {
+			it(`should create an empty working query when an empty fragment`, () => {
+				const emptyFragment = ``
+
+				expect(buildViewerQuery(emptyFragment)).to.equals(emptyQuery)
 			})
 		})
 	})
