@@ -10,11 +10,11 @@ describe(`Query builder`, () => {
 				expect(buildRepositoriesQuery(emptyFragment)).to.be.a(`function`)
 			})
 		})
-		describe(`Query generation`, () => {
+		describe(`Repository Query generation`, () => {
 			let queryGenerator
 
 			beforeEach(() => {
-				queryGenerator = buildRepositoriesQuery(simpleFragment)
+				queryGenerator = buildRepositoriesQuery(simpleRepositoryFragment)
 			})
 
 			it(`should create an empty working query when given an empty repository list`, () => {
@@ -22,14 +22,14 @@ describe(`Query builder`, () => {
 			})
 
 			it(`should create a simple query when given one repository`, () => {
-				expect(queryGenerator([{owner: `facebook`, name: `react`}])).to.equals(simpleQuery)
+				expect(queryGenerator([{owner: `facebook`, name: `react`}])).to.equals(simpleRepositoryQuery)
 			})
 
 			it(`should create a query when given multiple repositories`, () => {
 				expect(queryGenerator([
 					{owner: `facebook`, name: `react`},
 					{owner: `angular`, name: `angular`},
-				])).to.equals(multipleQuery)
+				])).to.equals(multipleRepositoryQuery)
 			})
 		})
 	})
@@ -48,7 +48,7 @@ query {
 	...rateLimit
 }`
 
-const simpleQuery = `fragment rateLimit on Query {
+const simpleRepositoryQuery = `fragment rateLimit on Query {
 	rateLimit {
 		cost,
 		limit,
@@ -70,7 +70,7 @@ query {
 	...repositoryList
 }`
 
-const multipleQuery = `fragment rateLimit on Query {
+const multipleRepositoryQuery = `fragment rateLimit on Query {
 	rateLimit {
 		cost,
 		limit,
@@ -93,6 +93,6 @@ query {
 	...repositoryList
 }`
 
-const simpleFragment = `fragment repository on Repository {
+const simpleRepositoryFragment = `fragment repository on Repository {
 	name
 }`
