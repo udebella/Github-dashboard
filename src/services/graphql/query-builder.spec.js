@@ -40,6 +40,9 @@ describe(`Query builder`, () => {
 
 				expect(buildViewerQuery(emptyFragment)).to.equals(emptyQuery)
 			})
+			it(`should create the query when using the given fragment`, () => {
+				expect(buildViewerQuery(simpleViewerFragment)).to.equals(simpleViewerQuery)
+			})
 		})
 	})
 })
@@ -104,4 +107,27 @@ query {
 
 const simpleRepositoryFragment = `fragment repository on Repository {
 	name
+}`
+
+
+const simpleViewerQuery = `fragment rateLimit on Query {
+	rateLimit {
+		cost,
+		limit,
+		remaining,
+		resetAt
+	}
+}
+
+fragment viewer on User {
+	login
+}
+
+query {
+	...rateLimit
+	viewer {...viewer}
+}`
+
+const simpleViewerFragment = `fragment viewer on User {
+	login
 }`
