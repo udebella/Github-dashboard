@@ -4,7 +4,7 @@
 		<div class="columns">
 			<repository-list class="repository-list"/>
 			<pull-request-list class="pull-request-list"/>
-			<div class="future"></div>
+			<viewer-pull-request-list class="viewer-pull-request-list"/>
 		</div>
 	</div>
 </template>
