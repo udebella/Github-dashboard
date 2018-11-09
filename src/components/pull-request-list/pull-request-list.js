@@ -98,7 +98,6 @@ const extractStatuses = commits => {
 			description: context,
 			jobUrl: targetUrl,
 		})) || []
-
 }
 
 const extractStatus = commits => {
@@ -107,5 +106,4 @@ const extractStatus = commits => {
 		commits.nodes[0] &&
 		commits.nodes[0].commit &&
 		commits.nodes[0].commit.status
-
 }
