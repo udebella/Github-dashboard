@@ -1,15 +1,19 @@
 export const extractHttp = ({pullRequests}) => pullRequests.nodes
-	.map(({title, url, createdAt, commits}) => Object.assign({}, {
+	.map(({title, url, createdAt, commits}) => ({
 		prTitle: title,
 		prUrl: url,
 		creationDate: new Date(createdAt),
-	}, extractStatuses(commits)))
+		...extractStatuses(commits),
+	}))
 
-const extractStatuses = ({nodes}) => ({
-	buildStatus: nodes[0].commit.status.state || `NO_STATUS`,
-	statuses: nodes[0].commit.status.contexts.map(({context, state, targetUrl}) => ({
-		description: context,
-		jobStatus: state,
-		jobUrl: targetUrl,
-	})),
-})
+const extractStatuses = ({nodes}) => {
+	const status = nodes[0].commit.status
+	return {
+		buildStatus: status.state || `NO_STATUS`,
+		statuses: status.contexts.map(({context, state, targetUrl}) => ({
+			description: context,
+			jobStatus: state,
+			jobUrl: targetUrl,
+		})),
+	}
+}
