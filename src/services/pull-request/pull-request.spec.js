@@ -7,31 +7,27 @@ describe(`Pull request service`, () => {
 	beforeEach(() => {
 		httpResponse = {
 			pullRequests: {
-				nodes: [
-					{
-						title: `Fix wheel/touch browser locking in IE and Safari`,
-						url: `https://github.com/facebook/react/pull/9333`,
-						comments: {totalCount: 36},
-						reviews: {totalCount: 39},
-						updatedAt: `2018-10-25T01:36:27Z`,
-						createdAt: `2018-10-20T00:00:00Z`,
-						state: `OPEN`,
-						commits: {
-							nodes: [{
-								commit: {
-									status: {
-										contexts: [{
-											state: `SUCCESS`,
-											context: `build description`,
-											targetUrl: `http://build-target-url`,
-										}],
+				nodes: [{
+					title: `Fix wheel/touch browser locking in IE and Safari`,
+					url: `https://github.com/facebook/react/pull/9333`,
+					updatedAt: `2018-10-25T01:36:27Z`,
+					createdAt: `2018-10-20T00:00:00Z`,
+					state: `OPEN`,
+					commits: {
+						nodes: [{
+							commit: {
+								status: {
+									contexts: [{
 										state: `SUCCESS`,
-									},
+										context: `build description`,
+										targetUrl: `http://build-target-url`,
+									}],
+									state: `SUCCESS`,
 								},
-							}],
-						},
+							},
+						}],
 					},
-				],
+				}],
 			},
 		}
 	})
@@ -73,5 +69,34 @@ describe(`Pull request service`, () => {
 				jobUrl: `http://build-target-url`,
 			}],
 		}])
+	})
+
+	it(`should order pull requests by last update date`, () => {
+		httpResponse.pullRequests.nodes.push({
+			title: `Implement pauseExecution, continueExecution, dumpQueue for Scheduler`,
+			url: `https://github.com/facebook/react/pull/14053`,
+			createdAt: `2018-10-31T22:17:12Z`,
+			updatedAt: `2018-11-07T20:10:15Z`,
+			state: `OPEN`,
+			commits: {
+				nodes: [{
+					commit: {
+						status: {
+							contexts: [{
+								state: `FAILURE`,
+								context: `ci/circleci`,
+								targetUrl: `https://circleci.com/gh/facebook/react/12397?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link`,
+							}],
+							state: `FAILURE`,
+						},
+					},
+				}],
+			},
+		})
+
+		const response = extractHttp(httpResponse)
+
+		expect(response[0].prTitle).to.equals(`Implement pauseExecution, continueExecution, dumpQueue for Scheduler`)
+		expect(response[1].prTitle).to.equals(`Fix wheel/touch browser locking in IE and Safari`)
 	})
 })
