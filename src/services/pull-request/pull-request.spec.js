@@ -45,4 +45,50 @@ describe(`Pull request service`, () => {
 			statuses: [],
 		}])
 	})
+
+	it(`should extract statuses from a response on a pull request that was built`, () => {
+		const httpResponse = {
+			pullRequests: {
+				nodes: [
+					{
+						title: `Fix wheel/touch browser locking in IE and Safari`,
+						url: `https://github.com/facebook/react/pull/9333`,
+						comments: {totalCount: 36},
+						reviews: {totalCount: 39},
+						updatedAt: `2018-10-25T01:36:27Z`,
+						createdAt: `2018-10-20T00:00:00Z`,
+						state: `OPEN`,
+						commits: {
+							nodes: [{
+								commit: {
+									status: {
+										contexts: [{
+											state: `SUCCESS`,
+											context: `build description`,
+											targetUrl: `http://build-target-url`,
+										}],
+										state: `SUCCESS`,
+									},
+								},
+							}],
+						},
+					},
+				],
+			},
+		}
+
+		const response = extractHttp(httpResponse)
+
+		expect(response).to.deep.equals([{
+			prTitle: `Fix wheel/touch browser locking in IE and Safari`,
+			prUrl: `https://github.com/facebook/react/pull/9333`,
+			creationDate: new Date(`2018-10-20T00:00:00Z`),
+			buildStatus: `SUCCESS`,
+			statuses: [{
+				jobStatus: `SUCCESS`,
+				description: `build description`,
+				jobUrl: `http://build-target-url`,
+			}],
+		}])
+	})
 })
