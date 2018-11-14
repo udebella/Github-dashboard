@@ -39,10 +39,7 @@ describe(`Pull request service`, () => {
 	})
 
 	it(`should return a formatted response when pull request was not build`, () => {
-		httpResponse.pullRequests.nodes[0].commits.nodes[0].commit.status = {
-			contexts: [],
-			state: null,
-		}
+		httpResponse.pullRequests.nodes[0].commits.nodes[0].commit.status = null
 
 		const response = extractHttp(httpResponse)
 

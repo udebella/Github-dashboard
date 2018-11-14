@@ -8,10 +8,10 @@ export const extractHttp = ({pullRequests}) => pullRequests.nodes
 	}))
 
 const extractStatuses = ({nodes}) => {
-	const status = nodes[0].commit.status
+	const {state, contexts} = nodes[0].commit.status || {state: `NO_STATUS`, contexts: []}
 	return {
-		buildStatus: status.state || `NO_STATUS`,
-		statuses: status.contexts.map(({context, state, targetUrl}) => ({
+		buildStatus: state,
+		statuses: contexts.map(({context, state, targetUrl}) => ({
 			description: context,
 			jobStatus: state,
 			jobUrl: targetUrl,
