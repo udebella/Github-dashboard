@@ -22,10 +22,12 @@
 			transition: 300ms ease;
 		}
 
-		&:hover .popover, .popover:hover {
-			visibility: visible;
-			opacity: 1;
-			transition: 300ms ease;
+		@include on-desktop {
+			&:hover .popover, .popover:hover {
+				visibility: visible;
+				opacity: 1;
+				transition: 300ms ease;
+			}
 		}
 	}
 }
