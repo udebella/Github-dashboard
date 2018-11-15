@@ -21,5 +21,19 @@ describe(`Popover component`, () => {
 		it(`should display the component`, () => {
 			expect(popover.text()).to.equal(`Slot content`)
 		})
+
+		it(`should display the popover on the right by default`, () => {
+			expect(popover.classes()).to.contains(`right`)
+		})
+
+		it(`should allow to display the popover on the left`, () => {
+			popover = shallowMount(Popover, {
+				propsData: {
+					side: `left`,
+				},
+			})
+
+			expect(popover.classes()).to.contains(`left`)
+		})
 	})
 })

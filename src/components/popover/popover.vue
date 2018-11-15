@@ -1,5 +1,7 @@
 <template>
-	<div class="popover">
+	<div
+		:class="side"
+		class="popover">
 		<slot/>
 	</div>
 </template>
