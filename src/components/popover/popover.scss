@@ -23,12 +23,12 @@ $backgroundColor: $surface;
 	}
 
 	&:before {
-		left: -21px;
+		left: -20px;
 		border-right-color: $borderColor;
 	}
 
 	&:after {
-		left: -20px;
+		left: -19px;
 		border-right-color: $backgroundColor;
 	}
 }
