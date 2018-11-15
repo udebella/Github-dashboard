@@ -14,6 +14,7 @@
 				data-test="living-icon"/>
 			<popover
 				v-if="statusesList.length"
+				side="left"
 				class="popover">
 				<build-statuses :statuses="statusesList"/>
 			</popover>
