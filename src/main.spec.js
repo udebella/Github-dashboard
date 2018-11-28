@@ -7,4 +7,4 @@ import AsyncComputed from 'vue-async-computed'
 Vue.use(Vuex)
 Vue.use(AsyncComputed)
 chai.use(sinonChai)
-Vue.component(`font-awesome-icon`, {})
+Vue.component('font-awesome-icon', {})

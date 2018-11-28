@@ -1,5 +1,5 @@
 export default {
-	name: `custom-select`,
+	name: 'custom-select',
 	props: {
 		items: {
 			type: Array,
@@ -7,11 +7,11 @@ export default {
 		},
 	},
 	data: () => ({
-		selected: ``,
+		selected: '',
 	}),
 	methods: {
 		notify() {
-			this.$emit(`selected`, this.selected)
+			this.$emit('selected', this.selected)
 		},
 	},
 }

@@ -1,5 +1,5 @@
 import CustomButton from '../custom-button/custom-button.vue'
-import { faCheckCircle, faExclamationCircle, faTimesCircle, faClock } from '@fortawesome/free-solid-svg-icons'
+import {faCheckCircle, faClock, faExclamationCircle, faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 
 const statusToIcon = {
 	FAILURE: faExclamationCircle,
@@ -9,7 +9,7 @@ const statusToIcon = {
 }
 
 export default {
-	name: `build-status`,
+	name: 'build-status',
 	props: {
 		description: {
 			type: String,

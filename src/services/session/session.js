@@ -1,6 +1,6 @@
 export const NO_USER = {}
 
-const USER_KEY = `user`
+const USER_KEY = 'user'
 
 export const buildSessionService = (storage = window.sessionStorage) => {
 	const setUser = item => {

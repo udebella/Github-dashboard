@@ -1,55 +1,55 @@
-const {absolutePath} = require(`./helpers`)
-const HtmlWebpackPlugin = require(`html-webpack-plugin`)
-const {VueLoaderPlugin} = require(`vue-loader`)
+const {absolutePath} = require('./helpers')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const {VueLoaderPlugin} = require('vue-loader')
 
 const commonConfig = {
 	resolve: {
-		extensions: [`.mjs`, `.js`, `.vue`, `.scss`],
+		extensions: ['.mjs', '.js', '.vue', '.scss'],
 	},
-	entry: absolutePath(`/src/main.js`),
+	entry: absolutePath('/src/main.js'),
 	output: {
 		pathinfo: true,
-		path: absolutePath(`/dist`),
-		filename: `[name]-[hash].js`,
+		path: absolutePath('/dist'),
+		filename: '[name]-[hash].js',
 	},
 	module: {
 		rules: [
 			{
-				type: `javascript/auto`,
+				type: 'javascript/auto',
 				test: /\.mjs$/,
 				use: [],
 			},
 			{
 				test: /\.(js|vue)$/,
-				enforce: `pre`,
+				enforce: 'pre',
 				exclude: /node_modules/,
-				loader: `eslint-loader`,
+				loader: 'eslint-loader',
 				options: {
 					fix: true,
 				},
 			},
 			{
 				test: /\.js/,
-				loader: `babel-loader`,
+				loader: 'babel-loader',
 			},
 			{
 				test: /\.vue$/,
-				loader: `vue-loader`,
+				loader: 'vue-loader',
 			},
 			{
 				test: /\.scss$/,
 				loader: [
-					`vue-style-loader`,
-					`css-loader`,
-					`sass-loader`,
+					'vue-style-loader',
+					'css-loader',
+					'sass-loader',
 				],
 			},
 			{
 				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-				loader: `file-loader`,
+				loader: 'file-loader',
 				options: {
-					name: `[name].[ext]`,
-					outputPath: `assets/fonts/`,
+					name: '[name].[ext]',
+					outputPath: 'assets/fonts/',
 				},
 			},
 		],
@@ -57,7 +57,7 @@ const commonConfig = {
 	plugins: [
 		new VueLoaderPlugin(),
 		new HtmlWebpackPlugin({
-			template: absolutePath(`/src/index.html`),
+			template: absolutePath('/src/index.html'),
 		}),
 	],
 }

@@ -1,11 +1,11 @@
-const {HotModuleReplacementPlugin, NamedModulesPlugin} = require(`webpack`)
-const commonConfig = require(`./webpack.common`)
+const {HotModuleReplacementPlugin, NamedModulesPlugin} = require('webpack')
+const commonConfig = require('./webpack.common')
 
 const config = {
 	...commonConfig,
-	mode: `development`,
+	mode: 'development',
 	devServer: {
-		clientLogLevel: `warning`,
+		clientLogLevel: 'warning',
 		// contentBase: './dist',
 		port: 3000,
 		hot: true,

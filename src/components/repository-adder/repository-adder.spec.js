@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import RepositoryAdder from './repository-adder.vue'
 
-describe(`RepositoryAdder component`, () => {
+describe('RepositoryAdder component', () => {
 	let repositoryAdder, store
 
 	beforeEach(() => {
@@ -12,28 +12,28 @@ describe(`RepositoryAdder component`, () => {
 		repositoryAdder = shallowMount(RepositoryAdder, {store})
 	})
 
-	describe(`Initialization`, () => {
-		it(`should have the right component name`, () => {
-			expect(repositoryAdder.name()).to.equal(`repository-adder`)
+	describe('Initialization', () => {
+		it('should have the right component name', () => {
+			expect(repositoryAdder.name()).to.equal('repository-adder')
 		})
 
-		it(`should hide the component when configuration mode is disabled`, () => {
+		it('should hide the component when configuration mode is disabled', () => {
 			store.state.configurationEnabled = false
 			repositoryAdder = shallowMount(RepositoryAdder, {store})
 
-			expect(repositoryAdder.find(`[data-test=button]`).exists()).to.be.false
+			expect(repositoryAdder.find('[data-test=button]').exists()).to.be.false
 		})
 	})
 
-	describe(`Adding a repository`, () => {
-		it(`should display a debounced input`, () => {
-			expect(repositoryAdder.find(`[data-test=owner-input]`).exists()).to.be.true
+	describe('Adding a repository', () => {
+		it('should display a debounced input', () => {
+			expect(repositoryAdder.find('[data-test=owner-input]').exists()).to.be.true
 		})
 
-		it(`should hide the icon when clicked`, () => {
-			const icon = repositoryAdder.find(`[data-test=icon]`)
+		it('should hide the icon when clicked', () => {
+			const icon = repositoryAdder.find('[data-test=icon]')
 
-			repositoryAdder.find({name: `badge`}).vm.$emit(`click`)
+			repositoryAdder.find({name: 'badge'}).vm.$emit('click')
 
 			expect(icon.exists()).to.be.false
 		})

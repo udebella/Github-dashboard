@@ -1,11 +1,11 @@
 import Vuex, {Store} from 'vuex'
-import Vue from "vue"
+import Vue from 'vue'
 import localStoragePlugin from './local-storage-plugin'
 
 Vue.use(Vuex)
 
 const state = {
-	githubApi: `https://api.github.com/graphql`,
+	githubApi: 'https://api.github.com/graphql',
 	watchedRepositories: [],
 	configurationEnabled: true,
 }

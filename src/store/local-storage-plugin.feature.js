@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import {Store} from 'vuex'
 import LocalStoragePlugin from './local-storage-plugin'
 
-describe(`Local storage store feature`, () => {
+describe('Local storage store feature', () => {
 	let store
 
 	beforeEach(() => {
@@ -20,10 +20,10 @@ describe(`Local storage store feature`, () => {
 		window.localStorage.clear()
 	})
 
-	it(`should save mutation and reload them into a new store`, () => {
+	it('should save mutation and reload them into a new store', () => {
 		LocalStoragePlugin(store)
 
-		store.commit(`increment`)
+		store.commit('increment')
 		const newStore = new Store({})
 		LocalStoragePlugin(newStore)
 

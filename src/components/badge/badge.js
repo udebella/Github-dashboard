@@ -1,8 +1,8 @@
 export default {
-	name: `badge`,
+	name: 'badge',
 	methods: {
 		click() {
-			this.$emit(`click`)
+			this.$emit('click')
 		},
 	},
 }

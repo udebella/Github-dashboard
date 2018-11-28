@@ -1,7 +1,7 @@
 import RepositoryLine from '../repository-line/repository-line.vue'
 import RepositoryAdder from '../repository-adder/repository-adder.vue'
-import {request} from "../../services/graphql/graphql-client"
-import {buildRepositoriesQuery} from "../../services/graphql/query-builder"
+import {request} from '../../services/graphql/graphql-client'
+import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
 
 const extractHttpData = ({httpData}) => {
 	return Object.values(httpData)
@@ -17,7 +17,7 @@ const extractHttpData = ({httpData}) => {
 				name: name,
 				owner: owner.login,
 				repositoryUrl: url,
-				branchStatus: repositoryData.state || `NO_STATUS`,
+				branchStatus: repositoryData.state || 'NO_STATUS',
 				statusesList: repositoryData.contexts && repositoryData.contexts.map(statusMapper) || [],
 			}
 		})
@@ -46,7 +46,7 @@ export const repositoryListFragment = `fragment repository on Repository {
 }`
 
 export default {
-	name: `repository-list`,
+	name: 'repository-list',
 	props: {
 		request: {
 			type: Function,

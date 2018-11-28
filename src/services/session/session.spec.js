@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
-import {NO_USER, buildSessionService} from "./session"
+import {buildSessionService, NO_USER} from './session'
 
-describe(`Session service`, () => {
+describe('Session service', () => {
 	let sessionService, fakeSessionStorage
 
 	beforeEach(() => {
@@ -15,30 +15,30 @@ describe(`Session service`, () => {
 		sessionService = buildSessionService(fakeSessionStorage)
 	})
 
-	describe(`Initialization`, () => {
-		it(`should init properly`, () => {
+	describe('Initialization', () => {
+		it('should init properly', () => {
 			expect(sessionService).to.exist
 		})
 	})
 
-	describe(`Store user in session`, () => {
-		it(`should allow to store user in session`, () => {
-			sessionService.setUser(`token`)
+	describe('Store user in session', () => {
+		it('should allow to store user in session', () => {
+			sessionService.setUser('token')
 
 			expect(fakeSessionStorage.setItem).to.have.been.called
 		})
 	})
 
-	describe(`Retrieve user from session`, () => {
-		it(`should allow to retrieve user in session`, () => {
-			fakeSessionStorage.getItem.returns(`"token"`)
+	describe('Retrieve user from session', () => {
+		it('should allow to retrieve user in session', () => {
+			fakeSessionStorage.getItem.returns('"token"')
 
 			const token = sessionService.getUser()
 
-			expect(token).to.equal(`token`)
+			expect(token).to.equal('token')
 		})
 
-		it(`should handle the case where there is no logged user in session`, () => {
+		it('should handle the case where there is no logged user in session', () => {
 			fakeSessionStorage.getItem.returns(null)
 
 			const token = sessionService.getUser()
@@ -47,8 +47,8 @@ describe(`Session service`, () => {
 		})
 	})
 
-	describe(`Remove user from session`, () => {
-		it(`should remove item from session`, () => {
+	describe('Remove user from session', () => {
+		it('should remove item from session', () => {
 			sessionService.removeUser()
 
 			expect(fakeSessionStorage.removeItem).to.have.been.called

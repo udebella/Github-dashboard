@@ -2,10 +2,10 @@ import {shallowMount} from '@vue/test-utils'
 import {expect} from 'chai'
 import BuildStatuses from './build-statuses.vue'
 
-describe(`BuildStatuses component`, () => {
+describe('BuildStatuses component', () => {
 	let buildStatuses
 
-	describe(`without status`, () => {
+	describe('without status', () => {
 		beforeEach(() => {
 			buildStatuses = shallowMount(BuildStatuses, {
 				propsData: {
@@ -14,38 +14,38 @@ describe(`BuildStatuses component`, () => {
 			})
 		})
 
-		describe(`Initialisation`, () => {
-			it(`should have branch-status name`, () => {
-				expect(buildStatuses.name()).to.equals(`build-statuses`)
+		describe('Initialisation', () => {
+			it('should have branch-status name', () => {
+				expect(buildStatuses.name()).to.equals('build-statuses')
 			})
 
-			it(`should not display when there is no status`, () => {
-				expect(buildStatuses.contains(`div`)).to.be.false
+			it('should not display when there is no status', () => {
+				expect(buildStatuses.contains('div')).to.be.false
 			})
 		})
 	})
 
-	describe(`with statuses`, () => {
+	describe('with statuses', () => {
 		beforeEach(() => {
 			buildStatuses = shallowMount(BuildStatuses, {
 				propsData: {
 					statuses: [{
-						description: `description`,
-						jobUrl: `http://build-url`,
-						jobStatus: `SUCCESS`,
+						description: 'description',
+						jobUrl: 'http://build-url',
+						jobStatus: 'SUCCESS',
 					}],
 				},
 			})
 		})
 
-		describe(`Initialisation`, () => {
-			it(`should display statuses`, () => {
-				const buildStatus = buildStatuses.find({name: `build-status`})
+		describe('Initialisation', () => {
+			it('should display statuses', () => {
+				const buildStatus = buildStatuses.find({name: 'build-status'})
 				expect(buildStatus.exists()).to.be.true
 				expect(buildStatus.props()).to.deep.equals({
-					description: `description`,
-					url: `http://build-url`,
-					state: `SUCCESS`,
+					description: 'description',
+					url: 'http://build-url',
+					state: 'SUCCESS',
 				})
 			})
 		})

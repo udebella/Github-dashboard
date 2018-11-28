@@ -2,20 +2,20 @@ import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import {{pascalCase componentName}} from './{{dashCase componentName}}.vue'
 
-describe(`{{pascalCase componentName}} component`, () => {
+describe('{{pascalCase componentName}} component', () => {
 	let {{camelCase componentName}}
 
 	beforeEach(() => {
 		{{camelCase componentName}} = shallowMount({{pascalCase componentName}})
 	})
 
-	describe(`Initialization`, () => {
-		it(`should have the right component name`, () => {
-			expect({{camelCase componentName}}.name()).to.equal(`{{dashCase componentName}}`)
+describe('Initialization', () => {
+it('should have the right component name', () => {
+expect({{camelCase componentName}}.name()).to.equal('{{dashCase componentName}}')
 		})
 
-		it(`should display the component`, () => {
-			expect({{camelCase componentName}}.find(`div`).text()).to.equal(`Test component`)
+it('should display the component', () => {
+expect({{camelCase componentName}}.find('div').text()).to.equal('Test component')
 		})
 	})
 })

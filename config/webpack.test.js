@@ -1,6 +1,6 @@
-const {SourceMapDevToolPlugin} = require(`webpack`)
-const webpackConfig = require(`./webpack.common`)
-const nodeExternals = require(`webpack-node-externals`)
+const {SourceMapDevToolPlugin} = require('webpack')
+const webpackConfig = require('./webpack.common')
+const nodeExternals = require('webpack-node-externals')
 
 const testConfig = {
 	...webpackConfig,
@@ -9,7 +9,7 @@ const testConfig = {
 			...webpackConfig.module.rules,
 			{
 				test: /\.js$/,
-				loader: `istanbul-instrumenter-loader`,
+				loader: 'istanbul-instrumenter-loader',
 				exclude: [
 					/node_modules/,
 					/\.(spec|feature)\.js$/,
@@ -28,8 +28,8 @@ const testConfig = {
 		}),
 	],
 	externals: [nodeExternals()],
-	devtool: `inline-source-map`,
-	mode: `development`,
+	devtool: 'inline-source-map',
+	mode: 'development',
 }
 
 module.exports = testConfig

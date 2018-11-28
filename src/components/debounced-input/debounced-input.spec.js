@@ -1,9 +1,9 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import DebouncedInput from './debounced-input.vue'
-import {useFakeTimers} from "sinon"
+import {useFakeTimers} from 'sinon'
 
-describe(`DebouncedInput component`, () => {
+describe('DebouncedInput component', () => {
 	let clock
 
 	beforeEach(() => {
@@ -14,41 +14,41 @@ describe(`DebouncedInput component`, () => {
 		clock.restore()
 	})
 
-	describe(`Initialization`, () => {
-		it(`should have the right component name`, () => {
+	describe('Initialization', () => {
+		it('should have the right component name', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 
-			expect(debouncedInput.name()).to.equal(`debounced-input`)
+			expect(debouncedInput.name()).to.equal('debounced-input')
 		})
 
-		it(`should display a text input`, () => {
+		it('should display a text input', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
-			const input = debouncedInput.find(`input`)
+			const input = debouncedInput.find('input')
 
 			expect(input.exists()).to.be.true
-			expect(input.attributes().type).to.equals(`text`)
+			expect(input.attributes().type).to.equals('text')
 		})
 	})
 
-	describe(`Handling input data`, () => {
-		it(`should send a input event after a while when modifying the input`, () => {
+	describe('Handling input data', () => {
+		it('should send a input event after a while when modifying the input', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 
-			debouncedInput.setValue(`test`)
+			debouncedInput.setValue('test')
 			clock.tick(1000)
 
-			expect(debouncedInput.emitted(`input`)).to.deep.equals([[`test`]])
+			expect(debouncedInput.emitted('input')).to.deep.equals([['test']])
 		})
 
-		it(`should send event only once when there is less 1 sec between updates`, () => {
+		it('should send event only once when there is less 1 sec between updates', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 
-			debouncedInput.setValue(`test`)
+			debouncedInput.setValue('test')
 			clock.tick(500)
-			debouncedInput.setValue(`another test`)
+			debouncedInput.setValue('another test')
 			clock.tick(1000)
 
-			expect(debouncedInput.emitted(`input`)).to.deep.equals([[`another test`]])
+			expect(debouncedInput.emitted('input')).to.deep.equals([['another test']])
 		})
 	})
 })

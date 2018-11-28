@@ -1,5 +1,5 @@
-import {buildSessionService} from "../session/session"
-import {request as defaultRequest} from "../graphql/graphql-client"
+import {buildSessionService} from '../session/session'
+import {request as defaultRequest} from '../graphql/graphql-client'
 
 // TODO find a way to test this
 const query = `{ 

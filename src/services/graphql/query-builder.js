@@ -1,12 +1,12 @@
 export const buildRepositoriesQuery = fragment => repositoryList => {
-	const fragments = repositoryList.length > 0 ? `\n\n${fragment}\n\n${repositoryListFragment(repositoryList)}` : ``
-	const query = repositoryList.length > 0 ? `\n\t...repositoryList` : ``
+	const fragments = repositoryList.length > 0 ? `\n\n${fragment}\n\n${repositoryListFragment(repositoryList)}` : ''
+	const query = repositoryList.length > 0 ? '\n\t...repositoryList' : ''
 	return `${rateLimitFragment}${fragments}\n\nquery {\n\t...rateLimit${query}\n}`
 }
 
 export const buildViewerQuery = fragment => {
-	const formattedFragment = fragment ? `\n\n${fragment}` : ``
-	const query = fragment ? `\n\tviewer {...viewer}` : ``
+	const formattedFragment = fragment ? `\n\n${fragment}` : ''
+	const query = fragment ? '\n\tviewer {...viewer}' : ''
 	return `${rateLimitFragment}${formattedFragment}\n\nquery {\n\t...rateLimit${query}\n}`
 }
 

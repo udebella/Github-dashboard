@@ -1,9 +1,9 @@
-import {request} from "./graphql-client"
+import {request} from './graphql-client'
 import {expect} from 'chai'
 import {spy, stub} from 'sinon'
-import {NO_USER} from "../session/session"
+import {NO_USER} from '../session/session'
 
-describe(`Service: graphql-client`, () => {
+describe('Service: graphql-client', () => {
 	let mocks
 
 	beforeEach(() => {
@@ -17,47 +17,47 @@ describe(`Service: graphql-client`, () => {
 			},
 			store: {
 				state: {
-					githubApi: `http://github-api`,
+					githubApi: 'http://github-api',
 				},
 			},
 		}
 	})
 
-	describe(`Method request`, () => {
-		it(`should retrieve user from session before making a request`, () => {
-			request(`someQuery`, mocks)
+	describe('Method request', () => {
+		it('should retrieve user from session before making a request', () => {
+			request('someQuery', mocks)
 
 			expect(mocks.session.getUser).to.have.been.called
 		})
 
-		it(`should build a graphqlClient properly`, () => {
-			mocks.session.getUser.returns({token: `userToken`})
+		it('should build a graphqlClient properly', () => {
+			mocks.session.getUser.returns({token: 'userToken'})
 
-			request(`someQuery`, mocks)
+			request('someQuery', mocks)
 
-			expect(mocks.builder).to.have.been.calledWith(`http://github-api`, {
+			expect(mocks.builder).to.have.been.calledWith('http://github-api', {
 				headers: {
-					Authorization: `token userToken`,
+					Authorization: 'token userToken',
 				},
 			})
 		})
 
-		it(`should call request method from graphql client`, () => {
+		it('should call request method from graphql client', () => {
 			// When
-			request(`fakeQuery`, mocks)
+			request('fakeQuery', mocks)
 
 			// Then
-			expect(mocks.fakeRequest).to.have.been.calledWith(`fakeQuery`)
+			expect(mocks.fakeRequest).to.have.been.calledWith('fakeQuery')
 		})
 
-		it(`should return a promise`, async () => {
-			mocks.fakeRequest.returns(Promise.resolve(`value`))
+		it('should return a promise', async () => {
+			mocks.fakeRequest.returns(Promise.resolve('value'))
 
 			// When
-			const response = await request(`fakeQuery`, mocks)
+			const response = await request('fakeQuery', mocks)
 
 			// Then
-			expect(response).to.equal(`value`)
+			expect(response).to.equal('value')
 		})
 	})
 })

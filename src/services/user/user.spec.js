@@ -1,9 +1,9 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
-import {buildUserService} from "./user"
+import {buildUserService} from './user'
 
 
-describe(`User service`, () => {
+describe('User service', () => {
 	let userService, mocks
 
 	beforeEach(() => {
@@ -21,91 +21,91 @@ describe(`User service`, () => {
 		userService = buildUserService(mocks)
 	})
 
-	describe(`Initialization`, () => {
-		it(`should init properly`, () => {
+	describe('Initialization', () => {
+		it('should init properly', () => {
 			expect(userService).to.exist
 		})
 	})
 
-	describe(`Login`, () => {
-		it(`should save token to session for validation`, () => {
+	describe('Login', () => {
+		it('should save token to session for validation', () => {
 			// Given
 			mocks.request.returns({
-				viewer: {login: `user`},
+				viewer: {login: 'user'},
 			})
 
 			// When
-			userService.login(`token`)
+			userService.login('token')
 
 			// Then
-			expect(mocks.fakeSetUser).to.have.been.calledWith({token: `token`})
+			expect(mocks.fakeSetUser).to.have.been.calledWith({token: 'token'})
 		})
 
-		it(`should validate given token to github api`, async () => {
+		it('should validate given token to github api', async () => {
 			// Given
 			mocks.request.returns({
-				viewer: {login: `user`},
+				viewer: {login: 'user'},
 			})
 
 			// When
-			const loggedUser = await userService.login(`token`)
+			const loggedUser = await userService.login('token')
 
 			// Then
 			expect(loggedUser).to.deep.equals({
 				success: {
-					login: `user`,
-					token: `token`,
+					login: 'user',
+					token: 'token',
 				},
 			})
 		})
 
-		it(`should save user data in session when validated through github api`, async () => {
+		it('should save user data in session when validated through github api', async () => {
 			// Given
 			mocks.request.returns({
-				viewer: {login: `user`},
+				viewer: {login: 'user'},
 			})
 
 			// When
-			await userService.login(`token`)
+			await userService.login('token')
 
 			// Then
 			expect(mocks.fakeRemoveUser).to.have.callCount(0)
 			expect(mocks.fakeSetUser).to.have.been.calledWith({
-				login: `user`,
-				token: `token`,
+				login: 'user',
+				token: 'token',
 			})
 		})
 
-		it(`should handle wrong token`, async () => {
+		it('should handle wrong token', async () => {
 			// Given
-			mocks.request.throws({response: {message: `Bad credentials`, status: 401}})
+			mocks.request.throws({response: {message: 'Bad credentials', status: 401}})
 
 			// When
-			const loggedUser = await userService.login(`token`)
+			const loggedUser = await userService.login('token')
 
 			// Then
 			expect(loggedUser).to.deep.equals({
 				error: {
 					code: 401,
-					message: `Bad credentials`,
+					message: 'Bad credentials',
 				},
 			})
 		})
 
-		it(`should reset session when token is invalid`, async () => {
+		it('should reset session when token is invalid', async () => {
 			// Given
-			mocks.request.throws({response: {message: `Bad credentials`, status: 401}})
+			mocks.request.throws({response: {message: 'Bad credentials', status: 401}})
 
 			// When
-			await userService.login(`token`)
+			await userService.login('token')
 
 			// Then
 			expect(mocks.fakeRemoveUser).to.have.been.called
 		})
 	})
 
-	describe(`connectedUser`, () => {
-		it(`should return an empty object when there is no connected user`, () => {
+	describe('connectedUser', () => {
+		it('should return an empty object when there is no connected user', () => {
 			mocks.fakeGetUser.returns({})
 
 			const user = userService.connectedUser()
@@ -113,17 +113,17 @@ describe(`User service`, () => {
 			expect(user).to.deep.equal({})
 		})
 
-		it(`should return the user after performing a login`, () => {
+		it('should return the user after performing a login', () => {
 			mocks.fakeGetUser.returns({
-				login: `user`,
-				token: `token`,
+				login: 'user',
+				token: 'token',
 			})
 
 			const user = userService.connectedUser()
 
 			expect(user).to.deep.equal({
-				login: `user`,
-				token: `token`,
+				login: 'user',
+				token: 'token',
 			})
 		})
 	})

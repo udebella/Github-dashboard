@@ -1,5 +1,5 @@
 export default {
-	name: `github-api-config`,
+	name: 'github-api-config',
 	data() {
 		return {inputValue: this.$store.state.githubApi}
 	},
@@ -10,7 +10,7 @@ export default {
 	},
 	methods: {
 		updateGithubApi() {
-			this.$store.commit(`updateGithubApi`, this.inputValue)
+			this.$store.commit('updateGithubApi', this.inputValue)
 		},
 	},
 }

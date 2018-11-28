@@ -2,7 +2,7 @@ import {faTrash} from '@fortawesome/free-solid-svg-icons'
 import CustomButton from '../custom-button/custom-button.vue'
 
 export default {
-	name: `repository-remover`,
+	name: 'repository-remover',
 	props: {
 		name: {
 			type: String,
@@ -23,7 +23,7 @@ export default {
 	},
 	methods: {
 		remove() {
-			this.$store.commit(`removeRepository`, {name: this.name, owner: this.owner})
+			this.$store.commit('removeRepository', {name: this.name, owner: this.owner})
 		},
 	},
 	components: {

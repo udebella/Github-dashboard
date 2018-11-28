@@ -1,5 +1,5 @@
 export default {
-	name: `custom-button`,
+	name: 'custom-button',
 	props: {
 		href: {
 			type: String,
@@ -7,7 +7,7 @@ export default {
 	},
 	methods: {
 		onClick(event) {
-			this.$emit(`click`, event)
+			this.$emit('click', event)
 		},
 	},
 }

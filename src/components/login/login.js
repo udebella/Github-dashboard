@@ -1,10 +1,10 @@
 import {faUser} from '@fortawesome/free-solid-svg-icons'
-import {buildUserService} from "../../services/user/user"
-import {NO_USER} from "../../services/session/session"
+import {buildUserService} from '../../services/user/user'
+import {NO_USER} from '../../services/session/session'
 import DebouncedInput from '../debounced-input/debounced-input.vue'
 
 export default {
-	name: `login`,
+	name: 'login',
 	props: {
 		userService: {
 			default: buildUserService,
@@ -21,7 +21,7 @@ export default {
 			return this.connectedUser === NO_USER
 		},
 		title() {
-			return this.displayInputToken ? `You are not logged in` : `Logged in as ${this.connectedUser.login}`
+			return this.displayInputToken ? 'You are not logged in' : `Logged in as ${this.connectedUser.login}`
 		},
 	},
 	methods: {

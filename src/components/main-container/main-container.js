@@ -4,7 +4,7 @@ import PullRequestList from '../pull-request-list/pull-request-list.vue'
 import ViewerPullRequestList from '../viewer-pull-request-list/viewer-pull-request-list.vue'
 
 export default {
-	name: `main-container`,
+	name: 'main-container',
 	components: {
 		GithubApiConfig,
 		RepositoryList,

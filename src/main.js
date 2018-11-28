@@ -5,10 +5,10 @@ import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import AsyncComputed from 'vue-async-computed'
 
 Vue.use(AsyncComputed)
-Vue.component(`font-awesome-icon`, FontAwesomeIcon)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 new Vue({
-	el: `#app`,
+	el: '#app',
 	render: h => h(App),
 	store,
 })

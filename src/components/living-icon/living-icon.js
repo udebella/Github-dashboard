@@ -1,8 +1,8 @@
 import {differenceInWeeks, distanceInWordsToNow} from 'date-fns'
-import {faHeart, faSkull} from "@fortawesome/free-solid-svg-icons";
+import {faHeart, faSkull} from '@fortawesome/free-solid-svg-icons'
 
 export default {
-	name: `living-icon`,
+	name: 'living-icon',
 	props: {
 		date: {
 			type: Date,

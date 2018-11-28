@@ -2,38 +2,38 @@ import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import Popover from './popover.vue'
 
-describe(`Popover component`, () => {
+describe('Popover component', () => {
 	let popover
 
 	beforeEach(() => {
 		popover = shallowMount(Popover, {
 			slots: {
-				default: [`<span>Slot content</span>`],
+				default: ['<span>Slot content</span>'],
 			},
 		})
 	})
 
-	describe(`Initialization`, () => {
-		it(`should have popover name`, () => {
-			expect(popover.name()).to.equals(`popover`)
+	describe('Initialization', () => {
+		it('should have popover name', () => {
+			expect(popover.name()).to.equals('popover')
 		})
 
-		it(`should display the component`, () => {
-			expect(popover.text()).to.equal(`Slot content`)
+		it('should display the component', () => {
+			expect(popover.text()).to.equal('Slot content')
 		})
 
-		it(`should display the popover on the right by default`, () => {
-			expect(popover.classes()).to.contains(`right`)
+		it('should display the popover on the right by default', () => {
+			expect(popover.classes()).to.contains('right')
 		})
 
-		it(`should allow to display the popover on the left`, () => {
+		it('should allow to display the popover on the left', () => {
 			popover = shallowMount(Popover, {
 				propsData: {
-					side: `left`,
+					side: 'left',
 				},
 			})
 
-			expect(popover.classes()).to.contains(`left`)
+			expect(popover.classes()).to.contains('left')
 		})
 	})
 })

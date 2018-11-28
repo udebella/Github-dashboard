@@ -1,10 +1,10 @@
 import {request as defaultRequest} from '../../services/graphql/graphql-client'
 import {buildViewerQuery} from '../../services/graphql/query-builder'
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
-import {extractHttp as extractPullRequest} from "../../services/pull-request/pull-request";
+import {extractHttp as extractPullRequest} from '../../services/pull-request/pull-request'
 
 export default {
-	name: `viewer-pull-request-list`,
+	name: 'viewer-pull-request-list',
 	props: {
 		request: {
 			type: Function,

@@ -4,7 +4,7 @@ import RepositoryRemover from '../repository-remover/repository-remover.vue'
 import BuildStatuses from '../build-statuses/build-statuses.vue'
 
 export default {
-	name: `repository-line`,
+	name: 'repository-line',
 	props: {
 		repository: {
 			required: true,

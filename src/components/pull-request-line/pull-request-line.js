@@ -4,7 +4,7 @@ import BuildStatuses from '../build-statuses/build-statuses.vue'
 import Popover from '../popover/popover.vue'
 
 export default {
-	name: `pull-request-line`,
+	name: 'pull-request-line',
 	props: {
 		title: {
 			type: String,

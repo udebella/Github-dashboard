@@ -1,9 +1,9 @@
 export default {
-	name: `popover`,
+	name: 'popover',
 	props: {
 		side: {
 			type: String,
-			default: `right`,
+			default: 'right',
 		},
 	},
 }

@@ -1,7 +1,7 @@
 import {request as defaultRequest} from '../../services/graphql/graphql-client'
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
 import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
-import {extractHttp as extractPullRequest} from '../../services/pull-request/pull-request';
+import {extractHttp as extractPullRequest} from '../../services/pull-request/pull-request'
 
 const pullRequestFragment = `fragment repository on Repository {
   name
@@ -41,7 +41,7 @@ const pullRequestFragment = `fragment repository on Repository {
 }`
 
 export default {
-	name: `pull-request-list`,
+	name: 'pull-request-list',
 	props: {
 		request: {
 			type: Function,

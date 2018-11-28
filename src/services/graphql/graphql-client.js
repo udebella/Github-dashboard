@@ -1,5 +1,5 @@
 import {GraphQLClient} from 'graphql-request'
-import {buildSessionService} from "../session/session"
+import {buildSessionService} from '../session/session'
 import {store as defaultStore} from '../../store/store'
 
 // TODO Is it possible to test that?

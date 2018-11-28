@@ -1,1 +1,1 @@
-require(`jsdom-global`)(undefined, {url: `https://example.org/`})
+require('jsdom-global')(undefined, {url: 'https://example.org/'})

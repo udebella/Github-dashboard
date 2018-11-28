@@ -1,9 +1,9 @@
-import {debounce} from "debounce"
+import {debounce} from 'debounce'
 
 export default {
-	name: `debounced-input`,
+	name: 'debounced-input',
 	data: () => ({
-		input: ``,
+		input: '',
 	}),
 	watch: {
 		input() {
@@ -12,7 +12,7 @@ export default {
 	},
 	created() {
 		const notifyParent = () => {
-			this.$emit(`input`, this.input)
+			this.$emit('input', this.input)
 		}
 
 		this.debouncedInput = debounce(notifyParent, 1000)

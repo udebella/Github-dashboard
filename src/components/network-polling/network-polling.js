@@ -1,7 +1,7 @@
-import {request} from "../../services/graphql/graphql-client"
+import {request} from '../../services/graphql/graphql-client'
 
 export default {
-	name: `network-polling`,
+	name: 'network-polling',
 	props: {
 		query: {
 			type: String,
@@ -15,7 +15,7 @@ export default {
 	created() {
 		const callHttp = async () => {
 			const response = await this.request(this.query)
-			this.$emit(`httpUpdate`, response)
+			this.$emit('httpUpdate', response)
 		}
 		this.interval = setInterval(callHttp, 10000)
 		callHttp()

@@ -22,7 +22,7 @@
 		],
 		"quotes": [
 			"error",
-			"backtick"
+			"single"
 		]
 	},
 	"plugins": [

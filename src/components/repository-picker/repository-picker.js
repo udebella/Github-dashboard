@@ -1,7 +1,7 @@
-import {request} from "../../services/graphql/graphql-client"
+import {request} from '../../services/graphql/graphql-client'
 import DebouncedInput from '../debounced-input/debounced-input.vue'
 import CustomSelect from '../custom-select/custom-select.vue'
-import {query} from "./repository-picker.query"
+import {query} from './repository-picker.query'
 
 const extract = response => {
 	const repositories = response && response.search && response.search.nodes || []
@@ -15,7 +15,7 @@ const extract = response => {
 }
 
 export default {
-	name: `repository-picker`,
+	name: 'repository-picker',
 	props: {
 		request: {
 			default: () => request,
@@ -38,7 +38,7 @@ export default {
 		},
 		pickRepository(value) {
 			const selectedRepository = this.repositories.find(({name}) => name === value)
-			this.$store.commit(`addRepository`, selectedRepository)
+			this.$store.commit('addRepository', selectedRepository)
 		},
 	},
 	components: {
