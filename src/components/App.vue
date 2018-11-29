@@ -10,7 +10,7 @@
 	import MainContainer from './main-container/main-container.vue'
 
 	export default {
-		name: `App`,
+		name: 'App',
 		components: {
 			MainContainer,
 			DashboardHeader,
