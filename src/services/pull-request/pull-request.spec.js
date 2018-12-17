@@ -47,6 +47,7 @@ describe('Pull request service', () => {
 			prTitle: 'Fix wheel/touch browser locking in IE and Safari',
 			prUrl: 'https://github.com/facebook/react/pull/9333',
 			creationDate: new Date('2018-10-20T00:00:00Z'),
+			updateDate: new Date('2018-10-25T01:36:27Z'),
 			buildStatus: 'NO_STATUS',
 			statuses: [],
 		}])
@@ -59,6 +60,7 @@ describe('Pull request service', () => {
 			prTitle: 'Fix wheel/touch browser locking in IE and Safari',
 			prUrl: 'https://github.com/facebook/react/pull/9333',
 			creationDate: new Date('2018-10-20T00:00:00Z'),
+			updateDate: new Date('2018-10-25T01:36:27Z'),
 			buildStatus: 'SUCCESS',
 			statuses: [{
 				jobStatus: 'SUCCESS',

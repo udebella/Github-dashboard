@@ -1,9 +1,10 @@
 export const extractHttp = ({pullRequests}) => pullRequests.nodes
 	.sort(({updatedAt: first}, {updatedAt: second}) => new Date(second).getTime() - new Date(first).getTime())
-	.map(({title, url, createdAt, commits}) => ({
+	.map(({title, url, createdAt, updatedAt, commits}) => ({
 		prTitle: title,
 		prUrl: url,
 		creationDate: new Date(createdAt),
+		updateDate: new Date(updatedAt),
 		...extractStatuses(commits),
 	}))
 
