@@ -4,8 +4,8 @@
 			v-for="repository in repositories"
 			:key="repository.name"
 			:repository="repository"
-			data-test="repository-line"/>
-		<repository-adder data-test="repository-adder"/>
+			data-test="repository-line" />
+		<repository-adder data-test="repository-adder" />
 	</div>
 </template>
 

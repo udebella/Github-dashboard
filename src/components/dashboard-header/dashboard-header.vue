@@ -6,15 +6,17 @@
 			Github Dashboard
 		</div>
 		<div class="right">
-			<configuration data-test="configuration"/>
+			<configuration data-test="configuration" />
 			<login 
 				class="login" 
-				data-test="login"/>
+				data-test="login" />
 			<custom-button
 				title="View sources"
 				target="_blank"
 				href="https://github.com/udebella/Github-dashboard"
-				data-test="sources"><font-awesome-icon :icon="icon"/></custom-button>
+				data-test="sources">
+				<font-awesome-icon :icon="icon" />
+			</custom-button>
 		</div>
 	</div>
 </template>

@@ -8,15 +8,17 @@
 			:class="buildStatus"
 			class="line"
 			data-test="name">
-			<div class="title">{{ title }}</div>
+			<div class="title">
+				{{ title }}
+			</div>
 			<living-icon
 				:date="creationDate"
-				data-test="living-icon"/>
+				data-test="living-icon" />
 			<popover
 				v-if="statusesList.length"
 				side="left"
 				class="popover">
-				<build-statuses :statuses="statusesList"/>
+				<build-statuses :statuses="statusesList" />
 			</popover>
 		</badge>
 	</a>

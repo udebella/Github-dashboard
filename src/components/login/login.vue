@@ -4,13 +4,13 @@
 		:class="displayInputToken ? 'login-failed' : 'login-success'">
 		<font-awesome-icon
 			:icon="icon" 
-			data-test="icon"/>
+			data-test="icon" />
 		<debounced-input
 			v-if="displayInputToken"
 			placeholder="Github token"
 			data-test="input-token"
 			type="password"
-			@input="performLogin"/>
+			@input="performLogin" />
 	</div>
 </template>
 

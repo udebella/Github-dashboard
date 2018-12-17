@@ -5,7 +5,7 @@
 		class="button"
 		target="_blank"
 		data-test="link">
-		<slot/>
+		<slot />
 	</a>
 	<div 
 		v-else

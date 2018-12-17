@@ -4,7 +4,7 @@
 			:name="repository.name"
 			:owner="repository.owner"
 			data-test="trash"
-			class="repository-remover"/>
+			class="repository-remover" />
 		<a
 			:href="repository.repositoryUrl"
 			data-test="link"
@@ -17,7 +17,7 @@
 				<popover 
 					v-if="repository.statusesList.length"
 					class="popover">
-					<build-statuses :statuses="repository.statusesList"/>
+					<build-statuses :statuses="repository.statusesList" />
 				</popover>
 			</badge>
 		</a>

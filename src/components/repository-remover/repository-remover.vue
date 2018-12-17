@@ -4,7 +4,7 @@
 		@click="remove">
 		<font-awesome-icon
 			:icon="icon"
-			data-test="icon"/>
+			data-test="icon" />
 	</custom-button>
 </template>
 

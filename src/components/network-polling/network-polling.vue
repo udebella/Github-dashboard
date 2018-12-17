@@ -1,5 +1,5 @@
 <template>
-	<div class="hidden"/>
+	<div class="hidden" />
 </template>
 
 <script src="./network-polling.js"></script>

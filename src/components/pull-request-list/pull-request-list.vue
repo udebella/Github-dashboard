@@ -8,7 +8,7 @@
 			:build-status="buildStatus"
 			:creation-date="creationDate"
 			:statuses-list="statuses"
-			data-test="line"/>
+			data-test="line" />
 	</div>
 </template>
 

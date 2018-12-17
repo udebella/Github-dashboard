@@ -2,7 +2,7 @@
 	<div 
 		class="badge"
 		@click="click">
-		<slot/>
+		<slot />
 	</div>
 </template>
 

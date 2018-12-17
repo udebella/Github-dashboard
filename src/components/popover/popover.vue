@@ -2,7 +2,7 @@
 	<div
 		:class="side"
 		class="popover">
-		<slot/>
+		<slot />
 	</div>
 </template>
 

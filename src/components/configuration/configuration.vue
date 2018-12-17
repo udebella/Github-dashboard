@@ -3,7 +3,7 @@
 		<font-awesome-icon
 			:class="configurationMode"
 			:icon="icon"
-			data-test="icon"/>
+			data-test="icon" />
 	</custom-button>
 </template>
 

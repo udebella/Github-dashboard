@@ -4,7 +4,7 @@
 		data-test="button"
 		title="Watch a new repository" 
 		class="icon">
-		<repository-picker data-test="owner-input"/>
+		<repository-picker data-test="owner-input" />
 	</badge>
 </template>
 

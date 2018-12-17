@@ -2,7 +2,7 @@
 	<div :title="title">
 		<font-awesome-icon
 			:icon="icon"
-			data-test="icon"/>
+			data-test="icon" />
 	</div>
 </template>
 

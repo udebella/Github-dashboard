@@ -8,7 +8,7 @@
 			:title="prTitle"
 			:url="prUrl"
 			:statuses-list="statuses"
-			data-test="line"/>
+			data-test="line" />
 	</div>
 </template>
 

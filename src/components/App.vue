@@ -1,7 +1,7 @@
 <template>
 	<div class="app">
-		<dashboard-header/>
-		<main-container/>
+		<dashboard-header />
+		<main-container />
 	</div>
 </template>
 
