@@ -63,7 +63,7 @@ export default {
 				const httpResponse = await this.request(this.queryBuilder(watchedRepositories))
 				return Object.values(httpResponse)
 					.filter(repositories => repositories && repositories.pullRequests)
-					.reduce((previousValue, currentValue) => [...previousValue, ...this.pullRequestReader(currentValue)], [])
+					.flatMap(this.pullRequestReader)
 			},
 			default: [],
 		},
