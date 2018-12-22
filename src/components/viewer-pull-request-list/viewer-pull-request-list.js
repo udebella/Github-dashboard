@@ -39,13 +39,12 @@ export const viewerFragment = `fragment viewer on User {
     nodes {
       title
       url
-      comments {
-        totalCount
-      }
       createdAt
       updatedAt
-      reviews(first: 1) {
-        totalCount
+      reviews(last: 1) {
+        nodes:  {
+          createdAt
+        }
       }
       state
       commits(last: 1) {

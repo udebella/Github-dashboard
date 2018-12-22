@@ -19,8 +19,7 @@ describe('ViewerPullRequestList component', () => {
 						{
 							title: 'Fix wheel/touch browser locking in IE and Safari',
 							url: 'https://github.com/facebook/react/pull/9333',
-							comments: {totalCount: 36},
-							reviews: {totalCount: 39},
+							reviews: {nodes: [{createdAt: '2018-12-22T23:42:46Z'}]},
 							updatedAt: '2018-10-25T01:36:27Z',
 							createdAt: '2018-10-20T00:00:00Z',
 							state: 'OPEN',
