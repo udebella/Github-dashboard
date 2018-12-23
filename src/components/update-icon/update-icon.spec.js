@@ -17,5 +17,11 @@ describe('UpdateIcon component', () => {
 
 			expect(icon.vm.$attrs.icon).to.deep.equal(faEye)
 		})
+
+		it('should display a title explaining the purpose of the icon', () => {
+			const livingIcon = shallowMount(UpdateIcon)
+
+			expect(livingIcon.attributes().title).to.equal('There are new updates')
+		})
 	})
 })
