@@ -26,7 +26,9 @@ describe('PullRequestLine component', () => {
 		it('should have the right component name', () => {
 			expect(pullRequestLine.name()).to.equal('pull-request-line')
 		})
+	})
 
+	describe('Display', () => {
 		it('should display the pull request name', () => {
 			expect(pullRequestLine.find('[data-test=name]').text()).to.equal('Pull request name')
 		})
