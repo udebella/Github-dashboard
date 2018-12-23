@@ -5,7 +5,7 @@ export default {
 	props: {
 		hasUpdates: {
 			type: Boolean,
-			default: true,
+			required: true,
 		},
 	},
 	data: () => ({
