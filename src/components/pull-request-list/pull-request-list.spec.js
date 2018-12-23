@@ -121,6 +121,7 @@ describe('PullRequestList component', () => {
 				url: 'https://github.com/angular/angular/pull/27697',
 				buildStatus: 'FAILURE',
 				creationDate: new Date('2018-12-16T18:26:59Z'),
+				hasUpdates: false,
 				statusesList: [{
 					jobStatus: 'SUCCESS',
 					description: 'continuous-integration/travis-ci/pr',
@@ -132,6 +133,7 @@ describe('PullRequestList component', () => {
 				url: 'https://github.com/facebook/react/pull/9333',
 				buildStatus: 'FAILURE',
 				creationDate: new Date('2018-10-20T00:00:00Z'),
+				hasUpdates: false,
 				statusesList: [{
 					jobStatus: 'SUCCESS',
 					description: 'build description',

@@ -14,6 +14,10 @@
 			<living-icon
 				:date="creationDate"
 				data-test="living-icon" />
+			<update-icon
+				v-if="hasUpdates"
+				data-test="update-icon"
+				:has-updates="true" />
 			<popover
 				v-if="statusesList.length"
 				side="left"

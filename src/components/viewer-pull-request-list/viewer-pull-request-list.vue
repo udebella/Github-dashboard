@@ -8,6 +8,7 @@
 			:title="prTitle"
 			:url="prUrl"
 			:statuses-list="statuses"
+			:has-updates="false"
 			data-test="line" />
 	</div>
 </template>

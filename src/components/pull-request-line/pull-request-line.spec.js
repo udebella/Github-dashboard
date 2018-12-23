@@ -13,6 +13,7 @@ describe('PullRequestLine component', () => {
 				url: 'http://pull-request-url',
 				buildStatus: 'SUCCESS',
 				creationDate: today,
+				hasUpdates: true,
 				statusesList: [{
 					jobStatus: 'SUCCESS',
 					description: 'build description',
@@ -45,7 +46,33 @@ describe('PullRequestLine component', () => {
 			const livingIcon = pullRequestLine.find('[data-test=living-icon]')
 
 			expect(livingIcon.exists()).to.be.true
-			expect(livingIcon.props().date).to.equals(today)
+			expect(livingIcon.props().date).to.equal(today)
+		})
+
+		it('should display an update icon', () => {
+			const updateIcon = pullRequestLine.find('[data-test=update-icon]')
+
+			expect(updateIcon.exists()).to.be.true
+		})
+
+		it('should not display the update icon when there are no updates', () => {
+			pullRequestLine = shallowMount(PullRequestLine, {
+				propsData: {
+					title: 'Pull request name',
+					url: 'http://pull-request-url',
+					buildStatus: 'SUCCESS',
+					creationDate: today,
+					hasUpdates: false,
+					statusesList: [{
+						jobStatus: 'SUCCESS',
+						description: 'build description',
+						jobUrl: 'http://build-target-url',
+					}],
+				},
+			})
+			const updateIcon = pullRequestLine.find('[data-test=update-icon]')
+
+			expect(updateIcon.exists()).to.be.false
 		})
 	})
 

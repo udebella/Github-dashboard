@@ -101,6 +101,7 @@ describe('ViewerPullRequestList component', () => {
 				url: 'https://github.com/facebook/react/pull/9333',
 				buildStatus: 'FAILURE',
 				creationDate: new Date('2018-10-20T00:00:00Z'),
+				hasUpdates: false,
 				statusesList: [{
 					jobStatus: 'SUCCESS',
 					description: 'build description',
