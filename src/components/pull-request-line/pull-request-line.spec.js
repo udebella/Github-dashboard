@@ -102,6 +102,7 @@ describe('PullRequestLine component', () => {
 					url: 'http://pull-request-url',
 					buildStatus: 'SUCCESS',
 					creationDate: today,
+					hasUpdates: true,
 				},
 			})
 
