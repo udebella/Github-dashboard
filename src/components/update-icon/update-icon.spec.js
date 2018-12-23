@@ -10,7 +10,9 @@ describe('UpdateIcon component', () => {
 
 			expect(updateIcon.name()).to.equal('update-icon')
 		})
+	})
 
+	describe('Display', () => {
 		it('should display an update icon', () => {
 			const livingIcon = shallowMount(UpdateIcon)
 			const icon = livingIcon.find('[data-test=icon]')
