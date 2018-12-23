@@ -1,5 +1,8 @@
 <template>
-	<div title="There are new updates">
+	<div
+		v-if="hasUpdates"
+		data-test="update-icon"
+		title="There are new updates">
 		<font-awesome-icon
 			:icon="icon"
 			data-test="icon" />
