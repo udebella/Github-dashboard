@@ -1,3 +1,5 @@
+const mostRecentFirst = ({updateDate: first}, {updateDate: second}) => second.getTime() - first.getTime()
+
 export const extractHttp = repositoryList => repositoryList
 	.flatMap(({pullRequests}) => pullRequests.nodes
 		.map(({title, url, createdAt, updatedAt, commits}) => ({
@@ -7,7 +9,7 @@ export const extractHttp = repositoryList => repositoryList
 			updateDate: new Date(updatedAt),
 			...extractStatuses(commits),
 		})))
-	.sort(({updateDate: first}, {updateDate: second}) => new Date(second).getTime() - new Date(first).getTime())
+	.sort(mostRecentFirst)
 
 const extractStatuses = ({nodes}) => {
 	const {committedDate, status} = nodes[0].commit
