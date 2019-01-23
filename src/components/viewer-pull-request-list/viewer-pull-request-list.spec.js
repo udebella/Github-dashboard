@@ -9,9 +9,6 @@ describe('ViewerPullRequestList component', () => {
 	let stubs
 
 	beforeEach(() => {
-		const store = {
-			state: {watchedRepositories: [{name: 'repository', owner: 'user'}]},
-		}
 		const fakeReponseRead = [{
 			prTitle: 'Fix wheel/touch browser locking in IE and Safari',
 			prUrl: 'https://github.com/facebook/react/pull/9333',
@@ -26,7 +23,6 @@ describe('ViewerPullRequestList component', () => {
 			}],
 		}]
 		stubs = {
-			store,
 			queryBuilder: stub(),
 			request: stub().returns(Promise.resolve({})),
 			pullRequestReader: stub().returns(fakeReponseRead),
@@ -36,7 +32,7 @@ describe('ViewerPullRequestList component', () => {
 
 	describe('Initialization', () => {
 		it('should have the right component name', () => {
-			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {store: stubs.store, propsData: stubs})
+			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
 			expect(viewerPullRequestList.name()).to.equal('viewer-pull-request-list')
 		})
@@ -46,7 +42,7 @@ describe('ViewerPullRequestList component', () => {
 			stubs.queryBuilder.returns('queryBuilt')
 
 			// When
-			shallowMount(ViewerPullRequestList, {store: stubs.store, propsData: stubs})
+			shallowMount(ViewerPullRequestList, {propsData: stubs})
 
 			// Then
 			await flushPromises()
@@ -61,7 +57,7 @@ describe('ViewerPullRequestList component', () => {
 			stubs.pullRequestReader.returns(stubs.fakeReponseRead)
 
 			// When
-			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {store: stubs.store, propsData: stubs})
+			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
 			// Then
 			await flushPromises()
@@ -70,7 +66,7 @@ describe('ViewerPullRequestList component', () => {
 
 		it('should display a list of pull request', async () => {
 			// When
-			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {store: stubs.store, propsData: stubs})
+			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
 			// Then
 			await flushPromises()
