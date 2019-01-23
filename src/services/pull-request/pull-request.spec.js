@@ -75,23 +75,27 @@ describe('Pull request service', () => {
 	})
 
 	it('should order pull requests by last update date', () => {
-		httpResponse[0].pullRequests.nodes.push({
-			title: 'Implement pauseExecution, continueExecution, dumpQueue for Scheduler',
-			url: 'https://github.com/facebook/react/pull/14053',
-			createdAt: '2018-10-31T22:17:12Z',
-			updatedAt: '2018-11-07T20:10:15Z',
-			state: 'OPEN',
-			commits: {
+		httpResponse.push({
+			pullRequests: {
 				nodes: [{
-					commit: {
-						status: {
-							contexts: [{
-								state: 'FAILURE',
-								context: 'ci/circleci',
-								targetUrl: 'https://circleci.com/gh/facebook/react/12397?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link',
-							}],
-							state: 'FAILURE',
-						},
+					title: 'Implement pauseExecution, continueExecution, dumpQueue for Scheduler',
+					url: 'https://github.com/facebook/react/pull/14053',
+					createdAt: '2018-10-31T22:17:12Z',
+					updatedAt: '2018-11-07T20:10:15Z',
+					state: 'OPEN',
+					commits: {
+						nodes: [{
+							commit: {
+								status: {
+									contexts: [{
+										state: 'FAILURE',
+										context: 'ci/circleci',
+										targetUrl: 'https://circleci.com/gh/facebook/react/12397?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link',
+									}],
+									state: 'FAILURE',
+								},
+							},
+						}],
 					},
 				}],
 			},

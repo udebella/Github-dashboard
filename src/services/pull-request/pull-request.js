@@ -1,6 +1,5 @@
 export const extractHttp = repositoryList => repositoryList
 	.flatMap(({pullRequests}) => pullRequests.nodes
-		.sort(({updatedAt: first}, {updatedAt: second}) => new Date(second).getTime() - new Date(first).getTime())
 		.map(({title, url, createdAt, updatedAt, commits}) => ({
 			prTitle: title,
 			prUrl: url,
@@ -8,6 +7,7 @@ export const extractHttp = repositoryList => repositoryList
 			updateDate: new Date(updatedAt),
 			...extractStatuses(commits),
 		})))
+	.sort(({updateDate: first}, {updateDate: second}) => new Date(second).getTime() - new Date(first).getTime())
 
 const extractStatuses = ({nodes}) => {
 	const {committedDate, status} = nodes[0].commit
