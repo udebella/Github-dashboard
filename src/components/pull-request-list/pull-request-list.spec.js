@@ -15,33 +15,7 @@ describe('PullRequestList component', () => {
 			name: 'react',
 			owner: {login: 'facebook'},
 			url: 'https://github.com/facebook/react',
-			pullRequests: {
-				nodes: [
-					{
-						title: 'Fix wheel/touch browser locking in IE and Safari',
-						url: 'https://github.com/facebook/react/pull/9333',
-						comments: {totalCount: 36},
-						reviews: {totalCount: 39},
-						updatedAt: '2018-10-25T01:36:27Z',
-						createdAt: '2018-10-20T00:00:00Z',
-						state: 'OPEN',
-						commits: {
-							nodes: [{
-								commit: {
-									status: {
-										contexts: [{
-											state: 'SUCCESS',
-											context: 'build description',
-											targetUrl: 'http://build-target-url',
-										}],
-										state: 'FAILURE',
-									},
-								},
-							}],
-						},
-					},
-				],
-			},
+			pullRequests: {},
 		}
 		const fakeAngularResponse = {
 			name: 'angular',
@@ -49,39 +23,7 @@ describe('PullRequestList component', () => {
 				login: 'angular',
 			},
 			url: 'https://github.com/angular/angular',
-			pullRequests: {
-				nodes: [
-					{
-						title: 'WIP - feat(ivy): implement listing lazy routes in `ngtsc`',
-						url: 'https://github.com/angular/angular/pull/27697',
-						comments: { totalCount: 5},
-						createdAt: '2018-12-16T18:26:59Z',
-						updatedAt: '2018-12-16T21:05:45Z',
-						reviews: {
-							totalCount: 0,
-						},
-						state: 'OPEN',
-						commits: {
-							nodes: [
-								{
-									commit: {
-										status: {
-											contexts: [
-												{
-													state: 'SUCCESS',
-													context: 'continuous-integration/travis-ci/pr',
-													targetUrl: 'https://travis-ci.org/angular/angular/builds/468759214?utm_source=github_status&utm_medium=notification',
-												},
-											],
-											state: 'FAILURE',
-										},
-									},
-								},
-							],
-						},
-					},
-				],
-			},
+			pullRequests: {},
 		}
 		const fakeGraphqlResponse = {
 			rep_0: fakeReactResponse,
@@ -93,10 +35,38 @@ describe('PullRequestList component', () => {
 				resetAt: '2018-10-21T10:06:02Z',
 			},
 		}
+
+		const fakeResponseRead = [{
+			prTitle: 'WIP - feat(ivy): implement listing lazy routes in `ngtsc`',
+			prUrl: 'https://github.com/angular/angular/pull/27697',
+			creationDate: new Date('2018-12-16T18:26:59.000Z'),
+			updateDate: new Date('2018-12-16T21:05:45Z'),
+			commitDate: new Date('2019-01-25T20:41:07Z'),
+			buildStatus: 'FAILURE',
+			statuses: [{
+				jobStatus: 'SUCCESS',
+				description: 'continuous-integration/travis-ci/pr',
+				jobUrl: 'https://travis-ci.org/angular/angular/builds/468759214?utm_source=github_status&utm_medium=notification',
+			}],
+		}, {
+			prTitle: 'Fix wheel/touch browser locking in IE and Safari',
+			prUrl: 'https://github.com/facebook/react/pull/9333',
+			creationDate: new Date('2018-10-20T00:00:00Z'),
+			updateDate: new Date('2018-10-25T01:36:27Z'),
+			commitDate: new Date('2019-01-23T20:41:07Z'),
+			buildStatus: 'FAILURE',
+			statuses: [{
+				jobStatus: 'SUCCESS',
+				description: 'build description',
+				jobUrl: 'http://build-target-url',
+			}],
+		}]
 		stubs = {
 			request: stub().returns(Promise.resolve(fakeGraphqlResponse)),
 			queryBuilder: stub(),
+			pullRequestReader: stub().returns(fakeResponseRead),
 			fakeGraphqlResponse,
+			fakeResponseRead,
 			store,
 		}
 
@@ -144,8 +114,8 @@ describe('PullRequestList component', () => {
 
 		it('should not display pull requests when graphql api returns an empty array of pull request for a repository', async () => {
 			// Given
-			stubs.fakeGraphqlResponse.rep_0.pullRequests.nodes = []
-			stubs.fakeGraphqlResponse.rep_1.pullRequests.nodes = []
+			stubs.fakeResponseRead = []
+			stubs.pullRequestReader.returns(stubs.fakeResponseRead)
 
 			// When
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
@@ -157,7 +127,8 @@ describe('PullRequestList component', () => {
 
 		it('should display a list of pull request even when there is no build status on the pull request', async () => {
 			// Given
-			stubs.fakeGraphqlResponse.rep_1.pullRequests.nodes[0].commits.nodes[0].commit.status = null
+			stubs.fakeResponseRead[0].buildStatus = 'NO_STATUS'
+			stubs.fakeResponseRead[0].statuses = []
 
 			// When
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
@@ -191,6 +162,27 @@ describe('PullRequestList component', () => {
 			// Then
 			await flushPromises()
 			expect(stubs.request).to.have.been.calledWith('queryBuilt')
+		})
+
+		it('should call reader service to read data from graphql api', async () => {
+			// When
+			shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
+
+			// Then
+			await flushPromises()
+			expect(stubs.pullRequestReader).to.have.been.deep.calledWith([{
+				name: 'react',
+				owner: {login: 'facebook'},
+				url: 'https://github.com/facebook/react',
+				pullRequests: {},
+			}, {
+				name: 'angular',
+				owner: {
+					login: 'angular',
+				},
+				url: 'https://github.com/angular/angular',
+				pullRequests: {},
+			}])
 		})
 	})
 })
