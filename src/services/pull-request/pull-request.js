@@ -15,7 +15,7 @@ const extractStatuses = ({nodes}) => {
 	const {committedDate, status} = nodes[0].commit
 	const {state, contexts} = status || {state: 'NO_STATUS', contexts: []}
 	return {
-		committedDate: new Date(committedDate),
+		commitDate: new Date(committedDate),
 		buildStatus: state,
 		statuses: contexts.map(({context, state, targetUrl}) => ({
 			description: context,
