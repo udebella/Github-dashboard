@@ -20,7 +20,7 @@ const pullRequestFragment = `fragment repository on Repository {
       updatedAt
       reviews(last: 1) {
         nodes {
-          createdAt
+          submittedAt
         }
       }
       state

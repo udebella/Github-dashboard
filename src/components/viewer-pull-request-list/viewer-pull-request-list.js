@@ -43,7 +43,7 @@ export const viewerFragment = `fragment viewer on User {
       updatedAt
       reviews(last: 1) {
         nodes {
-          createdAt
+          submittedAt
         }
       }
       state

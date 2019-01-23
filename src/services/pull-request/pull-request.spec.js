@@ -13,6 +13,11 @@ describe('Pull request service', () => {
 					updatedAt: '2018-10-25T01:36:27Z',
 					createdAt: '2018-10-20T00:00:00Z',
 					state: 'OPEN',
+					reviews: {
+						nodes: [{
+							submittedAt: '2019-01-23T09:55:14Z',
+						}],
+					},
 					commits: {
 						nodes: [{
 							commit: {
@@ -51,6 +56,7 @@ describe('Pull request service', () => {
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
 			commitDate: new Date('2019-01-23T20:41:07Z'),
+			reviewDate: '2019-01-23T09:55:14Z',
 			buildStatus: 'NO_STATUS',
 			statuses: [],
 		}])
@@ -65,6 +71,7 @@ describe('Pull request service', () => {
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
 			commitDate: new Date('2019-01-23T20:41:07Z'),
+			reviewDate: '2019-01-23T09:55:14Z',
 			buildStatus: 'SUCCESS',
 			statuses: [{
 				jobStatus: 'SUCCESS',
@@ -83,6 +90,7 @@ describe('Pull request service', () => {
 					createdAt: '2018-10-31T22:17:12Z',
 					updatedAt: '2018-11-07T20:10:15Z',
 					state: 'OPEN',
+					reviews: {nodes: []},
 					commits: {
 						nodes: [{
 							commit: {

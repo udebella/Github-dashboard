@@ -2,14 +2,17 @@ const mostRecentFirst = ({updateDate: first}, {updateDate: second}) => second.ge
 
 export const extractHttp = repositoryList => repositoryList
 	.flatMap(({pullRequests}) => pullRequests.nodes
-		.map(({title, url, createdAt, updatedAt, commits}) => ({
+		.map(({title, url, createdAt, updatedAt, commits, reviews}) => ({
 			prTitle: title,
 			prUrl: url,
 			creationDate: new Date(createdAt),
 			updateDate: new Date(updatedAt),
+			...extractReviews(reviews),
 			...extractStatuses(commits),
 		})))
 	.sort(mostRecentFirst)
+
+const extractReviews = ({nodes}) => nodes.length ? {reviewDate: nodes[0].submittedAt} : {}
 
 const extractStatuses = ({nodes}) => {
 	const {committedDate, status} = nodes[0].commit
