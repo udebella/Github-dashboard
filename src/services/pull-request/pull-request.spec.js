@@ -5,7 +5,7 @@ describe('Pull request service', () => {
 	let httpResponse
 
 	beforeEach(() => {
-		httpResponse = {
+		httpResponse = [{
 			pullRequests: {
 				nodes: [{
 					title: 'Fix wheel/touch browser locking in IE and Safari',
@@ -30,17 +30,18 @@ describe('Pull request service', () => {
 					},
 				}],
 			},
-		}
+		}]
 	})
 
 	it('should return an empty array when there is no pull request in http response', () => {
-		const response = extractHttp({pullRequests: {nodes: []}})
+		httpResponse[0].pullRequests.nodes = []
+		const response = extractHttp(httpResponse)
 
 		expect(response).to.deep.equals([])
 	})
 
 	it('should return a formatted response when pull request was not build', () => {
-		httpResponse.pullRequests.nodes[0].commits.nodes[0].commit.status = null
+		httpResponse[0].pullRequests.nodes[0].commits.nodes[0].commit.status = null
 
 		const response = extractHttp(httpResponse)
 
@@ -74,7 +75,7 @@ describe('Pull request service', () => {
 	})
 
 	it('should order pull requests by last update date', () => {
-		httpResponse.pullRequests.nodes.push({
+		httpResponse[0].pullRequests.nodes.push({
 			title: 'Implement pauseExecution, continueExecution, dumpQueue for Scheduler',
 			url: 'https://github.com/facebook/react/pull/14053',
 			createdAt: '2018-10-31T22:17:12Z',

@@ -23,7 +23,7 @@ export default {
 		pullRequests: {
 			async get() {
 				const httpResponse = await this.request(this.queryBuilder(viewerFragment))
-				return this.pullRequestReader(httpResponse.viewer)
+				return this.pullRequestReader([httpResponse.viewer])
 			},
 			default: [],
 		},

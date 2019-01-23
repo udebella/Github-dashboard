@@ -63,9 +63,9 @@ export default {
 			async get() {
 				const watchedRepositories = this.$store.state.watchedRepositories
 				const httpResponse = await this.request(this.queryBuilder(watchedRepositories))
-				return Object.values(httpResponse)
+				const repositories = Object.values(httpResponse)
 					.filter(repositories => repositories && repositories.pullRequests)
-					.flatMap(this.pullRequestReader)
+				return this.pullRequestReader(repositories)
 					.sort(mostRecentFirst)
 			},
 			default: [],
