@@ -40,8 +40,6 @@ const pullRequestFragment = `fragment repository on Repository {
   }
 }`
 
-const mostRecentFirst = ({updateDate: first}, {updateDate: second}) => second.getTime() - first.getTime()
-
 export default {
 	name: 'pull-request-list',
 	props: {
@@ -66,7 +64,6 @@ export default {
 				const repositories = Object.values(httpResponse)
 					.filter(repositories => repositories && repositories.pullRequests)
 				return this.pullRequestReader(repositories)
-					.sort(mostRecentFirst)
 			},
 			default: [],
 		},

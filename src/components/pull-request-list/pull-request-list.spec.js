@@ -192,17 +192,5 @@ describe('PullRequestList component', () => {
 			await flushPromises()
 			expect(stubs.request).to.have.been.calledWith('queryBuilt')
 		})
-
-		it('should display pull request ordered by last update date across repositories', async () => {
-			// When
-			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
-
-			// Then
-			await flushPromises()
-			const pullRequestLine = pullRequestList.findAll({name: 'pull-request-line'})
-			expect(pullRequestLine.length).to.equal(2)
-			expect(pullRequestLine.at(0).props().title).to.deep.equals('WIP - feat(ivy): implement listing lazy routes in `ngtsc`')
-			expect(pullRequestLine.at(1).props().title).to.deep.equals('Fix wheel/touch browser locking in IE and Safari')
-		})
 	})
 })
