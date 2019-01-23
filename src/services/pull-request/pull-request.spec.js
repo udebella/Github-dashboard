@@ -16,6 +16,7 @@ describe('Pull request service', () => {
 					commits: {
 						nodes: [{
 							commit: {
+								committedDate: '2019-01-23T20:41:07Z',
 								status: {
 									contexts: [{
 										state: 'SUCCESS',
@@ -48,6 +49,7 @@ describe('Pull request service', () => {
 			prUrl: 'https://github.com/facebook/react/pull/9333',
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
+			committedDate: '2019-01-23T20:41:07Z',
 			buildStatus: 'NO_STATUS',
 			statuses: [],
 		}])
@@ -61,6 +63,7 @@ describe('Pull request service', () => {
 			prUrl: 'https://github.com/facebook/react/pull/9333',
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
+			committedDate: '2019-01-23T20:41:07Z',
 			buildStatus: 'SUCCESS',
 			statuses: [{
 				jobStatus: 'SUCCESS',
