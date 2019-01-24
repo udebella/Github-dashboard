@@ -12,7 +12,7 @@ export const extractHttp = repositoryList => repositoryList
 		})))
 	.sort(mostRecentFirst)
 
-const extractReviews = ({nodes}) => nodes.length ? {reviewDate: nodes[0].submittedAt} : {}
+const extractReviews = ({nodes}) => nodes.length ? {reviewDate: new Date(nodes[0].submittedAt)} : {}
 
 const extractStatuses = ({nodes}) => {
 	const {committedDate, status} = nodes[0].commit
