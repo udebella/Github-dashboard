@@ -11,12 +11,14 @@
 			<div class="title">
 				{{ title }}
 			</div>
-			<living-icon
-				:date="creationDate"
-				data-test="living-icon" />
-			<update-icon
-				v-if="hasUpdates"
-				data-test="update-icon" />
+			<div class="icons">
+				<update-icon
+					v-if="hasUpdates"
+					data-test="update-icon" />
+				<living-icon
+					:date="creationDate"
+					data-test="living-icon" />
+			</div>
 			<popover
 				v-if="statusesList.length"
 				side="left"
