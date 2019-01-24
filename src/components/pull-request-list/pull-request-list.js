@@ -27,6 +27,7 @@ const pullRequestFragment = `fragment repository on Repository {
       commits(last: 1) {
         nodes {
           commit {
+            committedDate
             status {
             contexts {
 			    state
@@ -68,6 +69,11 @@ export default {
 				return this.pullRequestReader(repositories)
 			},
 			default: [],
+		},
+	},
+	methods: {
+		hasUpdates({commitDate, reviewDate = new Date(0)}) {
+			return commitDate.getTime() > reviewDate.getTime()
 		},
 	},
 	components: {

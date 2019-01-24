@@ -41,7 +41,8 @@ describe('PullRequestList component', () => {
 			prUrl: 'https://github.com/angular/angular/pull/27697',
 			creationDate: new Date('2018-12-16T18:26:59.000Z'),
 			updateDate: new Date('2018-12-16T21:05:45Z'),
-			commitDate: new Date('2019-01-25T20:41:07Z'),
+			commitDate: new Date('2019-01-21T11:32:43Z'),
+			reviewDate: new Date('2019-01-21T14:40:14Z'),
 			buildStatus: 'FAILURE',
 			statuses: [{
 				jobStatus: 'SUCCESS',
@@ -54,6 +55,7 @@ describe('PullRequestList component', () => {
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
 			commitDate: new Date('2019-01-23T20:41:07Z'),
+			reviewDate: new Date('2019-01-20T16:33:12Z'),
 			buildStatus: 'FAILURE',
 			statuses: [{
 				jobStatus: 'SUCCESS',
@@ -103,13 +105,26 @@ describe('PullRequestList component', () => {
 				url: 'https://github.com/facebook/react/pull/9333',
 				buildStatus: 'FAILURE',
 				creationDate: new Date('2018-10-20T00:00:00Z'),
-				hasUpdates: false,
+				hasUpdates: true,
 				statusesList: [{
 					jobStatus: 'SUCCESS',
 					description: 'build description',
 					jobUrl: 'http://build-target-url',
 				}],
 			})
+		})
+
+		it('should display update icon on pull request that do not have reviews', async () => {
+			// Given
+			stubs.fakeResponseRead[0].reviewDate = undefined
+
+			// When
+			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
+
+			// Then
+			await flushPromises()
+			const pullRequestLine = pullRequestList.findAll('[data-test=line]')
+			expect(pullRequestLine.at(0).props().hasUpdates).to.be.true
 		})
 
 		it('should not display pull requests when graphql api returns an empty array of pull request for a repository', async () => {

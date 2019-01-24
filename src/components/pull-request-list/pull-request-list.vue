@@ -1,14 +1,14 @@
 <template>
 	<div>
 		<pull-request-line
-			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses}) in pullRequests"
+			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses, commitDate, reviewDate}) in pullRequests"
 			:key="prTitle"
+			:has-updates="hasUpdates({commitDate, reviewDate})"
 			:title="prTitle"
 			:url="prUrl"
 			:build-status="buildStatus"
 			:creation-date="creationDate"
 			:statuses-list="statuses"
-			:has-updates="false"
 			data-test="line" />
 	</div>
 </template>
