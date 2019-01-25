@@ -28,6 +28,11 @@ export default {
 			default: [],
 		},
 	},
+	methods: {
+		hasUpdates({commitDate, reviewDate}) {
+			return commitDate.getTime() < reviewDate.getTime()
+		},
+	},
 	components: {
 		PullRequestLine,
 	},

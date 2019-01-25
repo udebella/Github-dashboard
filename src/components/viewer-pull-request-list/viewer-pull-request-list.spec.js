@@ -14,7 +14,8 @@ describe('ViewerPullRequestList component', () => {
 			prUrl: 'https://github.com/facebook/react/pull/9333',
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
-			committedDate: '2019-01-23T20:41:07Z',
+			commitDate: new Date('2019-01-23T20:41:07Z'),
+			reviewDate: new Date('2019-01-23T09:55:14Z'),
 			buildStatus: 'FAILURE',
 			statuses: [{
 				jobStatus: 'SUCCESS',
@@ -84,6 +85,19 @@ describe('ViewerPullRequestList component', () => {
 					jobUrl: 'http://build-target-url',
 				}],
 			})
+		})
+
+		it('should display an update icon when a review has been submitted after last commit', async () => {
+			stubs.fakeReponseRead[0].commitDate = new Date(0)
+			stubs.fakeReponseRead[0].reviewDate = new Date(1)
+
+			// When
+			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
+
+			// Then
+			await flushPromises()
+			const viewerPullRequestLine = viewerPullRequestList.find('[data-test=line]')
+			expect(viewerPullRequestLine.props().hasUpdates).to.be.true
 		})
 	})
 })
