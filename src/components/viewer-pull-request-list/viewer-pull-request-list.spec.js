@@ -99,5 +99,18 @@ describe('ViewerPullRequestList component', () => {
 			const viewerPullRequestLine = viewerPullRequestList.find('[data-test=line]')
 			expect(viewerPullRequestLine.props().hasUpdates).to.be.true
 		})
+
+		it('should not display the update icon when no review has been submitted', async () => {
+			stubs.fakeReponseRead[0].commitDate = new Date(1)
+			stubs.fakeReponseRead[0].reviewDate = undefined
+
+			// When
+			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
+
+			// Then
+			await flushPromises()
+			const viewerPullRequestLine = viewerPullRequestList.find('[data-test=line]')
+			expect(viewerPullRequestLine.props().hasUpdates).to.be.false
+		})
 	})
 })

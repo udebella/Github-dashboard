@@ -29,7 +29,7 @@ export default {
 		},
 	},
 	methods: {
-		hasUpdates({commitDate, reviewDate}) {
+		hasUpdates({commitDate, reviewDate = new Date(0)}) {
 			return commitDate.getTime() < reviewDate.getTime()
 		},
 	},
