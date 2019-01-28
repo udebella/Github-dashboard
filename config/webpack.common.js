@@ -54,6 +54,18 @@ const commonConfig = {
 			},
 		],
 	},
+	optimization: {
+		runtimeChunk: 'single',
+		splitChunks: {
+			cacheGroups: {
+				vendor: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendors',
+					chunks: 'all',
+				},
+			},
+		},
+	},
 	plugins: [
 		new VueLoaderPlugin(),
 		new HtmlWebpackPlugin({

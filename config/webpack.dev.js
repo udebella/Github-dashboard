@@ -11,6 +11,10 @@ const config = {
 		hot: true,
 		open: true,
 	},
+	optimization: {
+		...commonConfig.optimization,
+		usedExports: true,
+	},
 	plugins: [
 		...commonConfig.plugins,
 		new HotModuleReplacementPlugin(),
