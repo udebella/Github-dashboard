@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './components/App'
 import {store} from './store/store'
-import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome/index.es'
 import AsyncComputed from 'vue-async-computed'
 
 Vue.use(AsyncComputed)

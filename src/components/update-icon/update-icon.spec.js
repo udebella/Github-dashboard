@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import UpdateIcon from './update-icon.vue'
-import {faEye} from '@fortawesome/free-solid-svg-icons'
+import {faEye} from '@fortawesome/free-solid-svg-icons/faEye'
 
 describe('UpdateIcon component', () => {
 	describe('Initialization', () => {

@@ -1,4 +1,4 @@
-import {faGithub} from '@fortawesome/free-brands-svg-icons'
+import {faGithub} from '@fortawesome/free-brands-svg-icons/faGithub'
 import Login from '../login/login.vue'
 import Configuration from '../configuration/configuration.vue'
 import CustomButton from '../custom-button/custom-button.vue'

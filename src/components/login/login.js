@@ -1,4 +1,4 @@
-import {faUser} from '@fortawesome/free-solid-svg-icons'
+import {faUser} from '@fortawesome/free-solid-svg-icons/faUser'
 import {buildUserService} from '../../services/user/user'
 import {NO_USER} from '../../services/session/session'
 import DebouncedInput from '../debounced-input/debounced-input.vue'

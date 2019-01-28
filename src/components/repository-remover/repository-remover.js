@@ -1,4 +1,4 @@
-import {faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash'
 import CustomButton from '../custom-button/custom-button.vue'
 
 export default {

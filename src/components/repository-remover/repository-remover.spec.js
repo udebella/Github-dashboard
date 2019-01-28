@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import RepositoryRemover from './repository-remover.vue'
-import {faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash'
 import {stub} from 'sinon'
 
 describe('RepositoryRemover component', () => {

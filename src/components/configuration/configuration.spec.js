@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import {stub} from 'sinon'
 import {shallowMount} from '@vue/test-utils'
-import {faCog} from '@fortawesome/free-solid-svg-icons'
+import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 import Configuration from './configuration.vue'
 
 describe('Configuration component', () => {
