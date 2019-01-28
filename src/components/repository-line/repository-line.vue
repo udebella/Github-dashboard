@@ -8,7 +8,6 @@
 		<a
 			:href="repository.repositoryUrl"
 			data-test="link"
-			target="_blank"
 			class="link">
 			<badge 
 				:class="repository.branchStatus"

@@ -2,7 +2,6 @@
 	<a
 		:href="url"
 		data-test="link"
-		target="_blank"
 		class="link">
 		<badge
 			:class="buildStatus"

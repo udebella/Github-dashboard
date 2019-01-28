@@ -1,5 +1,5 @@
 <template>
-	<div class="header">
+	<header class="header">
 		<div 
 			class="title" 
 			data-test="title">
@@ -12,13 +12,12 @@
 				data-test="login" />
 			<custom-button
 				title="View sources"
-				target="_blank"
 				href="https://github.com/udebella/Github-dashboard"
 				data-test="sources">
 				<font-awesome-icon :icon="icon" />
 			</custom-button>
 		</div>
-	</div>
+	</header>
 </template>
 
 <script src="./dashboard-header.js"></script>

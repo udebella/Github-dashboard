@@ -4,8 +4,7 @@
 		:title="description"
 		:class="state"
 		class="icon"
-		data-test="link"
-		target="_blank">
+		data-test="link">
 		<font-awesome-icon
 			:icon="icon"
 			data-test="icon" />

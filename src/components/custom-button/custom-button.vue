@@ -3,7 +3,6 @@
 		v-if="href"
 		:href="href"
 		class="button"
-		target="_blank"
 		data-test="link">
 		<slot />
 	</a>
