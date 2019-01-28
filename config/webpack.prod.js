@@ -1,3 +1,4 @@
+const {absolutePath} = require('./helpers')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const commonConfig = require('./webpack.common')
 
@@ -6,8 +7,10 @@ const config = {
 	plugins: [
 		...commonConfig.plugins,
 		new BundleAnalyzerPlugin({
-			analyzerMode: 'disabled',
+			analyzerMode: 'static',
 			generateStatsFile: true,
+			openAnalyzer: false,
+			reportFilename: absolutePath('/bundle-analyzer/index.html'),
 		}),
 	],
 	mode: 'production',
