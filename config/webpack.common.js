@@ -4,7 +4,7 @@ const {VueLoaderPlugin} = require('vue-loader')
 
 const commonConfig = {
 	resolve: {
-		extensions: ['.mjs', '.js', '.vue', '.scss'],
+		extensions: ['.js', '.vue', '.scss'],
 	},
 	entry: absolutePath('/src/main.js'),
 	output: {
@@ -14,11 +14,6 @@ const commonConfig = {
 	},
 	module: {
 		rules: [
-			{
-				type: 'javascript/auto',
-				test: /\.mjs$/,
-				use: [],
-			},
 			{
 				test: /\.(js|vue)$/,
 				enforce: 'pre',
