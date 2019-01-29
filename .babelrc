@@ -1,8 +1,22 @@
 {
-	"plugins": ["@babel/transform-runtime"],
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
+				"modules": false,
+				"useBuiltIns": "usage",
+				"targets": "last 1 version, > 1%, maintained node versions, not dead"
+			}
+		]
+	],
+	"plugins": [
+		"@babel/transform-runtime"
+	],
 	"env": {
 		"test": {
-			"plugins": ["istanbul"]
+			"plugins": [
+				"istanbul"
+			]
 		}
 	}
 }
