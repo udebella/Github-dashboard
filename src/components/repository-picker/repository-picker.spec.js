@@ -29,7 +29,7 @@ describe('RepositoryPicker component', () => {
 	beforeEach(() => {
 		store = {
 			commit: stub(),
-		},
+		}
 		mocks = {
 			request: stub(),
 		}

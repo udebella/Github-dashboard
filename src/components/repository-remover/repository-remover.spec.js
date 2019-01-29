@@ -11,8 +11,8 @@ describe('RepositoryRemover component', () => {
 		store = {
 			state: {configurationEnabled: true},
 			commit: stub(),
-		},
-			repositoryRemover = shallowMount(RepositoryRemover, {propsData: {name: 'example', owner: 'user'}, store})
+		}
+		repositoryRemover = shallowMount(RepositoryRemover, {propsData: {name: 'example', owner: 'user'}, store})
 	})
 
 	describe('Initialization', () => {
