@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import LivingIcon from './living-icon.vue'
-import {subWeeks} from 'date-fns/sub_weeks'
+import subWeeks from 'date-fns/sub_weeks'
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart'
 import {faSkull} from '@fortawesome/free-solid-svg-icons/faSkull'
 
