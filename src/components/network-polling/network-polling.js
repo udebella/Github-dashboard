@@ -18,7 +18,7 @@ export default {
 			this.$emit('httpUpdate', response)
 		}
 		this.interval = setInterval(callHttp, 10000)
-		callHttp()
+		return callHttp()
 	},
 	destroyed() {
 		clearInterval(this.interval)

@@ -24,16 +24,16 @@ describe('Service: graphql-client', () => {
 	})
 
 	describe('Method request', () => {
-		it('should retrieve user from session before making a request', () => {
-			request('someQuery', mocks)
+		it('should retrieve user from session before making a request', async () => {
+			await request('someQuery', mocks)
 
 			expect(mocks.session.getUser).to.have.been.called
 		})
 
-		it('should build a graphqlClient properly', () => {
+		it('should build a graphqlClient properly', async () => {
 			mocks.session.getUser.returns({token: 'userToken'})
 
-			request('someQuery', mocks)
+			await request('someQuery', mocks)
 
 			expect(mocks.builder).to.have.been.calledWith('http://github-api', {
 				headers: {
@@ -42,9 +42,9 @@ describe('Service: graphql-client', () => {
 			})
 		})
 
-		it('should call request method from graphql client', () => {
+		it('should call request method from graphql client', async () => {
 			// When
-			request('fakeQuery', mocks)
+			await request('fakeQuery', mocks)
 
 			// Then
 			expect(mocks.fakeRequest).to.have.been.calledWith('fakeQuery')
