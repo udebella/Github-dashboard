@@ -1,5 +1,5 @@
 import CustomButton from '../custom-button/custom-button.vue'
-import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
+import {faCog} from '@fortawesome/free-solid-svg-icons'
 
 export default {
 	name: 'configuration',

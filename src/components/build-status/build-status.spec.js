@@ -1,10 +1,7 @@
 import {shallowMount} from '@vue/test-utils'
 import {expect} from 'chai'
 import BuildStatus from './build-status.vue'
-import {faCheckCircle} from '@fortawesome/free-solid-svg-icons/faCheckCircle'
-import {faClock} from '@fortawesome/free-solid-svg-icons/faClock'
-import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons/faExclamationCircle'
-import {faTimesCircle} from '@fortawesome/free-solid-svg-icons/faTimesCircle'
+import {faCheckCircle, faClock, faExclamationCircle, faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 
 describe('BuildStatus component', () => {
 	let buildStatus

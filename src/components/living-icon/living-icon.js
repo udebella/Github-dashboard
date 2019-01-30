@@ -1,7 +1,6 @@
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import differenceInWeeks from 'date-fns/difference_in_weeks'
-import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart'
-import {faSkull} from '@fortawesome/free-solid-svg-icons/faSkull'
+import {faHeart, faSkull} from '@fortawesome/free-solid-svg-icons'
 
 export default {
 	name: 'living-icon',
