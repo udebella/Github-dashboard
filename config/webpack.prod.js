@@ -12,6 +12,31 @@ const config = {
 			reportFilename: absolutePath('/bundle-analyzer/index.html'),
 		}),
 	],
+	optimization: {
+		splitChunks: {
+			maxInitialRequests: 4,
+			cacheGroups: {
+				vue: {
+					test: /[\\/]node_modules\/.*(vue).*[\\/]/,
+					name: 'vue',
+					chunks: 'all',
+					priority: 20,
+				},
+				fontawesome: {
+					test: /[\\/]node_modules\/@fortawesome[\\/]/,
+					name: 'fontawesome',
+					chunks: 'all',
+					priority: 20,
+				},
+				others: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'others',
+					chunks: 'all',
+					priority: 10,
+				},
+			},
+		},
+	},
 	mode: 'production',
 }
 

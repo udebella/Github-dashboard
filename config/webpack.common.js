@@ -10,7 +10,8 @@ const commonConfig = {
 	output: {
 		pathinfo: true,
 		path: absolutePath('/dist'),
-		filename: '[name]-[hash].js',
+		filename: '[name]-[hash:8].js',
+		chunkFilename: '[name]-[contenthash:8].js',
 	},
 	module: {
 		rules: [
@@ -48,18 +49,6 @@ const commonConfig = {
 				},
 			},
 		],
-	},
-	optimization: {
-		runtimeChunk: 'single',
-		splitChunks: {
-			cacheGroups: {
-				vendor: {
-					test: /[\\/]node_modules[\\/]/,
-					name: 'vendors',
-					chunks: 'all',
-				},
-			},
-		},
 	},
 	plugins: [
 		new VueLoaderPlugin(),
