@@ -8,7 +8,6 @@ const config = {
 		...commonConfig.plugins,
 		new BundleAnalyzerPlugin({
 			analyzerMode: 'static',
-			generateStatsFile: true,
 			openAnalyzer: false,
 			reportFilename: absolutePath('/bundle-analyzer/index.html'),
 		}),
