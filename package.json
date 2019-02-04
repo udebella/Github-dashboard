@@ -10,7 +10,9 @@
 		"test-ci": "nyc --reporter=lcov --reporter=text npm test",
 		"plop": "plop"
 	},
-	"sideEffects": ["*.scss"],
+	"sideEffects": [
+		"*.scss"
+	],
 	"author": "udebella",
 	"license": "MIT",
 	"dependencies": {
@@ -56,6 +58,8 @@
 		"webpack-node-externals": "^1.7.2"
 	},
 	"devDependencies": {
+		"connect": "^3.6.6",
+		"connect-prism": "^1.0.20",
 		"plop": "^2.2.0",
 		"webpack-bundle-analyzer": "^3.0.3",
 		"webpack-dev-server": "^3.1.14"

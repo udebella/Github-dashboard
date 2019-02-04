@@ -1,0 +1,195 @@
+{
+  "requestUrl": "/graphql",
+  "contentType": "application/json; charset=utf-8",
+  "method": "POST",
+  "statusCode": 200,
+  "data": {
+    "data": {
+      "rateLimit": {
+        "cost": 1,
+        "limit": 5000,
+        "remaining": 4998,
+        "resetAt": "2019-02-04T22:48:08Z"
+      },
+      "rep_0": {
+        "name": "angular",
+        "owner": {
+          "login": "angular"
+        },
+        "url": "https://github.com/angular/angular",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "PENDING",
+                  "context": "ci/angular: size",
+                  "targetUrl": null
+                },
+                {
+                  "state": "PENDING",
+                  "context": "ci/circleci: build-ivy-npm-packages",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/186639?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "PENDING",
+                  "context": "ci/circleci: build-npm-packages",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/186644?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                }
+              ],
+              "state": "PENDING"
+            }
+          }
+        }
+      },
+      "rep_1": {
+        "name": "angular-cli",
+        "owner": {
+          "login": "angular"
+        },
+        "url": "https://github.com/angular/angular-cli",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "FAILURE",
+                  "context": "buildkite/cli",
+                  "targetUrl": "https://buildkite.com/angular/cli/builds/75"
+                },
+                {
+                  "state": "FAILURE",
+                  "context": "continuous-integration/appveyor/branch",
+                  "targetUrl": "https://ci.appveyor.com/project/AngularCLI/angular-cli/builds/22007966"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/angular: size",
+                  "targetUrl": null
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: build",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/37317?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                }
+              ],
+              "state": "FAILURE"
+            }
+          }
+        }
+      },
+      "rep_2": {
+        "name": "blog",
+        "owner": {
+          "login": "udebella"
+        },
+        "url": "https://github.com/udebella/blog",
+        "defaultBranchRef": {
+          "target": {
+            "status": null
+          }
+        }
+      },
+      "rep_3": {
+        "name": "cli",
+        "owner": {
+          "login": "npm"
+        },
+        "url": "https://github.com/npm/cli",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "SUCCESS",
+                  "context": "continuous-integration/travis-ci/pr",
+                  "targetUrl": "https://travis-ci.org/npm/cli/builds/483630768?utm_source=github_status&utm_medium=notification"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "continuous-integration/travis-ci/push",
+                  "targetUrl": "https://travis-ci.org/npm/cli/builds/486166545?utm_source=github_status&utm_medium=notification"
+                }
+              ],
+              "state": "SUCCESS"
+            }
+          }
+        }
+      },
+      "rep_4": {
+        "name": "Github-dashboard",
+        "owner": {
+          "login": "udebella"
+        },
+        "url": "https://github.com/udebella/Github-dashboard",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "SUCCESS",
+                  "context": "continuous-integration/travis-ci/push",
+                  "targetUrl": "https://travis-ci.org/udebella/Github-dashboard/builds/486182008?utm_source=github_status&utm_medium=notification"
+                }
+              ],
+              "state": "SUCCESS"
+            }
+          }
+        }
+      },
+      "rep_5": {
+        "name": "react",
+        "owner": {
+          "login": "facebook"
+        },
+        "url": "https://github.com/facebook/react",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci",
+                  "targetUrl": "https://circleci.com/gh/facebook/react/13342?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "continuous-integration/appveyor/branch",
+                  "targetUrl": "https://ci.appveyor.com/project/Facebook/react/builds/22107680"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "coverage/coveralls",
+                  "targetUrl": "https://coveralls.io/builds/21438074"
+                }
+              ],
+              "state": "SUCCESS"
+            }
+          }
+        }
+      },
+      "rep_6": {
+        "name": "vue",
+        "owner": {
+          "login": "vuejs"
+        },
+        "url": "https://github.com/vuejs/vue",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "PENDING",
+                  "context": "ci/circleci: install",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vue/11435?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                }
+              ],
+              "state": "PENDING"
+            }
+          }
+        }
+      }
+    }
+  },
+  "isBase64": false
+}
