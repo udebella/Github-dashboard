@@ -5,6 +5,7 @@
 	"scripts": {
 		"start": "webpack-dev-server --config config/webpack.dev.js",
 		"build": "webpack-cli --config config/webpack.prod.js",
+		"prebuild": "npm run test-ci",
 		"bundle-analyzer": "webpack-bundle-analyzer ./dist/stats.json ./dist",
 		"test": "mocha-webpack --webpack-config config/webpack.test.js \"src/**/*.spec.js\" --require src/test-setup.js",
 		"test-ci": "nyc --reporter=lcov --reporter=text npm test",
