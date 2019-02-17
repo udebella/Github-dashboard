@@ -66,11 +66,6 @@ To generate component, [plop](https://github.com/amwmedia/plop) has been added :
 
 It will ask for the component name, and will generate a folder with base files to work with.
 
-
-## Fixed versions
-
-* [eslint-loader@2.1.0](https://github.com/webpack-contrib/eslint-loader/issues/248) : When running the webpack build, the `--fix` option does not work anymore
-
 --
 
 *Every given path is from project directory 
