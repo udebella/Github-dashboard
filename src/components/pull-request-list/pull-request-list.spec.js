@@ -41,8 +41,7 @@ describe('PullRequestList component', () => {
 			prUrl: 'https://github.com/angular/angular/pull/27697',
 			creationDate: new Date('2018-12-16T18:26:59.000Z'),
 			updateDate: new Date('2018-12-16T21:05:45Z'),
-			commitDate: new Date('2019-01-21T11:32:43Z'),
-			reviewDate: new Date('2019-01-21T14:40:14Z'),
+			lastEventAuthor: 'anUser',
 			buildStatus: 'FAILURE',
 			statuses: [{
 				jobStatus: 'SUCCESS',
@@ -54,8 +53,7 @@ describe('PullRequestList component', () => {
 			prUrl: 'https://github.com/facebook/react/pull/9333',
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
-			commitDate: new Date('2019-01-23T20:41:07Z'),
-			reviewDate: new Date('2019-01-20T16:33:12Z'),
+			lastEventAuthor: 'udebella',
 			buildStatus: 'FAILURE',
 			statuses: [{
 				jobStatus: 'SUCCESS',
@@ -67,6 +65,7 @@ describe('PullRequestList component', () => {
 			request: stub().returns(Promise.resolve(fakeGraphqlResponse)),
 			queryBuilder: stub(),
 			pullRequestReader: stub().returns(fakeResponseRead),
+			userService: {connectedUser: stub().returns({login: 'udebella'})},
 			fakeGraphqlResponse,
 			fakeResponseRead,
 			store,
@@ -93,7 +92,7 @@ describe('PullRequestList component', () => {
 				url: 'https://github.com/angular/angular/pull/27697',
 				buildStatus: 'FAILURE',
 				creationDate: new Date('2018-12-16T18:26:59Z'),
-				hasUpdates: false,
+				hasUpdates: true,
 				statusesList: [{
 					jobStatus: 'SUCCESS',
 					description: 'continuous-integration/travis-ci/pr',

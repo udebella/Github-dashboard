@@ -2,6 +2,7 @@ import {request as defaultRequest} from '../../services/graphql/graphql-client'
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
 import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
 import {extractHttp as extractPullRequest, pullRequestFragment} from '../../services/pull-request/pull-request'
+import {buildUserService} from '../../services/user/user'
 
 const pullRequestListFragment = `${pullRequestFragment}
 fragment repository on Repository {
@@ -30,6 +31,10 @@ export default {
 			type: Function,
 			default: extractPullRequest,
 		},
+		userService: {
+			type: Object,
+			default: buildUserService,
+		},
 	},
 	asyncComputed: {
 		pullRequests: {
@@ -44,8 +49,8 @@ export default {
 		},
 	},
 	methods: {
-		hasUpdates({commitDate, reviewDate = new Date(0)}) {
-			return commitDate.getTime() > reviewDate.getTime()
+		hasUpdates(lastEventAuthor) {
+			return this.userService.connectedUser().login !== lastEventAuthor
 		},
 	},
 	components: {
