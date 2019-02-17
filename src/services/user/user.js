@@ -20,7 +20,7 @@ export const buildUserService = ({sessionBuilder = buildSessionService, request 
 		}
 	}
 
-	const connectedUser = () => getUser()
+	const connectedUser = getUser
 
 	const performLogin = async token => {
 		const response = await request(query)
