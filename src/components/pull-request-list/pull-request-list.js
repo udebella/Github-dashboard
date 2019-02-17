@@ -1,45 +1,17 @@
 import {request as defaultRequest} from '../../services/graphql/graphql-client'
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
 import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
-import {extractHttp as extractPullRequest} from '../../services/pull-request/pull-request'
+import {extractHttp as extractPullRequest, pullRequestFragment} from '../../services/pull-request/pull-request'
 
-const pullRequestFragment = `fragment repository on Repository {
+const pullRequestListFragment = `${pullRequestFragment}
+fragment repository on Repository {
   name
   owner {
     login
   }
   url
-  pullRequests(states: OPEN, last: 20) {
-    nodes {
-      title
-      url
-      comments {
-        totalCount
-      }
-      createdAt
-      updatedAt
-      reviews(last: 1) {
-        nodes {
-          submittedAt
-        }
-      }
-      state
-      commits(last: 1) {
-        nodes {
-          commit {
-            committedDate
-            status {
-            contexts {
-			    state
-			    context
-			    targetUrl
-			  }
-              state
-            }
-          }
-        }
-      }
-    }
+  pullRequests(states: OPEN, last: 5) {
+    ...PullRequest
   }
 }`
 
@@ -52,7 +24,7 @@ export default {
 		},
 		queryBuilder: {
 			type: Function,
-			default: buildRepositoriesQuery(pullRequestFragment),
+			default: buildRepositoriesQuery(pullRequestListFragment),
 		},
 		pullRequestReader: {
 			type: Function,

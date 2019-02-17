@@ -56,7 +56,6 @@ describe('Pull request service', () => {
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
 			commitDate: new Date('2019-01-23T20:41:07Z'),
-			reviewDate: new Date('2019-01-23T09:55:14Z'),
 			buildStatus: 'NO_STATUS',
 			statuses: [],
 		}])
@@ -71,7 +70,6 @@ describe('Pull request service', () => {
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
 			commitDate: new Date('2019-01-23T20:41:07Z'),
-			reviewDate: new Date('2019-01-23T09:55:14Z'),
 			buildStatus: 'SUCCESS',
 			statuses: [{
 				jobStatus: 'SUCCESS',

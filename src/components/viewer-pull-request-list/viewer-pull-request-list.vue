@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<pull-request-line
-			v-for="({buildStatus, creationDate, statuses, prTitle, prUrl, commitDate, reviewDate}) in pullRequests"
+			v-for="({buildStatus, creationDate, statuses, prTitle, prUrl}) in pullRequests"
 			:key="prTitle"
-			:has-updates="hasUpdates({commitDate, reviewDate})"
+			:has-updates="false"
 			:build-status="buildStatus"
 			:creation-date="creationDate"
 			:title="prTitle"

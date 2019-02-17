@@ -105,26 +105,13 @@ describe('PullRequestList component', () => {
 				url: 'https://github.com/facebook/react/pull/9333',
 				buildStatus: 'FAILURE',
 				creationDate: new Date('2018-10-20T00:00:00Z'),
-				hasUpdates: true,
+				hasUpdates: false,
 				statusesList: [{
 					jobStatus: 'SUCCESS',
 					description: 'build description',
 					jobUrl: 'http://build-target-url',
 				}],
 			})
-		})
-
-		it('should display update icon on pull request that do not have reviews', async () => {
-			// Given
-			stubs.fakeResponseRead[0].reviewDate = undefined
-
-			// When
-			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
-
-			// Then
-			await flushPromises()
-			const pullRequestLine = pullRequestList.findAll('[data-test=line]')
-			expect(pullRequestLine.at(0).props().hasUpdates).to.be.true
 		})
 
 		it('should not display pull requests when graphql api returns an empty array of pull request for a repository', async () => {

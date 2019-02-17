@@ -1,18 +1,65 @@
 const mostRecentFirst = ({updateDate: first}, {updateDate: second}) => second.getTime() - first.getTime()
 
-export const extractHttp = repositoryList => repositoryList
-	.flatMap(({pullRequests}) => pullRequests.nodes
-		.map(({title, url, createdAt, updatedAt, commits, reviews}) => ({
-			prTitle: title,
-			prUrl: url,
-			creationDate: new Date(createdAt),
-			updateDate: new Date(updatedAt),
-			...extractReviews(reviews),
-			...extractStatuses(commits),
-		})))
-	.sort(mostRecentFirst)
+export const pullRequestFragment = `fragment PullRequest on PullRequestConnection {
+  nodes {
+      title
+      url
+      comments {
+        totalCount
+      }
+      createdAt
+      updatedAt
+      state
+      timeline(last: 1) {
+        nodes {
+          ...on Commit {
+            author {
+              name
+            }
+          }
+          ...on Comment {
+            author {
+              login
+            }
+          }
+        }
+      }
+      commits(last: 1) {
+        nodes {
+          commit {
+            committedDate
+            status {
+            contexts {
+			    state
+			    context
+			    targetUrl
+			  }
+              state
+            }
+          }
+        }
+      }
+    }
+}`
 
-const extractReviews = ({nodes}) => nodes.length ? {reviewDate: new Date(nodes[0].submittedAt)} : {}
+export const extractHttp = repositoryList => {
+	let test
+	try {
+		test = repositoryList
+			.flatMap(({pullRequests}) => pullRequests.nodes
+				.map(({title, url, createdAt, updatedAt, commits}) => ({
+					prTitle: title,
+					prUrl: url,
+					creationDate: new Date(createdAt),
+					updateDate: new Date(updatedAt),
+					...extractStatuses(commits),
+				})))
+			.sort(mostRecentFirst)
+	} catch(e) {
+		console.log('e', e) // eslint-disable-line
+	}
+	return test
+}
 
 const extractStatuses = ({nodes}) => {
 	const {committedDate, status} = nodes[0].commit

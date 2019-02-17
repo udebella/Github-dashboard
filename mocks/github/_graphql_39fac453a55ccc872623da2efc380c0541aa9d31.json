@@ -8,8 +8,8 @@
       "rateLimit": {
         "cost": 1,
         "limit": 5000,
-        "remaining": 4996,
-        "resetAt": "2019-02-04T22:48:08Z"
+        "remaining": 4998,
+        "resetAt": "2019-02-17T20:32:03Z"
       },
       "viewer": {
         "pullRequests": {
@@ -17,20 +17,26 @@
             {
               "title": "This is a test pull request",
               "url": "https://github.com/udebella/Github-dashboard/pull/1",
+              "comments": {
+                "totalCount": 0
+              },
               "createdAt": "2018-11-15T00:00:06Z",
               "updatedAt": "2019-01-28T21:48:47Z",
-              "reviews": {
+              "state": "OPEN",
+              "timeline": {
                 "nodes": [
                   {
-                    "submittedAt": "2019-01-28T21:48:47Z"
+                    "author": {
+                      "login": "udebella"
+                    }
                   }
                 ]
               },
-              "state": "OPEN",
               "commits": {
                 "nodes": [
                   {
                     "commit": {
+                      "committedDate": "2018-12-22T23:45:03Z",
                       "status": {
                         "contexts": [
                           {
@@ -42,34 +48,6 @@
                             "state": "SUCCESS",
                             "context": "continuous-integration/travis-ci/push",
                             "targetUrl": "https://travis-ci.org/udebella/Github-dashboard/builds/471470257?utm_source=github_status&utm_medium=notification"
-                          }
-                        ],
-                        "state": "SUCCESS"
-                      }
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "title": "Add support for custom ranges for delays",
-              "url": "https://github.com/seglo/connect-prism/pull/79",
-              "createdAt": "2018-12-02T16:21:45Z",
-              "updatedAt": "2018-12-03T21:08:59Z",
-              "reviews": {
-                "nodes": []
-              },
-              "state": "OPEN",
-              "commits": {
-                "nodes": [
-                  {
-                    "commit": {
-                      "status": {
-                        "contexts": [
-                          {
-                            "state": "SUCCESS",
-                            "context": "continuous-integration/travis-ci/pr",
-                            "targetUrl": "https://travis-ci.org/seglo/connect-prism/builds/463014897?utm_source=github_status&utm_medium=notification"
                           }
                         ],
                         "state": "SUCCESS"
