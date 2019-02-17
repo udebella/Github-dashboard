@@ -42,24 +42,21 @@ export const pullRequestFragment = `fragment PullRequest on PullRequestConnectio
     }
 }`
 
-export const extractHttp = repositoryList => {
-	let test
-	try {
-		test = repositoryList
-			.flatMap(({pullRequests}) => pullRequests.nodes
-				.map(({title, url, createdAt, updatedAt, commits}) => ({
-					prTitle: title,
-					prUrl: url,
-					creationDate: new Date(createdAt),
-					updateDate: new Date(updatedAt),
-					...extractStatuses(commits),
-				})))
-			.sort(mostRecentFirst)
-	} catch(e) {
-		console.log('e', e) // eslint-disable-line
-	}
-	return test
-}
+export const extractHttp = repositoryList => repositoryList
+	.flatMap(({pullRequests}) => pullRequests.nodes
+		.map(({title, url, createdAt, updatedAt, commits, timeline}) => ({
+			prTitle: title,
+			prUrl: url,
+			creationDate: new Date(createdAt),
+			updateDate: new Date(updatedAt),
+			...extractLastEventAuthor(timeline),
+			...extractStatuses(commits),
+		})))
+	.sort(mostRecentFirst)
+
+const extractLastEventAuthor = (timeline) => ({
+	lastEventAuthor: timeline && timeline.nodes && timeline.nodes[0] && timeline.nodes[0].author.login,
+})
 
 const extractStatuses = ({nodes}) => {
 	const {committedDate, status} = nodes[0].commit
