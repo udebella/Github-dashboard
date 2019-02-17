@@ -64,6 +64,14 @@ describe('Pull request service', () => {
 		}])
 	})
 
+	it('should return a default lastEventAuthor when the last action is not tracked', () => {
+		httpResponse[0].pullRequests.nodes[0].timeline.nodes[0] = {}
+
+		const response = extractHttp(httpResponse)
+
+		expect(response[0].lastEventAuthor).to.equals('')
+	})
+
 	it('should extract statuses from a response on a pull request that was built', () => {
 		const response = extractHttp(httpResponse)
 

@@ -54,8 +54,8 @@ export const extractHttp = repositoryList => repositoryList
 		})))
 	.sort(mostRecentFirst)
 
-const extractLastEventAuthor = (timeline) => ({
-	lastEventAuthor: timeline && timeline.nodes && timeline.nodes[0] && timeline.nodes[0].author.login,
+const extractLastEventAuthor = timeline => ({
+	lastEventAuthor: (timeline && timeline.nodes && timeline.nodes[0] && timeline.nodes[0].author && timeline.nodes[0].author.login) || '',
 })
 
 const extractStatuses = ({nodes}) => {
