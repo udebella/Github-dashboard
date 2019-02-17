@@ -14,8 +14,7 @@ describe('ViewerPullRequestList component', () => {
 			prUrl: 'https://github.com/facebook/react/pull/9333',
 			creationDate: new Date('2018-10-20T00:00:00Z'),
 			updateDate: new Date('2018-10-25T01:36:27Z'),
-			commitDate: new Date('2019-01-23T20:41:07Z'),
-			reviewDate: new Date('2019-01-23T09:55:14Z'),
+			lastEventAuthor: 'udebella',
 			buildStatus: 'FAILURE',
 			statuses: [{
 				jobStatus: 'SUCCESS',
@@ -27,6 +26,7 @@ describe('ViewerPullRequestList component', () => {
 			queryBuilder: stub(),
 			request: stub().returns(Promise.resolve({})),
 			pullRequestReader: stub().returns(fakeReponseRead),
+			userService: {connectedUser: stub().returns({login: 'udebella'})},
 			fakeReponseRead,
 		}
 	})
@@ -85,6 +85,18 @@ describe('ViewerPullRequestList component', () => {
 					jobUrl: 'http://build-target-url',
 				}],
 			})
+		})
+
+		it('should display an update icon if an other user is the author of the last event', async () => {
+			stubs.fakeReponseRead[0].lastEventAuthor = 'anOtherUser'
+
+			// When
+			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
+
+			// Then
+			await flushPromises()
+			const viewerPullRequestLine = viewerPullRequestList.find('[data-test=line]')
+			expect(viewerPullRequestLine.props().hasUpdates).to.be.true
 		})
 	})
 })
