@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<h2 data-test="title">
+			My currently open pull requests
+		</h2>
 		<pull-request-line
 			v-for="({buildStatus, creationDate, statuses, prTitle, prUrl, lastEventAuthor}) in pullRequests"
 			:key="prTitle"

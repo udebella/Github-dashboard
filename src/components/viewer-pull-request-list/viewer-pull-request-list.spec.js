@@ -38,6 +38,12 @@ describe('ViewerPullRequestList component', () => {
 			expect(viewerPullRequestList.name()).to.equal('viewer-pull-request-list')
 		})
 
+		it('should display a title', () => {
+			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
+
+			expect(viewerPullRequestList.find('[data-test=title]').text()).to.equal('My currently open pull requests')
+		})
+
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
 			// Given
 			stubs.queryBuilder.returns('queryBuilt')
