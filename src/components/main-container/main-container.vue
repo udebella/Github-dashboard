@@ -4,7 +4,10 @@
 		<div class="columns">
 			<repository-list class="repository-list" />
 			<pull-request-list class="pull-request-list" />
-			<viewer-pull-request-list class="viewer-pull-request-list" />
+			<div class="viewer-pull-request-list">
+				<viewer-pull-request-list />
+				<recently-closed-pull-requests />
+			</div>
 		</div>
 	</div>
 </template>

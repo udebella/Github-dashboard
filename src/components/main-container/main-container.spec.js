@@ -25,5 +25,9 @@ describe('MainContainer component', () => {
 		it('should display pull request list component', () => {
 			expect(mainContainer.find({name: 'pull-request-list'}).exists()).to.be.true
 		})
+
+		it('should display recently closed pull requests', () => {
+			expect(mainContainer.find({name: 'recently-closed-pull-requests'}).exists()).to.be.true
+		})
 	})
 })
