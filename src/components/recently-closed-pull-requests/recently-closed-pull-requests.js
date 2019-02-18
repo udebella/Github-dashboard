@@ -35,7 +35,7 @@ export default {
 
 export const viewerFragment = `${pullRequestFragment} 
 fragment viewer on User {
-  pullRequests(states: CLOSED, last: 5) {  
+  pullRequests(states: MERGED, last: 5) {  
     ...PullRequest
   }
 }`
