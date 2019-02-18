@@ -62,6 +62,14 @@ describe('Pull request service', () => {
 		}])
 	})
 
+	it('should return a default lastEventAuthor when the last action is a commit', () => {
+		httpResponse[0].pullRequests.nodes[0].timeline.nodes[0].author = {name: 'udebella'}
+
+		const response = extractHttp(httpResponse)
+
+		expect(response[0].lastEventAuthor).to.equals('udebella')
+	})
+
 	it('should return a default lastEventAuthor when the last action is not tracked', () => {
 		httpResponse[0].pullRequests.nodes[0].timeline.nodes[0] = {}
 
