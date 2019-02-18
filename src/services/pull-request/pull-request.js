@@ -53,9 +53,14 @@ export const extractHttp = repositoryList => repositoryList
 		})))
 	.sort(mostRecentFirst)
 
-const extractLastEventAuthor = ({nodes}) => ({
-	lastEventAuthor: (nodes[0].author && (nodes[0].author.login || nodes[0].author.name)) || '',
-})
+const extractLastEventAuthor = ({nodes: [{author}]}) => {
+	const {login, name} = author || {}
+	const authorName = login || name
+	const defaultAuthorName = ''
+	return {
+		lastEventAuthor: authorName || defaultAuthorName,
+	}
+}
 
 const extractStatuses = ({nodes}) => {
 	const {status} = nodes[0].commit
