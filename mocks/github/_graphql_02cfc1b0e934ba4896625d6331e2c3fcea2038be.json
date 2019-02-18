@@ -1,0 +1,215 @@
+{
+  "requestUrl": "/graphql",
+  "contentType": "application/json; charset=utf-8",
+  "method": "POST",
+  "statusCode": 200,
+  "data": {
+    "data": {
+      "rateLimit": {
+        "cost": 1,
+        "limit": 5000,
+        "remaining": 4998,
+        "resetAt": "2019-02-18T21:57:04Z"
+      },
+      "viewer": {
+        "pullRequests": {
+          "nodes": [
+            {
+              "title": "Small refactor upon update candidate",
+              "url": "https://github.com/lelionvert/socrates-promo02/pull/36",
+              "comments": {
+                "totalCount": 0
+              },
+              "createdAt": "2017-08-31T16:19:27Z",
+              "updatedAt": "2017-09-01T09:53:57Z",
+              "state": "MERGED",
+              "timeline": {
+                "nodes": [
+                  {}
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "status": null
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Start of api rest",
+              "url": "https://github.com/lelionvert/socrates-promo02/pull/37",
+              "comments": {
+                "totalCount": 0
+              },
+              "createdAt": "2017-09-05T10:03:27Z",
+              "updatedAt": "2017-09-12T08:12:27Z",
+              "state": "MERGED",
+              "timeline": {
+                "nodes": [
+                  {}
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "status": null
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Delete fake printer which was not used anymore",
+              "url": "https://github.com/lelionvert/socrates-promo02/pull/38",
+              "comments": {
+                "totalCount": 0
+              },
+              "createdAt": "2017-09-12T08:33:37Z",
+              "updatedAt": "2017-09-12T08:37:53Z",
+              "state": "MERGED",
+              "timeline": {
+                "nodes": [
+                  {}
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "status": null
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "docs: Improve axios mock on async testing",
+              "url": "https://github.com/vuejs/vue-test-utils/pull/940",
+              "comments": {
+                "totalCount": 0
+              },
+              "createdAt": "2018-08-22T19:41:54Z",
+              "updatedAt": "2018-08-22T19:55:39Z",
+              "state": "MERGED",
+              "timeline": {
+                "nodes": [
+                  {}
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "status": {
+                        "contexts": [
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: bootstrap",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8365?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: build_test",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8363?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: install",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8362?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: test",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8364?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: test_version_2.0.8",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8370?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: test_version_2.1.10",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8368?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: test_version_2.2.6",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8371?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: test_version_2.3.4",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8367?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: test_version_2.4.2",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8369?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "ci/circleci: test_version_2.5.13",
+                            "targetUrl": "https://circleci.com/gh/vuejs/vue-test-utils/8366?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                          },
+                          {
+                            "state": "SUCCESS",
+                            "context": "deploy/netlify",
+                            "targetUrl": "https://deploy-preview-940--vue-test-utils.netlify.com"
+                          }
+                        ],
+                        "state": "SUCCESS"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Add support for custom ranges for delays",
+              "url": "https://github.com/seglo/connect-prism/pull/79",
+              "comments": {
+                "totalCount": 5
+              },
+              "createdAt": "2018-12-02T16:21:45Z",
+              "updatedAt": "2019-02-07T19:43:04Z",
+              "state": "MERGED",
+              "timeline": {
+                "nodes": [
+                  {
+                    "author": {
+                      "login": "seglo"
+                    }
+                  }
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "status": {
+                        "contexts": [
+                          {
+                            "state": "SUCCESS",
+                            "context": "continuous-integration/travis-ci/pr",
+                            "targetUrl": "https://travis-ci.org/seglo/connect-prism/builds/463014897?utm_source=github_status&utm_medium=notification"
+                          }
+                        ],
+                        "state": "SUCCESS"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "isBase64": false
+}

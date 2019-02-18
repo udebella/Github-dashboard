@@ -1,0 +1,360 @@
+{
+  "requestUrl": "/graphql",
+  "contentType": "application/json; charset=utf-8",
+  "method": "POST",
+  "statusCode": 200,
+  "data": {
+    "data": {
+      "rateLimit": {
+        "cost": 1,
+        "limit": 5000,
+        "remaining": 4999,
+        "resetAt": "2019-02-18T21:57:04Z"
+      },
+      "rep_0": {
+        "name": "angular",
+        "owner": {
+          "login": "angular"
+        },
+        "url": "https://github.com/angular/angular",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/angular: size",
+                  "targetUrl": null
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: aio_monitoring",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208359?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: build-ivy-npm-packages",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208224?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: build-npm-packages",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208223?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: deploy_aio",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208237?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: integration_test",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208231?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: legacy-misc-tests",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208233?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: legacy-unit-tests-local",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208225?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: legacy-unit-tests-saucelabs",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208222?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: lint",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208227?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: material-unit-tests",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208229?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: publish_snapshot",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208238?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208221?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test_aio",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208226?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test_aio_local",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208232?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test_aio_local_ivy",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208235?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test_aio_tools",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208234?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test_docs_examples",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208230?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test_docs_examples_ivy",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208236?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test_ivy_aot",
+                  "targetUrl": "https://circleci.com/gh/angular/angular/208228?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                }
+              ],
+              "state": "SUCCESS"
+            }
+          }
+        }
+      },
+      "rep_1": {
+        "name": "angular-cli",
+        "owner": {
+          "login": "angular"
+        },
+        "url": "https://github.com/angular/angular-cli",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "FAILURE",
+                  "context": "continuous-integration/appveyor/branch",
+                  "targetUrl": "https://ci.appveyor.com/project/AngularCLI/angular-cli/builds/22458591"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "buildkite/cli",
+                  "targetUrl": "https://buildkite.com/angular/cli/builds/126"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/angular: size",
+                  "targetUrl": null
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: build",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39782?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: build-bazel",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39791?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: e2e-cli",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39785?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: e2e-cli-ivy-snapshots",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39790?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: e2e-cli-ng-snapshots",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39789?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: e2e-node-8",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39786?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: install",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39781?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: lint",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39784?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: snapshot_publish",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39793?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39788?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test-large",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39787?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: validate",
+                  "targetUrl": "https://circleci.com/gh/angular/angular-cli/39783?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                }
+              ],
+              "state": "FAILURE"
+            }
+          }
+        }
+      },
+      "rep_2": {
+        "name": "blog",
+        "owner": {
+          "login": "udebella"
+        },
+        "url": "https://github.com/udebella/blog",
+        "defaultBranchRef": {
+          "target": {
+            "status": null
+          }
+        }
+      },
+      "rep_3": {
+        "name": "cli",
+        "owner": {
+          "login": "npm"
+        },
+        "url": "https://github.com/npm/cli",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "SUCCESS",
+                  "context": "continuous-integration/travis-ci/push",
+                  "targetUrl": "https://travis-ci.org/npm/cli/builds/493399591?utm_source=github_status&utm_medium=notification"
+                }
+              ],
+              "state": "SUCCESS"
+            }
+          }
+        }
+      },
+      "rep_4": {
+        "name": "Github-dashboard",
+        "owner": {
+          "login": "udebella"
+        },
+        "url": "https://github.com/udebella/Github-dashboard",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "SUCCESS",
+                  "context": "continuous-integration/travis-ci/push",
+                  "targetUrl": "https://travis-ci.org/udebella/Github-dashboard/builds/494661662?utm_source=github_status&utm_medium=notification"
+                }
+              ],
+              "state": "SUCCESS"
+            }
+          }
+        }
+      },
+      "rep_5": {
+        "name": "react",
+        "owner": {
+          "login": "facebook"
+        },
+        "url": "https://github.com/facebook/react",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci",
+                  "targetUrl": "https://circleci.com/gh/facebook/react/13491?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "continuous-integration/appveyor/branch",
+                  "targetUrl": "https://ci.appveyor.com/project/Facebook/react/builds/22407647"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "coverage/coveralls",
+                  "targetUrl": "https://coveralls.io/builds/21673169"
+                }
+              ],
+              "state": "SUCCESS"
+            }
+          }
+        }
+      },
+      "rep_6": {
+        "name": "vue",
+        "owner": {
+          "login": "vuejs"
+        },
+        "url": "https://github.com/vuejs/vue",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: install",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vue/11818?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: lint-flow-types",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vue/11821?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test-cover",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vue/11820?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test-e2e",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vue/11822?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test-ssr-weex",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vue/11819?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "codecov/patch",
+                  "targetUrl": "https://codecov.io/gh/vuejs/vue/commit/ee29e41ef469b3ca3c793f04289075e3b128447f"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "codecov/project",
+                  "targetUrl": "https://codecov.io/gh/vuejs/vue/commit/ee29e41ef469b3ca3c793f04289075e3b128447f"
+                }
+              ],
+              "state": "SUCCESS"
+            }
+          }
+        }
+      }
+    }
+  },
+  "isBase64": false
+}

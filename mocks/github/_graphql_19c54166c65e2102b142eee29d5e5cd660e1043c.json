@@ -8,8 +8,8 @@
       "rateLimit": {
         "cost": 1,
         "limit": 5000,
-        "remaining": 4998,
-        "resetAt": "2019-02-18T01:44:41Z"
+        "remaining": 4997,
+        "resetAt": "2019-02-18T21:57:04Z"
       },
       "viewer": {
         "pullRequests": {
