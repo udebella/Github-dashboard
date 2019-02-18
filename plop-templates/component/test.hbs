@@ -9,13 +9,13 @@ describe('{{pascalCase componentName}} component', () => {
 		{{camelCase componentName}} = shallowMount({{pascalCase componentName}})
 	})
 
-describe('Initialization', () => {
-it('should have the right component name', () => {
-expect({{camelCase componentName}}.name()).to.equal('{{dashCase componentName}}')
+	describe('Initialization', () => {
+		it('should have the right component name', () => {
+			expect({{camelCase componentName}}.name()).to.equal('{{dashCase componentName}}')
 		})
 
-it('should display the component', () => {
-expect({{camelCase componentName}}.find('div').text()).to.equal('Test component')
+		it('should display the component', () => {
+			expect({{camelCase componentName}}.find('div').text()).to.equal('Test component')
 		})
 	})
 })
