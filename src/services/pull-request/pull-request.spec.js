@@ -106,7 +106,7 @@ describe('Pull request service', () => {
 					updatedAt: '2018-11-07T20:10:15Z',
 					state: 'OPEN',
 					timeline: {
-						nodes: [],
+						nodes: [{}],
 					},
 					commits: {
 						nodes: [{
