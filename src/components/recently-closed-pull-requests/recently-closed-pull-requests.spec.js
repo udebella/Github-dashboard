@@ -37,6 +37,12 @@ describe('RecentlyClosedPullRequests component', () => {
 			expect(recentlyClosedPullRequests.name()).to.equal('recently-closed-pull-requests')
 		})
 
+		it('should display a title', () => {
+			const recentlyClosedPullRequests = shallowMount(RecentlyClosedPullRequests, {propsData: stubs})
+
+			expect(recentlyClosedPullRequests.find('[data-test=title]').text()).to.equal('My recently closed pull requests')
+		})
+
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
 			// Given
 			stubs.queryBuilder.returns('queryBuilt')
