@@ -54,6 +54,10 @@ describe('RepositoryList component', () => {
 			expect(repositoryList.name()).to.equals('repository-list')
 		})
 
+		it('should display a title', () => {
+			expect(repositoryList.find('[data-test=title]').text()).to.equals('Watched repositories')
+		})
+
 		it('should display a list of repositories', async () => {
 			// When
 			const repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})

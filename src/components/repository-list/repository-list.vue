@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<h2 data-test="title">
+			Watched repositories
+		</h2>
 		<repository-line
 			v-for="repository in repositories"
 			:key="repository.name"
