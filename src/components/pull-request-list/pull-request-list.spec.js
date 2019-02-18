@@ -79,6 +79,10 @@ describe('PullRequestList component', () => {
 			expect(pullRequestList.name()).to.equal('pull-request-list')
 		})
 
+		it('should display a title', () => {
+			expect(pullRequestList.find('[data-test=title]').text()).to.equals('Pull requests on watched repositories')
+		})
+
 		it('should display a list of pull request', async () => {
 			// When
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
