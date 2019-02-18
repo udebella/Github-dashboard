@@ -1,0 +1,123 @@
+{
+  "requestUrl": "/graphql",
+  "contentType": "application/json; charset=utf-8",
+  "method": "POST",
+  "statusCode": 200,
+  "data": {
+    "data": {
+      "rateLimit": {
+        "cost": 1,
+        "limit": 5000,
+        "remaining": 4996,
+        "resetAt": "2019-02-18T00:27:31Z"
+      },
+      "viewer": {
+        "pullRequests": {
+          "nodes": [
+            {
+              "title": "Refactoring tentative",
+              "url": "https://github.com/Coreoz/PPT-Templates/pull/1",
+              "comments": {
+                "totalCount": 0
+              },
+              "createdAt": "2016-12-16T00:25:32Z",
+              "updatedAt": "2018-08-24T00:25:21Z",
+              "state": "CLOSED",
+              "timeline": {
+                "nodes": [
+                  {}
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "committedDate": "2016-12-25T19:19:48Z",
+                      "status": null
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Handle case where Strike and in middle of the next turn : score did not add bonuses",
+              "url": "https://github.com/dojo-developpement-paris/dojo-developpement-paris.github.io/pull/1",
+              "comments": {
+                "totalCount": 0
+              },
+              "createdAt": "2017-01-22T14:50:19Z",
+              "updatedAt": "2018-08-24T00:26:21Z",
+              "state": "CLOSED",
+              "timeline": {
+                "nodes": [
+                  {}
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "committedDate": "2017-01-22T14:42:12Z",
+                      "status": null
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "[WIP] Us 05 confirmcandidate",
+              "url": "https://github.com/lelionvert/socrates-promo02/pull/21",
+              "comments": {
+                "totalCount": 0
+              },
+              "createdAt": "2017-08-21T08:27:49Z",
+              "updatedAt": "2017-08-21T12:31:45Z",
+              "state": "CLOSED",
+              "timeline": {
+                "nodes": [
+                  {}
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "committedDate": "2017-08-21T08:22:39Z",
+                      "status": null
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "THIS IS A TEST",
+              "url": "https://github.com/udebella/blog/pull/2",
+              "comments": {
+                "totalCount": 0
+              },
+              "createdAt": "2018-10-23T23:21:34Z",
+              "updatedAt": "2018-10-23T23:25:29Z",
+              "state": "CLOSED",
+              "timeline": {
+                "nodes": [
+                  {}
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "committedDate": "2018-10-23T23:21:20Z",
+                      "status": null
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "isBase64": false
+}

@@ -27,7 +27,6 @@ export const pullRequestFragment = `fragment PullRequest on PullRequestConnectio
       commits(last: 1) {
         nodes {
           commit {
-            committedDate
             status {
             contexts {
 			    state
@@ -59,10 +58,9 @@ const extractLastEventAuthor = timeline => ({
 })
 
 const extractStatuses = ({nodes}) => {
-	const {committedDate, status} = nodes[0].commit
+	const {status} = nodes[0].commit
 	const {state, contexts} = status || {state: 'NO_STATUS', contexts: []}
 	return {
-		commitDate: new Date(committedDate),
 		buildStatus: state,
 		statuses: contexts.map(({context, state, targetUrl}) => ({
 			description: context,

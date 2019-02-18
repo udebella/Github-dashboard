@@ -9,7 +9,7 @@
         "cost": 1,
         "limit": 5000,
         "remaining": 4998,
-        "resetAt": "2019-02-17T20:32:03Z"
+        "resetAt": "2019-02-18T01:44:41Z"
       },
       "viewer": {
         "pullRequests": {
@@ -36,7 +36,6 @@
                 "nodes": [
                   {
                     "commit": {
-                      "committedDate": "2018-12-22T23:45:03Z",
                       "status": {
                         "contexts": [
                           {
