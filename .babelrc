@@ -5,6 +5,7 @@
 			{
 				"modules": false,
 				"useBuiltIns": "usage",
+				"corejs": 3,
 				"targets": "last 1 version, > 1%, maintained node versions, not dead"
 			}
 		]
