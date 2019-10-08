@@ -3,25 +3,30 @@ import {stub} from 'sinon'
 import {notificationApi} from './notification'
 
 describe('NotificationAPI', () => {
-	it('should create a notification when user gave its permission', () => {
+	let stubs
+
+	beforeEach(() => {
 		const Notification = stub()
-		Notification.permission = 'granted'
 		Notification.requestPermission = stub()
 
-		const api = notificationApi({Notification})
+		stubs = {Notification}
+	})
+
+	it('should create a notification when user gave its permission', () => {
+		stubs.Notification.permission = 'granted'
+
+		const api = notificationApi(stubs)
 		api.notify('Some notification')
 
-		expect(Notification).to.have.been.calledWith('Some notification')
+		expect(stubs.Notification).to.have.been.calledWith('Some notification')
 	})
 
 	it('should not create notification when user refused notifications', () => {
-		const Notification = stub()
-		Notification.permission = 'denied'
-		Notification.requestPermission = stub()
+		stubs.Notification.permission = 'denied'
 
-		const api = notificationApi({Notification})
+		const api = notificationApi(stubs)
 		api.notify('Some notification')
 
-		expect(Notification).not.to.have.been.called
+		expect(stubs.Notification).not.to.have.been.called
 	})
 })
