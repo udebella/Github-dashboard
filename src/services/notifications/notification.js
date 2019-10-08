@@ -4,8 +4,8 @@ export const notificationApi = ({Notification}) => {
 	if (Notification.permission === 'granted') {
 		authorizedNotification = true
 	} else if (Notification.permission !== 'denied') {
-		Notification.requestPermission(function (permission) {
-			if (permission === 'granted') {
+		Notification.requestPermission(userAnswer => {
+			if (userAnswer === 'granted') {
 				authorizedNotification = true
 			}
 		})

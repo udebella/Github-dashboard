@@ -29,4 +29,10 @@ describe('NotificationAPI', () => {
 
 		expect(stubs.Notification).not.to.have.been.called
 	})
+
+	it('should ask for permission before sending notifications', () => {
+		notificationApi(stubs)
+
+		expect(stubs.Notification.requestPermission).to.have.been.called
+	})
 })
