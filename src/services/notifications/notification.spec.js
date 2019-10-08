@@ -44,4 +44,13 @@ describe('NotificationAPI', () => {
 
 		expect(stubs.Notification).to.have.been.calledWith('Some notification')
 	})
+
+	it('should not send notifications when user refused notifications after asking', async () => {
+		stubs.Notification.requestPermission.returns(Promise.resolve('denied'))
+		const api = notificationApi(stubs)
+
+		await api.notify('Some notification')
+
+		expect(stubs.Notification).not.to.have.been.called
+	})
 })

@@ -10,6 +10,8 @@ export const notificationApi = ({Notification}) => {
 		Notification.requestPermission().then(userAnswer => {
 			if (userAnswer === 'granted') {
 				resolve(true)
+			} else {
+				resolve(false)
 			}
 		})
 	}
