@@ -12,8 +12,9 @@ export const notificationApi = ({Notification}) => {
 	}
 
 	const notify = () => {
-		console.log(authorizedNotification) // eslint-disable-line
-		new Notification('Some notification')
+		if (authorizedNotification) {
+			new Notification('Some notification')
+		}
 	}
 
 	return {

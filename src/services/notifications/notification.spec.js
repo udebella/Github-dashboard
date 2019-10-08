@@ -13,4 +13,15 @@ describe('NotificationAPI', () => {
 
 		expect(Notification).to.have.been.calledWith('Some notification')
 	})
+
+	it('should not create notification when user refused notifications', () => {
+		const Notification = stub()
+		Notification.permission = 'denied'
+		Notification.requestPermission = stub()
+
+		const api = notificationApi({Notification})
+		api.notify('Some notification')
+
+		expect(Notification).not.to.have.been.called
+	})
 })
