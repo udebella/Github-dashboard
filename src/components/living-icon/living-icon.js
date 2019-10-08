@@ -1,5 +1,4 @@
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-import differenceInWeeks from 'date-fns/difference_in_weeks'
+import {differenceInWeeks, formatDistanceToNow} from 'date-fns'
 import {faHeart, faSkull} from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -12,7 +11,7 @@ export default {
 	},
 	computed: {
 		title() {
-			return distanceInWordsToNow(this.date, { addSuffix: true })
+			return formatDistanceToNow(this.date, { addSuffix: true })
 		},
 		icon() {
 			return differenceInWeeks(new Date(), this.date) < 1 ? faHeart : faSkull
