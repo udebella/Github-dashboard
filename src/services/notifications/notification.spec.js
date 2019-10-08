@@ -7,7 +7,7 @@ describe('NotificationAPI', () => {
 
 	beforeEach(() => {
 		const Notification = stub()
-		Notification.requestPermission = stub()
+		Notification.requestPermission = stub().returns(Promise.resolve('denied'))
 
 		stubs = {Notification}
 	})
@@ -34,5 +34,14 @@ describe('NotificationAPI', () => {
 		notificationApi(stubs)
 
 		expect(stubs.Notification.requestPermission).to.have.been.called
+	})
+
+	it('should send notifications when user accepted notifications after asking', async () => {
+		stubs.Notification.requestPermission.returns(Promise.resolve('granted'))
+		const api = notificationApi(stubs)
+
+		await api.notify('Some notification')
+
+		expect(stubs.Notification).to.have.been.calledWith('Some notification')
 	})
 })
