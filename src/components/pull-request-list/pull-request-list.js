@@ -64,6 +64,11 @@ export default {
 		hasUpdates(lastEventAuthor) {
 			return this.userService.connectedUser().login !== lastEventAuthor
 		},
+		updatePullRequests(httpResponse) {
+			const repositories = Object.values(httpResponse)
+				.filter(repositories => repositories && repositories.pullRequests)
+			this.pullRequests = this.pullRequestReader(repositories)
+		},
 	},
 	components: {
 		PullRequestLine,
