@@ -12,6 +12,11 @@ export default {
 			default: request,
 		},
 	},
+	data() {
+		return {
+			date: new Date(1234),
+		}
+	},
 	created() {
 		const callHttp = async () => {
 			const response = await this.request(this.query)
