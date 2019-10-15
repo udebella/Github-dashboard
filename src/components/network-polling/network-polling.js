@@ -18,11 +18,12 @@ export default {
 	},
 	data() {
 		return {
-			date: this.dateGenerator(),
+			date: 0,
 		}
 	},
 	created() {
 		const callHttp = async () => {
+			this.date = this.dateGenerator()
 			const response = await this.request(this.query)
 			this.$emit('httpUpdate', response)
 		}

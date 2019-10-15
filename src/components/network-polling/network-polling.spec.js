@@ -9,7 +9,9 @@ describe('NetworkPolling component', () => {
 
 	beforeEach(() => {
 		const requestStub = stub().returns('response example')
-		const dateGenerator = stub().returns(new Date(1234))
+		const dateGenerator = stub()
+			.onCall(0).returns(new Date(1234))
+			.onCall(1).returns(new Date(2345))
 		clock = useFakeTimers()
 		stubs = {
 			requestStub,
@@ -50,6 +52,13 @@ describe('NetworkPolling component', () => {
 			const date = networkPolling.find('[data-test=date]')
 
 			expect(date.text()).to.equals('1234')
+		})
+
+		it('should display a new date for each http call', () => {
+			const date = networkPolling.find('[data-test=date]')
+
+			clock.tick(30000)
+			expect(date.text()).to.equals('2345')
 		})
 
 		it('should stop calling the url when component is not displayed anymore', () => {
