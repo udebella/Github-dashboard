@@ -1,5 +1,7 @@
 <template>
-	<custom-button @click="toggleConfiguration">
+	<custom-button
+		title="Enable/Disable configuration mode"
+		@click="toggleConfiguration">
 		<font-awesome-icon
 			:class="configurationMode"
 			:icon="icon"

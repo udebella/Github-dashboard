@@ -27,6 +27,10 @@ describe('Configuration component', () => {
 			expect(icon.vm.$attrs.icon).to.deep.equals(faCog)
 		})
 
+		it('should display a title to explain what the button is used for', () => {
+			expect(configuration.find({name: 'custom-button'}).attributes().title).to.equals('Enable/Disable configuration mode')
+		})
+
 		it('should display the icon as green when the configuration mode is enabled', () => {
 			const icon = configuration.find('[data-test=icon]')
 
