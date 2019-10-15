@@ -5,7 +5,8 @@
 		</h2>
 		<network-polling
 			data-test="network-polling"
-			:query="query" />
+			:query="query"
+			@httpUpdate="updatePullRequests" />
 		<pull-request-line
 			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses, lastEventAuthor}) in tempGetPullRequests()"
 			:key="prTitle"

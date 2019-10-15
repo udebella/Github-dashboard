@@ -93,9 +93,10 @@ describe('PullRequestList component', () => {
 		it('should display a list of pull request', async () => {
 			// When
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
+			const networkPolling = pullRequestList.find('[data-test=network-polling]')
 
 			// Then
-			await flushPromises()
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
 			const pullRequestLine = pullRequestList.findAll('[data-test=line]')
 			expect(pullRequestLine.length).to.equal(2)
 			expect(pullRequestLine.at(0).props()).to.deep.equals({
