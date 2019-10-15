@@ -82,13 +82,6 @@ describe('PullRequestList component', () => {
 			expect(pullRequestList.find('[data-test=title]').text()).to.equals('Pull requests on watched repositories')
 		})
 
-		it('should display a when the last network call was done', () => {
-			const networkPolling = pullRequestList.find('[data-test=network-polling]')
-
-			expect(networkPolling.exists()).to.be.true
-			expect(networkPolling.attributes().query).to.equals('graphql query')
-		})
-
 		it('should display a list of pull request', async () => {
 			// When
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
@@ -169,10 +162,11 @@ describe('PullRequestList component', () => {
 
 			// When
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
+			const networkPolling = pullRequestList.find('[data-test=network-polling]')
 
 			// Then
-			triggerFakeNetworkResponse(pullRequestList)
-			expect(stubs.request).to.have.been.calledWith('queryBuilt')
+			expect(networkPolling.exists()).to.be.true
+			expect(networkPolling.attributes().query).to.equals('queryBuilt')
 		})
 
 		it('should call reader service to read data from graphql api', async () => {
