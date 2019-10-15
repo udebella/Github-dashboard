@@ -148,7 +148,8 @@ describe('PullRequestList component', () => {
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			await flushPromises()
+			const networkPolling = pullRequestList.find('[data-test=network-polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
 			const pullRequestLine = pullRequestList.find('[data-test=line]')
 			expect(pullRequestLine.exists()).to.be.true
 			expect(pullRequestLine.props().buildStatus).to.equals('NO_STATUS')
