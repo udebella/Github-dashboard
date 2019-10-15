@@ -33,6 +33,27 @@ describe('NetworkPolling component', () => {
 	})
 
 	describe('Initialization', () => {
+		describe('Date display', () => {
+			it('should display the date of the last http request', () => {
+				const date = networkPolling.find('[data-test=date]')
+
+				expect(date.text()).to.equals('1234')
+			})
+
+			it('should display a title to explain the date', () => {
+				const date = networkPolling.find('[data-test=date]')
+
+				expect(date.attributes().title).to.equals('Last update date')
+			})
+
+			it('should display a new date for each http call', () => {
+				const date = networkPolling.find('[data-test=date]')
+
+				clock.tick(30000)
+				expect(date.text()).to.equals('2345')
+			})
+		})
+
 		it('should have network-polling name', () => {
 			expect(networkPolling.name()).to.equals('network-polling')
 		})
@@ -47,25 +68,6 @@ describe('NetworkPolling component', () => {
 			expect(stubs.requestStub.callCount).to.equal(1)
 			clock.tick(1)
 			expect(stubs.requestStub.callCount).to.equal(2)
-		})
-
-		it('should display the date of the last http request', () => {
-			const date = networkPolling.find('[data-test=date]')
-
-			expect(date.text()).to.equals('1234')
-		})
-
-		it('should display a title to explain the date', () => {
-			const date = networkPolling.find('[data-test=date]')
-
-			expect(date.attributes().title).to.equals('Last update date')
-		})
-
-		it('should display a new date for each http call', () => {
-			const date = networkPolling.find('[data-test=date]')
-
-			clock.tick(30000)
-			expect(date.text()).to.equals('2345')
 		})
 
 		it('should stop calling the url when component is not displayed anymore', () => {
