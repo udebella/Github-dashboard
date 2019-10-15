@@ -63,7 +63,7 @@ describe('PullRequestList component', () => {
 		}]
 		stubs = {
 			request: stub().returns(Promise.resolve(fakeGraphqlResponse)),
-			queryBuilder: stub(),
+			queryBuilder: stub().returns('graphql query'),
 			pullRequestReader: stub().returns(fakeResponseRead),
 			userService: {connectedUser: stub().returns({login: 'udebella'})},
 			fakeGraphqlResponse,
@@ -85,6 +85,7 @@ describe('PullRequestList component', () => {
 
 		it('should display a when the last network call was done', () => {
 			expect(pullRequestList.find('[data-test=network-polling]').exists()).to.be.true
+			expect(pullRequestList.find('[data-test=network-polling]').attributes().query).to.equals('graphql query')
 		})
 
 		it('should display a list of pull request', async () => {

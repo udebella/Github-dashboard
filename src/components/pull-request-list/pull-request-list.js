@@ -49,6 +49,12 @@ export default {
 			default: [],
 		},
 	},
+	computed: {
+		query() {
+			const watchedRepositories = this.$store.state.watchedRepositories
+			return this.queryBuilder(watchedRepositories)
+		},
+	},
 	methods: {
 		hasUpdates(lastEventAuthor) {
 			return this.userService.connectedUser().login !== lastEventAuthor

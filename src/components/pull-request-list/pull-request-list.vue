@@ -3,7 +3,9 @@
 		<h2 data-test="title">
 			Pull requests on watched repositories
 		</h2>
-		<network-polling data-test="network-polling" />
+		<network-polling
+			data-test="network-polling"
+			:query="query" />
 		<pull-request-line
 			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses, lastEventAuthor}) in pullRequests"
 			:key="prTitle"
