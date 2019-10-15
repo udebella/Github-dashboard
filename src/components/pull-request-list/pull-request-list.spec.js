@@ -2,7 +2,6 @@ import {expect} from 'chai'
 import {stub} from 'sinon'
 import {shallowMount} from '@vue/test-utils'
 import PullRequestList from './pull-request-list.vue'
-import flushPromises from 'flush-promises'
 
 describe('PullRequestList component', () => {
 	let pullRequestList, stubs
@@ -186,7 +185,8 @@ describe('PullRequestList component', () => {
 			shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			await flushPromises()
+			const networkPolling = pullRequestList.find('[data-test=network-polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
 			expect(stubs.pullRequestReader).to.have.been.deep.calledWith([{
 				name: 'react',
 				owner: {login: 'facebook'},
