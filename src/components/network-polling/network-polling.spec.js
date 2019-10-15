@@ -54,6 +54,12 @@ describe('NetworkPolling component', () => {
 			expect(date.text()).to.equals('1234')
 		})
 
+		it('should display a title to explain the date', () => {
+			const date = networkPolling.find('[data-test=date]')
+
+			expect(date.attributes().title).to.equals('Last update date')
+		})
+
 		it('should display a new date for each http call', () => {
 			const date = networkPolling.find('[data-test=date]')
 
