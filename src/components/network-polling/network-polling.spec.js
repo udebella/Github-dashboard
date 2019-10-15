@@ -5,12 +5,17 @@ import flushPomises from 'flush-promises'
 import NetworkPolling from './network-polling.vue'
 
 describe('NetworkPolling component', () => {
-	let networkPolling, requestStub, clock
+	let networkPolling, stubs, requestStub, clock
 
 	beforeEach(() => {
 		requestStub = stub().returns('response example')
 		const dateGenerator = stub().returns(new Date(1234))
 		clock = useFakeTimers()
+		stubs = {
+			requestStub,
+			clock,
+			dateGenerator,
+		}
 
 		networkPolling = shallowMount(NetworkPolling, {
 			propsData: {
@@ -31,15 +36,15 @@ describe('NetworkPolling component', () => {
 		})
 
 		it('should call the given url', () => {
-			expect(requestStub).to.have.been.calledWith('http://test-url')
+			expect(stubs.requestStub).to.have.been.calledWith('http://test-url')
 		})
 
 		it('should make http call every 30 sec', () => {
-			expect(requestStub.callCount).to.equal(1)
+			expect(stubs.requestStub.callCount).to.equal(1)
 			clock.tick(29999)
-			expect(requestStub.callCount).to.equal(1)
+			expect(stubs.requestStub.callCount).to.equal(1)
 			clock.tick(1)
-			expect(requestStub.callCount).to.equal(2)
+			expect(stubs.requestStub.callCount).to.equal(2)
 		})
 
 		it('should display the date of the last http request', () => {
@@ -49,12 +54,12 @@ describe('NetworkPolling component', () => {
 		})
 
 		it('should stop calling the url when component is not displayed anymore', () => {
-			expect(requestStub.callCount).to.equal(1)
+			expect(stubs.requestStub.callCount).to.equal(1)
 
 			networkPolling.destroy()
 			clock.tick(999999)
 
-			expect(requestStub.callCount).to.equal(1)
+			expect(stubs.requestStub.callCount).to.equal(1)
 		})
 
 		it('should call the new url when props change', () => {
@@ -63,7 +68,7 @@ describe('NetworkPolling component', () => {
 			})
 
 			clock.tick(30000)
-			expect(requestStub).to.have.been.calledWith('http://new-url')
+			expect(stubs.requestStub).to.have.been.calledWith('http://new-url')
 		})
 
 		it('should notify parent component with response from the request', async () => {
