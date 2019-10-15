@@ -8,7 +8,7 @@
 			:query="query"
 			@httpUpdate="updatePullRequests" />
 		<pull-request-line
-			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses, lastEventAuthor}) in tempGetPullRequests()"
+			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses, lastEventAuthor}) in pullRequests"
 			:key="prTitle"
 			:has-updates="hasUpdates(lastEventAuthor)"
 			:title="prTitle"

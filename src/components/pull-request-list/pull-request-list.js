@@ -37,21 +37,9 @@ export default {
 			default: buildUserService,
 		},
 	},
-	asyncComputed: {
-		pullRequestsToRename: {
-			async get() {
-				const watchedRepositories = this.$store.state.watchedRepositories
-				const httpResponse = await this.request(this.queryBuilder(watchedRepositories))
-				const repositories = Object.values(httpResponse)
-					.filter(repositories => repositories && repositories.pullRequests)
-				return this.pullRequestReader(repositories)
-			},
-			default: [],
-		},
-	},
 	data() {
 		return {
-			pullRequests: null,
+			pullRequests: [],
 		}
 	},
 	computed: {
@@ -68,12 +56,6 @@ export default {
 			const repositories = Object.values(httpResponse)
 				.filter(repositories => repositories && repositories.pullRequests)
 			this.pullRequests = this.pullRequestReader(repositories)
-		},
-		tempGetPullRequests() {
-			if (this.pullRequests === null) {
-				return this.pullRequestsToRename
-			}
-			return this.pullRequests
 		},
 	},
 	components: {
