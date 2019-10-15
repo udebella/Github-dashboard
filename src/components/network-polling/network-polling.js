@@ -1,6 +1,8 @@
 import {request} from '../../services/graphql/graphql-client'
 import {format} from 'date-fns'
 
+const formatDate = dateGenerator => format(dateGenerator(), 'mm:ss')
+
 export default {
 	name: 'network-polling',
 	props: {
@@ -19,12 +21,12 @@ export default {
 	},
 	data() {
 		return {
-			date: this.dateGenerator(),
+			date: formatDate(this.dateGenerator()),
 		}
 	},
 	created() {
 		const callHttp = async () => {
-			this.date = format(this.dateGenerator(), 'mm:ss')
+			this.date = formatDate(this.dateGenerator)
 			const response = await this.request(this.query)
 			this.$emit('httpUpdate', response)
 		}
