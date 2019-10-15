@@ -21,7 +21,7 @@ export default {
 	},
 	data() {
 		return {
-			date: formatDate(this.dateGenerator()),
+			date: formatDate(this.dateGenerator),
 		}
 	},
 	created() {
