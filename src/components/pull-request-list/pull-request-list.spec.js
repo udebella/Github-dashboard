@@ -83,6 +83,10 @@ describe('PullRequestList component', () => {
 			expect(pullRequestList.find('[data-test=title]').text()).to.equals('Pull requests on watched repositories')
 		})
 
+		it('should display a when the last network call was done', () => {
+			expect(pullRequestList.find('[data-test=network-polling]').exists()).to.be.true
+		})
+
 		it('should display a list of pull request', async () => {
 			// When
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
