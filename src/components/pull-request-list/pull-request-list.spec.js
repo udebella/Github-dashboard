@@ -172,7 +172,7 @@ describe('PullRequestList component', () => {
 			stubs.queryBuilder.returns('queryBuilt')
 
 			// When
-			shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
+			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
 			const networkPolling = pullRequestList.find('[data-test=network-polling]')
@@ -182,7 +182,7 @@ describe('PullRequestList component', () => {
 
 		it('should call reader service to read data from graphql api', async () => {
 			// When
-			shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
+			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
 			const networkPolling = pullRequestList.find('[data-test=network-polling]')
