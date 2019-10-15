@@ -49,6 +49,11 @@ export default {
 			default: [],
 		},
 	},
+	data() {
+		return {
+			pullRequests: [],
+		}
+	},
 	computed: {
 		query() {
 			const watchedRepositories = this.$store.state.watchedRepositories
