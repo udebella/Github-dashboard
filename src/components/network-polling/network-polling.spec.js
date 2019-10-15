@@ -36,9 +36,9 @@ describe('NetworkPolling component', () => {
 			expect(requestStub).to.have.been.calledWith('http://test-url')
 		})
 
-		it('should make http call every 10 sec', () => {
+		it('should make http call every 30 sec', () => {
 			expect(requestStub.callCount).to.equal(1)
-			clock.tick(9999)
+			clock.tick(29999)
 			expect(requestStub.callCount).to.equal(1)
 			clock.tick(1)
 			expect(requestStub.callCount).to.equal(2)
@@ -48,7 +48,7 @@ describe('NetworkPolling component', () => {
 			expect(requestStub.callCount).to.equal(1)
 
 			networkPolling.destroy()
-			clock.tick(10000)
+			clock.tick(999999)
 
 			expect(requestStub.callCount).to.equal(1)
 		})
@@ -58,7 +58,7 @@ describe('NetworkPolling component', () => {
 				query: 'http://new-url',
 			})
 
-			clock.tick(10000)
+			clock.tick(30000)
 			expect(requestStub).to.have.been.calledWith('http://new-url')
 		})
 

@@ -17,7 +17,7 @@ export default {
 			const response = await this.request(this.query)
 			this.$emit('httpUpdate', response)
 		}
-		this.interval = setInterval(callHttp, 10000)
+		this.interval = setInterval(callHttp, 30000)
 		return callHttp()
 	},
 	destroyed() {
