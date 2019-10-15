@@ -28,10 +28,6 @@ describe('NetworkPolling component', () => {
 			expect(networkPolling.name()).to.equals('network-polling')
 		})
 
-		it('should not display anything', () => {
-			expect(networkPolling.classes()).to.deep.equal(['hidden'])
-		})
-
 		it('should call the given url', () => {
 			expect(requestStub).to.have.been.calledWith('http://test-url')
 		})

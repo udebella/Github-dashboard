@@ -1,6 +1,5 @@
 <template>
-	<div class="hidden" />
+	<span />
 </template>
 
 <script src="./network-polling.js"></script>
-<style src="./network-polling.scss" scoped></style>
