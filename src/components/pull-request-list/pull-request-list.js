@@ -38,7 +38,7 @@ export default {
 		},
 	},
 	asyncComputed: {
-		pullRequests: {
+		pullRequestsToRename: {
 			async get() {
 				const watchedRepositories = this.$store.state.watchedRepositories
 				const httpResponse = await this.request(this.queryBuilder(watchedRepositories))

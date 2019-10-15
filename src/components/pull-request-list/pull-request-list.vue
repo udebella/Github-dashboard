@@ -7,7 +7,7 @@
 			data-test="network-polling"
 			:query="query" />
 		<pull-request-line
-			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses, lastEventAuthor}) in pullRequests"
+			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses, lastEventAuthor}) in pullRequestsToRename"
 			:key="prTitle"
 			:has-updates="hasUpdates(lastEventAuthor)"
 			:title="prTitle"
