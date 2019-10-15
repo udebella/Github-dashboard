@@ -10,8 +10,9 @@ describe('NetworkPolling component', () => {
 	beforeEach(() => {
 		const requestStub = stub().returns('response example')
 		const dateGenerator = stub()
-			.onCall(0).returns(new Date(1234))
-			.onCall(1).returns(new Date(2345))
+			.onCall(0).returns(new Date(0))
+			.onCall(1).returns(new Date(1234))
+			.onCall(2).returns(new Date(2345))
 		clock = useFakeTimers()
 		stubs = {
 			requestStub,

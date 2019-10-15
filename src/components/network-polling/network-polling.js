@@ -18,7 +18,7 @@ export default {
 	},
 	data() {
 		return {
-			date: 0,
+			date: this.dateGenerator(),
 		}
 	},
 	created() {
