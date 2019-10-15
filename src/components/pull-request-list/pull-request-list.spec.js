@@ -84,8 +84,10 @@ describe('PullRequestList component', () => {
 		})
 
 		it('should display a when the last network call was done', () => {
-			expect(pullRequestList.find('[data-test=network-polling]').exists()).to.be.true
-			expect(pullRequestList.find('[data-test=network-polling]').attributes().query).to.equals('graphql query')
+			const networkPolling = pullRequestList.find('[data-test=network-polling]')
+
+			expect(networkPolling.exists()).to.be.true
+			expect(networkPolling.attributes().query).to.equals('graphql query')
 		})
 
 		it('should display a list of pull request', async () => {
