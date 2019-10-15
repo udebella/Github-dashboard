@@ -1,12 +1,14 @@
 <template>
 	<div>
-		<h2 data-test="title">
-			Pull requests on watched repositories
-		</h2>
-		<network-polling
-			data-test="network-polling"
-			:query="query"
-			@httpUpdate="updatePullRequests" />
+		<div class="head">
+			<h2 data-test="title">
+				Pull requests on watched repositories
+			</h2>
+			<network-polling
+				data-test="network-polling"
+				:query="query"
+				@httpUpdate="updatePullRequests" />
+		</div>
 		<pull-request-line
 			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses, lastEventAuthor}) in pullRequests"
 			:key="prTitle"
