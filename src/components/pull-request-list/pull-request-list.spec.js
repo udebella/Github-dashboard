@@ -185,8 +185,7 @@ describe('PullRequestList component', () => {
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			const networkPolling = pullRequestList.find('[data-test=network-polling]')
-			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
+			triggerFakeNetworkResponse(pullRequestList)
 			expect(stubs.pullRequestReader).to.have.been.deep.calledWith([{
 				name: 'react',
 				owner: {login: 'facebook'},
@@ -201,5 +200,10 @@ describe('PullRequestList component', () => {
 				pullRequests: {},
 			}])
 		})
+
+		const triggerFakeNetworkResponse = pullRequestList => {
+			const networkPolling = pullRequestList.find('[data-test=network-polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
+		}
 	})
 })
