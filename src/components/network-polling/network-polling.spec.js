@@ -5,15 +5,14 @@ import flushPomises from 'flush-promises'
 import NetworkPolling from './network-polling.vue'
 
 describe('NetworkPolling component', () => {
-	let networkPolling, stubs, requestStub, clock
+	let networkPolling, stubs, clock
 
 	beforeEach(() => {
-		requestStub = stub().returns('response example')
+		const requestStub = stub().returns('response example')
 		const dateGenerator = stub().returns(new Date(1234))
 		clock = useFakeTimers()
 		stubs = {
 			requestStub,
-			clock,
 			dateGenerator,
 		}
 
