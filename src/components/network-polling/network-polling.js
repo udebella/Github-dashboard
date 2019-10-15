@@ -11,10 +11,14 @@ export default {
 			type: Function,
 			default: request,
 		},
+		dateGenerator: {
+			type: Function,
+			default: () => new Date(),
+		},
 	},
 	data() {
 		return {
-			date: new Date(1234),
+			date: this.dateGenerator(),
 		}
 	},
 	created() {
