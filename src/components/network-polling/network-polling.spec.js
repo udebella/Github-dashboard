@@ -9,12 +9,14 @@ describe('NetworkPolling component', () => {
 
 	beforeEach(() => {
 		requestStub = stub().returns('response example')
+		const dateGenerator = stub().returns(new Date(1234))
 		clock = useFakeTimers()
 
 		networkPolling = shallowMount(NetworkPolling, {
 			propsData: {
 				query: 'http://test-url',
 				request: requestStub,
+				dateGenerator,
 			},
 		})
 	})
@@ -38,6 +40,12 @@ describe('NetworkPolling component', () => {
 			expect(requestStub.callCount).to.equal(1)
 			clock.tick(1)
 			expect(requestStub.callCount).to.equal(2)
+		})
+
+		it('should display the date of the last http request', () => {
+			const date = networkPolling.find('[data-test=date]')
+
+			expect(date.text()).to.equals('1234')
 		})
 
 		it('should stop calling the url when component is not displayed anymore', () => {
