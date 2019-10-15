@@ -176,7 +176,8 @@ describe('PullRequestList component', () => {
 			shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			await flushPromises()
+			const networkPolling = pullRequestList.find('[data-test=network-polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
 			expect(stubs.request).to.have.been.calledWith('queryBuilt')
 		})
 
