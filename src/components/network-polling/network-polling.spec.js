@@ -37,7 +37,7 @@ describe('NetworkPolling component', () => {
 			it('should display the date of the last http request', () => {
 				const date = networkPolling.find('[data-test=date]')
 
-				expect(date.text()).to.equals('1234')
+				expect(date.text()).to.equals('00:01')
 			})
 
 			it('should display a title to explain the date', () => {
@@ -50,7 +50,7 @@ describe('NetworkPolling component', () => {
 				const date = networkPolling.find('[data-test=date]')
 
 				clock.tick(30000)
-				expect(date.text()).to.equals('2345')
+				expect(date.text()).to.equals('00:02')
 			})
 		})
 
