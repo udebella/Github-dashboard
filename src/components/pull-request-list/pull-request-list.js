@@ -51,7 +51,7 @@ export default {
 	},
 	data() {
 		return {
-			pullRequests: [],
+			pullRequests: null,
 		}
 	},
 	computed: {
@@ -68,6 +68,12 @@ export default {
 			const repositories = Object.values(httpResponse)
 				.filter(repositories => repositories && repositories.pullRequests)
 			this.pullRequests = this.pullRequestReader(repositories)
+		},
+		tempGetPullRequests() {
+			if (this.pullRequests === null) {
+				return this.pullRequestsToRename
+			}
+			return this.pullRequests
 		},
 	},
 	components: {
