@@ -6,7 +6,7 @@
 		<network-polling
 			data-test="polling"
 			:query="query"
-			@httpUpdate="onHttpUpdate" />
+			@httpUpdate="updateRepositories" />
 		<repository-line
 			v-for="repository in getRepositories()"
 			:key="repository.name"
