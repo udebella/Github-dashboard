@@ -8,7 +8,7 @@ describe('NetworkPolling component', () => {
 	let networkPolling, stubs, clock
 
 	beforeEach(() => {
-		const requestStub = stub().returns('response example')
+		const requestStub = stub().returns(Promise.resolve('response example'))
 		const dateGenerator = stub()
 			.onCall(0).returns(new Date(0))
 			.onCall(1).returns(new Date(1234))
