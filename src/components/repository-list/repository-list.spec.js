@@ -2,7 +2,6 @@ import {shallowMount} from '@vue/test-utils'
 import {expect} from 'chai'
 import {stub} from 'sinon'
 import RepositoryList from './repository-list.vue'
-import flushPromises from 'flush-promises'
 
 describe('RepositoryList component', () => {
 	let repositoryList
@@ -93,7 +92,8 @@ describe('RepositoryList component', () => {
 			const repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			await flushPromises()
+			const networkPolling = repositoryList.find('[data-test=polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphQlResponse)
 			const repositoryLine = repositoryList.find('[data-test=repository-line]')
 			expect(repositoryLine.exists()).to.be.true
 			expect(repositoryLine.props().repository).to.deep.equal({
@@ -113,7 +113,8 @@ describe('RepositoryList component', () => {
 			const repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			await flushPromises()
+			const networkPolling = repositoryList.find('[data-test=polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphQlResponse)
 			expect(repositoryList.contains('[data-test=repository-line]')).to.be.true
 		})
 
@@ -125,7 +126,8 @@ describe('RepositoryList component', () => {
 			shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			await flushPromises()
+			const networkPolling = repositoryList.find('[data-test=polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphQlResponse)
 			expect(stubs.request).to.have.been.calledWith('queryBuilt')
 		})
 
