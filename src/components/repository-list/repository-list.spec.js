@@ -56,11 +56,6 @@ describe('RepositoryList component', () => {
 			expect(repositoryList.find('[data-test=title]').text()).to.equals('Watched repositories')
 		})
 
-		it('should display the date of last network request', () => {
-			expect(repositoryList.find('[data-test=polling]').exists()).to.be.true
-			expect(repositoryList.find('[data-test=polling]').attributes().query).to.equals('graphql query')
-		})
-
 		it('should display a list of repositories', async () => {
 			// When
 			repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
@@ -115,15 +110,11 @@ describe('RepositoryList component', () => {
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
-			// Given
-			stubs.queryBuilder.returns('queryBuilt')
-
 			// When
 			shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			triggerNetworkResponse()
-			expect(stubs.request).to.have.been.calledWith('queryBuilt')
+			expect(repositoryList.find('[data-test=polling]').attributes().query).to.equals('graphql query')
 		})
 
 		it('should not display anything if the list is empty', () => {
