@@ -1,12 +1,14 @@
 <template>
 	<div>
-		<h2 data-test="title">
-			Watched repositories
-		</h2>
-		<network-polling
-			data-test="polling"
-			:query="query"
-			@httpUpdate="updateRepositories" />
+		<div class="head">
+			<h2 data-test="title">
+				Watched repositories
+			</h2>
+			<network-polling
+				data-test="polling"
+				:query="query"
+				@httpUpdate="updateRepositories" />
+		</div>
 		<repository-line
 			v-for="repository in repositories"
 			:key="repository.name"
