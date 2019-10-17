@@ -3,7 +3,7 @@
 		<h2 data-test="title">
 			Watched repositories
 		</h2>
-		<network-polling />
+		<network-polling data-test="polling" />
 		<repository-line
 			v-for="repository in repositories"
 			:key="repository.name"
