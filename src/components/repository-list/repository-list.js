@@ -82,8 +82,8 @@ export default {
 	methods: {
 		onHttpUpdate: httpData => extractHttpData({httpData}),
 
-		getRepositories: () => {
-			if (Array.isArray(this.tempRepositories)) {
+		getRepositories() {
+			if (Array.isArray(this.tempRepositories) && this.tempRepositories.length) {
 				return this.tempRepositories
 			}
 			return this.repositories
