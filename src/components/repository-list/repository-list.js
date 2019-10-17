@@ -70,7 +70,7 @@ export default {
 		},
 	},
 	asyncComputed: {
-		repositories: {
+		repositoriesTemp: {
 			async get() {
 				const watchedRepositories = this.$store.state.watchedRepositories
 				const httpData = await this.request(this.queryBuilder(watchedRepositories))
@@ -86,7 +86,7 @@ export default {
 			if (Array.isArray(this.tempRepositories) && this.tempRepositories.length) {
 				return this.tempRepositories
 			}
-			return this.repositories
+			return this.repositoriesTemp
 		},
 	},
 	components: {
