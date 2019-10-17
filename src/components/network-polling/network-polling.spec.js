@@ -46,11 +46,20 @@ describe('NetworkPolling component', () => {
 				expect(date.attributes().title).to.equals('Last update date')
 			})
 
-			it('should display a new date for each http call', () => {
+			it('should display a new date for each http call', async () => {
 				const date = networkPolling.find('[data-test=date]')
 
 				clock.tick(30000)
+				await flushPomises()
 				expect(date.text()).to.equals('00:02')
+			})
+
+			it('should not update the date when request failed', () => {
+				stubs.requestStub.returns(Promise.reject('failure'))
+				const date = networkPolling.find('[data-test=date]')
+
+				clock.tick(30000)
+				expect(date.text()).to.equals('00:01')
 			})
 		})
 

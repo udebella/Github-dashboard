@@ -26,8 +26,8 @@ export default {
 	},
 	created() {
 		const callHttp = async () => {
-			this.date = formatDate(this.dateGenerator)
 			const response = await this.request(this.query)
+			this.date = formatDate(this.dateGenerator)
 			this.$emit('httpUpdate', response)
 		}
 		this.interval = setInterval(callHttp, 30000)
