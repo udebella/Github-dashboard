@@ -1,4 +1,3 @@
-import {request as defaultRequest} from '../../services/graphql/graphql-client'
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
 import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
@@ -20,10 +19,6 @@ fragment repository on Repository {
 export default {
 	name: 'pull-request-list',
 	props: {
-		request: {
-			type: Function,
-			default: defaultRequest,
-		},
 		queryBuilder: {
 			type: Function,
 			default: buildRepositoriesQuery(pullRequestListFragment),
