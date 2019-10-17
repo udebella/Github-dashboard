@@ -8,7 +8,7 @@
 			:query="query"
 			@httpUpdate="updateRepositories" />
 		<repository-line
-			v-for="repository in getRepositories()"
+			v-for="repository in repositories"
 			:key="repository.name"
 			:repository="repository"
 			data-test="repository-line" />
