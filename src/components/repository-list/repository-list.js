@@ -73,6 +73,9 @@ export default {
 			default: [],
 		},
 	},
+	methods: {
+		onHttpUpdate: httpData => extractHttpData({httpData}),
+	},
 	components: {
 		RepositoryLine,
 		RepositoryAdder,
