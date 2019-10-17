@@ -57,6 +57,11 @@ export default {
 			default: buildRepositoriesQuery(repositoryListFragment),
 		},
 	},
+	data() {
+		return {
+			query: '',
+		}
+	},
 	asyncComputed: {
 		repositories: {
 			async get() {

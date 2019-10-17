@@ -60,6 +60,7 @@ describe('RepositoryList component', () => {
 
 		it('should display the date of last network request', () => {
 			expect(repositoryList.find('[data-test=polling]').exists()).to.be.true
+			expect(repositoryList.find('[data-test=polling]').attributes().query).to.equals('')
 		})
 
 		it('should display a list of repositories', async () => {

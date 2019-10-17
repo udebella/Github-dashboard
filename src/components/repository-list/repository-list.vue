@@ -3,7 +3,9 @@
 		<h2 data-test="title">
 			Watched repositories
 		</h2>
-		<network-polling data-test="polling" />
+		<network-polling
+			data-test="polling"
+			:query="query" />
 		<repository-line
 			v-for="repository in repositories"
 			:key="repository.name"
