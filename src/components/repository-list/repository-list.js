@@ -60,7 +60,7 @@ export default {
 	},
 	data() {
 		return {
-			tempRepositories: [],
+			repositories: [],
 		}
 	},
 	computed: {
@@ -83,8 +83,8 @@ export default {
 		onHttpUpdate: httpData => extractHttpData({httpData}),
 
 		getRepositories() {
-			if (Array.isArray(this.tempRepositories) && this.tempRepositories.length) {
-				return this.tempRepositories
+			if (Array.isArray(this.repositories) && this.repositories.length) {
+				return this.repositories
 			}
 			return this.repositoriesTemp
 		},
