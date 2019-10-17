@@ -68,7 +68,8 @@ describe('RepositoryList component', () => {
 			const repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			await flushPromises()
+			const networkPolling = repositoryList.find('[data-test=polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphQlResponse)
 			const repositoryLine = repositoryList.find('[data-test=repository-line]')
 			expect(repositoryLine.exists()).to.be.true
 			expect(repositoryLine.props().repository).to.deep.equal({
