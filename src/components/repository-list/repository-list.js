@@ -81,6 +81,13 @@ export default {
 	},
 	methods: {
 		onHttpUpdate: httpData => extractHttpData({httpData}),
+
+		getRepositories: () => {
+			if (Array.isArray(this.tempRepositories)) {
+				return this.tempRepositories
+			}
+			return this.repositories
+		},
 	},
 	components: {
 		RepositoryLine,
