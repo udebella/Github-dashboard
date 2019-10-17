@@ -1,5 +1,6 @@
 import RepositoryLine from '../repository-line/repository-line.vue'
 import RepositoryAdder from '../repository-adder/repository-adder.vue'
+import NetworkPolling from '../network-polling/network-polling.vue'
 import {request} from '../../services/graphql/graphql-client'
 import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
 
@@ -75,5 +76,6 @@ export default {
 	components: {
 		RepositoryLine,
 		RepositoryAdder,
+		NetworkPolling,
 	},
 }
