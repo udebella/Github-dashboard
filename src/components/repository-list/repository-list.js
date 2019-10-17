@@ -58,10 +58,11 @@ export default {
 			default: buildRepositoriesQuery(repositoryListFragment),
 		},
 	},
-	data() {
-		return {
-			query: '',
-		}
+	computed: {
+		query() {
+			const watchedRepositories = this.$store.state.watchedRepositories
+			return this.queryBuilder(watchedRepositories)
+		},
 	},
 	asyncComputed: {
 		repositories: {

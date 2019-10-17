@@ -40,7 +40,7 @@ describe('RepositoryList component', () => {
 			},
 		}
 		stubs = {
-			queryBuilder: stub(),
+			queryBuilder: stub().returns('graphql query'),
 			request: stub().returns(Promise.resolve(fakeGraphQlResponse)),
 			fakeGraphQlResponse,
 			store,
@@ -60,7 +60,7 @@ describe('RepositoryList component', () => {
 
 		it('should display the date of last network request', () => {
 			expect(repositoryList.find('[data-test=polling]').exists()).to.be.true
-			expect(repositoryList.find('[data-test=polling]').attributes().query).to.equals('')
+			expect(repositoryList.find('[data-test=polling]').attributes().query).to.equals('graphql query')
 		})
 
 		it('should display a list of repositories', async () => {
