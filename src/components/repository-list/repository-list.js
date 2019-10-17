@@ -58,6 +58,11 @@ export default {
 			default: buildRepositoriesQuery(repositoryListFragment),
 		},
 	},
+	data() {
+		return {
+			tempRepositories: [],
+		}
+	},
 	computed: {
 		query() {
 			const watchedRepositories = this.$store.state.watchedRepositories
