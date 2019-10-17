@@ -4,8 +4,7 @@ import {stub} from 'sinon'
 import RepositoryList from './repository-list.vue'
 
 describe('RepositoryList component', () => {
-	let repositoryList
-	let stubs
+	let repositoryList, stubs
 
 	beforeEach(() => {
 		const store = {
