@@ -69,25 +69,9 @@ export default {
 			return this.queryBuilder(watchedRepositories)
 		},
 	},
-	asyncComputed: {
-		repositoriesTemp: {
-			async get() {
-				const watchedRepositories = this.$store.state.watchedRepositories
-				const httpData = await this.request(this.queryBuilder(watchedRepositories))
-				return extractHttpData({httpData})
-			},
-			default: [],
-		},
-	},
 	methods: {
 		updateRepositories(httpData) {
 			this.repositories = extractHttpData({httpData})
-		},
-		getRepositories() {
-			if (Array.isArray(this.repositories) && this.repositories.length) {
-				return this.repositories
-			}
-			return this.repositoriesTemp
 		},
 	},
 	components: {
