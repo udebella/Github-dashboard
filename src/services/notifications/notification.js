@@ -1,4 +1,4 @@
-export const notificationApi = ({Notification}) => {
+const notificationApi = ({Notification = window.Notification} = {}) => {
 	let resolve
 	let authorizedNotification = new Promise(r => {resolve = r})
 
@@ -26,3 +26,5 @@ export const notificationApi = ({Notification}) => {
 		notify,
 	}
 }
+
+export {notificationApi}
