@@ -29,11 +29,11 @@
 		"@vue/test-utils": "^1.0.0-beta.29",
 		"babel-loader": "^8.0.6",
 		"chai": "^4.2.0",
-		"core-js": "^3.3.2",
+		"core-js": "^3.3.5",
 		"css-loader": "^3.2.0",
-		"date-fns": "^2.4.1",
+		"date-fns": "^2.6.0",
 		"debounce": "^1.2.0",
-		"eslint": "^6.5.1",
+		"eslint": "^6.6.0",
 		"eslint-loader": "^3.0.2",
 		"eslint-plugin-vue": "^5.2.3",
 		"file-loader": "^4.2.0",
@@ -43,9 +43,9 @@
 		"istanbul-instrumenter-loader": "^3.0.1",
 		"jsdom": "^15.2.0",
 		"jsdom-global": "^3.0.2",
-		"mocha": "^6.2.1",
+		"mocha": "^6.2.2",
 		"mocha-webpack": "^2.0.0-beta.0",
-		"node-sass": "^4.12.0",
+		"node-sass": "^4.13.0",
 		"nyc": "^14.1.1",
 		"sass-loader": "^8.0.0",
 		"sinon": "^7.5.0",
@@ -62,9 +62,9 @@
 	"devDependencies": {
 		"connect": "^3.7.0",
 		"connect-prism": "^1.0.21",
-		"plop": "^2.4.0",
-		"webpack-bundle-analyzer": "^3.5.2",
-		"webpack-dev-server": "^3.8.2"
+		"plop": "^2.5.2",
+		"webpack-bundle-analyzer": "^3.6.0",
+		"webpack-dev-server": "^3.9.0"
 	},
 	"nyc": {
 		"include": [
