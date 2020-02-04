@@ -24,8 +24,13 @@ export default {
 			date: formatDate(this.dateGenerator),
 		}
 	},
-	created() {
-		const callHttp = async () => {
+	watch: {
+		query() {
+			this.callHttp()
+		},
+	},
+	methods: {
+		async callHttp() {
 			try {
 				const response = await this.request(this.query)
 				this.date = formatDate(this.dateGenerator)
@@ -33,9 +38,11 @@ export default {
 			} catch(ex) {
 				// Request will be retried in a few sec
 			}
-		}
-		this.interval = setInterval(callHttp, 30000)
-		return callHttp()
+		},
+	},
+	created() {
+		this.interval = setInterval(this.callHttp, 30000)
+		return this.callHttp()
 	},
 	destroyed() {
 		clearInterval(this.interval)

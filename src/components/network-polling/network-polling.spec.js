@@ -88,12 +88,11 @@ describe('NetworkPolling component', () => {
 			expect(stubs.requestStub.callCount).to.equal(1)
 		})
 
-		it('should call the new url when props change', () => {
-			networkPolling.setProps({
+		it('should call the new url immediately when props change', async () => {
+			await networkPolling.setProps({
 				query: 'http://new-url',
 			})
 
-			clock.tick(30000)
 			expect(stubs.requestStub).to.have.been.calledWith('http://new-url')
 		})
 
