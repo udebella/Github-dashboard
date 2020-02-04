@@ -38,7 +38,7 @@ const config = {
 		},
 	},
 	mode: 'production',
-	devtool: 'source-map',
+	devtool: 'cheap-source-map',
 }
 
 module.exports = config
