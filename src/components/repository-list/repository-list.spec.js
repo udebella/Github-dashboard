@@ -61,7 +61,7 @@ describe('RepositoryList component', () => {
 			repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			triggerNetworkResponse()
+			await triggerNetworkResponse()
 			const repositoryLine = repositoryList.find('[data-test=repository-line]')
 			expect(repositoryLine.exists()).to.be.true
 			expect(repositoryLine.props().repository).to.deep.equal({
@@ -85,7 +85,7 @@ describe('RepositoryList component', () => {
 			repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			triggerNetworkResponse()
+			await triggerNetworkResponse()
 			const repositoryLine = repositoryList.find('[data-test=repository-line]')
 			expect(repositoryLine.exists()).to.be.true
 			expect(repositoryLine.props().repository).to.deep.equal({
@@ -105,7 +105,7 @@ describe('RepositoryList component', () => {
 			repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			triggerNetworkResponse()
+			await triggerNetworkResponse()
 			expect(repositoryList.contains('[data-test=repository-line]')).to.be.true
 		})
 
@@ -132,9 +132,10 @@ describe('RepositoryList component', () => {
 			expect(repositoryList.find('[data-test=repository-adder]').exists()).to.be.true
 		})
 
-		const triggerNetworkResponse = () => {
+		const triggerNetworkResponse = async () => {
 			const networkPolling = repositoryList.find('[data-test=polling]')
 			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphQlResponse)
+			await repositoryList.vm.$nextTick()
 		}
 	})
 })

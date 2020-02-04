@@ -87,7 +87,7 @@ describe('PullRequestList component', () => {
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			triggerFakeNetworkResponse(pullRequestList)
+			await triggerFakeNetworkResponse(pullRequestList)
 			const pullRequestLine = pullRequestList.findAll('[data-test=line]')
 			expect(pullRequestLine.length).to.equal(2)
 			expect(pullRequestLine.at(0).props()).to.deep.equals({
@@ -125,7 +125,7 @@ describe('PullRequestList component', () => {
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			triggerFakeNetworkResponse(pullRequestList)
+			await triggerFakeNetworkResponse(pullRequestList)
 			expect(pullRequestList.contains('[data-test=line]')).to.be.false
 		})
 
@@ -138,7 +138,7 @@ describe('PullRequestList component', () => {
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			triggerFakeNetworkResponse(pullRequestList)
+			await triggerFakeNetworkResponse(pullRequestList)
 			const pullRequestLine = pullRequestList.find('[data-test=line]')
 			expect(pullRequestLine.exists()).to.be.true
 			expect(pullRequestLine.props().buildStatus).to.equals('NO_STATUS')
@@ -152,7 +152,7 @@ describe('PullRequestList component', () => {
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			triggerFakeNetworkResponse(pullRequestList)
+			await triggerFakeNetworkResponse(pullRequestList)
 			expect(pullRequestList.contains('[data-test=line]')).to.be.true
 		})
 
@@ -174,7 +174,7 @@ describe('PullRequestList component', () => {
 			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			triggerFakeNetworkResponse(pullRequestList)
+			await triggerFakeNetworkResponse(pullRequestList)
 			expect(stubs.pullRequestReader).to.have.been.deep.calledWith([{
 				name: 'react',
 				owner: {login: 'facebook'},
@@ -190,9 +190,10 @@ describe('PullRequestList component', () => {
 			}])
 		})
 
-		const triggerFakeNetworkResponse = pullRequestList => {
+		const triggerFakeNetworkResponse = async pullRequestList => {
 			const networkPolling = pullRequestList.find('[data-test=network-polling]')
 			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
+			networkPolling.vm.$nextTick()
 		}
 	})
 })

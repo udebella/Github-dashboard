@@ -55,32 +55,32 @@ describe('BuildStatus component', () => {
 	})
 
 	describe('Icons', () => {
-		it('should map success status to check-circle icon', () => {
-			buildStatus.setProps({state: 'SUCCESS'})
+		it('should map success status to check-circle icon', async () => {
+			await buildStatus.setProps({state: 'SUCCESS'})
 			const icon = buildStatus.find('[data-test=icon]')
 
 			expect(icon.exists()).to.be.true
 			expect(icon.vm.$attrs.icon).to.deep.equal(faCheckCircle)
 		})
 
-		it('should map failure status to exclamation-circle icon', () => {
-			buildStatus.setProps({state: 'FAILURE'})
+		it('should map failure status to exclamation-circle icon', async () => {
+			await buildStatus.setProps({state: 'FAILURE'})
 			const icon = buildStatus.find('[data-test=icon]')
 
 			expect(icon.exists()).to.be.true
 			expect(icon.vm.$attrs.icon).to.deep.equal(faExclamationCircle)
 		})
 
-		it('should map error status to times-circle icon', () => {
-			buildStatus.setProps({state: 'ERROR'})
+		it('should map error status to times-circle icon', async () => {
+			await buildStatus.setProps({state: 'ERROR'})
 			const icon = buildStatus.find('[data-test=icon]')
 
 			expect(icon.exists()).to.be.true
 			expect(icon.vm.$attrs.icon).to.deep.equal(faTimesCircle)
 		})
 
-		it('should map pending status to clock icon', () => {
-			buildStatus.setProps({state: 'PENDING'})
+		it('should map pending status to clock icon', async () => {
+			await buildStatus.setProps({state: 'PENDING'})
 			const icon = buildStatus.find('[data-test=icon]')
 
 			expect(icon.exists()).to.be.true
