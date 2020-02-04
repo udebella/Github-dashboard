@@ -11,7 +11,7 @@ fragment repository on Repository {
     login
   }
   url
-  pullRequests(states: OPEN, last: 5) {
+  pullRequests(states: OPEN, last: 10) {
     ...PullRequest
   }
 }`
