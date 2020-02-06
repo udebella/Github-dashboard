@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import ViewerPullRequestList from './viewer-pull-request-list.vue'
-import flushPromises from 'flush-promises'
 import {stub} from 'sinon'
 import {viewerFragment} from './viewer-pull-request-list'
 
@@ -9,6 +8,7 @@ describe('ViewerPullRequestList component', () => {
 	let stubs
 
 	beforeEach(() => {
+		const fakeGraphqlResponse = 'fake response'
 		const fakeReponseRead = [{
 			prTitle: 'Fix wheel/touch browser locking in IE and Safari',
 			prUrl: 'https://github.com/facebook/react/pull/9333',
@@ -23,11 +23,12 @@ describe('ViewerPullRequestList component', () => {
 			}],
 		}]
 		stubs = {
-			queryBuilder: stub(),
+			queryBuilder: stub().returns('graphql query'),
 			request: stub().returns(Promise.resolve({})),
 			pullRequestReader: stub().returns(fakeReponseRead),
 			userService: {connectedUser: stub().returns({login: 'udebella'})},
 			fakeReponseRead,
+			fakeGraphqlResponse,
 		}
 	})
 
@@ -49,11 +50,11 @@ describe('ViewerPullRequestList component', () => {
 			stubs.queryBuilder.returns('queryBuilt')
 
 			// When
-			shallowMount(ViewerPullRequestList, {propsData: stubs})
+			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
 			// Then
-			await flushPromises()
-			expect(stubs.request).to.have.been.calledWith('queryBuilt')
+			await triggerFakeNetworkResponse(viewerPullRequestList)
+			expect(viewerPullRequestList.find('[data-test=network-polling]').props().query).to.equal('queryBuilt')
 			expect(stubs.queryBuilder).to.have.been.calledWith(viewerFragment)
 			expect(stubs.pullRequestReader).to.have.been.called
 		})
@@ -67,7 +68,7 @@ describe('ViewerPullRequestList component', () => {
 			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
 			// Then
-			await flushPromises()
+			await triggerFakeNetworkResponse(viewerPullRequestList)
 			expect(viewerPullRequestList.contains('[data-test=line]')).to.be.false
 		})
 
@@ -76,7 +77,7 @@ describe('ViewerPullRequestList component', () => {
 			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
 			// Then
-			await flushPromises()
+			await triggerFakeNetworkResponse(viewerPullRequestList)
 			const viewerPullRequestLine = viewerPullRequestList.find('[data-test=line]')
 			expect(viewerPullRequestLine.exists()).to.be.true
 			expect(viewerPullRequestLine.props()).to.deep.equals({
@@ -100,9 +101,15 @@ describe('ViewerPullRequestList component', () => {
 			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
 			// Then
-			await flushPromises()
+			await triggerFakeNetworkResponse(viewerPullRequestList)
 			const viewerPullRequestLine = viewerPullRequestList.find('[data-test=line]')
 			expect(viewerPullRequestLine.props().hasUpdates).to.be.true
 		})
+
+		const triggerFakeNetworkResponse = async viewerPullRequestList => {
+			const networkPolling = viewerPullRequestList.find('[data-test=network-polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
+			networkPolling.vm.$nextTick()
+		}
 	})
 })
