@@ -1,8 +1,14 @@
 <template>
 	<div>
-		<h2 data-test="title">
-			My recently merged pull requests
-		</h2>
+		<div class="head">
+			<h2 data-test="title">
+				My recently merged pull requests
+			</h2>
+			<network-polling
+				data-test="network-polling"
+				:query="query"
+				@httpUpdate="updatePullRequests" />
+		</div>
 		<pull-request-line
 			v-for="({buildStatus, creationDate, statuses, prTitle, prUrl}) in pullRequests"
 			:key="prTitle"

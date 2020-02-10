@@ -1,15 +1,11 @@
 import {extractHttp as extractPullRequest, pullRequestFragment} from '../../services/pull-request/pull-request'
-import {request as defaultRequest} from '../../services/graphql/graphql-client'
 import {buildViewerQuery} from '../../services/graphql/query-builder'
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
+import NetworkPolling from '../network-polling/network-polling.vue'
 
 export default {
 	name: 'recently-closed-pull-requests',
 	props: {
-		request: {
-			type: Function,
-			default: defaultRequest,
-		},
 		queryBuilder: {
 			type: Function,
 			default: buildViewerQuery,
@@ -19,23 +15,30 @@ export default {
 			default: extractPullRequest,
 		},
 	},
-	asyncComputed: {
-		pullRequests: {
-			async get() {
-				const httpResponse = await this.request(this.queryBuilder(viewerFragment))
-				return this.pullRequestReader([httpResponse.viewer])
-			},
-			default: [],
+	data() {
+		return {
+			pullRequests: [],
+		}
+	},
+	computed: {
+		query() {
+			return this.queryBuilder(viewerFragment)
+		},
+	},
+	methods: {
+		updatePullRequests(httpResponse) {
+			this.pullRequests = this.pullRequestReader([httpResponse.viewer])
 		},
 	},
 	components: {
 		PullRequestLine,
+		NetworkPolling,
 	},
 }
 
-export const viewerFragment = `${pullRequestFragment} 
+export const viewerFragment = `${pullRequestFragment}
 fragment viewer on User {
-  pullRequests(states: MERGED, last: 5) {  
+  pullRequests(states: MERGED, last: 5) {
     ...PullRequest
   }
 }`

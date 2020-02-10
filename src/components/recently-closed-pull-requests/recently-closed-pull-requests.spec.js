@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import RecentlyClosedPullRequests from './recently-closed-pull-requests.vue'
-import flushPromises from 'flush-promises'
 import {stub} from 'sinon'
 import {viewerFragment} from './recently-closed-pull-requests'
 
@@ -9,6 +8,7 @@ describe('RecentlyClosedPullRequests component', () => {
 	let stubs
 
 	beforeEach(() => {
+		const fakeGraphqlResponse = 'fake response'
 		const fakeReponseRead = [{
 			prTitle: 'Fix wheel/touch browser locking in IE and Safari',
 			prUrl: 'https://github.com/facebook/react/pull/9333',
@@ -23,10 +23,11 @@ describe('RecentlyClosedPullRequests component', () => {
 			}],
 		}]
 		stubs = {
-			queryBuilder: stub(),
+			queryBuilder: stub().returns('graphql query'),
 			request: stub().returns(Promise.resolve({})),
 			pullRequestReader: stub().returns(fakeReponseRead),
 			fakeReponseRead,
+			fakeGraphqlResponse,
 		}
 	})
 
@@ -48,11 +49,11 @@ describe('RecentlyClosedPullRequests component', () => {
 			stubs.queryBuilder.returns('queryBuilt')
 
 			// When
-			shallowMount(RecentlyClosedPullRequests, {propsData: stubs})
+			const recentlyClosedPullRequests = shallowMount(RecentlyClosedPullRequests, {propsData: stubs})
 
 			// Then
-			await flushPromises()
-			expect(stubs.request).to.have.been.calledWith('queryBuilt')
+			await triggerFakeNetworkResponse(recentlyClosedPullRequests)
+			expect(recentlyClosedPullRequests.find('[data-test=network-polling]').props().query).to.equal('queryBuilt')
 			expect(stubs.queryBuilder).to.have.been.calledWith(viewerFragment)
 			expect(stubs.pullRequestReader).to.have.been.called
 		})
@@ -66,7 +67,7 @@ describe('RecentlyClosedPullRequests component', () => {
 			const recentlyClosedPullRequests = shallowMount(RecentlyClosedPullRequests, {propsData: stubs})
 
 			// Then
-			await flushPromises()
+			await triggerFakeNetworkResponse(recentlyClosedPullRequests)
 			expect(recentlyClosedPullRequests.contains('[data-test=line]')).to.be.false
 		})
 
@@ -75,7 +76,7 @@ describe('RecentlyClosedPullRequests component', () => {
 			const recentlyClosedPullRequests = shallowMount(RecentlyClosedPullRequests, {propsData: stubs})
 
 			// Then
-			await flushPromises()
+			await triggerFakeNetworkResponse(recentlyClosedPullRequests)
 			const viewerPullRequestLine = recentlyClosedPullRequests.find('[data-test=line]')
 			expect(viewerPullRequestLine.exists()).to.be.true
 			expect(viewerPullRequestLine.props()).to.deep.equals({
@@ -91,5 +92,11 @@ describe('RecentlyClosedPullRequests component', () => {
 				}],
 			})
 		})
+
+		const triggerFakeNetworkResponse = async viewerPullRequestList => {
+			const networkPolling = viewerPullRequestList.find('[data-test=network-polling]')
+			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
+			networkPolling.vm.$nextTick()
+		}
 	})
 })

@@ -1,4 +1,3 @@
-import {request as defaultRequest} from '../../services/graphql/graphql-client'
 import {buildViewerQuery} from '../../services/graphql/query-builder'
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
@@ -8,10 +7,6 @@ import {buildUserService} from '../../services/user/user'
 export default {
 	name: 'viewer-pull-request-list',
 	props: {
-		request: {
-			type: Function,
-			default: defaultRequest,
-		},
 		queryBuilder: {
 			type: Function,
 			default: buildViewerQuery,
