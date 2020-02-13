@@ -2,6 +2,7 @@ import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import RefreshIndicator from './refresh-indicator.vue'
 import {useFakeTimers} from 'sinon'
+import flushPromises from 'flush-promises'
 
 describe('RefreshIndicator component', () => {
 	let refreshIndicator, stubs
@@ -10,7 +11,11 @@ describe('RefreshIndicator component', () => {
 		stubs = {
 			clock: useFakeTimers(),
 		}
-		refreshIndicator = shallowMount(RefreshIndicator)
+		refreshIndicator = shallowMount(RefreshIndicator, {
+			propsData: {
+				promise: Promise.resolve('first resolution'),
+			},
+		})
 	})
 
 	afterEach(() => {
@@ -33,6 +38,17 @@ describe('RefreshIndicator component', () => {
 
 			await refreshIndicator.vm.$nextTick()
 			expect(refreshIndicator.find('div').text()).to.equal('1')
+		})
+
+		it('should reset counter when prop promise is changing', async () => {
+			stubs.clock.tick(10000)
+
+			await refreshIndicator.setProps({
+				promise: Promise.resolve('new resolution'),
+			})
+			await flushPromises()
+
+			expect(refreshIndicator.find('div').text()).to.equal('0')
 		})
 	})
 })
