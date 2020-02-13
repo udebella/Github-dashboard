@@ -19,6 +19,11 @@ export default {
 	created() {
 		this.interval = setInterval(this.incrementCounter, 1000)
 	},
+	computed: {
+		freshness() {
+			return this.counter < 30 ? 'fresh' : 'old'
+		},
+	},
 	methods: {
 		incrementCounter() {
 			this.counter++

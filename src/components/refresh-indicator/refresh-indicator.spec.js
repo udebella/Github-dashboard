@@ -65,5 +65,12 @@ describe('RefreshIndicator component', () => {
 		it('should display the counter as green when it is less than 30 seconds', () => {
 			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['fresh'])
 		})
+
+		it('should display the counter as orange when it is less than 60 seconds', async () => {
+			stubs.clock.tick(60000)
+
+			await refreshIndicator.vm.$nextTick()
+			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['old'])
+		})
 	})
 })
