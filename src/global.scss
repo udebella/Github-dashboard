@@ -12,6 +12,7 @@ $surface: #232323;
 $success: green;
 $failure: red;
 $pending: #120262;
+$old: orange;
 
 @mixin lightenOnHover($color) {
 	background-color: $color;

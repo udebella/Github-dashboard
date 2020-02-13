@@ -1,1 +1,11 @@
 @import '../../global';
+
+.fresh {
+	color: $success
+}
+.old {
+	color: $old
+}
+.outdated {
+	color: $failure
+}
