@@ -1,5 +1,7 @@
 <template>
-	<div>{{ counter }}s ago</div>
+	<div data-test="counter">
+		{{ counter }}s ago
+	</div>
 </template>
 
 <script src="./refresh-indicator.js"></script>

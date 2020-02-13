@@ -30,14 +30,14 @@ describe('RefreshIndicator component', () => {
 
 	describe('Counter', () => {
 		it('should display an initialized counter', () => {
-			expect(refreshIndicator.find('div').text()).to.equal('0s ago')
+			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('0s ago')
 		})
 
 		it('should increment the counter each seconds', async () => {
 			stubs.clock.tick(1001)
 
 			await refreshIndicator.vm.$nextTick()
-			expect(refreshIndicator.find('div').text()).to.equal('1s ago')
+			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('1s ago')
 		})
 
 		it('should reset counter when prop promise is changing', async () => {
@@ -48,7 +48,7 @@ describe('RefreshIndicator component', () => {
 			})
 			await flushPromises()
 
-			expect(refreshIndicator.find('div').text()).to.equal('0s ago')
+			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('0s ago')
 		})
 
 		it('should not reset counter while the promise is not resolved', async () => {
@@ -59,7 +59,7 @@ describe('RefreshIndicator component', () => {
 			})
 			await flushPromises()
 
-			expect(refreshIndicator.find('div').text()).to.equal('5s ago')
+			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('5s ago')
 		})
 	})
 })
