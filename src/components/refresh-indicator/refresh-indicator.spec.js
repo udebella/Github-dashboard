@@ -50,5 +50,16 @@ describe('RefreshIndicator component', () => {
 
 			expect(refreshIndicator.find('div').text()).to.equal('0')
 		})
+
+		it('should not reset counter while the promise is not resolved', async () => {
+			stubs.clock.tick(5000)
+
+			await refreshIndicator.setProps({
+				promise: new Promise(() => {}),
+			})
+			await flushPromises()
+
+			expect(refreshIndicator.find('div').text()).to.equal('5')
+		})
 	})
 })
