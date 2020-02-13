@@ -61,5 +61,9 @@ describe('RefreshIndicator component', () => {
 
 			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('5s ago')
 		})
+
+		it('should display the counter as green when it is less than 30 seconds', () => {
+			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['fresh'])
+		})
 	})
 })

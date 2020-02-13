@@ -1,5 +1,7 @@
 <template>
-	<div data-test="counter">
+	<div
+		data-test="counter"
+		class="fresh">
 		{{ counter }}s ago
 	</div>
 </template>
