@@ -72,5 +72,12 @@ describe('RefreshIndicator component', () => {
 			await refreshIndicator.vm.$nextTick()
 			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['old'])
 		})
+
+		it('should display the counter as red when it is more than 60 sec', async () => {
+			stubs.clock.tick(61000)
+
+			await refreshIndicator.vm.$nextTick()
+			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['outdated'])
+		})
 	})
 })

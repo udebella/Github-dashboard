@@ -21,7 +21,13 @@ export default {
 	},
 	computed: {
 		freshness() {
-			return this.counter < 30 ? 'fresh' : 'old'
+			if (this.counter < 30) {
+				return 'fresh'
+			}
+			if (this.counter > 60) {
+				return 'outdated'
+			}
+			return 'old'
 		},
 	},
 	methods: {
