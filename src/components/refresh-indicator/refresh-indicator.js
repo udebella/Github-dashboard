@@ -17,7 +17,7 @@ export default {
 		},
 	},
 	created() {
-		setInterval(this.incrementCounter, 1000)
+		this.interval = setInterval(this.incrementCounter, 1000)
 	},
 	methods: {
 		incrementCounter() {
@@ -26,5 +26,8 @@ export default {
 		resetCounter() {
 			this.counter = 0
 		},
+	},
+	destroyed() {
+		clearInterval(this.interval)
 	},
 }
