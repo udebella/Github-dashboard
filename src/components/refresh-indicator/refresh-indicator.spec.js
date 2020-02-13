@@ -21,8 +21,10 @@ describe('RefreshIndicator component', () => {
 		it('should have the right component name', () => {
 			expect(refreshIndicator.name()).to.equal('refresh-indicator')
 		})
+	})
 
-		it('should an initialized counter', () => {
+	describe('Counter', () => {
+		it('should display an initialized counter', () => {
 			expect(refreshIndicator.find('div').text()).to.equal('0')
 		})
 
