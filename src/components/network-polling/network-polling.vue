@@ -3,7 +3,9 @@
 		<span
 			data-test="date"
 			title="Last update date">{{ date }}</span>
-		<refresh-indicator :promise="promise" />
+		<refresh-indicator
+			title="Last refresh"
+			:promise="promise" />
 	</div>
 </template>
 

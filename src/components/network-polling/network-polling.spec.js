@@ -46,6 +46,7 @@ describe('NetworkPolling component', () => {
 				const indicator = networkPolling.find({name: 'refresh-indicator'})
 
 				expect(indicator.exists()).to.be.true
+				expect(indicator.attributes().title).to.equal('Last refresh')
 				expect(indicator.props()).to.deep.equal({promise: stubs.promise})
 			})
 
