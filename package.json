@@ -45,11 +45,11 @@
 		"sinon-chai": "^3.4.0",
 		"vue": "^2.6.11",
 		"vue-async-computed": "^3.8.2",
-		"vue-loader": "^15.8.3",
+		"vue-loader": "^15.9.0",
 		"vue-template-compiler": "^2.6.11",
 		"vuex": "^3.1.2",
-		"webpack": "^4.41.5",
-		"webpack-cli": "^3.3.10",
+		"webpack": "^4.41.6",
+		"webpack-cli": "^3.3.11",
 		"webpack-node-externals": "^1.7.2"
 	},
 	"devDependencies": {
