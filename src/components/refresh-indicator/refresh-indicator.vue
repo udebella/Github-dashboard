@@ -1,5 +1,5 @@
 <template>
-	<div>Test component</div>
+	<div>{{ counter }}</div>
 </template>
 
 <script src="./refresh-indicator.js"></script>
