@@ -8,7 +8,8 @@ describe('NetworkPolling component', () => {
 	let networkPolling, stubs, clock
 
 	beforeEach(() => {
-		const requestStub = stub().returns(Promise.resolve('response example'))
+		const promise = Promise.resolve('response example')
+		const requestStub = stub().returns(promise)
 		const dateGenerator = stub()
 			.onCall(0).returns(new Date(0))
 			.onCall(1).returns(new Date(1234))
@@ -16,6 +17,7 @@ describe('NetworkPolling component', () => {
 		clock = useFakeTimers()
 		stubs = {
 			requestStub,
+			promise,
 			dateGenerator,
 		}
 
@@ -38,6 +40,13 @@ describe('NetworkPolling component', () => {
 				const date = networkPolling.find('[data-test=date]')
 
 				expect(date.text()).to.equals('00:01')
+			})
+
+			it('should display refresh indicator of the data', async () => {
+				const indicator = networkPolling.find({name: 'refresh-indicator'})
+
+				expect(indicator.exists()).to.be.true
+				expect(indicator.props()).to.deep.equal({promise: stubs.promise})
 			})
 
 			it('should display a title to explain the date', () => {

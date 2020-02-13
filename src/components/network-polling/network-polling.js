@@ -1,5 +1,6 @@
 import {request} from '../../services/graphql/graphql-client'
 import {format} from 'date-fns'
+import RefreshIndicator from '../refresh-indicator/refresh-indicator.vue'
 
 const formatDate = dateGenerator => format(dateGenerator(), 'mm:ss')
 
@@ -22,6 +23,7 @@ export default {
 	data() {
 		return {
 			date: formatDate(this.dateGenerator),
+			promise: new Promise(() => {}),
 		}
 	},
 	watch: {
@@ -32,7 +34,8 @@ export default {
 	methods: {
 		async callHttp() {
 			try {
-				const response = await this.request(this.query)
+				this.promise = this.request(this.query)
+				const response = await this.promise
 				this.date = formatDate(this.dateGenerator)
 				this.$emit('httpUpdate', response)
 			} catch(ex) {
@@ -46,5 +49,8 @@ export default {
 	},
 	destroyed() {
 		clearInterval(this.interval)
+	},
+	components: {
+		RefreshIndicator,
 	},
 }
