@@ -16,9 +16,9 @@ const notificationApi = ({Notification = window.Notification} = {}) => {
 		})
 	}
 
-	const notify = async () => {
+	const notify = async (notification) => {
 		if (await authorizedNotification) {
-			new Notification('Some notification')
+			new Notification(notification)
 		}
 	}
 
