@@ -2,11 +2,17 @@ import {notificationApi} from '../notifications/notification'
 
 const defaults = {notificationApi: notificationApi}
 const pullRequestNotifications = ({notificationApi} = defaults) => {
+	let alreadyNotified = []
+
 	const newList = (pullRequests) => {
-		if (pullRequests.length === 1) {
-			notificationApi().notify(`A new pull request was opened: ${pullRequests[0].title}`)
-		} else if (pullRequests.length > 1) {
-			notificationApi().notify(`${pullRequests.length} new pull requests were opened`)
+		const prToNotify = pullRequests
+			.filter(({title}) => !alreadyNotified.find(notifiedPr => notifiedPr.title === title))
+		if (prToNotify.length === 1) {
+			alreadyNotified = [...prToNotify]
+			notificationApi().notify(`A new pull request was opened: ${prToNotify[0].title}`)
+		} else if (prToNotify.length > 1) {
+			alreadyNotified = [...prToNotify]
+			notificationApi().notify(`${prToNotify.length} new pull requests were opened`)
 		}
 	}
 
