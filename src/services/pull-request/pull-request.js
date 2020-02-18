@@ -10,18 +10,22 @@ export const pullRequestFragment = `fragment PullRequest on PullRequestConnectio
       createdAt
       updatedAt
       state
-      timeline(last: 1) {
+      timelineItems(last: 1, itemTypes: [PULL_REQUEST_COMMIT, PULL_REQUEST_REVIEW]) {
         nodes {
-          ...on Commit {
-            author {
-              name
-            }
-          }
-          ...on Comment {
-            author {
-              login
-            }
-          }
+		  ...on PullRequestCommit {
+			commit {
+			  author {
+				user {
+				  login
+				}
+			  }
+			}
+		  }
+		  ...on PullRequestReview {
+			author {
+			  login
+			}
+		  }
         }
       }
       commits(last: 1) {
@@ -43,19 +47,19 @@ export const pullRequestFragment = `fragment PullRequest on PullRequestConnectio
 
 export const extractHttp = repositoryList => repositoryList
 	.flatMap(({pullRequests}) => pullRequests.nodes
-		.map(({title, url, createdAt, updatedAt, commits, timeline}) => ({
+		.map(({title, url, createdAt, updatedAt, commits, timelineItems}) => ({
 			prTitle: title,
 			prUrl: url,
 			creationDate: new Date(createdAt),
 			updateDate: new Date(updatedAt),
-			...extractLastEventAuthor(timeline),
+			...extractLastEventAuthor(timelineItems),
 			...extractStatuses(commits),
 		})))
 	.sort(mostRecentFirst)
 
-const extractLastEventAuthor = ({nodes: [{author}]}) => {
-	const {login, name} = author || {}
-	const authorName = login || name
+const extractLastEventAuthor = ({nodes: [lastEvent]}) => {
+	const {login} = lastEvent.author || lastEvent.commit && lastEvent.commit.author.user || {}
+	const authorName = login
 	const defaultAuthorName = ''
 	return {
 		lastEventAuthor: authorName || defaultAuthorName,

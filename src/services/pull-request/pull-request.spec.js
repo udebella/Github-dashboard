@@ -13,7 +13,7 @@ describe('Pull request service', () => {
 					updatedAt: '2018-10-25T01:36:27Z',
 					createdAt: '2018-10-20T00:00:00Z',
 					state: 'OPEN',
-					timeline: {
+					timelineItems: {
 						nodes: [{
 							author: {
 								login: 'udebella',
@@ -63,7 +63,7 @@ describe('Pull request service', () => {
 	})
 
 	it('should return a default lastEventAuthor when the last action is a commit', () => {
-		httpResponse[0].pullRequests.nodes[0].timeline.nodes[0].author = {name: 'udebella'}
+		httpResponse[0].pullRequests.nodes[0].timelineItems.nodes[0].author = {login: 'udebella'}
 
 		const response = extractHttp(httpResponse)
 
@@ -71,11 +71,19 @@ describe('Pull request service', () => {
 	})
 
 	it('should return a default lastEventAuthor when the last action is not tracked', () => {
-		httpResponse[0].pullRequests.nodes[0].timeline.nodes[0] = {}
+		httpResponse[0].pullRequests.nodes[0].timelineItems.nodes[0] = {}
 
 		const response = extractHttp(httpResponse)
 
 		expect(response[0].lastEventAuthor).to.equals('')
+	})
+
+	it('should be able to retrieve lastEventAuthor from commits', () => {
+		httpResponse[0].pullRequests.nodes[0].timelineItems.nodes[0] = {commit: {author: {user: {login: 'udebella'}}}}
+
+		const response = extractHttp(httpResponse)
+
+		expect(response[0].lastEventAuthor).to.equals('udebella')
 	})
 
 	it('should extract statuses from a response on a pull request that was built', () => {
@@ -105,7 +113,7 @@ describe('Pull request service', () => {
 					createdAt: '2018-10-31T22:17:12Z',
 					updatedAt: '2018-11-07T20:10:15Z',
 					state: 'OPEN',
-					timeline: {
+					timelineItems: {
 						nodes: [{}],
 					},
 					commits: {
