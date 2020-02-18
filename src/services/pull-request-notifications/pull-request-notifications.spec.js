@@ -30,4 +30,15 @@ describe('Pull request notification service', () => {
 
 		expect(stubs.notify).to.have.been.calledWith('A new pull request was opened: Test pull request')
 	})
+
+	it('should send notifications when there is multiple new pull requests', () => {
+		const pullRequestNotification = pullRequestNotifications(stubs)
+
+		pullRequestNotification.newList([
+			{title: 'Test pull request', url: '/a/random/url'},
+			{title: 'Another test pull request', url: '/a/random/url'},
+		])
+
+		expect(stubs.notify).to.have.been.calledWith('2 new pull requests were opened')
+	})
 })
