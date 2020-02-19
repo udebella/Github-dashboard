@@ -8,7 +8,10 @@ const pullRequestNotifications = ({notificationApi} = defaults) => {
 	const newList = pullRequests => {
 		const prToNotify = pullRequests
 			.filter(({title}) => !alreadyNotified.find(notifiedPr => notifiedPr.title === title))
-		alreadyNotified = [...prToNotify]
+		alreadyNotified = [
+			...alreadyNotified,
+			...prToNotify,
+		]
 		const notificationMessage = formatNotificationMessage(prToNotify)
 		if (prToNotify.length !== 0) {
 			notificationService.notify(notificationMessage)
