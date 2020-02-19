@@ -64,6 +64,7 @@ describe('PullRequestList component', () => {
 			request: stub().returns(Promise.resolve(fakeGraphqlResponse)),
 			queryBuilder: stub().returns('graphql query'),
 			pullRequestReader: stub().returns(fakeResponseRead),
+			pullRequestNotifications: {newList: stub()},
 			userService: {connectedUser: stub().returns({login: 'udebella'})},
 			fakeGraphqlResponse,
 			fakeResponseRead,
@@ -142,6 +143,18 @@ describe('PullRequestList component', () => {
 			const pullRequestLine = pullRequestList.find('[data-test=line]')
 			expect(pullRequestLine.exists()).to.be.true
 			expect(pullRequestLine.props().buildStatus).to.equals('NO_STATUS')
+		})
+
+		it('should send notification about new pull requests', async () => {
+			// When
+			const pullRequestList = shallowMount(PullRequestList, {store: stubs.store, propsData: stubs})
+
+			// Then
+			await triggerFakeNetworkResponse(pullRequestList)
+			expect(stubs.pullRequestNotifications.newList).to.have.been.calledWith([
+				{title: 'WIP - feat(ivy): implement listing lazy routes in `ngtsc`', url: 'https://github.com/angular/angular/pull/27697'},
+				{title: 'Fix wheel/touch browser locking in IE and Safari', url: 'https://github.com/facebook/react/pull/9333'},
+			])
 		})
 
 		it('should work on api that are not limited', async () => {

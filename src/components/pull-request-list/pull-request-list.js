@@ -3,6 +3,7 @@ import NetworkPolling from '../network-polling/network-polling.vue'
 import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
 import {extractHttp as extractPullRequest, pullRequestFragment} from '../../services/pull-request/pull-request'
 import {buildUserService} from '../../services/user/user'
+import {pullRequestNotifications} from '../../services/pull-request-notifications/pull-request-notifications'
 
 const pullRequestListFragment = `${pullRequestFragment}
 fragment repository on Repository {
@@ -31,6 +32,10 @@ export default {
 			type: Object,
 			default: buildUserService,
 		},
+		pullRequestNotifications: {
+			type: Object,
+			default: pullRequestNotifications,
+		},
 	},
 	data() {
 		return {
@@ -51,6 +56,7 @@ export default {
 			const repositories = Object.values(httpResponse)
 				.filter(repositories => repositories && repositories.pullRequests)
 			this.pullRequests = this.pullRequestReader(repositories)
+			this.pullRequestNotifications.newList(this.pullRequests.map(({prTitle, prUrl}) => ({title: prTitle, url: prUrl})))
 		},
 	},
 	components: {

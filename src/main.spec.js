@@ -6,3 +6,5 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 chai.use(sinonChai)
 Vue.component('font-awesome-icon', {})
+
+window.Notification = {permission: 'denied'} // TODO find a way to remove that use from notificationApi
