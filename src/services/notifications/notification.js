@@ -1,4 +1,4 @@
-const notificationApi = ({Notification = window.Notification} = {}) => {
+const notificationApi = ({Notification = window.Notification, document = window.document} = {}) => {
 	let resolve
 	let authorizedNotification = new Promise(r => {resolve = r})
 
@@ -17,7 +17,7 @@ const notificationApi = ({Notification = window.Notification} = {}) => {
 	}
 
 	const notify = async (notification) => {
-		if (await authorizedNotification) {
+		if (!document.hidden && await authorizedNotification) {
 			new Notification(notification)
 		}
 	}
