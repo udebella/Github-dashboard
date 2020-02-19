@@ -17,7 +17,7 @@ const notificationApi = ({Notification = window.Notification, document = window.
 	}
 
 	const notify = async (notification) => {
-		if (!document.hidden && await authorizedNotification) {
+		if (document.hidden && await authorizedNotification) {
 			new Notification(notification)
 		}
 	}

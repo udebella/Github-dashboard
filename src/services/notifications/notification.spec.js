@@ -9,7 +9,7 @@ describe('NotificationAPI', () => {
 		const Notification = stub()
 		Notification.requestPermission = stub().returns(Promise.resolve('denied'))
 		const document = {
-			hidden: false,
+			hidden: true,
 		}
 
 		stubs = {Notification, document}
@@ -59,7 +59,7 @@ describe('NotificationAPI', () => {
 
 	it('should not send notifications when the page is displayed', async () => {
 		stubs.Notification.permission = 'granted'
-		stubs.document.hidden = true
+		stubs.document.hidden = false
 		const api = notificationApi(stubs)
 
 		await api.notify('Some notification')
