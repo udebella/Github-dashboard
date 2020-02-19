@@ -9,10 +9,18 @@ const pullRequestNotifications = ({notificationApi} = defaults) => {
 		const prToNotify = pullRequests
 			.filter(({title}) => !alreadyNotified.find(notifiedPr => notifiedPr.title === title))
 		alreadyNotified = [...prToNotify]
+		const notificationMessage = formatNotificationMessage(prToNotify)
+		if (prToNotify.length !== 0) {
+			notificationService.notify(notificationMessage)
+		}
+	}
+
+	const formatNotificationMessage = prToNotify => {
 		if (prToNotify.length === 1) {
-			notificationService.notify(`A new pull request was opened: ${prToNotify[0].title}`)
-		} else if (prToNotify.length > 1) {
-			notificationService.notify(`${prToNotify.length} new pull requests were opened`)
+			const [{title}] = prToNotify
+			return `A new pull request was opened: ${title}`
+		} else {
+			return `${prToNotify.length} new pull requests were opened`
 		}
 	}
 
