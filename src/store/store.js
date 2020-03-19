@@ -8,6 +8,7 @@ const state = {
 	githubApi: 'https://api.github.com/graphql',
 	watchedRepositories: [],
 	configurationEnabled: true,
+	timeBetweenRefresh: 30,
 }
 
 const addRepository = (store, repository) => {

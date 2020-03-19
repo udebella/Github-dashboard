@@ -14,6 +14,10 @@ describe('Store', () => {
 		it('should have configuration mode enabled by default', () => {
 			expect(store.state.configurationEnabled).to.be.true
 		})
+
+		it('should have a default time between refresh time of 30 seconds', () => {
+			expect(store.state.timeBetweenRefresh).to.equals(30)
+		})
 	})
 
 	describe('addRepository', () => {
