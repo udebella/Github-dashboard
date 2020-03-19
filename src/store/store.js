@@ -1,15 +1,9 @@
 import Vuex, {Store} from 'vuex'
 import Vue from 'vue'
 import localStoragePlugin from './local-storage-plugin'
+import {StoreInit} from './store-init-plugin'
 
 Vue.use(Vuex)
-
-const state = {
-	githubApi: 'https://api.github.com/graphql',
-	watchedRepositories: [],
-	configurationEnabled: true,
-	timeBetweenRefresh: 30,
-}
 
 const addRepository = (store, repository) => {
 	store.watchedRepositories = [
@@ -47,7 +41,7 @@ export const mutations = {
 }
 
 export const store = new Store({
-	state,
+	state: {},
 	mutations,
-	plugins: [localStoragePlugin],
+	plugins: [StoreInit, localStoragePlugin],
 })
