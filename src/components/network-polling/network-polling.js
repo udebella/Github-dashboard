@@ -16,6 +16,7 @@ export default {
 	data() {
 		return {
 			promise: new Promise(() => {}),
+			timeBetweenRefresh: this.$store.state.timeBetweenRefresh,
 		}
 	},
 	watch: {
@@ -35,7 +36,7 @@ export default {
 		},
 	},
 	created() {
-		this.interval = setInterval(this.callHttp, this.$store.state.timeBetweenRefresh * 1000)
+		this.interval = setInterval(this.callHttp, this.timeBetweenRefresh * 1000)
 		return this.callHttp()
 	},
 	destroyed() {

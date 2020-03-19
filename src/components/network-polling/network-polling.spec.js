@@ -38,7 +38,7 @@ describe('NetworkPolling component', () => {
 
 				expect(indicator.exists()).to.be.true
 				expect(indicator.attributes().title).to.equal('Last refresh')
-				expect(indicator.props()).to.deep.equal({promise: stubs.promise})
+				expect(indicator.props()).to.deep.equal({promise: stubs.promise, timeBetweenRefresh: 30})
 			})
 		})
 
