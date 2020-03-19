@@ -1,6 +1,6 @@
 import Vuex, {Store} from 'vuex'
 import Vue from 'vue'
-import localStoragePlugin from './local-storage-plugin'
+import {localStoragePlugin} from './local-storage-plugin'
 import {storeInit} from './store-init-plugin'
 
 Vue.use(Vuex)

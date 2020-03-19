@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {Store} from 'vuex'
-import LocalStoragePlugin from './local-storage-plugin'
+import {localStoragePlugin} from './local-storage-plugin'
 
 describe('Local storage store feature', () => {
 	let store
@@ -21,11 +21,11 @@ describe('Local storage store feature', () => {
 	})
 
 	it('should save mutation and reload them into a new store', () => {
-		LocalStoragePlugin(store)
+		localStoragePlugin(store)
 
 		store.commit('increment')
 		const newStore = new Store({})
-		LocalStoragePlugin(newStore)
+		localStoragePlugin(newStore)
 
 		expect(newStore.state.count).to.equals(2)
 	})

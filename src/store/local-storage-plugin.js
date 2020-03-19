@@ -1,6 +1,6 @@
 const LOCAL_STORAGE_KEY = 'github-dashboard-store'
 
-export default (store, storage = window.localStorage) => {
+export const localStoragePlugin = (store, storage = window.localStorage) => {
 	const stringifiedStore = storage.getItem(LOCAL_STORAGE_KEY)
 	if (stringifiedStore) {
 		const localStorageStore = JSON.parse(stringifiedStore)
