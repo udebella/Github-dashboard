@@ -8,7 +8,8 @@ export const localStoragePlugin = defaultState => (store, storage = window.local
 
 	if (stringifiedStore) {
 		const localStorageStore = JSON.parse(stringifiedStore)
-		store.replaceState(localStorageStore)
+		store.replaceState({...defaultState, ...localStorageStore})
+		handler('initialize', {...defaultState, ...localStorageStore})
 	} else {
 		store.replaceState(defaultState)
 		handler('initialize', defaultState)

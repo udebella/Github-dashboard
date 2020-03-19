@@ -46,6 +46,15 @@ describe('Local storage store', () => {
 			expect(fakeStore.replaceState).to.have.been.calledWith({someValue: 3})
 			expect(fakeLocalStorage.setItem).to.have.been.calledWith('github-dashboard-store', '{"someValue":3}')
 		})
+
+		it('should complete incomplete previous state saved in the store', () => {
+			fakeLocalStorage.getItem.returns('{"oneValue": "already saved in the local storage"}')
+
+			localStoragePlugin({someValue: 'default new value'})(fakeStore, fakeLocalStorage)
+
+			expect(fakeStore.replaceState).to.have.been.calledWith({someValue: 'default new value', oneValue: 'already saved in the local storage'})
+			expect(fakeLocalStorage.setItem).to.have.been.calledWith('github-dashboard-store', '{"someValue":"default new value","oneValue":"already saved in the local storage"}')
+		})
 	})
 
 	describe('Save store to local storage after every mutation', () => {
