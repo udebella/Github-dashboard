@@ -3,7 +3,7 @@ import {stub} from 'sinon'
 import {localStoragePlugin} from './local-storage-plugin'
 
 describe('Local storage store', () => {
-	let sut, fakeStore, fakeLocalStorage
+	let fakeStore, fakeLocalStorage
 
 	beforeEach(() => {
 		fakeStore = {
@@ -15,18 +15,17 @@ describe('Local storage store', () => {
 			getItem: stub(),
 			setItem: stub(),
 		}
-		sut = localStoragePlugin
 	})
 
 	describe('Initialization', () => {
 		it('should be a function to give to vuex', () => {
-			expect(sut).to.be.a('function')
+			expect(localStoragePlugin).to.be.a('function')
 		})
 	})
 
 	describe('Load store from local storage', () => {
 		it('should retrieve store from local storage', () => {
-			sut(fakeStore, fakeLocalStorage)
+			localStoragePlugin(fakeStore, fakeLocalStorage)
 
 			expect(fakeLocalStorage.getItem).to.have.been.calledWith('github-dashboard-store')
 		})
@@ -34,7 +33,7 @@ describe('Local storage store', () => {
 		it('should replace the state with retrieved value from local storage', () => {
 			fakeLocalStorage.getItem.returns('{"state": "this is the store"}')
 
-			sut(fakeStore, fakeLocalStorage)
+			localStoragePlugin(fakeStore, fakeLocalStorage)
 
 			expect(fakeStore.replaceState).to.have.been.calledWith({state: 'this is the store'})
 		})
@@ -42,7 +41,7 @@ describe('Local storage store', () => {
 		it('should not replace the state when there is no value in the local storage', () => {
 			fakeLocalStorage.getItem.returns(null)
 
-			sut(fakeStore, fakeLocalStorage)
+			localStoragePlugin(fakeStore, fakeLocalStorage)
 
 			expect(fakeStore.replaceState).not.to.have.been.called
 		})
@@ -50,13 +49,13 @@ describe('Local storage store', () => {
 
 	describe('Save store to local storage after every mutation', () => {
 		it('should subscribe to store mutations', () => {
-			sut(fakeStore, fakeLocalStorage)
+			localStoragePlugin(fakeStore, fakeLocalStorage)
 
 			expect(fakeStore.subscribe).to.have.been.called
 		})
 
 		it('should put store in local storage after subscription', () => {
-			sut(fakeStore, fakeLocalStorage)
+			localStoragePlugin(fakeStore, fakeLocalStorage)
 			fakeStore.mutate('mutation', {state: 'this is the new store'})
 
 			expect(fakeLocalStorage.setItem).to.have.been.calledWith('github-dashboard-store', '{"state":"this is the new store"}')
