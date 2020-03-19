@@ -5,6 +5,13 @@ import {storeInit} from './store-init-plugin'
 
 Vue.use(Vuex)
 
+const defaultState = {
+	githubApi: 'https://api.github.com/graphql',
+	watchedRepositories: [],
+	configurationEnabled: true,
+	timeBetweenRefresh: 30,
+}
+
 const addRepository = (store, repository) => {
 	store.watchedRepositories = [
 		...store.watchedRepositories,
@@ -43,5 +50,5 @@ export const mutations = {
 export const store = new Store({
 	state: {},
 	mutations,
-	plugins: [localStoragePlugin(), storeInit],
+	plugins: [localStoragePlugin(defaultState), storeInit],
 })
