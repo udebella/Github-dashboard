@@ -35,7 +35,7 @@ export default {
 		},
 	},
 	created() {
-		this.interval = setInterval(this.callHttp, 30000)
+		this.interval = setInterval(this.callHttp, this.$store.state.timeBetweenRefresh * 1000)
 		return this.callHttp()
 	},
 	destroyed() {

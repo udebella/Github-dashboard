@@ -8,15 +8,18 @@ describe('NetworkPolling component', () => {
 	let networkPolling, stubs, clock
 
 	beforeEach(() => {
+		const store = {state: {timeBetweenRefresh: 30}}
 		const promise = Promise.resolve('response example')
 		const requestStub = stub().returns(promise)
 		clock = useFakeTimers()
 		stubs = {
 			requestStub,
 			promise,
+			store,
 		}
 
 		networkPolling = shallowMount(NetworkPolling, {
+			store,
 			propsData: {
 				query: 'http://test-url',
 				request: requestStub,
