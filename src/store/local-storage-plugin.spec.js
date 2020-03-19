@@ -38,12 +38,12 @@ describe('Local storage store', () => {
 			expect(fakeStore.replaceState).to.have.been.calledWith({state: 'this is the store'})
 		})
 
-		it('should not replace the state when there is no value in the local storage', () => {
+		it('should persist the default store if there is no value', () => {
 			fakeLocalStorage.getItem.returns(null)
 
-			localStoragePlugin(fakeStore, fakeLocalStorage)
+			localStoragePlugin({someValue: 3})(fakeStore, fakeLocalStorage)
 
-			expect(fakeStore.replaceState).not.to.have.been.called
+			expect(fakeStore.replaceState).to.have.been.calledWith({someValue: 3})
 		})
 	})
 

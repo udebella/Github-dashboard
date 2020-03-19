@@ -1,10 +1,12 @@
 const LOCAL_STORAGE_KEY = 'github-dashboard-store'
 
-export const localStoragePlugin = () => (store, storage = window.localStorage) => {
+export const localStoragePlugin = defaultState => (store, storage = window.localStorage) => {
 	const stringifiedStore = storage.getItem(LOCAL_STORAGE_KEY)
 	if (stringifiedStore) {
 		const localStorageStore = JSON.parse(stringifiedStore)
 		store.replaceState(localStorageStore)
+	} else {
+		store.replaceState(defaultState)
 	}
 
 	const handler = (_, state) => {

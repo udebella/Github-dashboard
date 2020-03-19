@@ -7,7 +7,7 @@ describe('Local storage store feature', () => {
 
 	beforeEach(() => {
 		store = new Store({
-			state: {count: 1},
+			state: {},
 			mutations: {
 				increment(state) {
 					state.count++
@@ -21,11 +21,11 @@ describe('Local storage store feature', () => {
 	})
 
 	it('should save mutation and reload them into a new store', () => {
-		localStoragePlugin()(store)
+		localStoragePlugin({count: 1})(store)
 
 		store.commit('increment')
 		const newStore = new Store({})
-		localStoragePlugin()(newStore)
+		localStoragePlugin({count: 1})(newStore)
 
 		expect(newStore.state.count).to.equals(2)
 	})
