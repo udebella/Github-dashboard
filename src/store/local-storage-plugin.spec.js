@@ -19,13 +19,13 @@ describe('Local storage store', () => {
 
 	describe('Initialization', () => {
 		it('should be a function to give to vuex', () => {
-			expect(localStoragePlugin).to.be.a('function')
+			expect(localStoragePlugin()).to.be.a('function')
 		})
 	})
 
 	describe('Load store from local storage', () => {
 		it('should retrieve store from local storage', () => {
-			localStoragePlugin(fakeStore, fakeLocalStorage)
+			localStoragePlugin()(fakeStore, fakeLocalStorage)
 
 			expect(fakeLocalStorage.getItem).to.have.been.calledWith('github-dashboard-store')
 		})
@@ -33,7 +33,7 @@ describe('Local storage store', () => {
 		it('should replace the state with retrieved value from local storage', () => {
 			fakeLocalStorage.getItem.returns('{"state": "this is the store"}')
 
-			localStoragePlugin(fakeStore, fakeLocalStorage)
+			localStoragePlugin()(fakeStore, fakeLocalStorage)
 
 			expect(fakeStore.replaceState).to.have.been.calledWith({state: 'this is the store'})
 		})
@@ -49,13 +49,13 @@ describe('Local storage store', () => {
 
 	describe('Save store to local storage after every mutation', () => {
 		it('should subscribe to store mutations', () => {
-			localStoragePlugin(fakeStore, fakeLocalStorage)
+			localStoragePlugin()(fakeStore, fakeLocalStorage)
 
 			expect(fakeStore.subscribe).to.have.been.called
 		})
 
 		it('should put store in local storage after subscription', () => {
-			localStoragePlugin(fakeStore, fakeLocalStorage)
+			localStoragePlugin()(fakeStore, fakeLocalStorage)
 			fakeStore.mutate('mutation', {state: 'this is the new store'})
 
 			expect(fakeLocalStorage.setItem).to.have.been.calledWith('github-dashboard-store', '{"state":"this is the new store"}')

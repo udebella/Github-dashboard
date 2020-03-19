@@ -43,5 +43,5 @@ export const mutations = {
 export const store = new Store({
 	state: {},
 	mutations,
-	plugins: [localStoragePlugin, storeInit],
+	plugins: [localStoragePlugin(), storeInit],
 })
