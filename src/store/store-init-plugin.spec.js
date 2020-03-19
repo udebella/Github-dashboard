@@ -29,5 +29,17 @@ describe('Init store', () => {
 				timeBetweenRefresh: 30,
 			})
 		})
+
+		it('should not erase already defined properties', () => {
+			fakeStore.state = {githubApi: 'https://another.github.api'}
+			StoreInit(fakeStore)
+
+			expect(fakeStore.replaceState).to.have.been.calledWith({
+				githubApi: 'https://another.github.api',
+				watchedRepositories: [],
+				configurationEnabled: true,
+				timeBetweenRefresh: 30,
+			})
+		})
 	})
 })

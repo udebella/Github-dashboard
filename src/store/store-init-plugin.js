@@ -5,6 +5,6 @@ const defaultStore = {
 	timeBetweenRefresh: 30,
 }
 
-export const StoreInit = ({replaceState}) => {
-	replaceState(defaultStore)
+export const StoreInit = ({state, replaceState}) => {
+	replaceState({...defaultStore, ...state})
 }
