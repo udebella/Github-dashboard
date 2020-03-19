@@ -14,6 +14,7 @@ describe('RefreshIndicator component', () => {
 		refreshIndicator = shallowMount(RefreshIndicator, {
 			propsData: {
 				promise: Promise.resolve('first resolution'),
+				timeBetweenRefresh: 30,
 			},
 		})
 	})
@@ -62,18 +63,18 @@ describe('RefreshIndicator component', () => {
 			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('5s ago')
 		})
 
-		it('should display the counter as green when it is less than 30 seconds', () => {
+		it('should display the counter as green when it is less than timeBetweenRefresh', () => {
 			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['fresh'])
 		})
 
-		it('should display the counter as orange when it is less than 60 seconds', async () => {
+		it('should display the counter as orange when it is less than twice the timeBetweenRefresh', async () => {
 			stubs.clock.tick(60000)
 
 			await refreshIndicator.vm.$nextTick()
 			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['old'])
 		})
 
-		it('should display the counter as red when it is more than 60 sec', async () => {
+		it('should display the counter as red when it is more than twice the timeBetweenRefresh', async () => {
 			stubs.clock.tick(61000)
 
 			await refreshIndicator.vm.$nextTick()

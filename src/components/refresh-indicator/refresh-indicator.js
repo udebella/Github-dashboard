@@ -5,6 +5,10 @@ export default {
 			type: Promise,
 			required: true,
 		},
+		timeBetweenRefresh: {
+			type: Number,
+			required: true,
+		},
 	},
 	data() {
 		return {
@@ -21,10 +25,10 @@ export default {
 	},
 	computed: {
 		freshness() {
-			if (this.counter < 30) {
+			if (this.counter < this.timeBetweenRefresh) {
 				return 'fresh'
 			}
-			if (this.counter > 60) {
+			if (this.counter > 2 * this.timeBetweenRefresh) {
 				return 'outdated'
 			}
 			return 'old'
