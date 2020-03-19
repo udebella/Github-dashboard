@@ -44,6 +44,7 @@ describe('Local storage store', () => {
 			localStoragePlugin({someValue: 3})(fakeStore, fakeLocalStorage)
 
 			expect(fakeStore.replaceState).to.have.been.calledWith({someValue: 3})
+			expect(fakeLocalStorage.setItem).to.have.been.calledWith('github-dashboard-store', '{"someValue":3}')
 		})
 	})
 
