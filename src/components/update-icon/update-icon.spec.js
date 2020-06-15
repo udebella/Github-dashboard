@@ -5,10 +5,10 @@ import {faEye} from '@fortawesome/free-solid-svg-icons'
 
 describe('UpdateIcon component', () => {
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
+		it('should mount properly', () => {
 			const updateIcon = shallowMount(UpdateIcon, {propsData: {hasUpdates: true}})
 
-			expect(updateIcon.name()).to.equal('update-icon')
+			expect(updateIcon.exists()).to.be.true
 		})
 	})
 

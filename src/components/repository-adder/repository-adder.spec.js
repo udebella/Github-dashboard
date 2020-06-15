@@ -13,8 +13,8 @@ describe('RepositoryAdder component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(repositoryAdder.name()).to.equal('repository-adder')
+		it('should mount properly', () => {
+			expect(repositoryAdder.exists()).to.be.true
 		})
 
 		it('should hide the component when configuration mode is disabled', () => {
@@ -33,7 +33,7 @@ describe('RepositoryAdder component', () => {
 		it('should hide the icon when clicked', () => {
 			const icon = repositoryAdder.find('[data-test=icon]')
 
-			repositoryAdder.find({name: 'badge'}).vm.$emit('click')
+			repositoryAdder.findComponent({name: 'badge'}).vm.$emit('click')
 
 			expect(icon.exists()).to.be.false
 		})

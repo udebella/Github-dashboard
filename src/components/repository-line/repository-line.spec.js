@@ -26,7 +26,7 @@ describe('RepositoryLine component', () => {
 
 	describe('Initialization', () => {
 		it('should have repository-line name', () => {
-			expect(repositoryLine.name()).to.equals('repository-line')
+			expect(repositoryLine.exists()).to.be.true
 		})
 
 		it('should use the color on the line according to the branch status', () => {
@@ -62,7 +62,7 @@ describe('RepositoryLine component', () => {
 		let buildStatuses
 
 		beforeEach(() => {
-			buildStatuses = repositoryLine.find({name: 'build-statuses'})
+			buildStatuses = repositoryLine.findComponent({name: 'build-statuses'})
 		})
 
 		it('should display build statuses', () => {
@@ -91,7 +91,7 @@ describe('RepositoryLine component', () => {
 				},
 			})
 
-			buildStatuses = repositoryLine.find({name: 'build-statuses'})
+			buildStatuses = repositoryLine.findComponent({name: 'build-statuses'})
 			expect(buildStatuses.exists()).to.be.false
 		})
 	})

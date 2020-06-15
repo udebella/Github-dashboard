@@ -14,8 +14,8 @@ describe('CustomButton component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(customButton.name()).to.equal('custom-button')
+		it('should mount properly', () => {
+			expect(customButton.exists()).to.be.true
 		})
 
 		it('should display the content of the slot', () => {

@@ -34,7 +34,7 @@ describe('NetworkPolling component', () => {
 	describe('Initialization', () => {
 		describe('Refresh display', () => {
 			it('should display refresh indicator of the data', async () => {
-				const indicator = networkPolling.find({name: 'refresh-indicator'})
+				const indicator = networkPolling.findComponent({name: 'refresh-indicator'})
 
 				expect(indicator.exists()).to.be.true
 				expect(indicator.attributes().title).to.equal('Last refresh')
@@ -42,8 +42,8 @@ describe('NetworkPolling component', () => {
 			})
 		})
 
-		it('should have network-polling name', () => {
-			expect(networkPolling.name()).to.equals('network-polling')
+		it('should mount properly', () => {
+			expect(networkPolling.exists()).to.be.true
 		})
 
 		it('should call the given url', () => {

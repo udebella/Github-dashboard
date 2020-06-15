@@ -48,8 +48,8 @@ describe('RepositoryList component', () => {
 	})
 
 	describe('Initialisation', () => {
-		it('should have repository-list name', () => {
-			expect(repositoryList.name()).to.equals('repository-list')
+		it('should mount properly', () => {
+			expect(repositoryList.exists()).to.be.true
 		})
 
 		it('should display a title', () => {
@@ -106,7 +106,7 @@ describe('RepositoryList component', () => {
 
 			// Then
 			await triggerNetworkResponse()
-			expect(repositoryList.contains('[data-test=repository-line]')).to.be.true
+			expect(repositoryList.find('[data-test=repository-line]').exists()).to.be.true
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
@@ -125,7 +125,7 @@ describe('RepositoryList component', () => {
 			const repositoryList = shallowMount(RepositoryList, {store: stubs.store, propsData: stubs})
 
 			// Then
-			expect(repositoryList.contains('[data-test=repository-line]')).to.be.false
+			expect(repositoryList.find('[data-test=repository-line]').exists()).to.be.false
 		})
 
 		it('should display a repository adder component', () => {

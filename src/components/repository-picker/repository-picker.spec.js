@@ -37,8 +37,8 @@ describe('RepositoryPicker component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(repositoryPicker.name()).to.equal('repository-picker')
+		it('should mount properly', () => {
+			expect(repositoryPicker.exists()).to.be.true
 		})
 
 		it('should display a input to enter repository owner', () => {

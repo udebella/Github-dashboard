@@ -16,8 +16,8 @@ describe('RepositoryRemover component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(repositoryRemover.name()).to.equal('repository-remover')
+		it('should mount properly', () => {
+			expect(repositoryRemover.exists()).to.be.true
 		})
 
 		it('should display a remove icon', () => {
@@ -36,7 +36,7 @@ describe('RepositoryRemover component', () => {
 
 	describe('Removing a repository', () => {
 		it('should remove the repository from watched repository when clicked', () => {
-			repositoryRemover.find({name: 'custom-button'}).vm.$emit('click')
+			repositoryRemover.findComponent({name: 'custom-button'}).vm.$emit('click')
 
 			expect(store.commit).to.have.been.calledWith('removeRepository', {name: 'example', owner: 'user'})
 		})

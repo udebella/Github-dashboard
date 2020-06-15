@@ -15,7 +15,7 @@ describe('Popover component', () => {
 
 	describe('Initialization', () => {
 		it('should have popover name', () => {
-			expect(popover.name()).to.equals('popover')
+			expect(popover.exists()).to.be.true
 		})
 
 		it('should display the component', () => {

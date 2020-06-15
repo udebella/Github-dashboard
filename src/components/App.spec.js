@@ -10,16 +10,16 @@ describe('Component App', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(app.name()).to.equal('App')
+		it('should mount properly', () => {
+			expect(app.exists()).to.be.true
 		})
 
 		it('should display a header', () => {
-			expect(app.find({name: 'dashboard-header'}).exists()).to.be.true
+			expect(app.findComponent({name: 'dashboard-header'}).exists()).to.be.true
 		})
 
 		it('should display the main container', () => {
-			expect(app.find({name: 'main-container'}).exists()).to.be.true
+			expect(app.findComponent({name: 'main-container'}).exists()).to.be.true
 		})
 	})
 })

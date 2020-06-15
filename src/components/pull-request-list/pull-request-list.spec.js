@@ -75,8 +75,8 @@ describe('PullRequestList component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(pullRequestList.name()).to.equal('pull-request-list')
+		it('should mount properly', () => {
+			expect(pullRequestList.exists()).to.be.true
 		})
 
 		it('should display a title', () => {
@@ -127,7 +127,7 @@ describe('PullRequestList component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(pullRequestList)
-			expect(pullRequestList.contains('[data-test=line]')).to.be.false
+			expect(pullRequestList.find('[data-test=line]').exists()).to.be.false
 		})
 
 		it('should display a list of pull request even when there is no build status on the pull request', async () => {
@@ -166,7 +166,7 @@ describe('PullRequestList component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(pullRequestList)
-			expect(pullRequestList.contains('[data-test=line]')).to.be.true
+			expect(pullRequestList.find('[data-test=line]').exists()).to.be.true
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
@@ -206,7 +206,7 @@ describe('PullRequestList component', () => {
 		const triggerFakeNetworkResponse = async pullRequestList => {
 			const networkPolling = pullRequestList.find('[data-test=network-polling]')
 			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
-			networkPolling.vm.$nextTick()
+			await networkPolling.vm.$nextTick()
 		}
 	})
 })

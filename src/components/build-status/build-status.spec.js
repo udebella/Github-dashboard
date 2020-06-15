@@ -17,8 +17,8 @@ describe('BuildStatus component', () => {
 	})
 
 	describe('Initialisation', () => {
-		it('should have build-status name', () => {
-			expect(buildStatus.name()).to.equals('build-status')
+		it('should mount properly', () => {
+			expect(buildStatus.exists()).to.be.true
 		})
 	})
 

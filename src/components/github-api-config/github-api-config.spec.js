@@ -19,8 +19,8 @@ describe('GithubApiConfig component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(githubApiConfig.name()).to.equal('github-api-config')
+		it('should mount properly', () => {
+			expect(githubApiConfig.exists()).to.be.true
 		})
 
 		it('should display an input', () => {

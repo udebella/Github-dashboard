@@ -19,10 +19,10 @@ describe('Login component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
+		it('should mount properly', () => {
 			const login = shallowMount(Login, {propsData: mocks})
 
-			expect(login.name()).to.equal('login')
+			expect(login.exists()).to.be.true
 		})
 
 		it('should display a login icon', () => {

@@ -33,10 +33,10 @@ describe('ViewerPullRequestList component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
+		it('should mount properly', () => {
 			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
-			expect(viewerPullRequestList.name()).to.equal('viewer-pull-request-list')
+			expect(viewerPullRequestList.exists()).to.be.true
 		})
 
 		it('should display a title', () => {
@@ -69,7 +69,7 @@ describe('ViewerPullRequestList component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(viewerPullRequestList)
-			expect(viewerPullRequestList.contains('[data-test=line]')).to.be.false
+			expect(viewerPullRequestList.find('[data-test=line]').exists()).to.be.false
 		})
 
 		it('should display a list of pull request', async () => {
@@ -109,7 +109,7 @@ describe('ViewerPullRequestList component', () => {
 		const triggerFakeNetworkResponse = async viewerPullRequestList => {
 			const networkPolling = viewerPullRequestList.find('[data-test=network-polling]')
 			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
-			networkPolling.vm.$nextTick()
+			await networkPolling.vm.$nextTick()
 		}
 	})
 })

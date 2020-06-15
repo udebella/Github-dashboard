@@ -16,8 +16,8 @@ describe('Configuration component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(configuration.name()).to.equal('configuration')
+		it('should mount properly', () => {
+			expect(configuration.exists()).to.be.true
 		})
 
 		it('should display a cog icon', () => {
@@ -28,7 +28,7 @@ describe('Configuration component', () => {
 		})
 
 		it('should display a title to explain what the button is used for', () => {
-			expect(configuration.find({name: 'custom-button'}).attributes().title).to.equals('Enable/Disable configuration mode')
+			expect(configuration.findComponent({name: 'custom-button'}).attributes().title).to.equals('Enable/Disable configuration mode')
 		})
 
 		it('should display the icon as green when the configuration mode is enabled', () => {
@@ -48,7 +48,7 @@ describe('Configuration component', () => {
 
 	describe('Toggling configuration mode', () => {
 		it('should toggle configuration mode when clicking the icon', () => {
-			configuration.find({name: 'custom-button'}).vm.$emit('click')
+			configuration.findComponent({name: 'custom-button'}).vm.$emit('click')
 
 			expect(store.commit).to.have.been.calledWith('toggleConfiguration')
 		})

@@ -11,8 +11,8 @@ describe('Dashboard Header component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(dashboardHeader.name()).to.equal('dashboard-header')
+		it('should mount properly', () => {
+			expect(dashboardHeader.exists()).to.be.true
 		})
 
 		it('should display the component', () => {
@@ -21,7 +21,7 @@ describe('Dashboard Header component', () => {
 
 		it('should display a link to the sources', () => {
 			const sources = dashboardHeader.find('[data-test=sources]')
-			const icon = sources.find({name: 'font-awesome-icon'})
+			const icon = sources.findComponent({name: 'font-awesome-icon'})
 
 			expect(sources.attributes().href).to.equal('https://github.com/udebella/Github-dashboard')
 			expect(sources.attributes().title).to.equal('View sources')

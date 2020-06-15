@@ -24,8 +24,8 @@ describe('PullRequestLine component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(pullRequestLine.name()).to.equal('pull-request-line')
+		it('should mount properly', () => {
+			expect(pullRequestLine.exists()).to.be.true
 		})
 	})
 
@@ -80,7 +80,7 @@ describe('PullRequestLine component', () => {
 		let buildStatuses
 
 		beforeEach(() => {
-			buildStatuses = pullRequestLine.find({name: 'build-statuses'})
+			buildStatuses = pullRequestLine.findComponent({name: 'build-statuses'})
 		})
 
 		it('should display build statuses', () => {
@@ -106,7 +106,7 @@ describe('PullRequestLine component', () => {
 				},
 			})
 
-			buildStatuses = pullRequestLine.find({name: 'build-statuses'})
+			buildStatuses = pullRequestLine.findComponent({name: 'build-statuses'})
 			expect(buildStatuses.exists()).to.be.false
 		})
 	})

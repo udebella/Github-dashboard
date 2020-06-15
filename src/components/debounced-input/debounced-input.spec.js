@@ -15,10 +15,10 @@ describe('DebouncedInput component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
+		it('should mount properly', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 
-			expect(debouncedInput.name()).to.equal('debounced-input')
+			expect(debouncedInput.exists()).to.be.true
 		})
 
 		it('should display a text input', () => {

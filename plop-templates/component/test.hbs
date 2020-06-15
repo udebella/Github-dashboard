@@ -10,8 +10,8 @@ describe('{{pascalCase componentName}} component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect({{camelCase componentName}}.name()).to.equal('{{dashCase componentName}}')
+		it('should mount properly', () => {
+			expect({{camelCase componentName}}.exists()).to.be.true
 		})
 
 		it('should display the component', () => {

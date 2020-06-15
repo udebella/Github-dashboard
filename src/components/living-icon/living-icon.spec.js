@@ -6,10 +6,10 @@ import {faHeart, faSkull} from '@fortawesome/free-solid-svg-icons'
 
 describe('LivingIcon component', () => {
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
+		it('should mount properly', () => {
 			const livingIcon = shallowMount(LivingIcon, {propsData: { date: new Date() }})
 
-			expect(livingIcon.name()).to.equal('living-icon')
+			expect(livingIcon.exists()).to.be.true
 		})
 
 		it('should display a living icon', () => {

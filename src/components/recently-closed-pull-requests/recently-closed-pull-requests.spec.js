@@ -32,10 +32,10 @@ describe('RecentlyClosedPullRequests component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
+		it('should mount properly', () => {
 			const recentlyClosedPullRequests = shallowMount(RecentlyClosedPullRequests, {propsData: stubs})
 
-			expect(recentlyClosedPullRequests.name()).to.equal('recently-closed-pull-requests')
+			expect(recentlyClosedPullRequests.exists()).to.be.true
 		})
 
 		it('should display a title', () => {
@@ -68,7 +68,7 @@ describe('RecentlyClosedPullRequests component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(recentlyClosedPullRequests)
-			expect(recentlyClosedPullRequests.contains('[data-test=line]')).to.be.false
+			expect(recentlyClosedPullRequests.find('[data-test=line]').exists()).to.be.false
 		})
 
 		it('should display a list of pull request', async () => {
@@ -96,7 +96,7 @@ describe('RecentlyClosedPullRequests component', () => {
 		const triggerFakeNetworkResponse = async viewerPullRequestList => {
 			const networkPolling = viewerPullRequestList.find('[data-test=network-polling]')
 			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
-			networkPolling.vm.$nextTick()
+			await networkPolling.vm.$nextTick()
 		}
 	})
 })

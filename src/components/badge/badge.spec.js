@@ -14,8 +14,8 @@ describe('Badge component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the name badge', () => {
-			expect(badge.name()).to.equals('badge')
+		it('should mount properly', () => {
+			expect(badge.exists()).to.be.true
 		})
 
 		it('should display the content of the slot', () => {

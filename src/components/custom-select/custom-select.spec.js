@@ -4,10 +4,10 @@ import CustomSelect from './custom-select.vue'
 
 describe('CustomSelect component', () => {
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
+		it('should mount properly', () => {
 			const customSelect = shallowMount(CustomSelect)
 
-			expect(customSelect.name()).to.equal('custom-select')
+			expect(customSelect.exists()).to.be.true
 		})
 
 		it('should display a select with options', () => {

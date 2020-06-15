@@ -24,8 +24,8 @@ describe('RefreshIndicator component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have the right component name', () => {
-			expect(refreshIndicator.name()).to.equal('refresh-indicator')
+		it('should mount properly', () => {
+			expect(refreshIndicator.exists()).to.be.true
 		})
 	})
 

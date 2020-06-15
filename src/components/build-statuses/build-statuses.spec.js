@@ -16,11 +16,11 @@ describe('BuildStatuses component', () => {
 
 		describe('Initialisation', () => {
 			it('should have branch-status name', () => {
-				expect(buildStatuses.name()).to.equals('build-statuses')
+				expect(buildStatuses.exists()).to.be.true
 			})
 
 			it('should not display when there is no status', () => {
-				expect(buildStatuses.contains('div')).to.be.false
+				expect(buildStatuses.find('div').exists()).to.be.false
 			})
 		})
 	})
@@ -40,7 +40,7 @@ describe('BuildStatuses component', () => {
 
 		describe('Initialisation', () => {
 			it('should display statuses', () => {
-				const buildStatus = buildStatuses.find({name: 'build-status'})
+				const buildStatus = buildStatuses.findComponent({name: 'build-status'})
 				expect(buildStatus.exists()).to.be.true
 				expect(buildStatus.props()).to.deep.equals({
 					description: 'description',
