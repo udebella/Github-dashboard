@@ -31,7 +31,7 @@
 		"eslint-plugin-vue": "^6.2.2",
 		"file-loader": "^6.0.0",
 		"flush-promises": "^1.0.2",
-		"graphql-request": "^1.8.2",
+		"graphql-request": "^2.0.0",
 		"html-webpack-plugin": "^4.3.0",
 		"istanbul-instrumenter-loader": "^3.0.1",
 		"jsdom": "^16.2.2",
