@@ -28,7 +28,7 @@ const testConfig = {
 		}),
 	],
 	externals: [nodeExternals()],
-	devtool: 'inline-source-map',
+	devtool: 'inline-cheap-module-source-map',
 	mode: 'development',
 }
 
