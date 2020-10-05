@@ -32,7 +32,12 @@ const commonConfig = {
 				test: /\.scss$/,
 				loader: [
 					'vue-style-loader',
-					'css-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							esModule: false
+						}
+					},
 					'sass-loader',
 				],
 			},
