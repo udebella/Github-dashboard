@@ -1,0 +1,70 @@
+{
+  "requestUrl": "/graphql",
+  "contentType": "application/json; charset=utf-8",
+  "method": "POST",
+  "statusCode": 200,
+  "data": {
+    "data": {
+      "rateLimit": {
+        "cost": 1,
+        "limit": 5000,
+        "remaining": 4989,
+        "resetAt": "2020-10-05T20:10:33Z"
+      },
+      "rep_0": {
+        "name": "Github-dashboard",
+        "owner": {
+          "login": "udebella"
+        },
+        "url": "https://github.com/udebella/Github-dashboard",
+        "defaultBranchRef": {
+          "target": {
+            "status": null
+          }
+        }
+      },
+      "rep_1": {
+        "name": "vuex",
+        "owner": {
+          "login": "vuejs"
+        },
+        "url": "https://github.com/vuejs/vuex",
+        "defaultBranchRef": {
+          "target": {
+            "status": {
+              "contexts": [
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: install",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vuex/4558?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: lint-types",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vuex/4560?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test-e2e",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vuex/4561?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test-ssr",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vuex/4559?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                },
+                {
+                  "state": "SUCCESS",
+                  "context": "ci/circleci: test-unit",
+                  "targetUrl": "https://circleci.com/gh/vuejs/vuex/4562?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link"
+                }
+              ],
+              "state": "SUCCESS"
+            }
+          }
+        }
+      }
+    }
+  },
+  "isBase64": false
+}

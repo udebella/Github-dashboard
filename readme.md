@@ -29,10 +29,12 @@ It will automatically generate a coverage report in `/coverage` repository
 
 ## Running the project locally
 
-To run the project, you need to 
+To run the project, you need to
 ```bash
 # npm start
 ```
+
+To use mocks, you need to use `http://localhost:3000/graphql` as url for github.
 
 It will automatically open your browser.
 
@@ -49,12 +51,12 @@ exploited with the following command line :
 # npm run bundle-analyzer
 ```
 
-That [tool](https://www.npmjs.com/package/webpack-bundle-analyzer) allows you to check the size of the bundle generated 
+That [tool](https://www.npmjs.com/package/webpack-bundle-analyzer) allows you to check the size of the bundle generated
 and which dependency makes the size explode.
 
 ## Deploying
 
-When commits lands on master branch, [travis](https://travis-ci.org/udebella/Github-dashboard) will automatically launch 
+When commits lands on master branch, [travis](https://travis-ci.org/udebella/Github-dashboard) will automatically launch
 a build that will deploy to github-pages when completed.
 
 ## Generating component
@@ -68,4 +70,4 @@ It will ask for the component name, and will generate a folder with base files t
 
 --
 
-*Every given path is from project directory 
+*Every given path is from project directory

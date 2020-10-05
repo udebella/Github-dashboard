@@ -8,84 +8,12 @@
       "rateLimit": {
         "cost": 1,
         "limit": 5000,
-        "remaining": 4998,
-        "resetAt": "2019-02-18T21:57:04Z"
+        "remaining": 4988,
+        "resetAt": "2020-10-05T20:10:33Z"
       },
       "viewer": {
         "pullRequests": {
           "nodes": [
-            {
-              "title": "Small refactor upon update candidate",
-              "url": "https://github.com/lelionvert/socrates-promo02/pull/36",
-              "comments": {
-                "totalCount": 0
-              },
-              "createdAt": "2017-08-31T16:19:27Z",
-              "updatedAt": "2017-09-01T09:53:57Z",
-              "state": "MERGED",
-              "timeline": {
-                "nodes": [
-                  {}
-                ]
-              },
-              "commits": {
-                "nodes": [
-                  {
-                    "commit": {
-                      "status": null
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "title": "Start of api rest",
-              "url": "https://github.com/lelionvert/socrates-promo02/pull/37",
-              "comments": {
-                "totalCount": 0
-              },
-              "createdAt": "2017-09-05T10:03:27Z",
-              "updatedAt": "2017-09-12T08:12:27Z",
-              "state": "MERGED",
-              "timeline": {
-                "nodes": [
-                  {}
-                ]
-              },
-              "commits": {
-                "nodes": [
-                  {
-                    "commit": {
-                      "status": null
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "title": "Delete fake printer which was not used anymore",
-              "url": "https://github.com/lelionvert/socrates-promo02/pull/38",
-              "comments": {
-                "totalCount": 0
-              },
-              "createdAt": "2017-09-12T08:33:37Z",
-              "updatedAt": "2017-09-12T08:37:53Z",
-              "state": "MERGED",
-              "timeline": {
-                "nodes": [
-                  {}
-                ]
-              },
-              "commits": {
-                "nodes": [
-                  {
-                    "commit": {
-                      "status": null
-                    }
-                  }
-                ]
-              }
-            },
             {
               "title": "docs: Improve axios mock on async testing",
               "url": "https://github.com/vuejs/vue-test-utils/pull/940",
@@ -95,9 +23,13 @@
               "createdAt": "2018-08-22T19:41:54Z",
               "updatedAt": "2018-08-22T19:55:39Z",
               "state": "MERGED",
-              "timeline": {
+              "timelineItems": {
                 "nodes": [
-                  {}
+                  {
+                    "author": {
+                      "login": "eddyerburgh"
+                    }
+                  }
                 ]
               },
               "commits": {
@@ -178,11 +110,15 @@
               "createdAt": "2018-12-02T16:21:45Z",
               "updatedAt": "2019-02-07T19:43:04Z",
               "state": "MERGED",
-              "timeline": {
+              "timelineItems": {
                 "nodes": [
                   {
-                    "author": {
-                      "login": "seglo"
+                    "commit": {
+                      "author": {
+                        "user": {
+                          "login": "udebella"
+                        }
+                      }
                     }
                   }
                 ]
@@ -197,6 +133,120 @@
                             "state": "SUCCESS",
                             "context": "continuous-integration/travis-ci/pr",
                             "targetUrl": "https://travis-ci.org/seglo/connect-prism/builds/463014897?utm_source=github_status&utm_medium=notification"
+                          }
+                        ],
+                        "state": "SUCCESS"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Removed babel",
+              "url": "https://github.com/udebella/Github-dashboard/pull/2",
+              "comments": {
+                "totalCount": 0
+              },
+              "createdAt": "2019-10-30T23:03:32Z",
+              "updatedAt": "2019-10-30T23:09:03Z",
+              "state": "MERGED",
+              "timelineItems": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "author": {
+                        "user": {
+                          "login": "udebella"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "status": null
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Add article about javascript dependencies",
+              "url": "https://github.com/ismailnguyen/a-software-crafter-s-journey/pull/1",
+              "comments": {
+                "totalCount": 1
+              },
+              "createdAt": "2019-12-17T18:41:29Z",
+              "updatedAt": "2019-12-18T09:03:03Z",
+              "state": "MERGED",
+              "timelineItems": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "author": {
+                        "user": {
+                          "login": "udebella"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "status": {
+                        "contexts": [
+                          {
+                            "state": "SUCCESS",
+                            "context": "now",
+                            "targetUrl": "https://zeit.co/ismailnguyen/a-software-crafter-s-journey/76ccjljwe"
+                          }
+                        ],
+                        "state": "SUCCESS"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Add article \"Rex - Une équipe de techleads\".",
+              "url": "https://github.com/ismailnguyen/a-software-crafter-s-journey/pull/2",
+              "comments": {
+                "totalCount": 2
+              },
+              "createdAt": "2019-12-17T18:59:54Z",
+              "updatedAt": "2019-12-18T09:08:48Z",
+              "state": "MERGED",
+              "timelineItems": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "author": {
+                        "user": {
+                          "login": "udebella"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "commits": {
+                "nodes": [
+                  {
+                    "commit": {
+                      "status": {
+                        "contexts": [
+                          {
+                            "state": "SUCCESS",
+                            "context": "now",
+                            "targetUrl": "https://zeit.co/ismailnguyen/a-software-crafter-s-journey/jhz9siow0"
                           }
                         ],
                         "state": "SUCCESS"
