@@ -78,7 +78,7 @@ describe('NetworkPolling component', () => {
 		it('should notify parent component with response from the request', async () => {
 			await flushPomises()
 
-			expect(networkPolling.emitted().httpUpdate).to.deep.equal([['response example']])
+			expect(networkPolling.emitted()['http-update']).to.deep.equal([['response example']])
 		})
 	})
 })

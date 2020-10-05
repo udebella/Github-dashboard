@@ -134,7 +134,7 @@ describe('RepositoryList component', () => {
 
 		const triggerNetworkResponse = async () => {
 			const networkPolling = repositoryList.find('[data-test=polling]')
-			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphQlResponse)
+			networkPolling.vm.$emit('http-update', stubs.fakeGraphQlResponse)
 			await repositoryList.vm.$nextTick()
 		}
 	})

@@ -108,7 +108,7 @@ describe('ViewerPullRequestList component', () => {
 
 		const triggerFakeNetworkResponse = async viewerPullRequestList => {
 			const networkPolling = viewerPullRequestList.find('[data-test=network-polling]')
-			networkPolling.vm.$emit('httpUpdate', stubs.fakeGraphqlResponse)
+			networkPolling.vm.$emit('http-update', stubs.fakeGraphqlResponse)
 			await networkPolling.vm.$nextTick()
 		}
 	})

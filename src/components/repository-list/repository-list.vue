@@ -7,7 +7,7 @@
 			<network-polling
 				data-test="polling"
 				:query="query"
-				@httpUpdate="updateRepositories" />
+				@http-update="updateRepositories" />
 		</div>
 		<repository-line
 			v-for="repository in repositories"

@@ -7,7 +7,7 @@
 			<network-polling
 				data-test="network-polling"
 				:query="query"
-				@httpUpdate="updatePullRequests" />
+				@http-update="updatePullRequests" />
 		</div>
 		<pull-request-line
 			v-for="({prTitle, prUrl, buildStatus, creationDate, statuses, lastEventAuthor}) in pullRequests"

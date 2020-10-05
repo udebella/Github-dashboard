@@ -29,7 +29,7 @@ export default {
 			try {
 				this.promise = this.request(this.query)
 				const response = await this.promise
-				this.$emit('httpUpdate', response)
+				this.$emit('http-update', response)
 			} catch(ex) {
 				// Request will be retried in a few sec
 			}
