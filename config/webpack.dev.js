@@ -16,14 +16,9 @@ const config = {
 			'/graphql': 'http://localhost:3100',
 		},
 	},
-	optimization: {
-		...commonConfig.optimization,
-		usedExports: true,
-	},
 	plugins: [
 		...commonConfig.plugins,
 		new HotModuleReplacementPlugin(),
-		new NamedModulesPlugin(),
 	],
 }
 

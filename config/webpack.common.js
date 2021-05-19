@@ -10,8 +10,8 @@ const commonConfig = {
 	output: {
 		pathinfo: true,
 		path: absolutePath('/dist'),
-		filename: '[name]-[hash:8].js',
-		chunkFilename: '[name]-[contenthash:8].js',
+		filename: '[name]-[contenthash:8].js',
+		assetModuleFilename: 'assets/[name][ext][query]'
 	},
 	module: {
 		rules: [
@@ -30,23 +30,22 @@ const commonConfig = {
 			},
 			{
 				test: /\.scss$/,
-				loader: [
-					'vue-style-loader',
+				use: [
+					{loader: 'vue-style-loader'},
 					{
 						loader: 'css-loader',
 						options: {
 							esModule: false
 						}
 					},
-					'sass-loader',
+					{loader: 'sass-loader'},
 				],
 			},
 			{
 				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-				loader: 'file-loader',
-				options: {
-					name: '[name].[ext]',
-					outputPath: 'assets/fonts/',
+				type: 'asset/resource',
+				generator: {
+					filename: 'assets/fonts/[hash][ext][query]'
 				},
 			},
 		],

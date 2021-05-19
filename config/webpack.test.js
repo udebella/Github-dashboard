@@ -14,7 +14,7 @@ const testConfig = {
 					/node_modules/,
 					/\.(spec|feature)\.js$/,
 				],
-				query: {
+				options: {
 					esModules: true,
 				},
 			},
