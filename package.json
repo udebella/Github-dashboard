@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"start": "webpack-dev-server --config config/webpack.dev.js",
+		"start": "webpack serve --config config/webpack.dev.js",
 		"build": "webpack-cli --config config/webpack.prod.js",
 		"bundle-analyzer": "webpack-bundle-analyzer ./dist/stats.json ./dist",
 		"test": "mochapack --webpack-config config/webpack.test.js \"src/**/*.spec.js\" --require src/test-setup.js",
