@@ -49,13 +49,13 @@
 		"vuex": "^3.5.1",
 		"webpack": "^4.44.2",
 		"webpack-cli": "^4.0.0",
-		"webpack-node-externals": "^2.5.2"
+		"webpack-node-externals": "^3.0.0"
 	},
 	"devDependencies": {
 		"connect": "^3.7.0",
 		"connect-prism": "^1.0.21",
 		"plop": "^2.7.4",
-		"webpack-bundle-analyzer": "^3.9.0",
+		"webpack-bundle-analyzer": "^4.4.2",
 		"webpack-dev-server": "^3.11.0"
 	},
 	"nyc": {
