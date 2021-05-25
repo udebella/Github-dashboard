@@ -40,14 +40,7 @@ const commonConfig = {
 					},
 					{loader: 'sass-loader'},
 				],
-			},
-			{
-				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-				type: 'asset/resource',
-				generator: {
-					filename: 'assets/fonts/[hash][ext][query]'
-				},
-			},
+			}
 		],
 	},
 	plugins: [
