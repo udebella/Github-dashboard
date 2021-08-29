@@ -1,4 +1,4 @@
-const {HotModuleReplacementPlugin, NamedModulesPlugin} = require('webpack')
+const {HotModuleReplacementPlugin} = require('webpack')
 const commonConfig = require('./webpack.common')
 const createMockServer = require('./mock-server')
 
@@ -8,7 +8,9 @@ const config = {
 	...commonConfig,
 	mode: 'development',
 	devServer: {
-		clientLogLevel: 'warning',
+		client: {
+			logging: 'warn',
+		},
 		port: 3000,
 		hot: true,
 		open: true,

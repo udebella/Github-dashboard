@@ -56,7 +56,7 @@
 		"connect-prism": "^1.0.21",
 		"plop": "^2.7.4",
 		"webpack-bundle-analyzer": "^4.4.2",
-		"webpack-dev-server": "^3.11.0"
+		"webpack-dev-server": "^4.0.0"
 	},
 	"nyc": {
 		"include": [
