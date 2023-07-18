@@ -1,11 +1,10 @@
 import CustomButton from '../custom-button/custom-button.vue'
-import {faCheckCircle, faClock, faExclamationCircle, faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 
 const statusToIcon = {
-	FAILURE: faExclamationCircle,
-	ERROR: faTimesCircle,
-	PENDING: faClock,
-	SUCCESS: faCheckCircle,
+	FAILURE: 'fa-exclamation-circle',
+	ERROR: 'fa-times-circle',
+	PENDING: 'fa-clock',
+	SUCCESS: 'fa-check-circle',
 }
 
 export default {

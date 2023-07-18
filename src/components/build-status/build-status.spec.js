@@ -1,7 +1,6 @@
 import {shallowMount} from '@vue/test-utils'
-import {expect} from 'chai'
 import BuildStatus from './build-status.vue'
-import {faCheckCircle, faClock, faExclamationCircle, faTimesCircle} from '@fortawesome/free-solid-svg-icons'
+import {beforeEach, describe, expect, it} from "vitest";
 
 describe('BuildStatus component', () => {
 	let buildStatus
@@ -13,12 +12,18 @@ describe('BuildStatus component', () => {
 				description: 'a short description',
 				state: 'SUCCESS',
 			},
+			global: {
+				stubs: {
+					fontAwesomeIcon: true
+				},
+				renderStubDefaultSlot: true
+			}
 		})
 	})
 
 	describe('Initialisation', () => {
 		it('should mount properly', () => {
-			expect(buildStatus.exists()).to.be.true
+			expect(buildStatus.exists()).toBe(true)
 		})
 	})
 
@@ -30,15 +35,15 @@ describe('BuildStatus component', () => {
 		})
 
 		it('should display a link to the build', () => {
-			expect(link.attributes().href).to.equal('http://build-link')
+			expect(link.attributes().href).toBe('http://build-link')
 		})
 
 		it('should display a short description of the build as tooltip', () => {
-			expect(link.attributes().title).to.equal('a short description')
+			expect(link.attributes().title).toBe('a short description')
 		})
 
 		it('should use the state to display an icon', () => {
-			expect(link.classes()).to.deep.equal(['icon', 'SUCCESS'])
+			expect(link.classes()).toEqual(expect.arrayContaining(['icon', 'SUCCESS']))
 		})
 
 		it('should allow some build status to not have an url (some bot don\'t add url to statuses on github)', () => {
@@ -47,44 +52,45 @@ describe('BuildStatus component', () => {
 					description: 'a short description',
 					state: 'SUCCESS',
 				},
+				global: {
+					stubs: {
+						fontAwesomeIcon: true
+					}
+				}
 			})
 
-			expect(link.attributes().title).to.equals('a short description')
-			expect(link.classes()).to.contains('SUCCESS')
+			expect(link.attributes().title).toBe('a short description')
+			expect(link.classes()).toContain('SUCCESS')
 		})
 	})
 
 	describe('Icons', () => {
 		it('should map success status to check-circle icon', async () => {
 			await buildStatus.setProps({state: 'SUCCESS'})
-			const icon = buildStatus.find('[data-test=icon]')
+			const icon = buildStatus.findComponent('[data-test=icon]')
 
-			expect(icon.exists()).to.be.true
-			expect(icon.vm.$attrs.icon).to.deep.equal(faCheckCircle)
+			expect(icon.attributes().icon).toBe("fa-check-circle")
 		})
 
 		it('should map failure status to exclamation-circle icon', async () => {
 			await buildStatus.setProps({state: 'FAILURE'})
 			const icon = buildStatus.find('[data-test=icon]')
 
-			expect(icon.exists()).to.be.true
-			expect(icon.vm.$attrs.icon).to.deep.equal(faExclamationCircle)
+			expect(icon.attributes().icon).toBe("fa-exclamation-circle")
 		})
 
 		it('should map error status to times-circle icon', async () => {
 			await buildStatus.setProps({state: 'ERROR'})
 			const icon = buildStatus.find('[data-test=icon]')
 
-			expect(icon.exists()).to.be.true
-			expect(icon.vm.$attrs.icon).to.deep.equal(faTimesCircle)
+			expect(icon.attributes().icon).toBe("fa-times-circle")
 		})
 
 		it('should map pending status to clock icon', async () => {
 			await buildStatus.setProps({state: 'PENDING'})
 			const icon = buildStatus.find('[data-test=icon]')
 
-			expect(icon.exists()).to.be.true
-			expect(icon.vm.$attrs.icon).to.deep.equal(faClock)
+			expect(icon.attributes().icon).toBe("fa-clock")
 		})
 	})
 })
