@@ -1,5 +1,5 @@
-import {expect} from 'chai'
 import {extractHttp} from './pull-request'
+import {beforeEach, describe, expect, it} from "vitest";
 
 describe('Pull request service', () => {
 	let httpResponse
@@ -43,7 +43,7 @@ describe('Pull request service', () => {
 		httpResponse[0].pullRequests.nodes = []
 		const response = extractHttp(httpResponse)
 
-		expect(response).to.deep.equals([])
+		expect(response).toEqual([])
 	})
 
 	it('should return a formatted response when pull request was not build', () => {
@@ -51,7 +51,7 @@ describe('Pull request service', () => {
 
 		const response = extractHttp(httpResponse)
 
-		expect(response).to.deep.equals([{
+		expect(response).toEqual([{
 			prTitle: 'Fix wheel/touch browser locking in IE and Safari',
 			prUrl: 'https://github.com/facebook/react/pull/9333',
 			creationDate: new Date('2018-10-20T00:00:00Z'),
@@ -67,7 +67,7 @@ describe('Pull request service', () => {
 
 		const response = extractHttp(httpResponse)
 
-		expect(response[0].lastEventAuthor).to.equals('udebella')
+		expect(response[0].lastEventAuthor).toBe('udebella')
 	})
 
 	it('should return a default lastEventAuthor when the last action is not tracked', () => {
@@ -75,7 +75,7 @@ describe('Pull request service', () => {
 
 		const response = extractHttp(httpResponse)
 
-		expect(response[0].lastEventAuthor).to.equals('')
+		expect(response[0].lastEventAuthor).toBe('')
 	})
 
 	it('should be able to retrieve lastEventAuthor from commits', () => {
@@ -83,7 +83,7 @@ describe('Pull request service', () => {
 
 		const response = extractHttp(httpResponse)
 
-		expect(response[0].lastEventAuthor).to.equals('udebella')
+		expect(response[0].lastEventAuthor).toBe('udebella')
 	})
 
 	it('should extract statuses from a response on a pull request that was built', () => {
@@ -136,7 +136,7 @@ describe('Pull request service', () => {
 
 		const response = extractHttp(httpResponse)
 
-		expect(response[0].prTitle).to.equals('Implement pauseExecution, continueExecution, dumpQueue for Scheduler')
-		expect(response[1].prTitle).to.equals('Fix wheel/touch browser locking in IE and Safari')
+		expect(response[0].prTitle).toBe('Implement pauseExecution, continueExecution, dumpQueue for Scheduler')
+		expect(response[1].prTitle).toBe('Fix wheel/touch browser locking in IE and Safari')
 	})
 })
