@@ -1,5 +1,4 @@
 import CustomButton from '../custom-button/custom-button.vue'
-import {faCog} from '@fortawesome/free-solid-svg-icons'
 
 export default {
 	name: 'configuration',
@@ -9,7 +8,7 @@ export default {
 		},
 	},
 	data: () => ({
-		icon: faCog,
+		icon: "faCog",
 	}),
 	methods: {
 		toggleConfiguration() {
