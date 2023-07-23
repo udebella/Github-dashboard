@@ -1,5 +1,5 @@
-import {expect} from 'chai'
 import {buildRepositoriesQuery, buildViewerQuery} from './query-builder'
+import {beforeEach, describe, expect, it} from "vitest";
 
 describe('Query builder', () => {
 	describe('buildRepositoriesQuery', () => {
@@ -7,7 +7,7 @@ describe('Query builder', () => {
 			it('should return a function that will use the list of repositories to generate the query', () => {
 				const emptyFragment = ''
 
-				expect(buildRepositoriesQuery(emptyFragment)).to.be.a('function')
+				expect(buildRepositoriesQuery(emptyFragment)).toBeTypeOf('function')
 			})
 		})
 
@@ -19,18 +19,18 @@ describe('Query builder', () => {
 			})
 
 			it('should create an empty working query when given an empty repository list', () => {
-				expect(queryGenerator([])).to.equals(emptyQuery)
+				expect(queryGenerator([])).toBe(emptyQuery)
 			})
 
 			it('should create a simple query when given one repository', () => {
-				expect(queryGenerator([{owner: 'facebook', name: 'react'}])).to.equals(simpleRepositoryQuery)
+				expect(queryGenerator([{owner: 'facebook', name: 'react'}])).toBe(simpleRepositoryQuery)
 			})
 
 			it('should create a query when given multiple repositories', () => {
 				expect(queryGenerator([
 					{owner: 'facebook', name: 'react'},
 					{owner: 'angular', name: 'angular'},
-				])).to.equals(multipleRepositoryQuery)
+				])).toBe(multipleRepositoryQuery)
 			})
 		})
 
@@ -38,10 +38,10 @@ describe('Query builder', () => {
 			it('should create an empty working query when an empty fragment', () => {
 				const emptyFragment = ''
 
-				expect(buildViewerQuery(emptyFragment)).to.equals(emptyQuery)
+				expect(buildViewerQuery(emptyFragment)).toBe(emptyQuery)
 			})
 			it('should create the query when using the given fragment', () => {
-				expect(buildViewerQuery(simpleViewerFragment)).to.equals(simpleViewerQuery)
+				expect(buildViewerQuery(simpleViewerFragment)).toBe(simpleViewerQuery)
 			})
 		})
 	})
