@@ -5,9 +5,4 @@ export default {
 			type: String,
 		},
 	},
-	methods: {
-		onClick(event) {
-			this.$emit('click', event)
-		},
-	},
 }

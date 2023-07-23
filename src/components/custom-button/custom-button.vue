@@ -6,11 +6,10 @@
 		data-test="link">
 		<slot />
 	</a>
-	<div 
+	<div
 		v-else
 		class="button"
-		data-test="button"
-		@click="onClick">
+		data-test="button">
 		<slot />
 	</div>
 </template>
