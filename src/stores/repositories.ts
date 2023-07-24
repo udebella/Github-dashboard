@@ -10,13 +10,13 @@ type State = {
 }
 
 export const useRepositoryStore = defineStore('repository', {
- state: (): State => ({
-	 watched: []
- }),
+	state: (): State => ({
+		watched: []
+	}),
 	actions: {
-	 addRepository(repository: Repository) {
-		 this.watched.push(repository)
-	 },
+		addRepository(repository: Repository) {
+			this.watched.push(repository)
+		},
 		removeRepository(repository: Repository) {
 			this.watched = this.watched.filter(differentFrom(repository))
 		}
