@@ -9,6 +9,9 @@ export const useConfigurationStore = defineStore('configuration', {
 	actions: {
 		updateGithubApi(newApi: string) {
 			this.githubApi = newApi
+		},
+		toggleConfiguration() {
+			this.configurationEnabled = !this.configurationEnabled;
 		}
 	}
 })

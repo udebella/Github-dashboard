@@ -34,4 +34,24 @@ describe('Configuration store', () => {
 			expect(store.githubApi).toBe('http://new-api')
 		})
 	})
+
+	describe('toggleConfiguration', () => {
+		it('should enable configuration mode when configuration is disabled', () => {
+			const store = useConfigurationStore()
+			store.$patch({ configurationEnabled: false })
+
+			store.toggleConfiguration()
+
+			expect(store.configurationEnabled).toBe(true)
+		})
+
+		it('should disable configuration mode when configuration is enabled', () => {
+			const store = useConfigurationStore()
+			store.$patch({ configurationEnabled: true })
+
+			store.toggleConfiguration()
+
+			expect(store.configurationEnabled).toBe(false)
+		})
+	})
 });
