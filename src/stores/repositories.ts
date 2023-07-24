@@ -15,7 +15,8 @@ export const useRepositoryStore = defineStore('repository', {
 	}),
 	actions: {
 		addRepository(repository: Repository) {
-			this.watched.push(repository)
+			this.watched = [...this.watched, repository,]
+				.sort(({name: first}, {name: second}) => first.localeCompare(second))
 		},
 		removeRepository(repository: Repository) {
 			this.watched = this.watched.filter(differentFrom(repository))

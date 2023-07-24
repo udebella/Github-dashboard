@@ -31,7 +31,7 @@ describe('Repositories store', () => {
 			const repository = {owner: 'username', name: 'another repository'}
 			store.addRepository(repository)
 
-			expect(store.watched).toEqual([firstRepository, repository])
+			expect(store.watched).toEqual([repository, firstRepository])
 		})
 	})
 
