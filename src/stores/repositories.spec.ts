@@ -34,26 +34,5 @@ describe('Repositories store', () => {
 
 			expect(store.watched).toEqual([firstRepository, repository])
 		})
-
-		// it('should not mutate the store', () => {
-		// 	// Given
-		// 	const watchedRepositories = [{owner: 'user', name: 'repository'}]
-		// 	const store = {watchedRepositories}
-		//
-		// 	// When
-		// 	addRepository(store, {owner: 'username', name: 'another repository'})
-		//
-		// 	// Then
-		// 	expect(store.watchedRepositories).not.to.equal(watchedRepositories)
-		// })
-		//
-		// it('should keep previous watched repositories in the store', () => {
-		// 	const firstRepository = {owner: 'user', name: 'repository'}
-		// 	const store = {watchedRepositories: [firstRepository]}
-		//
-		// 	addRepository(store, {owner: 'user', name: 'another repository'})
-		//
-		// 	expect(store.watchedRepositories).to.contains(firstRepository)
-		// })
 	})
 });
