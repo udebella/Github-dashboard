@@ -24,4 +24,14 @@ describe('Configuration store', () => {
 
 		expect(store.timeBetweenRefresh).toBe(30)
 	})
+
+	describe('updateGithubApi', () => {
+		it('should update the github api in the store', () => {
+			const store = useConfigurationStore()
+
+			store.updateGithubApi('http://new-api')
+
+			expect(store.githubApi).toBe('http://new-api')
+		})
+	})
 });

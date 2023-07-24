@@ -5,5 +5,10 @@ export const useConfigurationStore = defineStore('configuration', {
 		githubApi: 'https://api.github.com/graphql',
 		configurationEnabled: true,
 		timeBetweenRefresh: 30
-	})
+	}),
+	actions: {
+		updateGithubApi(newApi: string) {
+			this.githubApi = newApi
+		}
+	}
 })
