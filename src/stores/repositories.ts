@@ -16,6 +16,14 @@ export const useRepositoryStore = defineStore('repository', {
 	actions: {
 	 addRepository(repository: Repository) {
 		 this.watched.push(repository)
-	 }
+	 },
+		removeRepository(repository: Repository) {
+			this.watched = this.watched.filter(differentFrom(repository))
+		}
 	}
 })
+
+const differentFrom = (first: Repository) => (second: Repository) => {
+	return first.name !== second.name ||
+		first.owner !== second.owner
+}

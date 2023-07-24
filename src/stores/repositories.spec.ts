@@ -1,5 +1,4 @@
-import {expect} from "vitest";
-import { describe, it, beforeEach } from "vitest";
+import {beforeEach, describe, expect, it} from "vitest";
 import {useRepositoryStore} from "@/stores/repositories";
 import {createPinia, setActivePinia} from "pinia";
 
@@ -33,6 +32,27 @@ describe('Repositories store', () => {
 			store.addRepository(repository)
 
 			expect(store.watched).toEqual([firstRepository, repository])
+		})
+	})
+
+	describe('removeRepository', () => {
+		it('should remove watched repository for the username', () => {
+			const store = useRepositoryStore()
+			store.addRepository({owner: 'user', name: 'repository'})
+
+			store.removeRepository({owner: 'user', name: 'repository'})
+
+			expect(store.watched).toEqual([])
+		})
+
+		it('should only remove the specified repository and keep the others', () => {
+			const store = useRepositoryStore()
+			store.addRepository({owner: 'user', name: 'repository'})
+			store.addRepository({owner: 'user', name: 'secondRepository'})
+
+			store.removeRepository({owner: 'user', name: 'repository'})
+
+			expect(store.watched).toEqual([{owner: 'user', name: 'secondRepository'}])
 		})
 	})
 });
