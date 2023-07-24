@@ -24,16 +24,17 @@ describe('Repositories store', () => {
 			expect(store.watched).toEqual([repository])
 		})
 
-		// it('should allow to add multiple repositories for an user ordered by name', () => {
-		// 	const firstRepository = {owner: 'user', name: 'repository'}
-		// 	const store = {watchedRepositories: [firstRepository]}
-		//
-		// 	const repository = {owner: 'username', name: 'another repository'}
-		// 	addRepository(store, repository)
-		//
-		// 	expect(store.watchedRepositories).to.deep.equal([repository, firstRepository])
-		// })
-		//
+		it('should allow to add multiple repositories for an user ordered by name', () => {
+			const store = useRepositoryStore()
+
+			const firstRepository = {owner: 'user', name: 'repository'}
+			store.addRepository(firstRepository)
+			const repository = {owner: 'username', name: 'another repository'}
+			store.addRepository(repository)
+
+			expect(store.watched).toEqual([firstRepository, repository])
+		})
+
 		// it('should not mutate the store', () => {
 		// 	// Given
 		// 	const watchedRepositories = [{owner: 'user', name: 'repository'}]
