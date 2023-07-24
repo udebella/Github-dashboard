@@ -1,0 +1,9 @@
+import {defineStore} from "pinia";
+
+export const useConfigurationStore = defineStore('configuration', {
+	state: () => ({
+		githubApi: 'https://api.github.com/graphql',
+		configurationEnabled: true,
+		timeBetweenRefresh: 30
+	})
+})
