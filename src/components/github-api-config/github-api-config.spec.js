@@ -1,21 +1,25 @@
 import {expect} from 'chai'
-import {stub} from 'sinon'
 import {shallowMount} from '@vue/test-utils'
 import GithubApiConfig from './github-api-config.vue'
+import {beforeEach, describe, it} from "vitest";
+import {useConfigurationStore} from "@/stores/configuration";
+import {createPinia, setActivePinia} from "pinia";
 
 describe('GithubApiConfig component', () => {
 	let githubApiConfig, store
 
 	beforeEach(() => {
-		store = {
-			commit: stub(),
-			state: {
-				configurationEnabled: true,
-				githubApi: 'http://github-api',
-			},
-		}
+		setActivePinia(createPinia())
+		store = useConfigurationStore()
+		// {
+		// 	commit: vitest.fn(),
+		// 	state: {
+		// 		configurationEnabled: true,
+		// 		githubApi: 'http://github-api',
+		// 	},
+		// }
 
-		githubApiConfig = shallowMount(GithubApiConfig, {store})
+		githubApiConfig = shallowMount(GithubApiConfig)
 	})
 
 	describe('Initialization', () => {
@@ -28,6 +32,9 @@ describe('GithubApiConfig component', () => {
 		})
 
 		it('should display as default value the one from the store', () => {
+			store.$patch({githubApi: 'http://github-api'})
+			githubApiConfig = shallowMount(GithubApiConfig)
+
 			expect(githubApiConfig.find('[data-test=input]').element.value).to.equals('http://github-api')
 		})
 
@@ -36,8 +43,8 @@ describe('GithubApiConfig component', () => {
 		})
 
 		it('should not be displayed when configuration mode is disabled', () => {
-			store.state.configurationEnabled = false
-			githubApiConfig = shallowMount(GithubApiConfig, {store})
+			store.$patch({configurationEnabled: false})
+			githubApiConfig = shallowMount(GithubApiConfig)
 
 			expect(githubApiConfig.find('[data-test=input]').exists()).to.be.false
 		})
@@ -47,7 +54,7 @@ describe('GithubApiConfig component', () => {
 		it('should save the new api in the store when changed', () => {
 			githubApiConfig.find('[data-test=input]').setValue('https://new-api')
 
-			expect(store.commit).to.have.been.calledWith('updateGithubApi', 'https://new-api')
+			expect(store.githubApi).toBe('https://new-api')
 		})
 	})
 })
