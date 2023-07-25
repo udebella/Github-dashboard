@@ -1,33 +1,33 @@
-import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import RepositoryAdder from './repository-adder.vue'
+import {beforeEach, describe, expect, it} from "vitest";
+import {createPinia, setActivePinia} from "pinia";
+import {useConfigurationStore} from "@/stores/configuration";
 
 describe('RepositoryAdder component', () => {
-	let repositoryAdder, store
+	let repositoryAdder
 
 	beforeEach(() => {
-		store = {
-			state: {configurationEnabled: true},
-		}
-		repositoryAdder = shallowMount(RepositoryAdder, {store})
+		setActivePinia(createPinia())
+		repositoryAdder = shallowMount(RepositoryAdder, { global: { renderStubDefaultSlot: true }})
 	})
 
 	describe('Initialization', () => {
 		it('should mount properly', () => {
-			expect(repositoryAdder.exists()).to.be.true
+			expect(repositoryAdder.exists()).toBe(true)
 		})
 
 		it('should hide the component when configuration mode is disabled', () => {
-			store.state.configurationEnabled = false
-			repositoryAdder = shallowMount(RepositoryAdder, {store})
+			useConfigurationStore().$patch({configurationEnabled: false})
+			repositoryAdder = shallowMount(RepositoryAdder)
 
-			expect(repositoryAdder.find('[data-test=button]').exists()).to.be.false
+			expect(repositoryAdder.find('[data-test=button]').exists()).toBe(false)
 		})
 	})
 
 	describe('Adding a repository', () => {
 		it('should display a debounced input', () => {
-			expect(repositoryAdder.find('[data-test=owner-input]').exists()).to.be.true
+			expect(repositoryAdder.find('[data-test=owner-input]').exists()).toBe(true)
 		})
 
 		it('should hide the icon when clicked', () => {
@@ -35,7 +35,7 @@ describe('RepositoryAdder component', () => {
 
 			repositoryAdder.findComponent({name: 'badge'}).vm.$emit('click')
 
-			expect(icon.exists()).to.be.false
+			expect(icon.exists()).toBe(false)
 		})
 	})
 })
