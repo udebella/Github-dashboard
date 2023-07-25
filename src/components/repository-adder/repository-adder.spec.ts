@@ -1,11 +1,11 @@
-import {shallowMount} from '@vue/test-utils'
+import {shallowMount, VueWrapper} from '@vue/test-utils'
 import RepositoryAdder from './repository-adder.vue'
 import {beforeEach, describe, expect, it} from "vitest";
 import {createPinia, setActivePinia} from "pinia";
 import {useConfigurationStore} from "@/stores/configuration";
 
 describe('RepositoryAdder component', () => {
-	let repositoryAdder
+	let repositoryAdder: VueWrapper
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
@@ -17,8 +17,9 @@ describe('RepositoryAdder component', () => {
 			expect(repositoryAdder.exists()).toBe(true)
 		})
 
-		it('should hide the component when configuration mode is disabled', () => {
+		it('should hide the component when configuration mode is disabled', async () => {
 			useConfigurationStore().$patch({configurationEnabled: false})
+
 			repositoryAdder = shallowMount(RepositoryAdder)
 
 			expect(repositoryAdder.find('[data-test=button]').exists()).toBe(false)
