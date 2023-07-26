@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import UpdateIcon from './update-icon.vue'
-import {faEye} from '@fortawesome/free-solid-svg-icons'
+import { describe, it } from "vitest";
 
 describe('UpdateIcon component', () => {
 	describe('Initialization', () => {
@@ -15,9 +15,9 @@ describe('UpdateIcon component', () => {
 	describe('Display', () => {
 		it('should display an update icon', () => {
 			const updateIcon = shallowMount(UpdateIcon, {propsData: {hasUpdates: true}})
-			const icon = updateIcon.find('[data-test=icon]')
+			const icon = updateIcon.findComponent('[data-test=icon]')
 
-			expect(icon.vm.$attrs.icon).to.deep.equal(faEye)
+			expect(icon.attributes().icon).to.deep.equal("hasUpdates")
 		})
 
 		it('should display a title explaining the purpose of the icon', () => {
