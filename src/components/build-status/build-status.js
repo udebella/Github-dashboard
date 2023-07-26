@@ -1,4 +1,5 @@
 import CustomButton from '../custom-button/custom-button.vue'
+import IconComponent from "@/components/icon/icon-component.vue";
 
 const statusToIcon = {
 	FAILURE: 'warning',
@@ -28,6 +29,7 @@ export default {
 		},
 	},
 	components: {
+		IconComponent,
 		CustomButton,
 	},
 }

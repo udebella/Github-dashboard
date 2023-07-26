@@ -5,7 +5,7 @@
 		:class="state"
 		class="icon"
 		data-test="link">
-		<font-awesome-icon
+		<icon-component
 			:icon="icon"
 			data-test="icon" />
 	</custom-button>
