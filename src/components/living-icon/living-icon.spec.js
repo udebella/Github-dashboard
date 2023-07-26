@@ -1,8 +1,7 @@
-import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import LivingIcon from './living-icon.vue'
 import {subWeeks} from 'date-fns'
-import { describe, it, } from "vitest";
+import {describe, expect, it} from "vitest";
 
 describe('LivingIcon component', () => {
 	describe('Initialization', () => {
@@ -24,14 +23,14 @@ describe('LivingIcon component', () => {
 			const livingIcon = shallowMount(LivingIcon, {propsData: { date: lastWeekDate }})
 			const icon = livingIcon.findComponent('[data-test=icon]')
 
-			expect(icon.attributes().icon).to.deep.equal('dead')
+			expect(icon.attributes().icon).toBe('dead')
 		})
 
 		it('should display a title indicating time since given date', () => {
 			const lastWeekDate = subWeeks(new Date(), 1)
 			const livingIcon = shallowMount(LivingIcon, {propsData: { date: lastWeekDate }})
 
-			expect(livingIcon.attributes().title).to.equal('7 days ago')
+			expect(livingIcon.attributes().title).toBe('7 days ago')
 		})
 	})
 })
