@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import 'remixicon/fonts/remixicon.css'
 
-type IconsNames = 'success' | 'pending' | 'warning' | 'error' | 'living' | 'dead' | 'hasUpdates' | 'user'
+type IconsNames = 'success' | 'pending' | 'warning' | 'error' | 'living' | 'dead' | 'hasUpdates' | 'user' | 'github'
 type IconClass = `ri-${string}-fill`
 
 const iconClasses: Record<IconsNames, IconClass> = {
@@ -16,7 +16,8 @@ const iconClasses: Record<IconsNames, IconClass> = {
 	living: 'ri-heart-fill',
 	dead: 'ri-skull-fill',
 	hasUpdates: 'ri-eye-fill',
-	user: 'ri-user-fill'
+	user: 'ri-user-fill',
+	github: 'ri-github-fill'
 }
 
 const props = defineProps<{
