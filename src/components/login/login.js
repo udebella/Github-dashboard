@@ -1,6 +1,7 @@
 import {buildUserService} from '../../services/user/user'
 import {NO_USER} from '../../services/session/session'
 import DebouncedInput from '../debounced-input/debounced-input.vue'
+import IconComponent from "@/components/icon/icon-component.vue";
 
 export default {
 	name: 'login',
@@ -31,6 +32,7 @@ export default {
 		},
 	},
 	components: {
+		IconComponent,
 		DebouncedInput,
 	},
 }

@@ -24,7 +24,7 @@ describe('Login component', () => {
 
 		it('should display a login icon', () => {
 			const login = shallowMount(Login, {propsData: mocks})
-			const icon = login.find('[data-test=icon]')
+			const icon = login.findComponent('[data-test=icon]')
 
 			expect(icon.exists()).toBe(true)
 			expect(icon.attributes().icon).toBe('user')

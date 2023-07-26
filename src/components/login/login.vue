@@ -1,9 +1,9 @@
 <template>
-	<div 
-		:title="title" 
+	<div
+		:title="title"
 		:class="displayInputToken ? 'login-failed' : 'login-success'">
-		<font-awesome-icon
-			:icon="icon" 
+		<icon-component
+			:icon="icon"
 			data-test="icon" />
 		<debounced-input
 			v-if="displayInputToken"
