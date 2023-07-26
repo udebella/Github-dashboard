@@ -2,29 +2,29 @@ import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import LivingIcon from './living-icon.vue'
 import {subWeeks} from 'date-fns'
-import {faHeart, faSkull} from '@fortawesome/free-solid-svg-icons'
+import { describe, it, } from "vitest";
 
 describe('LivingIcon component', () => {
 	describe('Initialization', () => {
 		it('should mount properly', () => {
 			const livingIcon = shallowMount(LivingIcon, {propsData: { date: new Date() }})
 
-			expect(livingIcon.exists()).to.be.true
+			expect(livingIcon.exists()).toBe(true)
 		})
 
 		it('should display a living icon', () => {
 			const livingIcon = shallowMount(LivingIcon, {propsData: { date: new Date() }})
-			const icon = livingIcon.find('[data-test=icon]')
+			const icon = livingIcon.findComponent('[data-test=icon]')
 
-			expect(icon.vm.$attrs.icon).to.deep.equal(faHeart)
+			expect(icon.attributes().icon).toBe('living')
 		})
 
 		it('should display a skull icon when date is one week before today', () => {
 			const lastWeekDate = subWeeks(new Date(), 1)
 			const livingIcon = shallowMount(LivingIcon, {propsData: { date: lastWeekDate }})
-			const icon = livingIcon.find('[data-test=icon]')
+			const icon = livingIcon.findComponent('[data-test=icon]')
 
-			expect(icon.vm.$attrs.icon).to.deep.equal(faSkull)
+			expect(icon.attributes().icon).to.deep.equal('dead')
 		})
 
 		it('should display a title indicating time since given date', () => {

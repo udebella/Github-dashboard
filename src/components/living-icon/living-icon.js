@@ -1,8 +1,9 @@
 import {differenceInWeeks, formatDistanceToNow} from 'date-fns'
-import {faHeart, faSkull} from '@fortawesome/free-solid-svg-icons'
+import IconComponent from "@/components/icon/icon-component.vue";
 
 export default {
 	name: 'living-icon',
+	components: {IconComponent},
 	props: {
 		date: {
 			type: Date,
@@ -14,7 +15,7 @@ export default {
 			return formatDistanceToNow(this.date, { addSuffix: true })
 		},
 		icon() {
-			return differenceInWeeks(new Date(), this.date) < 1 ? faHeart : faSkull
+			return differenceInWeeks(new Date(), this.date) < 1 ? 'living' : 'dead'
 		},
 	},
 }
