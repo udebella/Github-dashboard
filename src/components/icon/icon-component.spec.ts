@@ -6,7 +6,7 @@ describe('Icon component', () => {
 	it('displays an icon', () => {
 		const wrapper = shallowMount(IconComponent, {
 			props: {
-				icon: 'error-warning'
+				icon: 'warning'
 			}
 		})
 

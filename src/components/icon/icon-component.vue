@@ -6,6 +6,6 @@
 import 'remixicon/fonts/remixicon.css'
 
 defineProps<{
-	icon: 'error-warning'
+	icon: 'warning'
 }>()
 </script>
