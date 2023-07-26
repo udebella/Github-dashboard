@@ -2,7 +2,7 @@
 	<custom-button
 		v-if="configurationEnabled"
 		@click="remove">
-		<font-awesome-icon
+		<icon-component
 			:icon="icon"
 			data-test="icon" />
 	</custom-button>
