@@ -1,6 +1,10 @@
 <template>
-	<i class="ri-admin-line"/>
+	<i class="ri-error-warning-line"/>
 </template>
 
 <script lang="ts" setup>
+
+defineProps<{
+	icon: 'error-warning'
+}>()
 </script>
