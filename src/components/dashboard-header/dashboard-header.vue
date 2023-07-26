@@ -1,20 +1,20 @@
 <template>
 	<header class="header">
-		<div 
-			class="title" 
+		<div
+			class="title"
 			data-test="title">
 			Github Dashboard
 		</div>
 		<div class="right">
 			<configuration data-test="configuration" />
-			<login 
-				class="login" 
+			<login
+				class="login"
 				data-test="login" />
 			<custom-button
 				title="View sources"
 				href="https://github.com/udebella/Github-dashboard"
 				data-test="sources">
-				<font-awesome-icon :icon="icon" />
+				<icon-component :icon="icon" />
 			</custom-button>
 		</div>
 	</header>
