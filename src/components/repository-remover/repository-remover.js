@@ -21,7 +21,7 @@ export default {
 		},
 	},
 	data: () => ({
-		icon: 'delete-bin',
+		icon: 'deleteBin',
 	}),
 	computed: {
 		configurationEnabled() {
