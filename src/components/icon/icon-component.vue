@@ -1,5 +1,5 @@
 <template>
-	<i class="ri-error-warning-line"/>
+	<i class="ri-error-warning-fill"/>
 </template>
 
 <script lang="ts" setup>

@@ -10,6 +10,6 @@ describe('Icon component', () => {
 			}
 		})
 
-		expect(wrapper.find('i').attributes().class).toBe('ri-error-warning-line')
+		expect(wrapper.find('i').attributes().class).toBe('ri-error-warning-fill')
 	});
 });
