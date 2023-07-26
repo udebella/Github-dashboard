@@ -1,10 +1,10 @@
 import CustomButton from '../custom-button/custom-button.vue'
 
 const statusToIcon = {
-	FAILURE: 'fa-exclamation-circle',
-	ERROR: 'fa-times-circle',
-	PENDING: 'fa-clock',
-	SUCCESS: 'fa-check-circle',
+	FAILURE: 'warning',
+	ERROR: 'error',
+	PENDING: 'pending',
+	SUCCESS: 'success',
 }
 
 export default {

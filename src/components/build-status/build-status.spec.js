@@ -67,28 +67,28 @@ describe('BuildStatus component', () => {
 			await buildStatus.setProps({state: 'SUCCESS'})
 			const icon = buildStatus.findComponent('[data-test=icon]')
 
-			expect(icon.attributes().icon).toBe("fa-check-circle")
+			expect(icon.attributes().icon).toBe("success")
 		})
 
 		it('should map failure status to exclamation-circle icon', async () => {
 			await buildStatus.setProps({state: 'FAILURE'})
 			const icon = buildStatus.find('[data-test=icon]')
 
-			expect(icon.attributes().icon).toBe("fa-exclamation-circle")
+			expect(icon.attributes().icon).toBe("warning")
 		})
 
 		it('should map error status to times-circle icon', async () => {
 			await buildStatus.setProps({state: 'ERROR'})
 			const icon = buildStatus.find('[data-test=icon]')
 
-			expect(icon.attributes().icon).toBe("fa-times-circle")
+			expect(icon.attributes().icon).toBe("error")
 		})
 
 		it('should map pending status to clock icon', async () => {
 			await buildStatus.setProps({state: 'PENDING'})
 			const icon = buildStatus.find('[data-test=icon]')
 
-			expect(icon.attributes().icon).toBe("fa-clock")
+			expect(icon.attributes().icon).toBe("pending")
 		})
 	})
 })
