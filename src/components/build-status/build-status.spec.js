@@ -13,7 +13,6 @@ describe('BuildStatus component', () => {
 				state: 'SUCCESS',
 			},
 			global: {
-				stubs: { fontAwesomeIcon: true },
 				renderStubDefaultSlot: true
 			}
 		})
