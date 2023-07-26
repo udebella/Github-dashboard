@@ -12,4 +12,13 @@ describe('Icon component', () => {
 
 		expect(wrapper.find('i').attributes().class).toBe('ri-error-warning-fill')
 	});
+	it('displays an icon 2', () => {
+		const wrapper = shallowMount(IconComponent, {
+			props: {
+				icon: 'error'
+			}
+		})
+
+		expect(wrapper.find('i').attributes().class).toBe('ri-close-circle-fill')
+	});
 });
