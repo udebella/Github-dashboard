@@ -4,6 +4,7 @@ import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
 import {extractHttp as extractPullRequest, pullRequestFragment} from '../../services/pull-request/pull-request'
 import {buildUserService} from '../../services/user/user'
 import {pullRequestNotifications} from '../../services/pull-request-notifications/pull-request-notifications'
+import {useRepositoryStore} from "@/stores/repositories";
 
 const pullRequestListFragment = `${pullRequestFragment}
 fragment repository on Repository {
@@ -18,6 +19,10 @@ fragment repository on Repository {
 }`
 
 export default {
+	setup() {
+		const repositoryStore = useRepositoryStore()
+		return { repositoryStore }
+	},
 	name: 'pull-request-list',
 	props: {
 		queryBuilder: {
@@ -44,7 +49,7 @@ export default {
 	},
 	computed: {
 		query() {
-			const watchedRepositories = this.$store.state.watchedRepositories
+			const watchedRepositories = this.repositoryStore.watchedRepositories
 			return this.queryBuilder(watchedRepositories)
 		},
 	},
