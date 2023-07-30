@@ -1,6 +1,7 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import MainContainer from './main-container.vue'
+import {describe, beforeEach, it} from "vitest";
 
 describe('MainContainer component', () => {
 	let mainContainer

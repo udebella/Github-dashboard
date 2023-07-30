@@ -27,19 +27,19 @@ export default {
 	props: {
 		queryBuilder: {
 			type: Function,
-			default: buildRepositoriesQuery(pullRequestListFragment),
+			default: () => buildRepositoriesQuery(pullRequestListFragment),
 		},
 		pullRequestReader: {
 			type: Function,
-			default: extractPullRequest,
+			default: () => extractPullRequest,
 		},
 		userService: {
 			type: Object,
-			default: buildUserService,
+			default: () => buildUserService(),
 		},
 		pullRequestNotifications: {
 			type: Object,
-			default: pullRequestNotifications,
+			default: () => pullRequestNotifications(),
 		},
 	},
 	data() {
