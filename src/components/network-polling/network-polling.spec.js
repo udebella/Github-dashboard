@@ -2,21 +2,18 @@ import {flushPromises, shallowMount} from '@vue/test-utils'
 import NetworkPolling from './network-polling.vue'
 import {afterEach, beforeEach, describe, expect, it, vitest} from "vitest";
 import {createPinia, setActivePinia} from "pinia";
-import {useConfigurationStore} from "@/stores/configuration";
 
 describe('NetworkPolling component', () => {
 	let networkPolling, stubs
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
-		const store = useConfigurationStore()
 		const promise = Promise.resolve('response example')
 		const requestStub = vitest.fn().mockReturnValue(promise)
 		vitest.useFakeTimers()
 		stubs = {
 			requestStub,
 			promise,
-			store,
 		}
 
 		networkPolling = shallowMount(NetworkPolling, {
@@ -58,10 +55,10 @@ describe('NetworkPolling component', () => {
 			expect(stubs.requestStub).toHaveBeenCalledTimes(2)
 		})
 
-		it('should stop calling the url when component is not displayed anymore', async () => {
+		it('should stop calling the url when component is not displayed anymore', () => {
 			expect(stubs.requestStub).toHaveBeenCalledOnce()
 
-			await networkPolling.unmount()
+			networkPolling.unmount()
 			vitest.advanceTimersByTime(999999)
 
 			expect(stubs.requestStub).toHaveBeenCalledOnce()
