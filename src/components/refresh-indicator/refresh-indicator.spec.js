@@ -16,7 +16,7 @@ describe('RefreshIndicator component', () => {
 	})
 
 	afterEach(() => {
-		vitest.restoreAllMocks()
+		vitest.useRealTimers()
 	})
 
 	describe('Initialization', () => {

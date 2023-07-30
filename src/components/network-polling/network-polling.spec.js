@@ -25,7 +25,7 @@ describe('NetworkPolling component', () => {
 	})
 
 	afterEach(() => {
-		vitest.restoreAllMocks()
+		vitest.useRealTimers()
 	})
 
 	describe('Initialization', () => {
