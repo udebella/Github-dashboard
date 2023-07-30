@@ -1,8 +1,7 @@
-import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import RecentlyClosedPullRequests from './recently-closed-pull-requests.vue'
 import {viewerFragment} from './recently-closed-pull-requests'
-import { describe, beforeEach, it, vitest} from "vitest";
+import {beforeEach, describe, expect, it, vitest} from "vitest";
 
 describe('RecentlyClosedPullRequests component', () => {
 	let stubs
@@ -35,13 +34,13 @@ describe('RecentlyClosedPullRequests component', () => {
 		it('should mount properly', () => {
 			const recentlyClosedPullRequests = shallowMount(RecentlyClosedPullRequests, {propsData: stubs})
 
-			expect(recentlyClosedPullRequests.exists()).to.be.true
+			expect(recentlyClosedPullRequests.exists()).toBe(true)
 		})
 
 		it('should display a title', () => {
 			const recentlyClosedPullRequests = shallowMount(RecentlyClosedPullRequests, {propsData: stubs})
 
-			expect(recentlyClosedPullRequests.find('[data-test=title]').text()).to.equal('My recently merged pull requests')
+			expect(recentlyClosedPullRequests.find('[data-test=title]').text()).toBe('My recently merged pull requests')
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
@@ -53,7 +52,7 @@ describe('RecentlyClosedPullRequests component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(recentlyClosedPullRequests)
-			expect(recentlyClosedPullRequests.findComponent('[data-test=network-polling]').props().query).to.equal('queryBuilt')
+			expect(recentlyClosedPullRequests.findComponent('[data-test=network-polling]').props().query).toBe('queryBuilt')
 			expect(stubs.queryBuilder).toHaveBeenCalledWith(viewerFragment)
 			expect(stubs.pullRequestReader).toHaveBeenCalled()
 		})
@@ -68,7 +67,7 @@ describe('RecentlyClosedPullRequests component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(recentlyClosedPullRequests)
-			expect(recentlyClosedPullRequests.find('[data-test=line]').exists()).to.be.false
+			expect(recentlyClosedPullRequests.find('[data-test=line]').exists()).toBe(false)
 		})
 
 		it('should display a list of pull request', async () => {
@@ -78,8 +77,8 @@ describe('RecentlyClosedPullRequests component', () => {
 			// Then
 			await triggerFakeNetworkResponse(recentlyClosedPullRequests)
 			const viewerPullRequestLine = recentlyClosedPullRequests.findComponent('[data-test=line]')
-			expect(viewerPullRequestLine.exists()).to.be.true
-			expect(viewerPullRequestLine.props()).to.deep.equals({
+			expect(viewerPullRequestLine.exists()).toBe(true)
+			expect(viewerPullRequestLine.props()).toEqual({
 				title: 'Fix wheel/touch browser locking in IE and Safari',
 				url: 'https://github.com/facebook/react/pull/9333',
 				buildStatus: 'FAILURE',
