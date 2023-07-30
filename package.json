@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@types/debounce": "^1.2.1",
     "date-fns": "^2.30.0",
     "debounce": "^1.2.1",
     "graphql-request": "^6.1.0",

@@ -3,14 +3,14 @@
 </template>
 
 <script lang="ts" setup>
-import { debounce } from 'debounce' // TODO install typings for debounce dependency
+import { debounce } from 'debounce'
 
 const emit = defineEmits<{
-	input: string
+	input: [string]
 }>()
 
 const notifyParent = (event: Event) => {
-	const target: HTMLInputElement = event.target
+	const target = event.target as HTMLInputElement
 	emit('input', target.value)
 }
 
