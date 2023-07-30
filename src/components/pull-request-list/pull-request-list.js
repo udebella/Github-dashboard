@@ -30,11 +30,11 @@ export default {
 	props: {
 		queryBuilder: {
 			type: Function,
-			default: () => buildRepositoriesQuery(pullRequestListFragment)
+			default: buildRepositoriesQuery(pullRequestListFragment)
 		},
 		pullRequestReader: {
 			type: Function,
-			default: () => extractPullRequest
+			default: extractPullRequest
 		},
 		userService: {
 			type: Object,
@@ -52,7 +52,7 @@ export default {
 	},
 	computed: {
 		query() {
-			const watchedRepositories = this.repositoryStore.watchedRepositories
+			const watchedRepositories = this.repositoryStore.watched
 			return this.queryBuilder(watchedRepositories)
 		}
 	},
