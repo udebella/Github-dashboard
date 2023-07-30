@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import ViewerPullRequestList from './viewer-pull-request-list.vue'
-import {stub} from 'sinon'
 import {viewerFragment} from './viewer-pull-request-list'
+import { describe, beforeEach, it, vitest} from "vitest";
 
 describe('ViewerPullRequestList component', () => {
 	let stubs
@@ -23,10 +23,10 @@ describe('ViewerPullRequestList component', () => {
 			}],
 		}]
 		stubs = {
-			queryBuilder: stub().returns('graphql query'),
-			request: stub().returns(Promise.resolve({})),
-			pullRequestReader: stub().returns(fakeReponseRead),
-			userService: {connectedUser: stub().returns({login: 'udebella'})},
+			queryBuilder: vitest.fn().mockReturnValue('graphql query'),
+			request: vitest.fn().mockReturnValue(Promise.resolve({})),
+			pullRequestReader: vitest.fn().mockReturnValue(fakeReponseRead),
+			userService: {connectedUser: vitest.fn().mockReturnValue({login: 'udebella'})},
 			fakeReponseRead,
 			fakeGraphqlResponse,
 		}
@@ -47,22 +47,22 @@ describe('ViewerPullRequestList component', () => {
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
 			// Given
-			stubs.queryBuilder.returns('queryBuilt')
+			stubs.queryBuilder.mockReturnValue('queryBuilt')
 
 			// When
 			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
 			// Then
 			await triggerFakeNetworkResponse(viewerPullRequestList)
-			expect(viewerPullRequestList.find('[data-test=network-polling]').props().query).to.equal('queryBuilt')
-			expect(stubs.queryBuilder).to.have.been.calledWith(viewerFragment)
-			expect(stubs.pullRequestReader).to.have.been.called
+			expect(viewerPullRequestList.findComponent('[data-test=network-polling]').props().query).to.equal('queryBuilt')
+			expect(stubs.queryBuilder).toHaveBeenCalledWith(viewerFragment)
+			expect(stubs.pullRequestReader).toHaveBeenCalled()
 		})
 
 		it('should not display pull requests when graphql api returns an empty array of pull request for a repository', async () => {
 			// Given
 			stubs.fakeReponseRead = []
-			stubs.pullRequestReader.returns(stubs.fakeReponseRead)
+			stubs.pullRequestReader.mockReturnValue(stubs.fakeReponseRead)
 
 			// When
 			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
@@ -78,7 +78,7 @@ describe('ViewerPullRequestList component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(viewerPullRequestList)
-			const viewerPullRequestLine = viewerPullRequestList.find('[data-test=line]')
+			const viewerPullRequestLine = viewerPullRequestList.findComponent('[data-test=line]')
 			expect(viewerPullRequestLine.exists()).to.be.true
 			expect(viewerPullRequestLine.props()).to.deep.equals({
 				title: 'Fix wheel/touch browser locking in IE and Safari',
@@ -102,14 +102,13 @@ describe('ViewerPullRequestList component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(viewerPullRequestList)
-			const viewerPullRequestLine = viewerPullRequestList.find('[data-test=line]')
+			const viewerPullRequestLine = viewerPullRequestList.findComponent('[data-test=line]')
 			expect(viewerPullRequestLine.props().hasUpdates).to.be.true
 		})
 
 		const triggerFakeNetworkResponse = async viewerPullRequestList => {
-			const networkPolling = viewerPullRequestList.find('[data-test=network-polling]')
-			networkPolling.vm.$emit('http-update', stubs.fakeGraphqlResponse)
-			await networkPolling.vm.$nextTick()
+			const networkPolling = viewerPullRequestList.findComponent('[data-test=network-polling]')
+			await networkPolling.vm.$emit('http-update', stubs.fakeGraphqlResponse)
 		}
 	})
 })
