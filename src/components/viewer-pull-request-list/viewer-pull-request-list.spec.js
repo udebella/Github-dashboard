@@ -1,8 +1,7 @@
-import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
 import ViewerPullRequestList from './viewer-pull-request-list.vue'
 import {viewerFragment} from './viewer-pull-request-list'
-import { describe, beforeEach, it, vitest} from "vitest";
+import {beforeEach, describe, expect, it, vitest} from "vitest";
 
 describe('ViewerPullRequestList component', () => {
 	let stubs
@@ -36,13 +35,13 @@ describe('ViewerPullRequestList component', () => {
 		it('should mount properly', () => {
 			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
-			expect(viewerPullRequestList.exists()).to.be.true
+			expect(viewerPullRequestList.exists()).toBe(true)
 		})
 
 		it('should display a title', () => {
 			const viewerPullRequestList = shallowMount(ViewerPullRequestList, {propsData: stubs})
 
-			expect(viewerPullRequestList.find('[data-test=title]').text()).to.equal('My currently open pull requests')
+			expect(viewerPullRequestList.find('[data-test=title]').text()).toBe('My currently open pull requests')
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
@@ -54,7 +53,7 @@ describe('ViewerPullRequestList component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(viewerPullRequestList)
-			expect(viewerPullRequestList.findComponent('[data-test=network-polling]').props().query).to.equal('queryBuilt')
+			expect(viewerPullRequestList.findComponent('[data-test=network-polling]').props().query).toBe('queryBuilt')
 			expect(stubs.queryBuilder).toHaveBeenCalledWith(viewerFragment)
 			expect(stubs.pullRequestReader).toHaveBeenCalled()
 		})
@@ -69,7 +68,7 @@ describe('ViewerPullRequestList component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(viewerPullRequestList)
-			expect(viewerPullRequestList.find('[data-test=line]').exists()).to.be.false
+			expect(viewerPullRequestList.find('[data-test=line]').exists()).toBe(false)
 		})
 
 		it('should display a list of pull request', async () => {
@@ -79,8 +78,8 @@ describe('ViewerPullRequestList component', () => {
 			// Then
 			await triggerFakeNetworkResponse(viewerPullRequestList)
 			const viewerPullRequestLine = viewerPullRequestList.findComponent('[data-test=line]')
-			expect(viewerPullRequestLine.exists()).to.be.true
-			expect(viewerPullRequestLine.props()).to.deep.equals({
+			expect(viewerPullRequestLine.exists()).toBe(true)
+			expect(viewerPullRequestLine.props()).toEqual({
 				title: 'Fix wheel/touch browser locking in IE and Safari',
 				url: 'https://github.com/facebook/react/pull/9333',
 				buildStatus: 'FAILURE',
@@ -103,7 +102,7 @@ describe('ViewerPullRequestList component', () => {
 			// Then
 			await triggerFakeNetworkResponse(viewerPullRequestList)
 			const viewerPullRequestLine = viewerPullRequestList.findComponent('[data-test=line]')
-			expect(viewerPullRequestLine.props().hasUpdates).to.be.true
+			expect(viewerPullRequestLine.props().hasUpdates).toBe(true)
 		})
 
 		const triggerFakeNetworkResponse = async viewerPullRequestList => {
