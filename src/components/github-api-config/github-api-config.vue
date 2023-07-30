@@ -14,7 +14,7 @@ import { useConfigurationStore } from '@/stores/configuration'
 const store = useConfigurationStore()
 
 const updateGithubApi = (event: Event) => {
-	const input: HTMLInputElement = event.target
+	const input = event.target as HTMLInputElement
 	store.updateGithubApi(input.value)
 }
 </script>
