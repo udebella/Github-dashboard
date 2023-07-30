@@ -1,17 +1,18 @@
-import {shallowMount} from '@vue/test-utils'
-import {expect} from 'chai'
-import {stub, useFakeTimers} from 'sinon'
-import flushPomises from 'flush-promises'
+import {flushPromises, shallowMount} from '@vue/test-utils'
 import NetworkPolling from './network-polling.vue'
+import {afterEach, beforeEach, describe, expect, it, vitest} from "vitest";
+import {createPinia, setActivePinia} from "pinia";
+import {useConfigurationStore} from "@/stores/configuration";
 
 describe('NetworkPolling component', () => {
-	let networkPolling, stubs, clock
+	let networkPolling, stubs
 
 	beforeEach(() => {
-		const store = {state: {timeBetweenRefresh: 30}}
+		setActivePinia(createPinia())
+		const store = useConfigurationStore()
 		const promise = Promise.resolve('response example')
-		const requestStub = stub().returns(promise)
-		clock = useFakeTimers()
+		const requestStub = vitest.fn().mockReturnValue(promise)
+		vitest.useFakeTimers()
 		stubs = {
 			requestStub,
 			promise,
@@ -19,7 +20,6 @@ describe('NetworkPolling component', () => {
 		}
 
 		networkPolling = shallowMount(NetworkPolling, {
-			store,
 			propsData: {
 				query: 'http://test-url',
 				request: requestStub,
@@ -28,7 +28,7 @@ describe('NetworkPolling component', () => {
 	})
 
 	afterEach(() => {
-		clock.restore()
+		vitest.restoreAllMocks()
 	})
 
 	describe('Initialization', () => {
@@ -36,35 +36,35 @@ describe('NetworkPolling component', () => {
 			it('should display refresh indicator of the data', async () => {
 				const indicator = networkPolling.findComponent({name: 'refresh-indicator'})
 
-				expect(indicator.exists()).to.be.true
-				expect(indicator.attributes().title).to.equal('Last refresh')
-				expect(indicator.props()).to.deep.equal({promise: stubs.promise, timeBetweenRefresh: 30})
+				expect(indicator.exists()).toBe(true)
+				expect(indicator.attributes().title).toEqual('Last refresh')
+				expect(indicator.props()).toEqual({promise: stubs.promise, timeBetweenRefresh: 30})
 			})
 		})
 
 		it('should mount properly', () => {
-			expect(networkPolling.exists()).to.be.true
+			expect(networkPolling.exists()).toBe(true)
 		})
 
 		it('should call the given url', () => {
-			expect(stubs.requestStub).to.have.been.calledWith('http://test-url')
+			expect(stubs.requestStub).toHaveBeenCalledWith('http://test-url')
 		})
 
 		it('should make http call every 30 sec', () => {
-			expect(stubs.requestStub.callCount).to.equal(1)
-			clock.tick(29999)
-			expect(stubs.requestStub.callCount).to.equal(1)
-			clock.tick(1)
-			expect(stubs.requestStub.callCount).to.equal(2)
+			expect(stubs.requestStub).toHaveBeenCalledOnce()
+			vitest.advanceTimersByTime(29999)
+			expect(stubs.requestStub).toHaveBeenCalledOnce()
+			vitest.advanceTimersByTime(1)
+			expect(stubs.requestStub).toHaveBeenCalledTimes(2)
 		})
 
-		it('should stop calling the url when component is not displayed anymore', () => {
-			expect(stubs.requestStub.callCount).to.equal(1)
+		it('should stop calling the url when component is not displayed anymore', async () => {
+			expect(stubs.requestStub).toHaveBeenCalledOnce()
 
-			networkPolling.destroy()
-			clock.tick(999999)
+			await networkPolling.unmount()
+			vitest.advanceTimersByTime(999999)
 
-			expect(stubs.requestStub.callCount).to.equal(1)
+			expect(stubs.requestStub).toHaveBeenCalledOnce()
 		})
 
 		it('should call the new url immediately when props change', async () => {
@@ -72,13 +72,13 @@ describe('NetworkPolling component', () => {
 				query: 'http://new-url',
 			})
 
-			expect(stubs.requestStub).to.have.been.calledWith('http://new-url')
+			expect(stubs.requestStub).toHaveBeenCalledWith('http://new-url')
 		})
 
 		it('should notify parent component with response from the request', async () => {
-			await flushPomises()
+			await flushPromises()
 
-			expect(networkPolling.emitted()['http-update']).to.deep.equal([['response example']])
+			expect(networkPolling.emitted()['http-update']).toEqual([['response example']])
 		})
 	})
 })

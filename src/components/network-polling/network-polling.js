@@ -1,7 +1,12 @@
 import {request} from '../../services/graphql/graphql-client'
 import RefreshIndicator from '../refresh-indicator/refresh-indicator.vue'
+import {useConfigurationStore} from "@/stores/configuration";
 
 export default {
+	setup() {
+		const timeBetweenRefresh = useConfigurationStore().timeBetweenRefresh
+		return { timeBetweenRefresh }
+	},
 	name: 'network-polling',
 	props: {
 		query: {
@@ -16,7 +21,6 @@ export default {
 	data() {
 		return {
 			promise: new Promise(() => {}),
-			timeBetweenRefresh: this.$store.state.timeBetweenRefresh,
 		}
 	},
 	watch: {
@@ -39,7 +43,7 @@ export default {
 		this.interval = setInterval(this.callHttp, this.timeBetweenRefresh * 1000)
 		return this.callHttp()
 	},
-	destroyed() {
+	unmounted() {
 		clearInterval(this.interval)
 	},
 	components: {
