@@ -24,7 +24,7 @@ describe('RecentlyClosedPullRequests component', () => {
 		}]
 		stubs = {
 			queryBuilder: vitest.fn().mockReturnValue('graphql query'),
-			request: vitest.fn().mockReturnValue(Promise.resolve({})),
+			request: vitest.fn().mockResolvedValue({}),
 			pullRequestReader: vitest.fn().mockReturnValue(fakeReponseRead),
 			fakeReponseRead,
 			fakeGraphqlResponse,
