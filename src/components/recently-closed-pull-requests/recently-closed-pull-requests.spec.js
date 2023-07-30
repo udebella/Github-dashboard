@@ -25,7 +25,6 @@ describe('RecentlyClosedPullRequests component', () => {
 			queryBuilder: vitest.fn().mockReturnValue('graphql query'),
 			request: vitest.fn().mockResolvedValue({}),
 			pullRequestReader: vitest.fn().mockReturnValue(fakeReponseRead),
-			fakeReponseRead,
 			fakeGraphqlResponse,
 		}
 	})
@@ -59,8 +58,7 @@ describe('RecentlyClosedPullRequests component', () => {
 
 		it('should not display pull requests when graphql api returns an empty array of pull request for a repository', async () => {
 			// Given
-			stubs.fakeReponseRead = []
-			stubs.pullRequestReader.mockReturnValue(stubs.fakeReponseRead)
+			stubs.pullRequestReader.mockReturnValue([])
 
 			// When
 			const recentlyClosedPullRequests = shallowMount(RecentlyClosedPullRequests, {propsData: stubs})
