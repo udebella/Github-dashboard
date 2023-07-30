@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BuildStatuses from './build-statuses.vue'
-import {beforeEach, describe, expect, it} from "vitest";
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('BuildStatuses component', () => {
 	let buildStatuses
@@ -9,8 +9,8 @@ describe('BuildStatuses component', () => {
 		beforeEach(() => {
 			buildStatuses = shallowMount(BuildStatuses, {
 				propsData: {
-					statuses: [],
-				},
+					statuses: []
+				}
 			})
 		})
 
@@ -29,23 +29,25 @@ describe('BuildStatuses component', () => {
 		beforeEach(() => {
 			buildStatuses = shallowMount(BuildStatuses, {
 				propsData: {
-					statuses: [{
-						description: 'description',
-						jobUrl: 'http://build-url',
-						jobStatus: 'SUCCESS',
-					}],
-				},
+					statuses: [
+						{
+							description: 'description',
+							jobUrl: 'http://build-url',
+							jobStatus: 'SUCCESS'
+						}
+					]
+				}
 			})
 		})
 
 		describe('Initialisation', () => {
 			it('should display statuses', () => {
-				const buildStatus = buildStatuses.findComponent({name: 'build-status'})
+				const buildStatus = buildStatuses.findComponent({ name: 'build-status' })
 				expect(buildStatus.exists()).toBe(true)
 				expect(buildStatus.props()).toEqual({
 					description: 'description',
 					url: 'http://build-url',
-					state: 'SUCCESS',
+					state: 'SUCCESS'
 				})
 			})
 		})

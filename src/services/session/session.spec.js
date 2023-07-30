@@ -1,5 +1,5 @@
-import {buildSessionService, NO_USER} from './session'
-import {beforeEach, describe, expect, it, vitest} from "vitest";
+import { buildSessionService, NO_USER } from './session'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('Session service', () => {
 	let sessionService, fakeSessionStorage
@@ -8,7 +8,7 @@ describe('Session service', () => {
 		fakeSessionStorage = {
 			setItem: vitest.fn(),
 			getItem: vitest.fn(),
-			removeItem: vitest.fn(),
+			removeItem: vitest.fn()
 		}
 
 		sessionService = buildSessionService(fakeSessionStorage)

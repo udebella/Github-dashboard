@@ -4,11 +4,12 @@
 		:value="store.githubApi"
 		type="text"
 		data-test="input"
-		@input="updateGithubApi">
+		@input="updateGithubApi"
+	/>
 </template>
 
 <script setup lang="ts">
-import {useConfigurationStore} from "@/stores/configuration";
+import { useConfigurationStore } from '@/stores/configuration'
 
 const store = useConfigurationStore()
 

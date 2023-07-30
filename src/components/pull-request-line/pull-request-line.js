@@ -9,34 +9,34 @@ export default {
 	props: {
 		title: {
 			type: String,
-			required: true,
+			required: true
 		},
 		url: {
 			type: String,
-			required: true,
+			required: true
 		},
 		buildStatus: {
 			type: String,
-			required: true,
+			required: true
 		},
 		creationDate: {
 			type: Date,
-			required: true,
+			required: true
 		},
 		hasUpdates: {
 			type: Boolean,
-			required: true,
+			required: true
 		},
 		statusesList: {
 			type: Array,
-			default: () => [],
-		},
+			default: () => []
+		}
 	},
 	components: {
 		Badge,
 		LivingIcon,
 		UpdateIcon,
 		BuildStatuses,
-		Popover,
-	},
+		Popover
+	}
 }

@@ -1,7 +1,7 @@
 import CustomButton from '../custom-button/custom-button.vue'
-import {useRepositoryStore} from "@/stores/repositories";
-import IconComponent from "@/components/icon/icon-component.vue";
-import {useConfigurationStore} from "@/stores/configuration";
+import { useRepositoryStore } from '@/stores/repositories'
+import IconComponent from '@/components/icon/icon-component.vue'
+import { useConfigurationStore } from '@/stores/configuration'
 
 export default {
 	setup() {
@@ -13,28 +13,28 @@ export default {
 	props: {
 		name: {
 			type: String,
-			required: true,
+			required: true
 		},
 		owner: {
 			type: String,
-			required: true,
-		},
+			required: true
+		}
 	},
 	data: () => ({
-		icon: 'deleteBin',
+		icon: 'deleteBin'
 	}),
 	computed: {
 		configurationEnabled() {
 			return this.configurationStore.configurationEnabled
-		},
+		}
 	},
 	methods: {
 		remove() {
-			this.repositoryStore.removeRepository({name: this.name, owner: this.owner})
-		},
+			this.repositoryStore.removeRepository({ name: this.name, owner: this.owner })
+		}
 	},
 	components: {
 		IconComponent,
-		CustomButton,
-	},
+		CustomButton
+	}
 }

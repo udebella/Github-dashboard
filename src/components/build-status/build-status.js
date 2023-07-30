@@ -1,11 +1,11 @@
 import CustomButton from '../custom-button/custom-button.vue'
-import IconComponent from "@/components/icon/icon-component.vue";
+import IconComponent from '@/components/icon/icon-component.vue'
 
 const statusToIcon = {
 	FAILURE: 'warning',
 	ERROR: 'error',
 	PENDING: 'pending',
-	SUCCESS: 'success',
+	SUCCESS: 'success'
 }
 
 export default {
@@ -13,23 +13,23 @@ export default {
 	props: {
 		description: {
 			type: String,
-			required: true,
+			required: true
 		},
 		url: {
-			type: String,
+			type: String
 		},
 		state: {
 			required: true,
-			type: String,
-		},
+			type: String
+		}
 	},
 	computed: {
 		icon() {
 			return statusToIcon[this.state]
-		},
+		}
 	},
 	components: {
 		IconComponent,
-		CustomButton,
-	},
+		CustomButton
+	}
 }

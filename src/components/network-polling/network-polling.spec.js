@@ -1,7 +1,7 @@
-import {flushPromises, shallowMount} from '@vue/test-utils'
+import { flushPromises, shallowMount } from '@vue/test-utils'
 import NetworkPolling from './network-polling.vue'
-import {afterEach, beforeEach, describe, expect, it, vitest} from "vitest";
-import {createPinia, setActivePinia} from "pinia";
+import { afterEach, beforeEach, describe, expect, it, vitest } from 'vitest'
+import { createPinia, setActivePinia } from 'pinia'
 
 describe('NetworkPolling component', () => {
 	let networkPolling, stubs
@@ -13,14 +13,14 @@ describe('NetworkPolling component', () => {
 		vitest.useFakeTimers()
 		stubs = {
 			requestStub,
-			promise,
+			promise
 		}
 
 		networkPolling = shallowMount(NetworkPolling, {
 			propsData: {
 				query: 'http://test-url',
-				request: requestStub,
-			},
+				request: requestStub
+			}
 		})
 	})
 
@@ -31,11 +31,11 @@ describe('NetworkPolling component', () => {
 	describe('Initialization', () => {
 		describe('Refresh display', () => {
 			it('should display refresh indicator of the data', async () => {
-				const indicator = networkPolling.findComponent({name: 'refresh-indicator'})
+				const indicator = networkPolling.findComponent({ name: 'refresh-indicator' })
 
 				expect(indicator.exists()).toBe(true)
 				expect(indicator.attributes().title).toEqual('Last refresh')
-				expect(indicator.props()).toEqual({promise: stubs.promise, timeBetweenRefresh: 30})
+				expect(indicator.props()).toEqual({ promise: stubs.promise, timeBetweenRefresh: 30 })
 			})
 		})
 
@@ -66,7 +66,7 @@ describe('NetworkPolling component', () => {
 
 		it('should call the new url immediately when props change', async () => {
 			await networkPolling.setProps({
-				query: 'http://new-url',
+				query: 'http://new-url'
 			})
 
 			expect(stubs.requestStub).toHaveBeenCalledWith('http://new-url')

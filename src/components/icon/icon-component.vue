@@ -1,11 +1,22 @@
 <template>
-	<i :class="iconClass"/>
+	<i :class="iconClass" />
 </template>
 
 <script lang="ts" setup>
 import 'remixicon/fonts/remixicon.css'
 
-type IconsNames = 'success' | 'pending' | 'warning' | 'error' | 'living' | 'dead' | 'hasUpdates' | 'user' | 'github' | 'deleteBin' | 'configuration'
+type IconsNames =
+	| 'success'
+	| 'pending'
+	| 'warning'
+	| 'error'
+	| 'living'
+	| 'dead'
+	| 'hasUpdates'
+	| 'user'
+	| 'github'
+	| 'deleteBin'
+	| 'configuration'
 type IconClass = `ri-${string}-fill`
 
 const iconClasses: Record<IconsNames, IconClass> = {

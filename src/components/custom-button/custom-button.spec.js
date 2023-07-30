@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import CustomButton from './custom-button.vue'
-import {beforeEach, describe, it, expect} from "vitest";
+import { beforeEach, describe, it, expect } from 'vitest'
 
 describe('CustomButton component', () => {
 	let customButton
@@ -8,8 +8,8 @@ describe('CustomButton component', () => {
 	beforeEach(() => {
 		customButton = shallowMount(CustomButton, {
 			slots: {
-				default: ['<span>Slot content</span>'],
-			},
+				default: ['<span>Slot content</span>']
+			}
 		})
 	})
 
@@ -26,7 +26,7 @@ describe('CustomButton component', () => {
 	describe('Link', () => {
 		it('should have a link when an url is given', () => {
 			customButton = shallowMount(CustomButton, {
-				propsData: {href: 'http://url'},
+				propsData: { href: 'http://url' }
 			})
 
 			const link = customButton.find('[data-test=link]')

@@ -1,17 +1,17 @@
-import {request} from '../../services/graphql/graphql-client'
+import { request } from '../../services/graphql/graphql-client'
 import DebouncedInput from '../debounced-input/debounced-input.vue'
 import CustomSelect from '../custom-select/custom-select.vue'
-import {query} from './repository-picker.query'
-import {useRepositoryStore} from "@/stores/repositories";
+import { query } from './repository-picker.query'
+import { useRepositoryStore } from '@/stores/repositories'
 
-const extract = response => {
-	const repositories = response && response.search && response.search.nodes || []
+const extract = (response) => {
+	const repositories = (response && response.search && response.search.nodes) || []
 	// FIXME defaultBranchRef can be null on new projects
-	return repositories.map(({name, owner, url, defaultBranchRef}) => ({
+	return repositories.map(({ name, owner, url, defaultBranchRef }) => ({
 		name,
 		owner: owner.login,
 		url,
-		defaultBranch: defaultBranchRef.name,
+		defaultBranch: defaultBranchRef.name
 	}))
 }
 
@@ -23,16 +23,16 @@ export default {
 	name: 'repository-picker',
 	props: {
 		request: {
-			default: () => request,
-		},
+			default: () => request
+		}
 	},
 	data: () => ({
-		repositories: [],
+		repositories: []
 	}),
 	computed: {
 		repositoriesNames() {
-			return this.repositories.map(({name}) => name)
-		},
+			return this.repositories.map(({ name }) => name)
+		}
 	},
 	methods: {
 		async retrieveRepositoriesFor(searchQuery) {
@@ -42,12 +42,12 @@ export default {
 			}
 		},
 		pickRepository(value) {
-			const selectedRepository = this.repositories.find(({name}) => name === value)
+			const selectedRepository = this.repositories.find(({ name }) => name === value)
 			this.repositoryStore.addRepository(selectedRepository)
-		},
+		}
 	},
 	components: {
 		DebouncedInput,
-		CustomSelect,
-	},
+		CustomSelect
+	}
 }

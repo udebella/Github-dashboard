@@ -1,14 +1,14 @@
-import {differenceInWeeks, formatDistanceToNow} from 'date-fns'
-import IconComponent from "@/components/icon/icon-component.vue";
+import { differenceInWeeks, formatDistanceToNow } from 'date-fns'
+import IconComponent from '@/components/icon/icon-component.vue'
 
 export default {
 	name: 'living-icon',
-	components: {IconComponent},
+	components: { IconComponent },
 	props: {
 		date: {
 			type: Date,
-			required: true,
-		},
+			required: true
+		}
 	},
 	computed: {
 		title() {
@@ -16,6 +16,6 @@ export default {
 		},
 		icon() {
 			return differenceInWeeks(new Date(), this.date) < 1 ? 'living' : 'dead'
-		},
-	},
+		}
+	}
 }

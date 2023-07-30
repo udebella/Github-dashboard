@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import RepositoryLine from './repository-line.vue'
-import {beforeEach, describe, expect, it} from "vitest";
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('RepositoryLine component', () => {
 	let repositoryLine
@@ -14,12 +14,14 @@ describe('RepositoryLine component', () => {
 					repositoryUrl: 'http://repository-url',
 					branchStatus: 'SUCCESS',
 					defaultBranch: 'master',
-					statusesList: [{
-						jobStatus: 'SUCCESS',
-						description: 'build description',
-						jobUrl: 'http://build-target-url',
-					}],
-				},
+					statusesList: [
+						{
+							jobStatus: 'SUCCESS',
+							description: 'build description',
+							jobUrl: 'http://build-target-url'
+						}
+					]
+				}
 			},
 			global: {
 				renderStubDefaultSlot: true
@@ -65,7 +67,7 @@ describe('RepositoryLine component', () => {
 		let buildStatuses
 
 		beforeEach(() => {
-			buildStatuses = repositoryLine.findComponent({name: 'build-statuses'})
+			buildStatuses = repositoryLine.findComponent({ name: 'build-statuses' })
 		})
 
 		it('should display build statuses', () => {
@@ -73,11 +75,13 @@ describe('RepositoryLine component', () => {
 		})
 
 		it('should give the list of statuses to the component', () => {
-			expect(buildStatuses.props().statuses).toEqual([{
-				jobStatus: 'SUCCESS',
-				description: 'build description',
-				jobUrl: 'http://build-target-url',
-			}])
+			expect(buildStatuses.props().statuses).toEqual([
+				{
+					jobStatus: 'SUCCESS',
+					description: 'build description',
+					jobUrl: 'http://build-target-url'
+				}
+			])
 		})
 
 		it('should not display build statuses when there is no build status associated with the commit', () => {
@@ -89,12 +93,12 @@ describe('RepositoryLine component', () => {
 						repositoryUrl: 'http://repository-url',
 						branchStatus: 'SUCCESS',
 						defaultBranch: 'master',
-						statusesList: [],
-					},
-				},
+						statusesList: []
+					}
+				}
 			})
 
-			buildStatuses = repositoryLine.findComponent({name: 'build-statuses'})
+			buildStatuses = repositoryLine.findComponent({ name: 'build-statuses' })
 			expect(buildStatuses.exists()).toBe(false)
 		})
 	})

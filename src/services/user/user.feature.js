@@ -1,5 +1,5 @@
-import {buildUserService} from './user'
-import {describe, expect, it} from "vitest";
+import { buildUserService } from './user'
+import { describe, expect, it } from 'vitest'
 
 describe('User component test', () => {
 	it('should allow to build a user service without parameters', () => {

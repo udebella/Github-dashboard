@@ -1,6 +1,6 @@
-import {flushPromises, shallowMount} from '@vue/test-utils'
+import { flushPromises, shallowMount } from '@vue/test-utils'
 import RefreshIndicator from './refresh-indicator.vue'
-import {afterEach, beforeEach, describe, expect, it, vitest} from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('RefreshIndicator component', () => {
 	let refreshIndicator
@@ -10,8 +10,8 @@ describe('RefreshIndicator component', () => {
 		refreshIndicator = shallowMount(RefreshIndicator, {
 			propsData: {
 				promise: Promise.resolve('first resolution'),
-				timeBetweenRefresh: 30,
-			},
+				timeBetweenRefresh: 30
+			}
 		})
 	})
 
@@ -41,7 +41,7 @@ describe('RefreshIndicator component', () => {
 			vitest.advanceTimersByTime(10000)
 
 			await refreshIndicator.setProps({
-				promise: Promise.resolve('new resolution'),
+				promise: Promise.resolve('new resolution')
 			})
 			await flushPromises()
 
@@ -52,7 +52,7 @@ describe('RefreshIndicator component', () => {
 			vitest.advanceTimersByTime(5000)
 
 			await refreshIndicator.setProps({
-				promise: new Promise(() => {}),
+				promise: new Promise(() => {})
 			})
 			await flushPromises()
 

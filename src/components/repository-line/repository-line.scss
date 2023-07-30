@@ -1,4 +1,4 @@
-@import "../../global";
+@import '../../global';
 
 .line {
 	position: relative;
@@ -24,12 +24,12 @@
 		}
 
 		@include on-desktop {
-			& :hover .popover, .popover:hover {
+			& :hover .popover,
+			.popover:hover {
 				visibility: visible;
 				opacity: 1;
 				transition: 300ms ease;
 			}
 		}
 	}
-
 }

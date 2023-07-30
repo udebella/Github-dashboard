@@ -1,16 +1,16 @@
 <template>
-	<input @input="debouncedInput" type="text">
+	<input @input="debouncedInput" type="text" />
 </template>
 
 <script lang="ts" setup>
-import {debounce} from 'debounce' // TODO install typings for debounce dependency
+import { debounce } from 'debounce' // TODO install typings for debounce dependency
 
 const emit = defineEmits<{
 	input: string
 }>()
 
 const notifyParent = (event: Event) => {
-	const target: HTMLInputElement = event.target;
+	const target: HTMLInputElement = event.target
 	emit('input', target.value)
 }
 

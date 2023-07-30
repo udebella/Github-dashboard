@@ -1,5 +1,5 @@
-import {notificationApi} from './notification'
-import {beforeEach, describe, expect, it, vitest} from "vitest";
+import { notificationApi } from './notification'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('NotificationAPI', () => {
 	let stubs
@@ -8,10 +8,10 @@ describe('NotificationAPI', () => {
 		const Notification = vitest.fn()
 		Notification.requestPermission = vitest.fn().mockResolvedValue('denied')
 		const document = {
-			hidden: true,
+			hidden: true
 		}
 
-		stubs = {Notification, document}
+		stubs = { Notification, document }
 	})
 
 	it('should create a notification when user gave its permission', async () => {

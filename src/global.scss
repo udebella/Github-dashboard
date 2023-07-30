@@ -21,15 +21,21 @@ $old: orange;
 }
 
 @mixin on-desktop {
-	@media (min-width: 1200px) { @content; }
+	@media (min-width: 1200px) {
+		@content;
+	}
 }
 
 @mixin on-tablet {
-	@media (max-width: 1200px) { @content; }
+	@media (max-width: 1200px) {
+		@content;
+	}
 }
 
 @mixin on-mobile {
-	@media (max-width: 640px) { @content; }
+	@media (max-width: 640px) {
+		@content;
+	}
 }
 
 h2 {

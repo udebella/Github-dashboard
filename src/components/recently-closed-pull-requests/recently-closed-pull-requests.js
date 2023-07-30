@@ -1,5 +1,8 @@
-import {extractHttp as extractPullRequest, pullRequestFragment} from '../../services/pull-request/pull-request'
-import {buildViewerQuery} from '../../services/graphql/query-builder'
+import {
+	extractHttp as extractPullRequest,
+	pullRequestFragment
+} from '../../services/pull-request/pull-request'
+import { buildViewerQuery } from '../../services/graphql/query-builder'
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
 
@@ -8,32 +11,32 @@ export default {
 	props: {
 		queryBuilder: {
 			type: Function,
-			default: buildViewerQuery,
+			default: buildViewerQuery
 		},
 		pullRequestReader: {
 			type: Function,
-			default: extractPullRequest,
-		},
+			default: extractPullRequest
+		}
 	},
 	data() {
 		return {
-			pullRequests: [],
+			pullRequests: []
 		}
 	},
 	computed: {
 		query() {
 			return this.queryBuilder(viewerFragment)
-		},
+		}
 	},
 	methods: {
 		updatePullRequests(httpResponse) {
 			this.pullRequests = this.pullRequestReader([httpResponse.viewer])
-		},
+		}
 	},
 	components: {
 		PullRequestLine,
-		NetworkPolling,
-	},
+		NetworkPolling
+	}
 }
 
 export const viewerFragment = `${pullRequestFragment}

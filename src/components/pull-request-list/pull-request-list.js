@@ -1,10 +1,13 @@
 import PullRequestLine from '../pull-request-line/pull-request-line.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
-import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
-import {extractHttp as extractPullRequest, pullRequestFragment} from '../../services/pull-request/pull-request'
-import {buildUserService} from '../../services/user/user'
-import {pullRequestNotifications} from '../../services/pull-request-notifications/pull-request-notifications'
-import {useRepositoryStore} from "@/stores/repositories";
+import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
+import {
+	extractHttp as extractPullRequest,
+	pullRequestFragment
+} from '../../services/pull-request/pull-request'
+import { buildUserService } from '../../services/user/user'
+import { pullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications'
+import { useRepositoryStore } from '@/stores/repositories'
 
 const pullRequestListFragment = `${pullRequestFragment}
 fragment repository on Repository {
@@ -27,45 +30,48 @@ export default {
 	props: {
 		queryBuilder: {
 			type: Function,
-			default: () => buildRepositoriesQuery(pullRequestListFragment),
+			default: () => buildRepositoriesQuery(pullRequestListFragment)
 		},
 		pullRequestReader: {
 			type: Function,
-			default: () => extractPullRequest,
+			default: () => extractPullRequest
 		},
 		userService: {
 			type: Object,
-			default: () => buildUserService(),
+			default: () => buildUserService()
 		},
 		pullRequestNotifications: {
 			type: Object,
-			default: () => pullRequestNotifications(),
-		},
+			default: () => pullRequestNotifications()
+		}
 	},
 	data() {
 		return {
-			pullRequests: [],
+			pullRequests: []
 		}
 	},
 	computed: {
 		query() {
 			const watchedRepositories = this.repositoryStore.watchedRepositories
 			return this.queryBuilder(watchedRepositories)
-		},
+		}
 	},
 	methods: {
 		hasUpdates(lastEventAuthor) {
 			return this.userService.connectedUser().login !== lastEventAuthor
 		},
 		updatePullRequests(httpResponse) {
-			const repositories = Object.values(httpResponse)
-				.filter(repositories => repositories && repositories.pullRequests)
+			const repositories = Object.values(httpResponse).filter(
+				(repositories) => repositories && repositories.pullRequests
+			)
 			this.pullRequests = this.pullRequestReader(repositories)
-			this.pullRequestNotifications.newList(this.pullRequests.map(({prTitle, prUrl}) => ({title: prTitle, url: prUrl})))
-		},
+			this.pullRequestNotifications.newList(
+				this.pullRequests.map(({ prTitle, prUrl }) => ({ title: prTitle, url: prUrl }))
+			)
+		}
 	},
 	components: {
 		PullRequestLine,
-		NetworkPolling,
-	},
+		NetworkPolling
+	}
 }

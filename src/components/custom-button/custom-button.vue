@@ -1,15 +1,8 @@
 <template>
-	<a
-		v-if="href"
-		:href="href"
-		class="button"
-		data-test="link">
+	<a v-if="href" :href="href" class="button" data-test="link">
 		<slot />
 	</a>
-	<div
-		v-else
-		class="button"
-		data-test="button">
+	<div v-else class="button" data-test="button">
 		<slot />
 	</div>
 </template>

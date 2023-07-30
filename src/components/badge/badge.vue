@@ -1,7 +1,5 @@
 <template>
-	<div 
-		class="badge"
-		@click="click">
+	<div class="badge" @click="click">
 		<slot />
 	</div>
 </template>

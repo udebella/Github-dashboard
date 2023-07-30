@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import DebouncedInput from './debounced-input.vue'
-import {afterEach, beforeEach, describe, expect, it, vitest} from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('DebouncedInput component', () => {
 	beforeEach(() => {

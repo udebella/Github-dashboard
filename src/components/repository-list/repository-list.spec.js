@@ -1,8 +1,8 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import RepositoryList from './repository-list.vue'
-import {beforeEach, describe, expect, it, vitest} from "vitest";
-import {useRepositoryStore} from "@/stores/repositories";
-import {createPinia, setActivePinia} from "pinia";
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import { useRepositoryStore } from '@/stores/repositories'
+import { createPinia, setActivePinia } from 'pinia'
 
 describe('RepositoryList component', () => {
 	let repositoryList, stubs
@@ -10,12 +10,12 @@ describe('RepositoryList component', () => {
 	beforeEach(() => {
 		setActivePinia(createPinia())
 		useRepositoryStore().$patch({
-			watched: [{name: 'repository', owner: 'user'}],
+			watched: [{ name: 'repository', owner: 'user' }]
 		})
 		const fakeGraphQlResponse = {
 			rep_0: {
 				name: 'repository',
-				owner: {login: 'user'},
+				owner: { login: 'user' },
 				url: 'http://repository-url',
 				defaultBranchRef: {
 					target: {
@@ -24,28 +24,28 @@ describe('RepositoryList component', () => {
 								{
 									state: 'SUCCESS',
 									context: 'build description',
-									targetUrl: 'http://build-target-url',
-								},
+									targetUrl: 'http://build-target-url'
+								}
 							],
-							state: 'SUCCESS',
-						},
-					},
-				},
+							state: 'SUCCESS'
+						}
+					}
+				}
 			},
 			rateLimit: {
 				cost: 1,
 				limit: 5000,
 				remaining: 4999,
-				resetAt: '2018-10-21T14:33:46Z',
-			},
+				resetAt: '2018-10-21T14:33:46Z'
+			}
 		}
 		stubs = {
 			queryBuilder: vitest.fn().mockReturnValue('graphql query'),
 			request: vitest.fn().mockResolvedValue(fakeGraphQlResponse),
-			fakeGraphQlResponse,
+			fakeGraphQlResponse
 		}
 
-		repositoryList = shallowMount(RepositoryList, {propsData: stubs})
+		repositoryList = shallowMount(RepositoryList, { propsData: stubs })
 	})
 
 	describe('Initialisation', () => {
@@ -59,7 +59,7 @@ describe('RepositoryList component', () => {
 
 		it('should display a list of repositories', async () => {
 			// When
-			repositoryList = shallowMount(RepositoryList, {propsData: stubs})
+			repositoryList = shallowMount(RepositoryList, { propsData: stubs })
 
 			// Then
 			await triggerNetworkResponse()
@@ -70,11 +70,13 @@ describe('RepositoryList component', () => {
 				owner: 'user',
 				repositoryUrl: 'http://repository-url',
 				branchStatus: 'SUCCESS',
-				statusesList: [{
-					jobStatus: 'SUCCESS',
-					description: 'build description',
-					jobUrl: 'http://build-target-url',
-				}],
+				statusesList: [
+					{
+						jobStatus: 'SUCCESS',
+						description: 'build description',
+						jobUrl: 'http://build-target-url'
+					}
+				]
 			})
 		})
 
@@ -83,7 +85,7 @@ describe('RepositoryList component', () => {
 			stubs.fakeGraphQlResponse.rep_0.defaultBranchRef.target.status = null
 
 			// When
-			repositoryList = shallowMount(RepositoryList, {propsData: stubs})
+			repositoryList = shallowMount(RepositoryList, { propsData: stubs })
 
 			// Then
 			await triggerNetworkResponse()
@@ -94,7 +96,7 @@ describe('RepositoryList component', () => {
 				owner: 'user',
 				repositoryUrl: 'http://repository-url',
 				branchStatus: 'NO_STATUS',
-				statusesList: [],
+				statusesList: []
 			})
 		})
 
@@ -103,7 +105,7 @@ describe('RepositoryList component', () => {
 			stubs.fakeGraphQlResponse.rateLimit = null
 
 			// When
-			repositoryList = shallowMount(RepositoryList, {propsData: stubs})
+			repositoryList = shallowMount(RepositoryList, { propsData: stubs })
 
 			// Then
 			await triggerNetworkResponse()
@@ -112,7 +114,7 @@ describe('RepositoryList component', () => {
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
 			// When
-			shallowMount(RepositoryList, {propsData: stubs})
+			shallowMount(RepositoryList, { propsData: stubs })
 
 			// Then
 			expect(repositoryList.find('[data-test=polling]').attributes().query).toBe('graphql query')
@@ -120,10 +122,10 @@ describe('RepositoryList component', () => {
 
 		it('should not display anything if the list is empty', () => {
 			// Given
-			useRepositoryStore().$patch({ watched: []});
+			useRepositoryStore().$patch({ watched: [] })
 
 			// When
-			const repositoryList = shallowMount(RepositoryList, {propsData: stubs})
+			const repositoryList = shallowMount(RepositoryList, { propsData: stubs })
 
 			// Then
 			expect(repositoryList.find('[data-test=repository-line]').exists()).toBe(false)

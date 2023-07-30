@@ -1,15 +1,15 @@
-import {shallowMount, VueWrapper} from '@vue/test-utils'
+import { shallowMount, VueWrapper } from '@vue/test-utils'
 import RepositoryAdder from './repository-adder.vue'
-import {beforeEach, describe, expect, it} from "vitest";
-import {createPinia, setActivePinia} from "pinia";
-import {useConfigurationStore} from "@/stores/configuration";
+import { beforeEach, describe, expect, it } from 'vitest'
+import { createPinia, setActivePinia } from 'pinia'
+import { useConfigurationStore } from '@/stores/configuration'
 
 describe('RepositoryAdder component', () => {
 	let repositoryAdder: VueWrapper
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
-		repositoryAdder = shallowMount(RepositoryAdder, { global: { renderStubDefaultSlot: true }})
+		repositoryAdder = shallowMount(RepositoryAdder, { global: { renderStubDefaultSlot: true } })
 	})
 
 	describe('Initialization', () => {
@@ -18,7 +18,7 @@ describe('RepositoryAdder component', () => {
 		})
 
 		it('should hide the component when configuration mode is disabled', async () => {
-			useConfigurationStore().$patch({configurationEnabled: false})
+			useConfigurationStore().$patch({ configurationEnabled: false })
 
 			repositoryAdder = shallowMount(RepositoryAdder)
 
@@ -34,7 +34,7 @@ describe('RepositoryAdder component', () => {
 		it('should hide the icon when clicked', () => {
 			const icon = repositoryAdder.find('[data-test=icon]')
 
-			repositoryAdder.findComponent({name: 'badge'}).vm.$emit('click')
+			repositoryAdder.findComponent({ name: 'badge' }).vm.$emit('click')
 
 			expect(icon.exists()).toBe(false)
 		})

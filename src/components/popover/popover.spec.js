@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Popover from './popover.vue'
-import {beforeEach, describe, expect, it} from "vitest";
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Popover component', () => {
 	let popover
@@ -8,8 +8,8 @@ describe('Popover component', () => {
 	beforeEach(() => {
 		popover = shallowMount(Popover, {
 			slots: {
-				default: ['<span>Slot content</span>'],
-			},
+				default: ['<span>Slot content</span>']
+			}
 		})
 	})
 
@@ -29,8 +29,8 @@ describe('Popover component', () => {
 		it('should allow to display the popover on the left', () => {
 			popover = shallowMount(Popover, {
 				propsData: {
-					side: 'left',
-				},
+					side: 'left'
+				}
 			})
 
 			expect(popover.classes()).toContain('left')

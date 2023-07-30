@@ -1,4 +1,4 @@
-import {defineStore} from "pinia";
+import { defineStore } from 'pinia'
 
 export const useConfigurationStore = defineStore('configuration', {
 	state: () => ({
@@ -11,7 +11,7 @@ export const useConfigurationStore = defineStore('configuration', {
 			this.githubApi = newApi
 		},
 		toggleConfiguration() {
-			this.configurationEnabled = !this.configurationEnabled;
+			this.configurationEnabled = !this.configurationEnabled
 		}
 	}
 })

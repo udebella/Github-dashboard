@@ -3,22 +3,22 @@ export default {
 	props: {
 		promise: {
 			type: Promise,
-			required: true,
+			required: true
 		},
 		timeBetweenRefresh: {
 			type: Number,
-			required: true,
-		},
+			required: true
+		}
 	},
 	data() {
 		return {
-			counter: 0,
+			counter: 0
 		}
 	},
 	watch: {
 		promise() {
 			this.promise.then(this.resetCounter)
-		},
+		}
 	},
 	created() {
 		this.interval = setInterval(this.incrementCounter, 1000)
@@ -32,7 +32,7 @@ export default {
 				return 'outdated'
 			}
 			return 'old'
-		},
+		}
 	},
 	methods: {
 		incrementCounter() {
@@ -40,9 +40,9 @@ export default {
 		},
 		resetCounter() {
 			this.counter = 0
-		},
+		}
 	},
 	destroyed() {
 		clearInterval(this.interval)
-	},
+	}
 }

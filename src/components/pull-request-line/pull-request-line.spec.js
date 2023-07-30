@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import PullRequestLine from './pull-request-line.vue'
-import {beforeEach, describe, expect, it} from "vitest";
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('PullRequestLine component', () => {
 	let pullRequestLine
@@ -14,11 +14,13 @@ describe('PullRequestLine component', () => {
 				buildStatus: 'SUCCESS',
 				creationDate: today,
 				hasUpdates: true,
-				statusesList: [{
-					jobStatus: 'SUCCESS',
-					description: 'build description',
-					jobUrl: 'http://build-target-url',
-				}],
+				statusesList: [
+					{
+						jobStatus: 'SUCCESS',
+						description: 'build description',
+						jobUrl: 'http://build-target-url'
+					}
+				]
 			},
 			global: {
 				renderStubDefaultSlot: true
@@ -38,7 +40,9 @@ describe('PullRequestLine component', () => {
 		})
 
 		it('should display a link to the pull request', () => {
-			expect(pullRequestLine.find('[data-test=link]').attributes().href).toBe('http://pull-request-url')
+			expect(pullRequestLine.find('[data-test=link]').attributes().href).toBe(
+				'http://pull-request-url'
+			)
 		})
 
 		it('should display the build status of the pull request', () => {
@@ -66,12 +70,14 @@ describe('PullRequestLine component', () => {
 					buildStatus: 'SUCCESS',
 					creationDate: today,
 					hasUpdates: false,
-					statusesList: [{
-						jobStatus: 'SUCCESS',
-						description: 'build description',
-						jobUrl: 'http://build-target-url',
-					}],
-				},
+					statusesList: [
+						{
+							jobStatus: 'SUCCESS',
+							description: 'build description',
+							jobUrl: 'http://build-target-url'
+						}
+					]
+				}
 			})
 			const updateIcon = pullRequestLine.find('[data-test=update-icon]')
 
@@ -83,7 +89,7 @@ describe('PullRequestLine component', () => {
 		let buildStatuses
 
 		beforeEach(() => {
-			buildStatuses = pullRequestLine.findComponent({name: 'build-statuses'})
+			buildStatuses = pullRequestLine.findComponent({ name: 'build-statuses' })
 		})
 
 		it('should display build statuses', () => {
@@ -91,11 +97,13 @@ describe('PullRequestLine component', () => {
 		})
 
 		it('should give the list of statuses to the component', () => {
-			expect(buildStatuses.props().statuses).toEqual([{
-				jobStatus: 'SUCCESS',
-				description: 'build description',
-				jobUrl: 'http://build-target-url',
-			}])
+			expect(buildStatuses.props().statuses).toEqual([
+				{
+					jobStatus: 'SUCCESS',
+					description: 'build description',
+					jobUrl: 'http://build-target-url'
+				}
+			])
 		})
 
 		it('should not display build statuses when there is no build status associated with the commit', () => {
@@ -105,11 +113,11 @@ describe('PullRequestLine component', () => {
 					url: 'http://pull-request-url',
 					buildStatus: 'SUCCESS',
 					creationDate: today,
-					hasUpdates: true,
-				},
+					hasUpdates: true
+				}
 			})
 
-			buildStatuses = pullRequestLine.findComponent({name: 'build-statuses'})
+			buildStatuses = pullRequestLine.findComponent({ name: 'build-statuses' })
 			expect(buildStatuses.exists()).toBe(false)
 		})
 	})

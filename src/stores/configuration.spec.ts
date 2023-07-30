@@ -1,11 +1,11 @@
-import { describe, it, beforeEach, expect } from "vitest";
-import {createPinia, setActivePinia} from "pinia";
-import {useConfigurationStore} from "@/stores/configuration";
+import { describe, it, beforeEach, expect } from 'vitest'
+import { createPinia, setActivePinia } from 'pinia'
+import { useConfigurationStore } from '@/stores/configuration'
 
 describe('Configuration store', () => {
 	beforeEach(() => {
 		setActivePinia(createPinia())
-	});
+	})
 
 	it('should use the public github api by default', () => {
 		const store = useConfigurationStore()
@@ -54,4 +54,4 @@ describe('Configuration store', () => {
 			expect(store.configurationEnabled).toBe(false)
 		})
 	})
-});
+})

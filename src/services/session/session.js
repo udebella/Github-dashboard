@@ -3,7 +3,7 @@ export const NO_USER = {}
 const USER_KEY = 'user'
 
 export const buildSessionService = (storage = window.sessionStorage) => {
-	const setUser = item => {
+	const setUser = (item) => {
 		storage.setItem(USER_KEY, JSON.stringify(item))
 	}
 
@@ -14,6 +14,6 @@ export const buildSessionService = (storage = window.sessionStorage) => {
 	return {
 		setUser,
 		getUser,
-		removeUser,
+		removeUser
 	}
 }

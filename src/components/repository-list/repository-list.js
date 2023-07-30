@@ -1,25 +1,25 @@
 import RepositoryLine from '../repository-line/repository-line.vue'
 import RepositoryAdder from '../repository-adder/repository-adder.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
-import {buildRepositoriesQuery} from '../../services/graphql/query-builder'
-import {useRepositoryStore} from "@/stores/repositories";
+import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
+import { useRepositoryStore } from '@/stores/repositories'
 
-const extractHttpData = ({httpData}) => {
+const extractHttpData = ({ httpData }) => {
 	return Object.values(httpData)
-		.filter(repositories => repositories && repositories.defaultBranchRef)
-		.map(({name, owner, url, defaultBranchRef}) => {
+		.filter((repositories) => repositories && repositories.defaultBranchRef)
+		.map(({ name, owner, url, defaultBranchRef }) => {
 			const repositoryData = defaultBranchRef.target.status || {}
-			const statusMapper = ({state, context, targetUrl}) => ({
+			const statusMapper = ({ state, context, targetUrl }) => ({
 				jobStatus: state,
 				description: context,
-				jobUrl: targetUrl,
+				jobUrl: targetUrl
 			})
 			return {
 				name: name,
 				owner: owner.login,
 				repositoryUrl: url,
 				branchStatus: repositoryData.state || 'NO_STATUS',
-				statusesList: repositoryData.contexts && repositoryData.contexts.map(statusMapper) || [],
+				statusesList: (repositoryData.contexts && repositoryData.contexts.map(statusMapper)) || []
 			}
 		})
 }
@@ -55,28 +55,28 @@ export default {
 	props: {
 		queryBuilder: {
 			type: Function,
-			default: buildRepositoriesQuery(repositoryListFragment),
-		},
+			default: buildRepositoriesQuery(repositoryListFragment)
+		}
 	},
 	data() {
 		return {
-			repositories: [],
+			repositories: []
 		}
 	},
 	computed: {
 		query() {
 			const watchedRepositories = this.repositoryStore.watched
 			return this.queryBuilder(watchedRepositories)
-		},
+		}
 	},
 	methods: {
 		updateRepositories(httpData) {
-			this.repositories = extractHttpData({httpData})
-		},
+			this.repositories = extractHttpData({ httpData })
+		}
 	},
 	components: {
 		RepositoryLine,
 		RepositoryAdder,
-		NetworkPolling,
-	},
+		NetworkPolling
+	}
 }

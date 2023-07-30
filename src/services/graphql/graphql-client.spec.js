@@ -1,8 +1,8 @@
-import {request} from './graphql-client'
-import {NO_USER} from '../session/session'
-import {beforeEach, describe, expect, it, vitest} from "vitest";
-import {createPinia, setActivePinia} from "pinia";
-import {useConfigurationStore} from "@/stores/configuration";
+import { request } from './graphql-client'
+import { NO_USER } from '../session/session'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import { createPinia, setActivePinia } from 'pinia'
+import { useConfigurationStore } from '@/stores/configuration'
 
 describe('Service: graphql-client', () => {
 	let mocks
@@ -12,11 +12,11 @@ describe('Service: graphql-client', () => {
 		useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 		mocks = {
 			builder: vitest.fn(() => ({
-				request: mocks.fakeRequest,
+				request: mocks.fakeRequest
 			})),
 			fakeRequest: vitest.fn(),
 			session: {
-				getUser: vitest.fn().mockReturnValue(NO_USER),
+				getUser: vitest.fn().mockReturnValue(NO_USER)
 			}
 		}
 	})
@@ -29,14 +29,14 @@ describe('Service: graphql-client', () => {
 		})
 
 		it('should build a graphqlClient properly', async () => {
-			mocks.session.getUser.mockReturnValue({token: 'userToken'})
+			mocks.session.getUser.mockReturnValue({ token: 'userToken' })
 
 			await request('someQuery', mocks)
 
 			expect(mocks.builder).toHaveBeenCalledWith('http://github-api', {
 				headers: {
-					Authorization: 'token userToken',
-				},
+					Authorization: 'token userToken'
+				}
 			})
 		})
 

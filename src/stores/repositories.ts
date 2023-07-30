@@ -1,7 +1,7 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia'
 
 type Repository = {
-	name: string,
+	name: string
 	owner: string
 }
 
@@ -15,8 +15,9 @@ export const useRepositoryStore = defineStore('repository', {
 	}),
 	actions: {
 		addRepository(repository: Repository) {
-			this.watched = [...this.watched, repository,]
-				.sort(({name: first}, {name: second}) => first.localeCompare(second))
+			this.watched = [...this.watched, repository].sort(({ name: first }, { name: second }) =>
+				first.localeCompare(second)
+			)
 		},
 		removeRepository(repository: Repository) {
 			this.watched = this.watched.filter(differentFrom(repository))
@@ -25,6 +26,5 @@ export const useRepositoryStore = defineStore('repository', {
 })
 
 const differentFrom = (first: Repository) => (second: Repository) => {
-	return first.name !== second.name ||
-		first.owner !== second.owner
+	return first.name !== second.name || first.owner !== second.owner
 }

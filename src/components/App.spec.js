@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import App from './App.vue'
-import { describe, beforeEach, it, expect } from "vitest";
+import { describe, beforeEach, it, expect } from 'vitest'
 
 describe('Component App', () => {
 	let app
@@ -15,11 +15,11 @@ describe('Component App', () => {
 		})
 
 		it('should display a header', () => {
-			expect(app.findComponent({name: 'dashboard-header'}).exists()).toBe(true)
+			expect(app.findComponent({ name: 'dashboard-header' }).exists()).toBe(true)
 		})
 
 		it('should display the main container', () => {
-			expect(app.findComponent({name: 'main-container'}).exists()).toBe(true)
+			expect(app.findComponent({ name: 'main-container' }).exists()).toBe(true)
 		})
 	})
 })

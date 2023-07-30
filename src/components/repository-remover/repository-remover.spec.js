@@ -1,16 +1,19 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import RepositoryRemover from './repository-remover.vue'
-import {beforeEach, describe, expect, it} from "vitest";
-import {createPinia, setActivePinia} from "pinia";
-import {useRepositoryStore} from "@/stores/repositories";
-import {useConfigurationStore} from "@/stores/configuration";
+import { beforeEach, describe, expect, it } from 'vitest'
+import { createPinia, setActivePinia } from 'pinia'
+import { useRepositoryStore } from '@/stores/repositories'
+import { useConfigurationStore } from '@/stores/configuration'
 
 describe('RepositoryRemover component', () => {
 	let repositoryRemover
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
-		repositoryRemover = shallowMount(RepositoryRemover, {propsData: {name: 'example', owner: 'user'}, global: { renderStubDefaultSlot: true }})
+		repositoryRemover = shallowMount(RepositoryRemover, {
+			propsData: { name: 'example', owner: 'user' },
+			global: { renderStubDefaultSlot: true }
+		})
 	})
 
 	describe('Initialization', () => {
@@ -19,13 +22,15 @@ describe('RepositoryRemover component', () => {
 		})
 
 		it('should display a remove icon', async () => {
-			await useConfigurationStore().$patch({configurationEnabled: true})
+			await useConfigurationStore().$patch({ configurationEnabled: true })
 
-			expect(repositoryRemover.findComponent('[data-test=icon]').attributes().icon).toBe('deleteBin')
+			expect(repositoryRemover.findComponent('[data-test=icon]').attributes().icon).toBe(
+				'deleteBin'
+			)
 		})
 
 		it('should hide the remove icon when configuration mode is disabled', async () => {
-			await useConfigurationStore().$patch({configurationEnabled: false})
+			await useConfigurationStore().$patch({ configurationEnabled: false })
 
 			expect(repositoryRemover.find('[data-test=icon]').exists()).toBe(false)
 		})
@@ -33,9 +38,9 @@ describe('RepositoryRemover component', () => {
 
 	describe('Removing a repository', () => {
 		it('should remove the repository from watched repository when clicked', async () => {
-			await useRepositoryStore().$patch({watched: [{name: 'example', owner: 'user'}]})
+			await useRepositoryStore().$patch({ watched: [{ name: 'example', owner: 'user' }] })
 
-			await repositoryRemover.findComponent({name: 'custom-button'}).vm.$emit('click')
+			await repositoryRemover.findComponent({ name: 'custom-button' }).vm.$emit('click')
 
 			expect(useRepositoryStore().watched).toEqual([])
 		})

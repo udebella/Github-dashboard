@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Badge from './badge.vue'
-import {beforeEach, describe, expect, it} from "vitest";
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Badge component', () => {
 	let badge
@@ -8,8 +8,8 @@ describe('Badge component', () => {
 	beforeEach(() => {
 		badge = shallowMount(Badge, {
 			slots: {
-				default: ['<span>Slot content</span>'],
-			},
+				default: ['<span>Slot content</span>']
+			}
 		})
 	})
 

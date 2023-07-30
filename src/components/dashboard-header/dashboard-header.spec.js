@@ -1,12 +1,12 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import DashboardHeader from './dashboard-header.vue'
-import {beforeEach, describe, expect, it} from "vitest";
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Dashboard Header component', () => {
 	let dashboardHeader
 
 	beforeEach(() => {
-		dashboardHeader = shallowMount(DashboardHeader, { global: { renderStubDefaultSlot: true }})
+		dashboardHeader = shallowMount(DashboardHeader, { global: { renderStubDefaultSlot: true } })
 	})
 
 	describe('Initialization', () => {
@@ -20,7 +20,7 @@ describe('Dashboard Header component', () => {
 
 		it('should display a link to the sources', () => {
 			const sources = dashboardHeader.find('[data-test=sources]')
-			const icon = sources.findComponent({name: 'icon-component'})
+			const icon = sources.findComponent({ name: 'icon-component' })
 
 			expect(sources.attributes().href).toBe('https://github.com/udebella/Github-dashboard')
 			expect(sources.attributes().title).toBe('View sources')

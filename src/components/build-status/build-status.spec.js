@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BuildStatus from './build-status.vue'
-import {beforeEach, describe, expect, it} from "vitest";
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('BuildStatus component', () => {
 	let buildStatus
@@ -10,7 +10,7 @@ describe('BuildStatus component', () => {
 			propsData: {
 				url: 'http://build-link',
 				description: 'a short description',
-				state: 'SUCCESS',
+				state: 'SUCCESS'
 			},
 			global: {
 				renderStubDefaultSlot: true
@@ -43,11 +43,11 @@ describe('BuildStatus component', () => {
 			expect(link.classes()).toEqual(expect.arrayContaining(['icon', 'SUCCESS']))
 		})
 
-		it('should allow some build status to not have an url (some bot don\'t add url to statuses on github)', () => {
+		it("should allow some build status to not have an url (some bot don't add url to statuses on github)", () => {
 			buildStatus = shallowMount(BuildStatus, {
 				propsData: {
 					description: 'a short description',
-					state: 'SUCCESS',
+					state: 'SUCCESS'
 				},
 				global: {
 					stubs: {
@@ -63,31 +63,31 @@ describe('BuildStatus component', () => {
 
 	describe('Icons', () => {
 		it('should map success status to check-circle icon', async () => {
-			await buildStatus.setProps({state: 'SUCCESS'})
+			await buildStatus.setProps({ state: 'SUCCESS' })
 			const icon = buildStatus.findComponent('[data-test=icon]')
 
-			expect(icon.attributes().icon).toBe("success")
+			expect(icon.attributes().icon).toBe('success')
 		})
 
 		it('should map failure status to exclamation-circle icon', async () => {
-			await buildStatus.setProps({state: 'FAILURE'})
+			await buildStatus.setProps({ state: 'FAILURE' })
 			const icon = buildStatus.find('[data-test=icon]')
 
-			expect(icon.attributes().icon).toBe("warning")
+			expect(icon.attributes().icon).toBe('warning')
 		})
 
 		it('should map error status to times-circle icon', async () => {
-			await buildStatus.setProps({state: 'ERROR'})
+			await buildStatus.setProps({ state: 'ERROR' })
 			const icon = buildStatus.find('[data-test=icon]')
 
-			expect(icon.attributes().icon).toBe("error")
+			expect(icon.attributes().icon).toBe('error')
 		})
 
 		it('should map pending status to clock icon', async () => {
-			await buildStatus.setProps({state: 'PENDING'})
+			await buildStatus.setProps({ state: 'PENDING' })
 			const icon = buildStatus.find('[data-test=icon]')
 
-			expect(icon.attributes().icon).toBe("pending")
+			expect(icon.attributes().icon).toBe('pending')
 		})
 	})
 })

@@ -5,10 +5,10 @@ export default {
 	props: {
 		statuses: {
 			required: true,
-			type: Array,
-		},
+			type: Array
+		}
 	},
 	components: {
-		BuildStatus,
-	},
+		BuildStatus
+	}
 }

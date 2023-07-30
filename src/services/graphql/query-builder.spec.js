@@ -1,5 +1,5 @@
-import {buildRepositoriesQuery, buildViewerQuery} from './query-builder'
-import {beforeEach, describe, expect, it} from "vitest";
+import { buildRepositoriesQuery, buildViewerQuery } from './query-builder'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Query builder', () => {
 	describe('buildRepositoriesQuery', () => {
@@ -23,14 +23,16 @@ describe('Query builder', () => {
 			})
 
 			it('should create a simple query when given one repository', () => {
-				expect(queryGenerator([{owner: 'facebook', name: 'react'}])).toBe(simpleRepositoryQuery)
+				expect(queryGenerator([{ owner: 'facebook', name: 'react' }])).toBe(simpleRepositoryQuery)
 			})
 
 			it('should create a query when given multiple repositories', () => {
-				expect(queryGenerator([
-					{owner: 'facebook', name: 'react'},
-					{owner: 'angular', name: 'angular'},
-				])).toBe(multipleRepositoryQuery)
+				expect(
+					queryGenerator([
+						{ owner: 'facebook', name: 'react' },
+						{ owner: 'angular', name: 'angular' }
+					])
+				).toBe(multipleRepositoryQuery)
 			})
 		})
 
@@ -108,7 +110,6 @@ query {
 const simpleRepositoryFragment = `fragment repository on Repository {
 	name
 }`
-
 
 const simpleViewerQuery = `fragment rateLimit on Query {
 	rateLimit {

@@ -1,10 +1,10 @@
-import {flushPromises, shallowMount} from '@vue/test-utils'
+import { flushPromises, shallowMount } from '@vue/test-utils'
 import RepositoryPicker from './repository-picker.vue'
-import {query} from './repository-picker.query'
-import {beforeEach, describe, expect, it, vitest} from "vitest";
-import {setActivePinia} from "pinia";
-import {createTestingPinia} from "@pinia/testing";
-import {useRepositoryStore} from "@/stores/repositories";
+import { query } from './repository-picker.query'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import { setActivePinia } from 'pinia'
+import { createTestingPinia } from '@pinia/testing'
+import { useRepositoryStore } from '@/stores/repositories'
 
 const fakeResponse = {
 	search: {
@@ -13,28 +13,30 @@ const fakeResponse = {
 				nameWithOwner: 'facebook/react',
 				name: 'react',
 				owner: {
-					login: 'facebook',
+					login: 'facebook'
 				},
 				url: 'https://github.com/facebook/react',
 				defaultBranchRef: {
-					name: 'master',
-				},
-			},
-		],
-	},
+					name: 'master'
+				}
+			}
+		]
+	}
 }
 
 describe('RepositoryPicker component', () => {
 	let repositoryPicker, mocks
 
 	beforeEach(() => {
-		setActivePinia(createTestingPinia({
-			createSpy: vitest.fn
-		}))
+		setActivePinia(
+			createTestingPinia({
+				createSpy: vitest.fn
+			})
+		)
 		mocks = {
-			request: vitest.fn(),
+			request: vitest.fn()
 		}
-		repositoryPicker = shallowMount(RepositoryPicker, {propsData: mocks})
+		repositoryPicker = shallowMount(RepositoryPicker, { propsData: mocks })
 	})
 
 	describe('Initialization', () => {
@@ -58,13 +60,15 @@ describe('RepositoryPicker component', () => {
 		it('should display a select to allow user to pick a repository', async () => {
 			mocks.request.mockReturnValue(fakeResponse)
 			repositoryPicker = shallowMount(RepositoryPicker, {
-				propsData: mocks,
+				propsData: mocks
 			})
 
 			await repositoryPicker.findComponent('[data-test=search-input]').vm.$emit('input', 'test')
 
 			await flushPromises()
-			expect(repositoryPicker.find('[data-test=repository-input]').attributes().items).toEqual('react')
+			expect(repositoryPicker.find('[data-test=repository-input]').attributes().items).toEqual(
+				'react'
+			)
 		})
 
 		it('should not make queries when update value is empty', async () => {
@@ -76,11 +80,13 @@ describe('RepositoryPicker component', () => {
 
 	describe('Pick a repository', () => {
 		it('should put in the store the repository picked', async () => {
-			const first = {name: 'first repository'}
-			const second = {name: 'second repository'}
-			repositoryPicker.setData({repositories: [first, second]})
+			const first = { name: 'first repository' }
+			const second = { name: 'second repository' }
+			repositoryPicker.setData({ repositories: [first, second] })
 
-			await repositoryPicker.findComponent('[data-test=repository-input]').vm.$emit('selected', 'second repository')
+			await repositoryPicker
+				.findComponent('[data-test=repository-input]')
+				.vm.$emit('selected', 'second repository')
 
 			expect(useRepositoryStore().addRepository).toHaveBeenCalledWith(second)
 		})

@@ -11,6 +11,6 @@ export default {
 		RepositoryList,
 		PullRequestList,
 		ViewerPullRequestList,
-		RecentlyClosedPullRequests,
-	},
+		RecentlyClosedPullRequests
+	}
 }
