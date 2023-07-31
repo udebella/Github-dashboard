@@ -3,7 +3,7 @@ export const localStoragePlugin = ({ store, storage = localStorage }) => {
 	if (state) {
 		store.$patch(JSON.parse(state))
 	}
-	store.$subscribe((state) => {
-		storage.setItem(`github-dashboard-store-${store.$id}`, JSON.stringify(state.events.target))
+	store.$subscribe((_, state) => {
+		storage.setItem(`github-dashboard-store-${store.$id}`, JSON.stringify(state))
 	})
 }
