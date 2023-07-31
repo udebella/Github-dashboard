@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './components/App.vue'
-import { localStoragePlugin } from '@/store/local-storage-plugin'
+import { localStoragePlugin } from '@/stores/local-storage-plugin'
 
 const app = createApp(App)
 
