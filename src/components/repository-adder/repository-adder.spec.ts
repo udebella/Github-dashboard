@@ -18,11 +18,10 @@ describe('RepositoryAdder component', () => {
 		})
 
 		it('should hide the component when configuration mode is disabled', async () => {
-			useConfigurationStore().$patch({ configurationEnabled: false })
+			await useConfigurationStore().$patch({ configurationEnabled: false })
 
-			repositoryAdder = shallowMount(RepositoryAdder)
-
-			expect(repositoryAdder.find('[data-test=button]').exists()).toBe(false)
+			const button = repositoryAdder.findComponent('[data-test=button]')
+			expect(button.exists()).toBe(false)
 		})
 	})
 
