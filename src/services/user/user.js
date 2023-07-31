@@ -1,5 +1,5 @@
-import {buildSessionService} from '../session/session'
-import {request as defaultRequest} from '../graphql/graphql-client'
+import { buildSessionService } from '../session/session'
+import { request as defaultRequest } from '../graphql/graphql-client'
 
 // TODO find a way to test this
 const query = `{ 
@@ -8,44 +8,47 @@ const query = `{
   }
 }`
 
-export const buildUserService = ({sessionBuilder = buildSessionService, request = defaultRequest} = {}) => {
-	const {setUser, getUser, removeUser} = sessionBuilder()
+export const buildUserService = ({
+	sessionBuilder = buildSessionService,
+	request = defaultRequest
+} = {}) => {
+	const { setUser, getUser, removeUser } = sessionBuilder()
 
-	const login = async token => {
-		setUser({token})
+	const login = async (token) => {
+		setUser({ token })
 		try {
 			return await performLogin(token)
-		} catch ({response}) {
+		} catch ({ response }) {
 			return handleError(response)
 		}
 	}
 
 	const connectedUser = getUser
 
-	const performLogin = async token => {
+	const performLogin = async (token) => {
 		const response = await request(query)
 		const loggedUser = {
 			login: response.viewer.login,
-			token: token,
+			token: token
 		}
 		setUser(loggedUser)
-		return ({
-			success: loggedUser,
-		})
+		return {
+			success: loggedUser
+		}
 	}
 
-	const handleError = ({message, status}) => {
+	const handleError = ({ message, status }) => {
 		removeUser()
-		return ({
+		return {
 			error: {
 				message,
-				code: status,
-			},
-		})
+				code: status
+			}
+		}
 	}
 
 	return {
 		login,
-		connectedUser,
+		connectedUser
 	}
 }

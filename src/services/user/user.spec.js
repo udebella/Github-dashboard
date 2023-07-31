@@ -1,7 +1,6 @@
-import {expect} from 'chai'
-import {stub} from 'sinon'
-import {buildUserService} from './user'
-
+import { expect } from 'chai'
+import { buildUserService } from './user'
+import { describe, it, beforeEach, vitest } from 'vitest'
 
 describe('User service', () => {
 	let userService, mocks
@@ -11,12 +10,12 @@ describe('User service', () => {
 			sessionBuilder: () => ({
 				setUser: mocks.fakeSetUser,
 				getUser: mocks.fakeGetUser,
-				removeUser: mocks.fakeRemoveUser,
+				removeUser: mocks.fakeRemoveUser
 			}),
-			fakeSetUser: stub(),
-			fakeGetUser: stub(),
-			fakeRemoveUser: stub(),
-			request: stub(),
+			fakeSetUser: vitest.fn(),
+			fakeGetUser: vitest.fn(),
+			fakeRemoveUser: vitest.fn(),
+			request: vitest.fn()
 		}
 		userService = buildUserService(mocks)
 	})
@@ -29,101 +28,90 @@ describe('User service', () => {
 
 	describe('Login', () => {
 		it('should save token to session for validation', () => {
-			// Given
-			mocks.request.returns({
-				viewer: {login: 'user'},
+			mocks.request.mockReturnValue({
+				viewer: { login: 'user' }
 			})
 
-			// When
 			userService.login('token')
 
-			// Then
-			expect(mocks.fakeSetUser).to.have.been.calledWith({token: 'token'})
+			expect(mocks.fakeSetUser).toHaveBeenCalledWith({ token: 'token' })
 		})
 
 		it('should validate given token to github api', async () => {
-			// Given
-			mocks.request.returns({
-				viewer: {login: 'user'},
+			mocks.request.mockReturnValue({
+				viewer: { login: 'user' }
 			})
 
-			// When
 			const loggedUser = await userService.login('token')
 
-			// Then
-			expect(loggedUser).to.deep.equals({
+			expect(loggedUser).toEqual({
 				success: {
 					login: 'user',
-					token: 'token',
-				},
+					token: 'token'
+				}
 			})
 		})
 
 		it('should save user data in session when validated through github api', async () => {
-			// Given
-			mocks.request.returns({
-				viewer: {login: 'user'},
+			mocks.request.mockReturnValue({
+				viewer: { login: 'user' }
 			})
 
-			// When
 			await userService.login('token')
 
-			// Then
-			expect(mocks.fakeRemoveUser).to.have.callCount(0)
-			expect(mocks.fakeSetUser).to.have.been.calledWith({
+			expect(mocks.fakeRemoveUser).not.toHaveBeenCalled()
+			expect(mocks.fakeSetUser).toHaveBeenCalledWith({
 				login: 'user',
-				token: 'token',
+				token: 'token'
 			})
 		})
 
 		it('should handle wrong token', async () => {
-			// Given
-			mocks.request.throws({response: {message: 'Bad credentials', status: 401}})
+			mocks.request.mockImplementation(() => {
+				throw { response: { message: 'Bad credentials', status: 401 } }
+			})
 
-			// When
 			const loggedUser = await userService.login('token')
 
-			// Then
 			expect(loggedUser).to.deep.equals({
 				error: {
 					code: 401,
-					message: 'Bad credentials',
-				},
+					message: 'Bad credentials'
+				}
 			})
 		})
 
 		it('should reset session when token is invalid', async () => {
-			// Given
-			mocks.request.throws({response: {message: 'Bad credentials', status: 401}})
+			mocks.request.mockImplementation(() => {
+				throw { response: { message: 'Bad credentials', status: 401 } }
+			})
 
-			// When
 			await userService.login('token')
 
-			// Then
-			expect(mocks.fakeRemoveUser).to.have.been.called
+			expect(mocks.fakeRemoveUser).toHaveBeenCalled()
 		})
 	})
 
 	describe('connectedUser', () => {
 		it('should return an empty object when there is no connected user', () => {
-			mocks.fakeGetUser.returns({})
+			mocks.fakeGetUser.mockReturnValue({})
 
 			const user = userService.connectedUser()
 
-			expect(user).to.deep.equal({})
+			expect(user).toEqual({})
 		})
 
 		it('should return the user after performing a login', () => {
-			mocks.fakeGetUser.returns({
+			mocks.fakeGetUser.mockReturnValue({
 				login: 'user',
-				token: 'token',
+				token: 'token'
 			})
 
 			const user = userService.connectedUser()
 
-			expect(user).to.deep.equal({
+			expect(user).toEqual({
 				login: 'user',
-				token: 'token',
+				token: 'token'
 			})
 		})
 	})

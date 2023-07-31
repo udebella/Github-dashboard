@@ -1,15 +1,14 @@
-import {expect} from 'chai'
-import {stub} from 'sinon'
-import {buildSessionService, NO_USER} from './session'
+import { buildSessionService, NO_USER } from './session'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('Session service', () => {
 	let sessionService, fakeSessionStorage
 
 	beforeEach(() => {
 		fakeSessionStorage = {
-			setItem: stub(),
-			getItem: stub(),
-			removeItem: stub(),
+			setItem: vitest.fn(),
+			getItem: vitest.fn(),
+			removeItem: vitest.fn()
 		}
 
 		sessionService = buildSessionService(fakeSessionStorage)
@@ -17,7 +16,7 @@ describe('Session service', () => {
 
 	describe('Initialization', () => {
 		it('should init properly', () => {
-			expect(sessionService).to.exist
+			expect(sessionService).toBeDefined()
 		})
 	})
 
@@ -25,25 +24,25 @@ describe('Session service', () => {
 		it('should allow to store user in session', () => {
 			sessionService.setUser('token')
 
-			expect(fakeSessionStorage.setItem).to.have.been.called
+			expect(fakeSessionStorage.setItem).toHaveBeenCalled()
 		})
 	})
 
 	describe('Retrieve user from session', () => {
 		it('should allow to retrieve user in session', () => {
-			fakeSessionStorage.getItem.returns('"token"')
+			fakeSessionStorage.getItem.mockReturnValue('"token"')
 
 			const token = sessionService.getUser()
 
-			expect(token).to.equal('token')
+			expect(token).toBe('token')
 		})
 
 		it('should handle the case where there is no logged user in session', () => {
-			fakeSessionStorage.getItem.returns(null)
+			fakeSessionStorage.getItem.mockReturnValue(null)
 
 			const token = sessionService.getUser()
 
-			expect(token).to.equal(NO_USER)
+			expect(token).toBe(NO_USER)
 		})
 	})
 
@@ -51,7 +50,7 @@ describe('Session service', () => {
 		it('should remove item from session', () => {
 			sessionService.removeUser()
 
-			expect(fakeSessionStorage.removeItem).to.have.been.called
+			expect(fakeSessionStorage.removeItem).toHaveBeenCalled()
 		})
 	})
 })

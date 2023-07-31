@@ -3,11 +3,13 @@
 		<debounced-input
 			placeholder="Search query"
 			data-test="search-input"
-			@input="retrieveRepositoriesFor" />
+			@input="retrieveRepositoriesFor"
+		/>
 		<custom-select
 			:items="repositoriesNames"
 			data-test="repository-input"
-			@selected="pickRepository" />
+			@selected="pickRepository"
+		/>
 	</div>
 </template>
 

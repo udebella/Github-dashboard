@@ -1,32 +1,40 @@
-import {faTrash} from '@fortawesome/free-solid-svg-icons'
 import CustomButton from '../custom-button/custom-button.vue'
+import { useRepositoryStore } from '@/stores/repositories'
+import IconComponent from '@/components/icon/icon-component.vue'
+import { useConfigurationStore } from '@/stores/configuration'
 
 export default {
+	setup() {
+		const repositoryStore = useRepositoryStore()
+		const configurationStore = useConfigurationStore()
+		return { repositoryStore, configurationStore }
+	},
 	name: 'repository-remover',
 	props: {
 		name: {
 			type: String,
-			required: true,
+			required: true
 		},
 		owner: {
 			type: String,
-			required: true,
-		},
+			required: true
+		}
 	},
 	data: () => ({
-		icon: faTrash,
+		icon: 'deleteBin'
 	}),
 	computed: {
 		configurationEnabled() {
-			return this.$store.state.configurationEnabled
-		},
+			return this.configurationStore.configurationEnabled
+		}
 	},
 	methods: {
 		remove() {
-			this.$store.commit('removeRepository', {name: this.name, owner: this.owner})
-		},
+			this.repositoryStore.removeRepository({ name: this.name, owner: this.owner })
+		}
 	},
 	components: {
-		CustomButton,
-	},
+		IconComponent,
+		CustomButton
+	}
 }

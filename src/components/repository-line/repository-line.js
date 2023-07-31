@@ -8,13 +8,13 @@ export default {
 	props: {
 		repository: {
 			required: true,
-			type: Object,
-		},
+			type: Object
+		}
 	},
 	components: {
 		Badge,
 		Popover,
 		RepositoryRemover,
-		BuildStatuses,
-	},
+		BuildStatuses
+	}
 }

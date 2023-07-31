@@ -1,32 +1,29 @@
-import {expect} from 'chai'
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import DebouncedInput from './debounced-input.vue'
-import {useFakeTimers} from 'sinon'
+import { afterEach, beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('DebouncedInput component', () => {
-	let clock
-
 	beforeEach(() => {
-		clock = useFakeTimers()
+		vitest.useFakeTimers()
 	})
 
 	afterEach(() => {
-		clock.restore()
+		vitest.useRealTimers()
 	})
 
 	describe('Initialization', () => {
 		it('should mount properly', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 
-			expect(debouncedInput.exists()).to.be.true
+			expect(debouncedInput.exists()).toBe(true)
 		})
 
 		it('should display a text input', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 			const input = debouncedInput.find('input')
 
-			expect(input.exists()).to.be.true
-			expect(input.attributes().type).to.equals('text')
+			expect(input.exists()).toBe(true)
+			expect(input.attributes().type).toBe('text')
 		})
 	})
 
@@ -34,21 +31,22 @@ describe('DebouncedInput component', () => {
 		it('should send a input event after a while when modifying the input', async () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 
-			await debouncedInput.setValue('test')
-			clock.tick(1000)
+			await debouncedInput.find('input').setValue('test')
+			vitest.advanceTimersByTime(1000)
 
-			expect(debouncedInput.emitted('input')).to.deep.equals([['test']])
+			expect(debouncedInput.emitted('input')).toEqual([['test']])
 		})
 
 		it('should send event only once when there is less 1 sec between updates', async () => {
 			const debouncedInput = shallowMount(DebouncedInput)
+			const input = debouncedInput.find('input')
 
-			debouncedInput.setValue('test')
-			clock.tick(500)
-			await debouncedInput.setValue('another test')
-			clock.tick(1000)
+			input.setValue('test')
+			vitest.advanceTimersByTime(500)
+			await input.setValue('another test')
+			vitest.advanceTimersByTime(1000)
 
-			expect(debouncedInput.emitted('input')).to.deep.equals([['another test']])
+			expect(debouncedInput.emitted('input')).toEqual([['another test']])
 		})
 	})
 })

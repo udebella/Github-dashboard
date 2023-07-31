@@ -1,10 +1,13 @@
 <template>
-	<div 
-		class="badge"
-		@click="click">
+	<div class="badge" @click="emits('click')">
 		<slot />
 	</div>
 </template>
 
-<script src="./badge.js"></script>
+<script lang="ts" setup>
+const emits = defineEmits<{
+	click: [void]
+}>()
+</script>
+
 <style src="./badge.scss" scoped></style>

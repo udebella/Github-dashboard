@@ -1,4 +1,4 @@
-@import "../../global";
+@import '../../global';
 
 $borderColor: $secondaryDark;
 $backgroundColor: $surface;
@@ -42,7 +42,8 @@ $backgroundColor: $surface;
 		}
 	}
 
-	&:before, &:after {
+	&:before,
+	&:after {
 		position: absolute;
 		top: calc(50% - 10px);
 		content: '';

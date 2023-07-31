@@ -1,8 +1,6 @@
-import {faEye} from '@fortawesome/free-solid-svg-icons'
+import IconComponent from '@/components/icon/icon-component.vue'
 
 export default {
 	name: 'update-icon',
-	data: () => ({
-		icon: faEye,
-	}),
+	components: { IconComponent }
 }

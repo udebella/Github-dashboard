@@ -1,6 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
-import {expect} from 'chai'
+import { shallowMount } from '@vue/test-utils'
 import RepositoryLine from './repository-line.vue'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('RepositoryLine component', () => {
 	let repositoryLine
@@ -14,27 +14,32 @@ describe('RepositoryLine component', () => {
 					repositoryUrl: 'http://repository-url',
 					branchStatus: 'SUCCESS',
 					defaultBranch: 'master',
-					statusesList: [{
-						jobStatus: 'SUCCESS',
-						description: 'build description',
-						jobUrl: 'http://build-target-url',
-					}],
-				},
+					statusesList: [
+						{
+							jobStatus: 'SUCCESS',
+							description: 'build description',
+							jobUrl: 'http://build-target-url'
+						}
+					]
+				}
 			},
+			global: {
+				renderStubDefaultSlot: true
+			}
 		})
 	})
 
 	describe('Initialization', () => {
 		it('should have repository-line name', () => {
-			expect(repositoryLine.exists()).to.be.true
+			expect(repositoryLine.exists()).toBe(true)
 		})
 
 		it('should use the color on the line according to the branch status', () => {
-			expect(repositoryLine.find('[data-test=badge]').classes()).to.contains('SUCCESS')
+			expect(repositoryLine.find('[data-test=badge]').classes()).toEqual(['SUCCESS'])
 		})
 
 		it('should display a way to remove the repository from watched repositories', () => {
-			expect(repositoryLine.find('[data-test=trash]').exists()).to.be.true
+			expect(repositoryLine.find('[data-test=trash]').exists()).toBe(true)
 		})
 	})
 
@@ -46,15 +51,15 @@ describe('RepositoryLine component', () => {
 		})
 
 		it('should display a repository link', () => {
-			expect(repositoryLink.exists()).to.be.true
+			expect(repositoryLink.exists()).toBe(true)
 		})
 
 		it('should give a repository name to the component', () => {
-			expect(repositoryLink.text()).to.equal('repository')
+			expect(repositoryLink.text()).toBe('repository')
 		})
 
 		it('should give a repository url to the component', () => {
-			expect(repositoryLink.attributes().href).to.equal('http://repository-url')
+			expect(repositoryLink.attributes().href).toBe('http://repository-url')
 		})
 	})
 
@@ -62,19 +67,21 @@ describe('RepositoryLine component', () => {
 		let buildStatuses
 
 		beforeEach(() => {
-			buildStatuses = repositoryLine.findComponent({name: 'build-statuses'})
+			buildStatuses = repositoryLine.findComponent({ name: 'build-statuses' })
 		})
 
 		it('should display build statuses', () => {
-			expect(buildStatuses.exists()).to.be.true
+			expect(buildStatuses.exists()).toBe(true)
 		})
 
 		it('should give the list of statuses to the component', () => {
-			expect(buildStatuses.props().statuses).to.deep.equal([{
-				jobStatus: 'SUCCESS',
-				description: 'build description',
-				jobUrl: 'http://build-target-url',
-			}])
+			expect(buildStatuses.props().statuses).toEqual([
+				{
+					jobStatus: 'SUCCESS',
+					description: 'build description',
+					jobUrl: 'http://build-target-url'
+				}
+			])
 		})
 
 		it('should not display build statuses when there is no build status associated with the commit', () => {
@@ -86,13 +93,13 @@ describe('RepositoryLine component', () => {
 						repositoryUrl: 'http://repository-url',
 						branchStatus: 'SUCCESS',
 						defaultBranch: 'master',
-						statusesList: [],
-					},
-				},
+						statusesList: []
+					}
+				}
 			})
 
-			buildStatuses = repositoryLine.findComponent({name: 'build-statuses'})
-			expect(buildStatuses.exists()).to.be.false
+			buildStatuses = repositoryLine.findComponent({ name: 'build-statuses' })
+			expect(buildStatuses.exists()).toBe(false)
 		})
 	})
 })

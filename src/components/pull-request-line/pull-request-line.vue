@@ -1,27 +1,14 @@
 <template>
-	<a
-		:href="url"
-		data-test="link"
-		class="link">
-		<badge
-			:class="buildStatus"
-			class="line"
-			data-test="name">
+	<a :href="url" data-test="link" class="link">
+		<badge :class="buildStatus" class="line" data-test="name">
 			<div class="title">
 				{{ title }}
 			</div>
 			<div class="icons">
-				<update-icon
-					v-if="hasUpdates"
-					data-test="update-icon" />
-				<living-icon
-					:date="creationDate"
-					data-test="living-icon" />
+				<update-icon v-if="hasUpdates" data-test="update-icon" />
+				<living-icon :date="creationDate" data-test="living-icon" />
 			</div>
-			<popover
-				v-if="statusesList.length"
-				side="left"
-				class="popover">
+			<popover v-if="statusesList.length" side="left" class="popover">
 				<build-statuses :statuses="statusesList" />
 			</popover>
 		</badge>

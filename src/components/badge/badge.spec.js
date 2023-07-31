@@ -1,6 +1,6 @@
-import {expect} from 'chai'
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Badge from './badge.vue'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Badge component', () => {
 	let badge
@@ -8,18 +8,18 @@ describe('Badge component', () => {
 	beforeEach(() => {
 		badge = shallowMount(Badge, {
 			slots: {
-				default: ['<span>Slot content</span>'],
-			},
+				default: ['<span>Slot content</span>']
+			}
 		})
 	})
 
 	describe('Initialization', () => {
 		it('should mount properly', () => {
-			expect(badge.exists()).to.be.true
+			expect(badge.exists()).toBe(true)
 		})
 
 		it('should display the content of the slot', () => {
-			expect(badge.text()).to.equal('Slot content')
+			expect(badge.text()).toBe('Slot content')
 		})
 	})
 
@@ -27,7 +27,7 @@ describe('Badge component', () => {
 		it('should be clickable and send a click event', () => {
 			badge.trigger('click')
 
-			expect(badge.emitted().click).to.exist
+			expect(badge.emitted().click).toBeDefined()
 		})
 	})
 })

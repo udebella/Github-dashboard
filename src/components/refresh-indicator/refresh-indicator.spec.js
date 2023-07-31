@@ -1,84 +1,80 @@
-import {expect} from 'chai'
-import {shallowMount} from '@vue/test-utils'
+import { flushPromises, shallowMount } from '@vue/test-utils'
 import RefreshIndicator from './refresh-indicator.vue'
-import {useFakeTimers} from 'sinon'
-import flushPromises from 'flush-promises'
+import { afterEach, beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('RefreshIndicator component', () => {
-	let refreshIndicator, stubs
+	let refreshIndicator
 
 	beforeEach(() => {
-		stubs = {
-			clock: useFakeTimers(),
-		}
+		vitest.useFakeTimers()
 		refreshIndicator = shallowMount(RefreshIndicator, {
 			propsData: {
 				promise: Promise.resolve('first resolution'),
-				timeBetweenRefresh: 30,
-			},
+				timeBetweenRefresh: 30
+			}
 		})
 	})
 
 	afterEach(() => {
-		stubs.clock.restore()
+		vitest.useRealTimers()
 	})
 
 	describe('Initialization', () => {
 		it('should mount properly', () => {
-			expect(refreshIndicator.exists()).to.be.true
+			expect(refreshIndicator.exists()).toBe(true)
 		})
 	})
 
 	describe('Counter', () => {
 		it('should display an initialized counter', () => {
-			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('0s ago')
+			expect(refreshIndicator.find('[data-test=counter]').text()).toBe('0s ago')
 		})
 
 		it('should increment the counter each seconds', async () => {
-			stubs.clock.tick(1001)
+			vitest.advanceTimersByTime(1001)
 
 			await refreshIndicator.vm.$nextTick()
-			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('1s ago')
+			expect(refreshIndicator.find('[data-test=counter]').text()).toBe('1s ago')
 		})
 
 		it('should reset counter when prop promise is changing', async () => {
-			stubs.clock.tick(10000)
+			vitest.advanceTimersByTime(10000)
 
 			await refreshIndicator.setProps({
-				promise: Promise.resolve('new resolution'),
+				promise: Promise.resolve('new resolution')
 			})
 			await flushPromises()
 
-			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('0s ago')
+			expect(refreshIndicator.find('[data-test=counter]').text()).toBe('0s ago')
 		})
 
 		it('should not reset counter while the promise is not resolved', async () => {
-			stubs.clock.tick(5000)
+			vitest.advanceTimersByTime(5000)
 
 			await refreshIndicator.setProps({
-				promise: new Promise(() => {}),
+				promise: new Promise(() => {})
 			})
 			await flushPromises()
 
-			expect(refreshIndicator.find('[data-test=counter]').text()).to.equal('5s ago')
+			expect(refreshIndicator.find('[data-test=counter]').text()).toBe('5s ago')
 		})
 
 		it('should display the counter as green when it is less than timeBetweenRefresh', () => {
-			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['fresh'])
+			expect(refreshIndicator.find('[data-test=counter]').classes()).toEqual(['fresh'])
 		})
 
 		it('should display the counter as orange when it is less than twice the timeBetweenRefresh', async () => {
-			stubs.clock.tick(60000)
+			vitest.advanceTimersByTime(60000)
 
 			await refreshIndicator.vm.$nextTick()
-			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['old'])
+			expect(refreshIndicator.find('[data-test=counter]').classes()).toEqual(['old'])
 		})
 
 		it('should display the counter as red when it is more than twice the timeBetweenRefresh', async () => {
-			stubs.clock.tick(61000)
+			vitest.advanceTimersByTime(61000)
 
 			await refreshIndicator.vm.$nextTick()
-			expect(refreshIndicator.find('[data-test=counter]').classes()).to.deep.equal(['outdated'])
+			expect(refreshIndicator.find('[data-test=counter]').classes()).toEqual(['outdated'])
 		})
 	})
 })

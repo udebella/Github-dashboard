@@ -1,6 +1,6 @@
-import {expect} from 'chai'
-import {shallowMount} from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import PullRequestLine from './pull-request-line.vue'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('PullRequestLine component', () => {
 	let pullRequestLine
@@ -14,45 +14,52 @@ describe('PullRequestLine component', () => {
 				buildStatus: 'SUCCESS',
 				creationDate: today,
 				hasUpdates: true,
-				statusesList: [{
-					jobStatus: 'SUCCESS',
-					description: 'build description',
-					jobUrl: 'http://build-target-url',
-				}],
+				statusesList: [
+					{
+						jobStatus: 'SUCCESS',
+						description: 'build description',
+						jobUrl: 'http://build-target-url'
+					}
+				]
 			},
+			global: {
+				renderStubDefaultSlot: true
+			}
 		})
 	})
 
 	describe('Initialization', () => {
 		it('should mount properly', () => {
-			expect(pullRequestLine.exists()).to.be.true
+			expect(pullRequestLine.exists()).toBe(true)
 		})
 	})
 
 	describe('Display', () => {
 		it('should display the pull request name', () => {
-			expect(pullRequestLine.find('[data-test=name]').text()).to.equal('Pull request name')
+			expect(pullRequestLine.find('[data-test=name]').text()).toBe('Pull request name')
 		})
 
 		it('should display a link to the pull request', () => {
-			expect(pullRequestLine.find('[data-test=link]').attributes().href).to.equal('http://pull-request-url')
+			expect(pullRequestLine.find('[data-test=link]').attributes().href).toBe(
+				'http://pull-request-url'
+			)
 		})
 
 		it('should display the build status of the pull request', () => {
-			expect(pullRequestLine.find('[data-test=name]').classes()).to.deep.equal(['line', 'SUCCESS'])
+			expect(pullRequestLine.find('[data-test=name]').classes()).toEqual(['SUCCESS', 'line'])
 		})
 
 		it('should display a living icon', () => {
-			const livingIcon = pullRequestLine.find('[data-test=living-icon]')
+			const livingIcon = pullRequestLine.findComponent('[data-test=living-icon]')
 
-			expect(livingIcon.exists()).to.be.true
-			expect(livingIcon.props().date).to.equal(today)
+			expect(livingIcon.exists()).toBe(true)
+			expect(livingIcon.props().date).toBe(today)
 		})
 
 		it('should display an update icon', () => {
 			const updateIcon = pullRequestLine.find('[data-test=update-icon]')
 
-			expect(updateIcon.exists()).to.be.true
+			expect(updateIcon.exists()).toBe(true)
 		})
 
 		it('should not display the update icon when there are no updates', () => {
@@ -63,16 +70,18 @@ describe('PullRequestLine component', () => {
 					buildStatus: 'SUCCESS',
 					creationDate: today,
 					hasUpdates: false,
-					statusesList: [{
-						jobStatus: 'SUCCESS',
-						description: 'build description',
-						jobUrl: 'http://build-target-url',
-					}],
-				},
+					statusesList: [
+						{
+							jobStatus: 'SUCCESS',
+							description: 'build description',
+							jobUrl: 'http://build-target-url'
+						}
+					]
+				}
 			})
 			const updateIcon = pullRequestLine.find('[data-test=update-icon]')
 
-			expect(updateIcon.exists()).to.be.false
+			expect(updateIcon.exists()).toBe(false)
 		})
 	})
 
@@ -80,19 +89,21 @@ describe('PullRequestLine component', () => {
 		let buildStatuses
 
 		beforeEach(() => {
-			buildStatuses = pullRequestLine.findComponent({name: 'build-statuses'})
+			buildStatuses = pullRequestLine.findComponent({ name: 'build-statuses' })
 		})
 
 		it('should display build statuses', () => {
-			expect(buildStatuses.exists()).to.be.true
+			expect(buildStatuses.exists()).toBe(true)
 		})
 
 		it('should give the list of statuses to the component', () => {
-			expect(buildStatuses.props().statuses).to.deep.equal([{
-				jobStatus: 'SUCCESS',
-				description: 'build description',
-				jobUrl: 'http://build-target-url',
-			}])
+			expect(buildStatuses.props().statuses).toEqual([
+				{
+					jobStatus: 'SUCCESS',
+					description: 'build description',
+					jobUrl: 'http://build-target-url'
+				}
+			])
 		})
 
 		it('should not display build statuses when there is no build status associated with the commit', () => {
@@ -102,12 +113,12 @@ describe('PullRequestLine component', () => {
 					url: 'http://pull-request-url',
 					buildStatus: 'SUCCESS',
 					creationDate: today,
-					hasUpdates: true,
-				},
+					hasUpdates: true
+				}
 			})
 
-			buildStatuses = pullRequestLine.findComponent({name: 'build-statuses'})
-			expect(buildStatuses.exists()).to.be.false
+			buildStatuses = pullRequestLine.findComponent({ name: 'build-statuses' })
+			expect(buildStatuses.exists()).toBe(false)
 		})
 	})
 })

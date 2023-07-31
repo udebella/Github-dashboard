@@ -1,8 +1,6 @@
 <template>
 	<div title="There are new updates">
-		<font-awesome-icon
-			:icon="icon"
-			data-test="icon" />
+		<icon-component icon="hasUpdates" data-test="icon" />
 	</div>
 </template>
 

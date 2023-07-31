@@ -1,22 +1,25 @@
 import CustomButton from '../custom-button/custom-button.vue'
-import {faCog} from '@fortawesome/free-solid-svg-icons'
+import { useConfigurationStore } from '@/stores/configuration'
+import IconComponent from '@/components/icon/icon-component.vue'
 
 export default {
+	setup() {
+		const configurationStore = useConfigurationStore()
+		return { configurationStore }
+	},
 	name: 'configuration',
 	computed: {
 		configurationMode() {
-			return this.$store.state.configurationEnabled ? 'enabled' : 'disabled'
-		},
+			return this.configurationStore.configurationEnabled ? 'enabled' : 'disabled'
+		}
 	},
-	data: () => ({
-		icon: faCog,
-	}),
 	methods: {
 		toggleConfiguration() {
-			this.$store.commit('toggleConfiguration')
-		},
+			this.configurationStore.toggleConfiguration()
+		}
 	},
 	components: {
-		CustomButton,
-	},
+		IconComponent,
+		CustomButton
+	}
 }

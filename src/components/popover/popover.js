@@ -3,7 +3,7 @@ export default {
 	props: {
 		side: {
 			type: String,
-			default: 'right',
-		},
-	},
+			default: 'right'
+		}
+	}
 }

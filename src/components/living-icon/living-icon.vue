@@ -1,8 +1,6 @@
 <template>
 	<div :title="title">
-		<font-awesome-icon
-			:icon="icon"
-			data-test="icon" />
+		<icon-component :icon="icon" data-test="icon" />
 	</div>
 </template>
 

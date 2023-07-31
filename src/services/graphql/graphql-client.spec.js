@@ -1,25 +1,23 @@
-import {request} from './graphql-client'
-import {expect} from 'chai'
-import {spy, stub} from 'sinon'
-import {NO_USER} from '../session/session'
+import { request } from './graphql-client'
+import { NO_USER } from '../session/session'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import { createPinia, setActivePinia } from 'pinia'
+import { useConfigurationStore } from '@/stores/configuration'
 
 describe('Service: graphql-client', () => {
 	let mocks
 
 	beforeEach(() => {
+		setActivePinia(createPinia())
+		useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 		mocks = {
-			builder: spy(() => ({
-				request: mocks.fakeRequest,
+			builder: vitest.fn(() => ({
+				request: mocks.fakeRequest
 			})),
-			fakeRequest: stub(),
+			fakeRequest: vitest.fn(),
 			session: {
-				getUser: stub().returns(NO_USER),
-			},
-			store: {
-				state: {
-					githubApi: 'http://github-api',
-				},
-			},
+				getUser: vitest.fn().mockReturnValue(NO_USER)
+			}
 		}
 	})
 
@@ -27,37 +25,33 @@ describe('Service: graphql-client', () => {
 		it('should retrieve user from session before making a request', async () => {
 			await request('someQuery', mocks)
 
-			expect(mocks.session.getUser).to.have.been.called
+			expect(mocks.session.getUser).toHaveBeenCalled()
 		})
 
 		it('should build a graphqlClient properly', async () => {
-			mocks.session.getUser.returns({token: 'userToken'})
+			mocks.session.getUser.mockReturnValue({ token: 'userToken' })
 
 			await request('someQuery', mocks)
 
-			expect(mocks.builder).to.have.been.calledWith('http://github-api', {
+			expect(mocks.builder).toHaveBeenCalledWith('http://github-api', {
 				headers: {
-					Authorization: 'token userToken',
-				},
+					Authorization: 'token userToken'
+				}
 			})
 		})
 
 		it('should call request method from graphql client', async () => {
-			// When
 			await request('fakeQuery', mocks)
 
-			// Then
-			expect(mocks.fakeRequest).to.have.been.calledWith('fakeQuery')
+			expect(mocks.fakeRequest).toHaveBeenCalledWith('fakeQuery')
 		})
 
 		it('should return a promise', async () => {
-			mocks.fakeRequest.returns(Promise.resolve('value'))
+			mocks.fakeRequest.mockResolvedValue('value')
 
-			// When
 			const response = await request('fakeQuery', mocks)
 
-			// Then
-			expect(response).to.equal('value')
+			expect(response).toBe('value')
 		})
 	})
 })

@@ -1,4 +1,4 @@
-@import "../../global";
+@import '../../global';
 
 .link {
 	text-decoration: none;
@@ -33,7 +33,8 @@
 		}
 
 		@include on-desktop {
-			&:hover .popover, .popover:hover {
+			&:hover .popover,
+			.popover:hover {
 				visibility: visible;
 				opacity: 1;
 				transition: 300ms ease;

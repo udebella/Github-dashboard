@@ -3,15 +3,15 @@ export default {
 	props: {
 		items: {
 			type: Array,
-			default: () => [],
-		},
+			default: () => []
+		}
 	},
 	data: () => ({
-		selected: '',
+		selected: ''
 	}),
 	methods: {
 		notify() {
 			this.$emit('selected', this.selected)
-		},
-	},
+		}
+	}
 }

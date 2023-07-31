@@ -1,10 +1,6 @@
 <template>
-	<custom-button
-		v-if="configurationEnabled"
-		@click="remove">
-		<font-awesome-icon
-			:icon="icon"
-			data-test="icon" />
+	<custom-button v-if="configurationEnabled" @click="remove">
+		<icon-component :icon="icon" data-test="icon" />
 	</custom-button>
 </template>
 

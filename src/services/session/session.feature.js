@@ -1,6 +1,5 @@
-import {buildSessionService} from './session'
-import {expect} from 'chai'
-
+import { buildSessionService } from './session'
+import { describe, expect, it } from 'vitest'
 
 describe('Session component test', () => {
 	it('should be save and retrieve an item in the session', () => {
@@ -9,7 +8,7 @@ describe('Session component test', () => {
 		sessionService.setUser('token')
 		const token = sessionService.getUser()
 
-		expect(token).to.equals('token')
+		expect(token).toBe('token')
 	})
 
 	it('should allow to save objects in session', () => {
@@ -17,13 +16,13 @@ describe('Session component test', () => {
 
 		sessionService.setUser({
 			login: 'user',
-			token: 'token',
+			token: 'token'
 		})
 		const token = sessionService.getUser()
 
-		expect(token).to.deep.equals({
+		expect(token).toEqual({
 			login: 'user',
-			token: 'token',
+			token: 'token'
 		})
 	})
 })

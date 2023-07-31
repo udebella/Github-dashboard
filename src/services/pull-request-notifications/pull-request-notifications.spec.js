@@ -1,17 +1,16 @@
-import {expect} from 'chai'
-import {stub} from 'sinon'
-import {pullRequestNotifications} from './pull-request-notifications'
+import { pullRequestNotifications } from './pull-request-notifications'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('Pull request notification service', () => {
 	let stubs
 	beforeEach(() => {
-		const notify = stub()
+		const notify = vitest.fn()
 		const notificationApi = () => ({
-			notify,
+			notify
 		})
 		stubs = {
 			notificationApi,
-			notify,
+			notify
 		}
 	})
 
@@ -20,56 +19,56 @@ describe('Pull request notification service', () => {
 
 		pullRequestNotification.newList([])
 
-		expect(stubs.notify).not.to.have.been.called
+		expect(stubs.notify).not.toHaveBeenCalled()
 	})
 
 	it('should send notifications when there is a new pull request', () => {
 		const pullRequestNotification = pullRequestNotifications(stubs)
 
-		pullRequestNotification.newList([{title: 'Test pull request', url: '/a/random/url'}])
+		pullRequestNotification.newList([{ title: 'Test pull request', url: '/a/random/url' }])
 
-		expect(stubs.notify).to.have.been.calledWith('A new pull request was opened: Test pull request')
+		expect(stubs.notify).toHaveBeenCalledWith('A new pull request was opened: Test pull request')
 	})
 
 	it('should send notifications when there is multiple new pull requests', () => {
 		const pullRequestNotification = pullRequestNotifications(stubs)
 
 		pullRequestNotification.newList([
-			{title: 'Test pull request', url: '/a/random/url'},
-			{title: 'Another test pull request', url: '/a/random/url'},
+			{ title: 'Test pull request', url: '/a/random/url' },
+			{ title: 'Another test pull request', url: '/a/random/url' }
 		])
 
-		expect(stubs.notify).to.have.been.calledWith('2 new pull requests were opened')
+		expect(stubs.notify).toHaveBeenCalledWith('2 new pull requests were opened')
 	})
 
 	it('should send notifications only for new pull requests', () => {
 		const pullRequestNotification = pullRequestNotifications(stubs)
-		pullRequestNotification.newList([
-			{title: 'Test pull request', url: '/a/random/url'},
-		])
-		stubs.notify.reset()
+		pullRequestNotification.newList([{ title: 'Test pull request', url: '/a/random/url' }])
+		stubs.notify.mockClear()
 
 		pullRequestNotification.newList([
-			{title: 'Test pull request', url: '/a/random/url'},
-			{title: 'Another test pull request', url: '/a/random/url'},
+			{ title: 'Test pull request', url: '/a/random/url' },
+			{ title: 'Another test pull request', url: '/a/random/url' }
 		])
 
-		expect(stubs.notify).to.have.been.calledWith('A new pull request was opened: Another test pull request')
+		expect(stubs.notify).toHaveBeenCalledWith(
+			'A new pull request was opened: Another test pull request'
+		)
 	})
 
 	it('should keep already notified pull request', () => {
 		const pullRequestNotification = pullRequestNotifications(stubs)
-		pullRequestNotification.newList([
-			{title: 'Test pull request', url: '/a/random/url'},
-		])
+		pullRequestNotification.newList([{ title: 'Test pull request', url: '/a/random/url' }])
 		pullRequestNotification.newList([])
-		stubs.notify.reset()
+		stubs.notify.mockClear()
 
 		pullRequestNotification.newList([
-			{title: 'Test pull request', url: '/a/random/url'},
-			{title: 'Another test pull request', url: '/a/random/url'},
+			{ title: 'Test pull request', url: '/a/random/url' },
+			{ title: 'Another test pull request', url: '/a/random/url' }
 		])
 
-		expect(stubs.notify).to.have.been.calledWith('A new pull request was opened: Another test pull request')
+		expect(stubs.notify).toHaveBeenCalledWith(
+			'A new pull request was opened: Another test pull request'
+		)
 	})
 })
