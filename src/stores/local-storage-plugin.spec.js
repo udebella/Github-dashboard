@@ -55,7 +55,7 @@ describe('Local storage store', () => {
 
 		it('should put store in local storage after subscription', () => {
 			localStoragePlugin({ store: fakeStore, storage: fakeLocalStorage })
-			fakeStore.mutate({ events: { target: { state: 'this is the new store' } } })
+			fakeStore.mutate(undefined, { state: 'this is the new store' })
 
 			expect(fakeLocalStorage.setItem).toHaveBeenCalledWith(
 				'github-dashboard-store-test',
