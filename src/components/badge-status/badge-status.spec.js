@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import Badge from './badge.vue'
+import Badge from './badge-status.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Badge component', () => {

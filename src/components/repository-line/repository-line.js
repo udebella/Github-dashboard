@@ -1,4 +1,4 @@
-import Badge from '../badge/badge.vue'
+import Badge from '@/components/badge-status/badge-status.vue'
 import Popover from '@/components/pop-over/pop-over.vue'
 import RepositoryRemover from '../repository-remover/repository-remover.vue'
 import BuildStatuses from '../build-statuses/build-statuses.vue'

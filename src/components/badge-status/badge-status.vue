@@ -10,4 +10,4 @@ const emits = defineEmits<{
 }>()
 </script>
 
-<style src="./badge.scss" scoped></style>
+<style src="./badge-status.scss" scoped></style>
