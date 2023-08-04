@@ -7,7 +7,7 @@ export default {
 		const configurationStore = useConfigurationStore()
 		return { configurationStore }
 	},
-	name: 'configuration',
+	name: 'configuration-button',
 	computed: {
 		configurationMode() {
 			return this.configurationStore.configurationEnabled ? 'enabled' : 'disabled'

@@ -4,5 +4,5 @@
 	</custom-button>
 </template>
 
-<script src="./configuration.js"></script>
-<style src="./configuration.scss" scoped></style>
+<script src="./configuration-button.js"></script>
+<style src="./configuration-button.scss" scoped></style>
