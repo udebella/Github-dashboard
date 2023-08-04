@@ -7,15 +7,10 @@
 	</div>
 </template>
 
-<script lang="js">
-export default {
-	name: 'custom-button',
-	props: {
-		href: {
-			type: String
-		}
-	}
-}
+<script setup lang="ts">
+defineProps<{
+	href?: string
+}>()
 </script>
 
 <style lang="scss" scoped>
