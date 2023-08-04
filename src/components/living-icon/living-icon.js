@@ -1,5 +1,5 @@
 import { differenceInWeeks, formatDistanceToNow } from 'date-fns'
-import IconComponent from '@/components/icon/icon-component.vue'
+import IconComponent from '../icon/icon-component.vue'
 
 export default {
 	name: 'living-icon',

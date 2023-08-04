@@ -2,7 +2,7 @@ import { request } from '../../services/graphql/graphql-client'
 import DebouncedInput from '../debounced-input/debounced-input.vue'
 import CustomSelect from '../custom-select/custom-select.vue'
 import { query } from './repository-picker.query'
-import { useRepositoryStore } from '@/stores/repositories'
+import { useRepositoryStore } from '../../stores/repositories'
 
 const extract = (response) => {
 	const repositories = (response && response.search && response.search.nodes) || []

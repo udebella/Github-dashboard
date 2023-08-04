@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils'
 import RepositoryList from './repository-list.vue'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
-import { useRepositoryStore } from '@/stores/repositories'
 import { createPinia, setActivePinia } from 'pinia'
+import { useRepositoryStore } from '../../stores/repositories'
 
 describe('RepositoryList component', () => {
 	let repositoryList, stubs

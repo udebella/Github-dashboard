@@ -1,8 +1,8 @@
-import Badge from '@/components/badge-status/badge-status.vue'
 import LivingIcon from '../living-icon/living-icon.vue'
 import UpdateIcon from '../update-icon/update-icon.vue'
 import BuildStatuses from '../build-statuses/build-statuses.vue'
-import Popover from '@/components/pop-over/pop-over.vue'
+import BadgeStatus from '../badge-status/badge-status.vue'
+import PopOver from '../pop-over/pop-over'
 
 export default {
 	name: 'pull-request-line',
@@ -33,10 +33,10 @@ export default {
 		}
 	},
 	components: {
-		Badge,
+		BadgeStatus,
 		LivingIcon,
 		UpdateIcon,
 		BuildStatuses,
-		Popover
+		PopOver
 	}
 }

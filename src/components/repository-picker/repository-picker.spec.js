@@ -4,7 +4,7 @@ import { query } from './repository-picker.query'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
-import { useRepositoryStore } from '@/stores/repositories'
+import { useRepositoryStore } from '../../stores/repositories'
 
 const fakeResponse = {
 	search: {

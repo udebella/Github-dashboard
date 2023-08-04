@@ -2,7 +2,7 @@ import { request } from './graphql-client'
 import { NO_USER } from '../session/session'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
-import { useConfigurationStore } from '@/stores/configuration'
+import { useConfigurationStore } from '../../stores/configuration'
 
 describe('Service: graphql-client', () => {
 	let mocks

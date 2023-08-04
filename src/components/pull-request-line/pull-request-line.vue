@@ -1,6 +1,6 @@
 <template>
 	<a :href="url" data-test="link" class="link">
-		<badge :class="buildStatus" class="line" data-test="name">
+		<badge-status :class="buildStatus" class="line" data-test="name">
 			<div class="title">
 				{{ title }}
 			</div>
@@ -8,10 +8,10 @@
 				<update-icon v-if="hasUpdates" data-test="update-icon" />
 				<living-icon :date="creationDate" data-test="living-icon" />
 			</div>
-			<popover v-if="statusesList.length" side="left" class="popover">
+			<pop-over v-if="statusesList.length" side="left" class="popover">
 				<build-statuses :statuses="statusesList" />
-			</popover>
-		</badge>
+			</pop-over>
+		</badge-status>
 	</a>
 </template>
 

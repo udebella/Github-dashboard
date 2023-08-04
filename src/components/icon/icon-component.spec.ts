@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import IconComponent from '@/components/icon/icon-component.vue'
+import IconComponent from './icon-component.vue'
 
 describe('Icon component', () => {
 	it('displays an icon', () => {
