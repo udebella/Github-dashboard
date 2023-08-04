@@ -2,7 +2,7 @@ import Badge from '../badge/badge.vue'
 import LivingIcon from '../living-icon/living-icon.vue'
 import UpdateIcon from '../update-icon/update-icon.vue'
 import BuildStatuses from '../build-statuses/build-statuses.vue'
-import Popover from '../popover/popover.vue'
+import Popover from '@/components/pop-over/pop-over.vue'
 
 export default {
 	name: 'pull-request-line',
