@@ -2,7 +2,7 @@ import RepositoryLine from '../repository-line/repository-line.vue'
 import RepositoryAdder from '../repository-adder/repository-adder.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
 import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
-import { useRepositoryStore } from '@/stores/repositories'
+import { useRepositoryStore } from '../../stores/repositories'
 
 const extractHttpData = ({ httpData }) => {
 	return Object.values(httpData)

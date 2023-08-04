@@ -1,7 +1,7 @@
-import Login from '@/components/login-input/login-input.vue'
-import Configuration from '@/components/configuration-button/configuration-button.vue'
 import CustomButton from '../custom-button/custom-button.vue'
-import IconComponent from '@/components/icon/icon-component.vue'
+import IconComponent from '../icon/icon-component.vue'
+import LoginInput from '../login-input/login-input'
+import ConfigurationButton from '../configuration-button/configuration-button'
 
 export default {
 	name: 'dashboard-header',
@@ -10,8 +10,8 @@ export default {
 	}),
 	components: {
 		IconComponent,
-		Login,
-		Configuration,
+		LoginInput,
+		ConfigurationButton,
 		CustomButton
 	}
 }

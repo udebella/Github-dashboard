@@ -1,4 +1,4 @@
-import IconComponent from '@/components/icon/icon-component.vue'
+import IconComponent from '../icon/icon-component.vue'
 
 export default {
 	name: 'update-icon',

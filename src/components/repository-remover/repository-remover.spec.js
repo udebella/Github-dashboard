@@ -2,8 +2,8 @@ import { shallowMount } from '@vue/test-utils'
 import RepositoryRemover from './repository-remover.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
-import { useRepositoryStore } from '@/stores/repositories'
-import { useConfigurationStore } from '@/stores/configuration'
+import { useConfigurationStore } from '../../stores/configuration'
+import { useRepositoryStore } from '../../stores/repositories'
 
 describe('RepositoryRemover component', () => {
 	let repositoryRemover

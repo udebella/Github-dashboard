@@ -1,8 +1,8 @@
 import { shallowMount, VueWrapper } from '@vue/test-utils'
 import GithubApiConfig from './github-api-config.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { useConfigurationStore } from '@/stores/configuration'
 import { createPinia, setActivePinia } from 'pinia'
+import { useConfigurationStore } from '../../stores/configuration'
 
 describe('GithubApiConfig component', () => {
 	let githubApiConfig: VueWrapper

@@ -2,7 +2,7 @@ import { shallowMount, VueWrapper } from '@vue/test-utils'
 import RepositoryAdder from './repository-adder.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
-import { useConfigurationStore } from '@/stores/configuration'
+import { useConfigurationStore } from '../../stores/configuration'
 
 describe('RepositoryAdder component', () => {
 	let repositoryAdder: VueWrapper
@@ -33,7 +33,7 @@ describe('RepositoryAdder component', () => {
 		it('should hide the icon when clicked', () => {
 			const icon = repositoryAdder.find('[data-test=icon]')
 
-			repositoryAdder.findComponent({ name: 'badge' }).vm.$emit('click')
+			repositoryAdder.findComponent({ name: 'badge-status' }).vm.$emit('click')
 
 			expect(icon.exists()).toBe(false)
 		})
