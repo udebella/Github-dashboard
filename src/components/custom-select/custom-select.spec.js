@@ -27,9 +27,7 @@ describe('CustomSelect component', () => {
 			expect(customSelect.findAll('[data-test=select] option').at(0).text()).toBe('')
 			expect(customSelect.findAll('[data-test=select] option').at(0).attributes().value).toBe('')
 			expect(customSelect.findAll('[data-test=select] option').at(1).text()).toBe('example')
-			expect(customSelect.findAll('[data-test=select] option').at(1).attributes().value).toBe(
-				'example'
-			)
+			expect(customSelect.findAll('[data-test=select] option').at(1).attributes().value).toBe('example')
 		})
 
 		it('should not display anything when there is no items in the list', () => {

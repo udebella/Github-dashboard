@@ -25,9 +25,7 @@ describe('GithubApiConfig component', () => {
 			useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 			githubApiConfig = shallowMount(GithubApiConfig)
 
-			expect(githubApiConfig.find<HTMLInputElement>('[data-test=input]').element.value).toBe(
-				'http://github-api'
-			)
+			expect(githubApiConfig.find<HTMLInputElement>('[data-test=input]').element.value).toBe('http://github-api')
 		})
 
 		it('should be displayed when configuration mode is enabled', () => {

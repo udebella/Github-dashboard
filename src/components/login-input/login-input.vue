@@ -11,5 +11,5 @@
 	</div>
 </template>
 
-<script src="./login.js"></script>
-<style src="./login.scss" scoped></style>
+<script src="./login-input.js"></script>
+<style src="./login-input.scss" scoped></style>

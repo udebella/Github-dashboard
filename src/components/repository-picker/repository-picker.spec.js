@@ -66,9 +66,7 @@ describe('RepositoryPicker component', () => {
 			await repositoryPicker.findComponent('[data-test=search-input]').vm.$emit('input', 'test')
 
 			await flushPromises()
-			expect(repositoryPicker.find('[data-test=repository-input]').attributes().items).toEqual(
-				'react'
-			)
+			expect(repositoryPicker.find('[data-test=repository-input]').attributes().items).toEqual('react')
 		})
 
 		it('should not make queries when update value is empty', async () => {

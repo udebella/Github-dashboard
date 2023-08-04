@@ -1,7 +1,4 @@
-const notificationApi = ({
-	Notification = window.Notification,
-	document = window.document
-} = {}) => {
+const notificationApi = ({ Notification = window.Notification, document = window.document } = {}) => {
 	let resolve
 	let authorizedNotification = new Promise((r) => {
 		resolve = r

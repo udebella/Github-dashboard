@@ -47,9 +47,7 @@ describe('RecentlyClosedPullRequests component', () => {
 				propsData: stubs
 			})
 
-			expect(recentlyClosedPullRequests.find('[data-test=title]').text()).toBe(
-				'My recently merged pull requests'
-			)
+			expect(recentlyClosedPullRequests.find('[data-test=title]').text()).toBe('My recently merged pull requests')
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
@@ -63,9 +61,9 @@ describe('RecentlyClosedPullRequests component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(recentlyClosedPullRequests)
-			expect(
-				recentlyClosedPullRequests.findComponent('[data-test=network-polling]').props().query
-			).toBe('queryBuilt')
+			expect(recentlyClosedPullRequests.findComponent('[data-test=network-polling]').props().query).toBe(
+				'queryBuilt'
+			)
 			expect(stubs.queryBuilder).toHaveBeenCalledWith(viewerFragment)
 			expect(stubs.pullRequestReader).toHaveBeenCalled()
 		})

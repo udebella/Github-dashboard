@@ -1,5 +1,5 @@
 export default {
-	name: 'popover',
+	name: 'pop-over',
 	props: {
 		side: {
 			type: String,

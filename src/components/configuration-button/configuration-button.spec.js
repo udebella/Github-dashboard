@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import Configuration from './configuration.vue'
+import Configuration from './configuration-button.vue'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { setActivePinia } from 'pinia'
 import { useConfigurationStore } from '@/stores/configuration'

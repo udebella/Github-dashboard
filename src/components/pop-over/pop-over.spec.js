@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import Popover from './popover.vue'
+import Popover from './pop-over.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Popover component', () => {

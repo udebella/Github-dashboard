@@ -4,7 +4,7 @@ import DebouncedInput from '../debounced-input/debounced-input.vue'
 import IconComponent from '@/components/icon/icon-component.vue'
 
 export default {
-	name: 'login',
+	name: 'login-input',
 	props: {
 		userService: {
 			default: buildUserService
@@ -22,9 +22,7 @@ export default {
 			return this.connectedUser === this.NO_USER
 		},
 		title() {
-			return this.displayInputToken
-				? 'You are not logged in'
-				: `Logged in as ${this.connectedUser.login}`
+			return this.displayInputToken ? 'You are not logged in' : `Logged in as ${this.connectedUser.login}`
 		}
 	},
 	methods: {

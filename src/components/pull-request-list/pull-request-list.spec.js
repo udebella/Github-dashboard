@@ -45,8 +45,7 @@ describe('PullRequestList component', () => {
 					{
 						jobStatus: 'SUCCESS',
 						description: 'continuous-integration/travis-ci/pr',
-						jobUrl:
-							'https://travis-ci.org/angular/angular/builds/468759214?utm_source=github_status&utm_medium=notification'
+						jobUrl: 'https://travis-ci.org/angular/angular/builds/468759214?utm_source=github_status&utm_medium=notification'
 					}
 				]
 			},
@@ -88,9 +87,7 @@ describe('PullRequestList component', () => {
 		})
 
 		it('should display a title', () => {
-			expect(pullRequestList.find('[data-test=title]').text()).toBe(
-				'Pull requests on watched repositories'
-			)
+			expect(pullRequestList.find('[data-test=title]').text()).toBe('Pull requests on watched repositories')
 		})
 
 		it('should display a list of pull request', async () => {
@@ -111,8 +108,7 @@ describe('PullRequestList component', () => {
 					{
 						jobStatus: 'SUCCESS',
 						description: 'continuous-integration/travis-ci/pr',
-						jobUrl:
-							'https://travis-ci.org/angular/angular/builds/468759214?utm_source=github_status&utm_medium=notification'
+						jobUrl: 'https://travis-ci.org/angular/angular/builds/468759214?utm_source=github_status&utm_medium=notification'
 					}
 				]
 			})
