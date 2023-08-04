@@ -8,4 +8,13 @@
 </template>
 
 <script src="./custom-button.js"></script>
-<style src="./custom-button.scss" scoped></style>
+<style lang="scss" scoped>
+@import '../../global.scss';
+
+.button {
+	@include lightenOnHover($surface);
+	padding: 5px;
+	cursor: pointer;
+	display: block;
+}
+</style>
