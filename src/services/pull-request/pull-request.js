@@ -1,5 +1,4 @@
-const mostRecentFirst = ({ updateDate: first }, { updateDate: second }) =>
-	second.getTime() - first.getTime()
+const mostRecentFirst = ({ updateDate: first }, { updateDate: second }) => second.getTime() - first.getTime()
 
 export const pullRequestFragment = `fragment PullRequest on PullRequestConnection {
   nodes {

@@ -1,15 +1,7 @@
 <template>
 	<div>
-		<debounced-input
-			placeholder="Search query"
-			data-test="search-input"
-			@input="retrieveRepositoriesFor"
-		/>
-		<custom-select
-			:items="repositoriesNames"
-			data-test="repository-input"
-			@selected="pickRepository"
-		/>
+		<debounced-input placeholder="Search query" data-test="search-input" @input="retrieveRepositoriesFor" />
+		<custom-select :items="repositoriesNames" data-test="repository-input" @selected="pickRepository" />
 	</div>
 </template>
 

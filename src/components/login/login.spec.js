@@ -80,9 +80,7 @@ describe('Login component', () => {
 			mocks.userService.connectedUser
 				.mockReturnValueOnce(NO_USER)
 				.mockReturnValue({ login: 'user', token: 'token' })
-			mocks.userService.login.mockReturnValue(
-				Promise.resolve({ success: { login: 'user', token: 'token' } })
-			)
+			mocks.userService.login.mockReturnValue(Promise.resolve({ success: { login: 'user', token: 'token' } }))
 			const login = shallowMount(Login, { propsData: mocks })
 
 			await login.findComponent('[data-test=input-token]').vm.$emit('input', 'test')

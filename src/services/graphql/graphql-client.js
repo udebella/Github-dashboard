@@ -7,11 +7,7 @@ const defaultBuilder = (...args) => new GraphQLClient(...args)
 
 export const request = async (
 	query,
-	{
-		builder = defaultBuilder,
-		session = buildSessionService(),
-		store = useConfigurationStore()
-	} = {}
+	{ builder = defaultBuilder, session = buildSessionService(), store = useConfigurationStore() } = {}
 ) => {
 	const { token } = session.getUser()
 	const client = builder(store.githubApi, {

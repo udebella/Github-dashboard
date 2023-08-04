@@ -22,9 +22,7 @@ export default {
 			return this.connectedUser === this.NO_USER
 		},
 		title() {
-			return this.displayInputToken
-				? 'You are not logged in'
-				: `Logged in as ${this.connectedUser.login}`
+			return this.displayInputToken ? 'You are not logged in' : `Logged in as ${this.connectedUser.login}`
 		}
 	},
 	methods: {

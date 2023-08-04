@@ -51,9 +51,7 @@ describe('Pull request notification service', () => {
 			{ title: 'Another test pull request', url: '/a/random/url' }
 		])
 
-		expect(stubs.notify).toHaveBeenCalledWith(
-			'A new pull request was opened: Another test pull request'
-		)
+		expect(stubs.notify).toHaveBeenCalledWith('A new pull request was opened: Another test pull request')
 	})
 
 	it('should keep already notified pull request', () => {
@@ -67,8 +65,6 @@ describe('Pull request notification service', () => {
 			{ title: 'Another test pull request', url: '/a/random/url' }
 		])
 
-		expect(stubs.notify).toHaveBeenCalledWith(
-			'A new pull request was opened: Another test pull request'
-		)
+		expect(stubs.notify).toHaveBeenCalledWith('A new pull request was opened: Another test pull request')
 	})
 })

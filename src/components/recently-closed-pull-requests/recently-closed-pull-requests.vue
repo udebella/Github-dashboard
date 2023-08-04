@@ -2,11 +2,7 @@
 	<div>
 		<div class="head">
 			<h2 data-test="title">My recently merged pull requests</h2>
-			<network-polling
-				data-test="network-polling"
-				:query="query"
-				@http-update="updatePullRequests"
-			/>
+			<network-polling data-test="network-polling" :query="query" @http-update="updatePullRequests" />
 		</div>
 		<pull-request-line
 			v-for="{ buildStatus, creationDate, statuses, prTitle, prUrl } in pullRequests"

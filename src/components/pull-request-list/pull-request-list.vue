@@ -2,21 +2,10 @@
 	<div>
 		<div class="head">
 			<h2 data-test="title">Pull requests on watched repositories</h2>
-			<network-polling
-				data-test="network-polling"
-				:query="query"
-				@http-update="updatePullRequests"
-			/>
+			<network-polling data-test="network-polling" :query="query" @http-update="updatePullRequests" />
 		</div>
 		<pull-request-line
-			v-for="{
-				prTitle,
-				prUrl,
-				buildStatus,
-				creationDate,
-				statuses,
-				lastEventAuthor
-			} in pullRequests"
+			v-for="{ prTitle, prUrl, buildStatus, creationDate, statuses, lastEventAuthor } in pullRequests"
 			:key="prTitle"
 			:has-updates="hasUpdates(lastEventAuthor)"
 			:title="prTitle"

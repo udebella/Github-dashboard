@@ -40,9 +40,7 @@ describe('PullRequestLine component', () => {
 		})
 
 		it('should display a link to the pull request', () => {
-			expect(pullRequestLine.find('[data-test=link]').attributes().href).toBe(
-				'http://pull-request-url'
-			)
+			expect(pullRequestLine.find('[data-test=link]').attributes().href).toBe('http://pull-request-url')
 		})
 
 		it('should display the build status of the pull request', () => {

@@ -24,9 +24,7 @@ describe('RepositoryRemover component', () => {
 		it('should display a remove icon', async () => {
 			await useConfigurationStore().$patch({ configurationEnabled: true })
 
-			expect(repositoryRemover.findComponent('[data-test=icon]').attributes().icon).toBe(
-				'deleteBin'
-			)
+			expect(repositoryRemover.findComponent('[data-test=icon]').attributes().icon).toBe('deleteBin')
 		})
 
 		it('should hide the remove icon when configuration mode is disabled', async () => {

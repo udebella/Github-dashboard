@@ -45,9 +45,7 @@ describe('ViewerPullRequestList component', () => {
 		it('should display a title', () => {
 			const viewerPullRequestList = shallowMount(ViewerPullRequestList, { propsData: stubs })
 
-			expect(viewerPullRequestList.find('[data-test=title]').text()).toBe(
-				'My currently open pull requests'
-			)
+			expect(viewerPullRequestList.find('[data-test=title]').text()).toBe('My currently open pull requests')
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
@@ -59,9 +57,7 @@ describe('ViewerPullRequestList component', () => {
 
 			// Then
 			await triggerFakeNetworkResponse(viewerPullRequestList)
-			expect(viewerPullRequestList.findComponent('[data-test=network-polling]').props().query).toBe(
-				'queryBuilt'
-			)
+			expect(viewerPullRequestList.findComponent('[data-test=network-polling]').props().query).toBe('queryBuilt')
 			expect(stubs.queryBuilder).toHaveBeenCalledWith(viewerFragment)
 			expect(stubs.pullRequestReader).toHaveBeenCalled()
 		})

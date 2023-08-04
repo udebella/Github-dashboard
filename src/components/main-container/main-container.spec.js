@@ -27,9 +27,7 @@ describe('MainContainer component', () => {
 		})
 
 		it('should display recently closed pull requests', () => {
-			expect(mainContainer.findComponent({ name: 'recently-closed-pull-requests' }).exists()).toBe(
-				true
-			)
+			expect(mainContainer.findComponent({ name: 'recently-closed-pull-requests' }).exists()).toBe(true)
 		})
 	})
 })

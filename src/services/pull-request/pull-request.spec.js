@@ -161,9 +161,7 @@ describe('Pull request service', () => {
 
 		const response = extractHttp(httpResponse)
 
-		expect(response[0].prTitle).toBe(
-			'Implement pauseExecution, continueExecution, dumpQueue for Scheduler'
-		)
+		expect(response[0].prTitle).toBe('Implement pauseExecution, continueExecution, dumpQueue for Scheduler')
 		expect(response[1].prTitle).toBe('Fix wheel/touch browser locking in IE and Safari')
 	})
 })
