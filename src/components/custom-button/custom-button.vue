@@ -7,7 +7,17 @@
 	</div>
 </template>
 
-<script src="./custom-button.js"></script>
+<script lang="js">
+export default {
+	name: 'custom-button',
+	props: {
+		href: {
+			type: String
+		}
+	}
+}
+</script>
+
 <style lang="scss" scoped>
 @import '../../global.scss';
 
