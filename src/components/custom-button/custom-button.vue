@@ -21,6 +21,7 @@ defineProps<{
 	cursor: pointer;
 	display: block;
 }
+
 .button:hover {
 	filter: brightness(150%);
 }
