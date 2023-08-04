@@ -1,41 +1,37 @@
+import type { VueWrapper } from '@vue/test-utils'
 import { shallowMount } from '@vue/test-utils'
 import CustomButton from './custom-button.vue'
-import { beforeEach, describe, it, expect } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('CustomButton component', () => {
-	let customButton
+	let customButton: VueWrapper
 
 	beforeEach(() => {
 		customButton = shallowMount(CustomButton, {
 			slots: {
-				default: ['<span>Slot content</span>']
+				default: '<span>Slot content</span>'
 			}
 		})
 	})
 
 	describe('Initialization', () => {
-		it('should mount properly', () => {
-			expect(customButton.exists()).toBe(true)
-		})
-
 		it('should display the content of the slot', () => {
 			expect(customButton.text()).toBe('Slot content')
 		})
 	})
 
 	describe('Link', () => {
-		it('should have a link when an url is given', () => {
-			customButton = shallowMount(CustomButton, {
-				propsData: { href: 'http://url' }
+		it('should have a link when an url is given', async () => {
+			await customButton.setProps({
+				href: 'http://url'
 			})
 
 			const link = customButton.find('[data-test=link]')
-			expect(link.exists()).toBe(true)
 			expect(link.attributes().href).toBe('http://url')
 		})
 
-		it('should not display the link when no url is given', () => {
-			customButton = shallowMount(CustomButton)
+		it('should not display the link when no url is given', async () => {
+			await customButton.setProps({ href: undefined })
 
 			const link = customButton.find('[data-test=link]')
 			expect(link.exists()).toBe(false)
@@ -44,9 +40,7 @@ describe('CustomButton component', () => {
 
 	describe('Button', () => {
 		it('should emit a click event when the component is clicked', async () => {
-			customButton = shallowMount(CustomButton)
-
-			await customButton.find('[data-test=button]').trigger('click', { cancellable: true })
+			await customButton.find('[data-test=button]').trigger('click')
 
 			expect(customButton.emitted().click.length).toBe(1)
 		})
