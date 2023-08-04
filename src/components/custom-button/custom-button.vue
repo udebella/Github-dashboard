@@ -13,13 +13,15 @@ defineProps<{
 }>()
 </script>
 
-<style lang="scss" scoped>
-@import '../../global.scss';
-
+<style lang="css" scoped>
 .button {
-	@include lightenOnHover($surface);
+	background-color: var(--color-surface);
+
 	padding: 5px;
 	cursor: pointer;
 	display: block;
+}
+.button:hover {
+	filter: brightness(150%);
 }
 </style>
