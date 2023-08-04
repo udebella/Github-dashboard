@@ -7,5 +7,21 @@
 	</div>
 </template>
 
-<script src="./custom-button.js"></script>
-<style src="./custom-button.scss" scoped></style>
+<script setup lang="ts">
+defineProps<{
+	href?: string
+}>()
+</script>
+
+<style lang="css" scoped>
+.button {
+	background-color: var(--color-surface);
+
+	padding: 5px;
+	cursor: pointer;
+	display: block;
+}
+.button:hover {
+	filter: brightness(150%);
+}
+</style>

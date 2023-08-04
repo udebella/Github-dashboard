@@ -1,8 +1,0 @@
-@import '../../global';
-
-.button {
-	@include lightenOnHover($surface);
-	padding: 5px;
-	cursor: pointer;
-	display: block;
-}
