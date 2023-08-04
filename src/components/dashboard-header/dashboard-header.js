@@ -1,4 +1,4 @@
-import Login from '../login/login.vue'
+import Login from '@/components/login-input/login-input.vue'
 import Configuration from '@/components/configuration-button/configuration-button.vue'
 import CustomButton from '../custom-button/custom-button.vue'
 import IconComponent from '@/components/icon/icon-component.vue'

@@ -1,5 +1,5 @@
 import { flushPromises, shallowMount } from '@vue/test-utils'
-import Login from './login.vue'
+import Login from './login-input.vue'
 import { NO_USER } from '../../services/session/session'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 

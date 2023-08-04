@@ -4,7 +4,7 @@ import DebouncedInput from '../debounced-input/debounced-input.vue'
 import IconComponent from '@/components/icon/icon-component.vue'
 
 export default {
-	name: 'login',
+	name: 'login-input',
 	props: {
 		userService: {
 			default: buildUserService
