@@ -35,7 +35,7 @@ describe('RepositoryLine component', () => {
 		})
 
 		it('should use the color on the line according to the branch status', () => {
-			expect(repositoryLine.find('[data-test=badge]').classes()).toEqual(['SUCCESS'])
+			expect(repositoryLine.findComponent('[data-test=badge]').props().status).toBe('SUCCESS')
 		})
 
 		it('should display a way to remove the repository from watched repositories', () => {
