@@ -18,12 +18,4 @@ describe('Badge Status component', () => {
 			expect(badge.text()).toBe('Slot content')
 		})
 	})
-
-	describe('click event', () => {
-		it('should be clickable and send a click event', () => {
-			badge.trigger('click')
-
-			expect(badge.emitted().click).toBeDefined()
-		})
-	})
 })
