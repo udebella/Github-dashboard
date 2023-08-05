@@ -34,5 +34,13 @@ describe('Badge Status component', () => {
 
 			expect(badge.classes()).toContain('red')
 		})
+
+		it('displays the badge in blue when its status is pending', async () => {
+			await badge.setProps({
+				status: 'PENDING'
+			})
+
+			expect(badge.classes()).toContain('blue')
+		})
 	})
 })

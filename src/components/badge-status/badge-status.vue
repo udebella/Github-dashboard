@@ -6,12 +6,13 @@
 
 <script lang="ts" setup>
 const props = defineProps<{
-	status: 'SUCCESS' | 'FAILURE'
+	status: 'SUCCESS' | 'FAILURE' | 'PENDING'
 }>()
 
 const statusToClass = {
 	SUCCESS: 'green',
-	FAILURE: 'red'
+	FAILURE: 'red',
+	PENDING: 'blue'
 }
 </script>
 
