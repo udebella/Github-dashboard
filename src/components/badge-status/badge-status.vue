@@ -26,16 +26,19 @@ const statusToClass = {
 	padding: 5px;
 }
 
-/* TODO move this to props instead of classes so that it can be type-checked */
-.SUCCESS {
+/* TODO removes SUCCESS, FAILURE and PENDING classes when everything is using props */
+.SUCCESS,
+.green {
 	background-color: var(--color-success);
 }
 
-.FAILURE {
+.FAILURE,
+.red {
 	background-color: var(--color-failure);
 }
 
-.PENDING {
+.PENDING,
+.blue {
 	background-color: var(--color-pending);
 }
 
