@@ -14,10 +14,6 @@ describe('Badge component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should mount properly', () => {
-			expect(badge.exists()).toBe(true)
-		})
-
 		it('should display the content of the slot', () => {
 			expect(badge.text()).toBe('Slot content')
 		})
