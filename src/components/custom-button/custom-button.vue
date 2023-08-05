@@ -20,6 +20,7 @@ defineProps<{
 	padding: 5px;
 	cursor: pointer;
 	display: block;
+	text-decoration: none;
 }
 
 .button:hover {
