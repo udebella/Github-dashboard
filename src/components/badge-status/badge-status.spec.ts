@@ -18,5 +18,13 @@ describe('Badge Status component', () => {
 		it('should display the content of the slot', () => {
 			expect(badge.text()).toBe('Slot content')
 		})
+
+		it('displays the badge in green when its status is success', async () => {
+			await badge.setProps({
+				status: 'SUCCESS'
+			})
+
+			expect(badge.classes()).toContain('green')
+		})
 	})
 })
