@@ -44,7 +44,7 @@ describe('PullRequestLine component', () => {
 		})
 
 		it('should display the build status of the pull request', () => {
-			expect(pullRequestLine.find('[data-test=name]').classes()).toEqual(['SUCCESS', 'line'])
+			expect(pullRequestLine.findComponent('[data-test=name]').props().status).toBe('SUCCESS')
 		})
 
 		it('should display a living icon', () => {

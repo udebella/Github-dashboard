@@ -1,6 +1,6 @@
 <template>
 	<a :href="url" data-test="link" class="link">
-		<badge-status :class="buildStatus" class="line" data-test="name">
+		<badge-status :status="buildStatus" class="line" data-test="name">
 			<div class="title">
 				{{ title }}
 			</div>
