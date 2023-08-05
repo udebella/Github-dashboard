@@ -4,16 +4,13 @@
 	</div>
 </template>
 
-<script lang="ts">
-export default {
-	name: 'pop-over',
-	props: {
-		side: {
-			type: String,
-			default: 'right'
-		}
-	}
-}
+<script lang="ts" setup>
+withDefaults(
+	defineProps<{
+		side?: 'left' | 'right'
+	}>(),
+	{ side: 'right' }
+)
 </script>
 
 <style lang="scss" scoped>
