@@ -1,10 +1,19 @@
 <template>
-	<div class="badge green">
+	<div class="badge" :class="statusToClass[props.status]">
 		<slot />
 	</div>
 </template>
 
-<script lang="ts" setup />
+<script lang="ts" setup>
+const props = defineProps<{
+	status: 'SUCCESS' | 'FAILURE'
+}>()
+
+const statusToClass = {
+	SUCCESS: 'green',
+	FAILURE: 'red'
+}
+</script>
 
 <style scoped lang="css">
 .badge {

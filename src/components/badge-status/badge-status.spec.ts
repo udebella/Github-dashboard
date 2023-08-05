@@ -26,5 +26,13 @@ describe('Badge Status component', () => {
 
 			expect(badge.classes()).toContain('green')
 		})
+
+		it('displays the badge in red when its status is failure', async () => {
+			await badge.setProps({
+				status: 'FAILURE'
+			})
+
+			expect(badge.classes()).toContain('red')
+		})
 	})
 })
