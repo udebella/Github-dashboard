@@ -15,7 +15,7 @@ describe('Badge Status component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should display the content of the slot', () => {
+		it('display the content of the slot', () => {
 			expect(badge.text()).toBe('Slot content')
 		})
 
