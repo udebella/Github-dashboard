@@ -1,7 +1,7 @@
 import RepositoryRemover from '../repository-remover/repository-remover.vue'
 import BuildStatuses from '../build-statuses/build-statuses.vue'
 import BadgeStatus from '../badge-status/badge-status.vue'
-import PopOver from '../pop-over/pop-over'
+import PopOver from '../pop-over/pop-over.vue'
 
 export default {
 	name: 'repository-line',
