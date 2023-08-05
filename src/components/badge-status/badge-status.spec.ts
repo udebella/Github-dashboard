@@ -18,7 +18,9 @@ describe('Badge Status component', () => {
 		it('display the content of the slot', () => {
 			expect(badge.text()).toBe('Slot content')
 		})
+	})
 
+	describe('Statuses colors', () => {
 		it('does not display any color status by default', () => {
 			expect(badge.classes()).toEqual(['badge'])
 		})
