@@ -7,12 +7,12 @@
 			class="repository-remover"
 		/>
 		<a :href="repository.repositoryUrl" data-test="link" class="link">
-			<badge :class="repository.branchStatus" data-test="badge">
+			<badge-status :class="repository.branchStatus" data-test="badge">
 				<span>{{ repository.name }}</span>
-				<popover v-if="repository.statusesList.length" class="popover">
+				<pop-over v-if="repository.statusesList.length" class="popover">
 					<build-statuses :statuses="repository.statusesList" />
-				</popover>
-			</badge>
+				</pop-over>
+			</badge-status>
 		</a>
 	</div>
 </template>
