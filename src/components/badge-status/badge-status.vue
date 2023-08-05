@@ -26,18 +26,14 @@ const statusToClass = {
 	padding: 5px;
 }
 
-/* TODO removes SUCCESS, FAILURE and PENDING classes when everything is using props */
-.SUCCESS,
 .green {
 	background-color: var(--color-success);
 }
 
-.FAILURE,
 .red {
 	background-color: var(--color-failure);
 }
 
-.PENDING,
 .blue {
 	background-color: var(--color-pending);
 }
