@@ -17,7 +17,9 @@ describe('Popover component', () => {
 		it('displays the slot', () => {
 			expect(popover.text()).toBe('Slot content')
 		})
+	})
 
+	describe('Side', () => {
 		it('displays the popover on the right by default', () => {
 			expect(popover.classes()).toContain('right')
 		})
