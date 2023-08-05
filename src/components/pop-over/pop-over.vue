@@ -4,5 +4,69 @@
 	</div>
 </template>
 
-<script src="./pop-over.js"></script>
-<style src="./pop-over.scss" scoped></style>
+<script lang="ts">
+export default {
+	name: 'pop-over',
+	props: {
+		side: {
+			type: String,
+			default: 'right'
+		}
+	}
+}
+</script>
+
+<style lang="scss" scoped>
+@import '../../global';
+
+$borderColor: $secondaryDark;
+$backgroundColor: $surface;
+
+.popover {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: $backgroundColor;
+	border: 1px solid $borderColor;
+	border-radius: 5px;
+	z-index: 2;
+	padding: 10px;
+	box-shadow: 3px 3px 3px black;
+
+	&.left {
+		right: calc(100% + 10px);
+
+		&:before {
+			right: -20px;
+			border-left-color: $borderColor;
+		}
+
+		&:after {
+			right: -19px;
+			border-left-color: $backgroundColor;
+		}
+	}
+
+	&.right {
+		left: calc(100% + 10px);
+
+		&:before {
+			left: -20px;
+			border-right-color: $borderColor;
+		}
+
+		&:after {
+			left: -19px;
+			border-right-color: $backgroundColor;
+		}
+	}
+
+	&:before,
+	&:after {
+		position: absolute;
+		top: calc(50% - 10px);
+		content: '';
+		border: 10px solid transparent;
+	}
+}
+</style>
