@@ -53,9 +53,7 @@ export const pullRequestFragment = `fragment PullRequest on PullRequestConnectio
 		  ...on PullRequestCommit {
 			commit {
 			  author {
-				user {
-				  login
-				}
+				name
 			  }
 			}
 		  }
@@ -116,9 +114,8 @@ const extractLastEventAuthor = ({ nodes }: PullRequestTimelineItemsConnection): 
 		}
 	}
 	if (isCommit(lastEvent)) {
-		const { login } = lastEvent!.commit.author!.user!
 		return {
-			lastEventAuthor: login
+			lastEventAuthor: lastEvent?.commit.author?.name ?? ''
 		}
 	}
 	return {

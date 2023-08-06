@@ -76,8 +76,8 @@ describe('Pull request service', () => {
 	})
 
 	describe('LastEventAuthor read', () => {
-		it('returns a default lastEventAuthor when the last action is a commit', () => {
-			httpResponse[0].pullRequests.nodes[0].timelineItems.nodes.push({ author: { login: 'udebella' } })
+		it('returns a default lastEventAuthor when the last action is a review', () => {
+			httpResponse[0].pullRequests.nodes[0].timelineItems.nodes[0] = { author: { login: 'udebella' } }
 
 			const response = extractHttp(httpResponse)
 
@@ -94,7 +94,7 @@ describe('Pull request service', () => {
 
 		it('is able to retrieve lastEventAuthor from commits', () => {
 			httpResponse[0].pullRequests.nodes[0].timelineItems.nodes[0] = {
-				commit: { author: { user: { login: 'udebella' } } }
+				commit: { author: { name: 'udebella' } }
 			}
 
 			const response = extractHttp(httpResponse)
