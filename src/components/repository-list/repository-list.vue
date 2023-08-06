@@ -5,7 +5,6 @@
 			<!-- @vue-ignore TODO remove when all underlying component migrated to composition api -->
 			<network-polling data-test="polling" :query="query" @http-update="updateRepositories" />
 		</div>
-		<!-- @vue-ignore TODO remove when all underlying component migrated to composition api -->
 		<repository-line
 			v-for="repository in repositories"
 			:key="repository.name"
