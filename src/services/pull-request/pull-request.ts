@@ -123,7 +123,7 @@ const extractLastEventAuthor = ({ nodes }: PullRequestTimelineItemsConnection): 
 	}
 }
 
-const extractStatuses = (check?: Maybe<StatusCheckRollup>): GDPullRequestStatus => {
+export const extractStatuses = (check?: Maybe<StatusCheckRollup>): GDPullRequestStatus => {
 	return {
 		buildStatus: check?.state ?? 'NO_STATUS',
 		statuses: check?.contexts?.nodes?.map(extractStatusesDetails) ?? []
