@@ -11,7 +11,7 @@ export type GDPullRequestStatus = {
 	statuses: GDBuildStatus[]
 }
 
-type GDBuildStatus = {
+export type GDBuildStatus = {
 	description: string
 	jobStatus: string
 	jobUrl: string

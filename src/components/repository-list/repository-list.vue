@@ -2,8 +2,10 @@
 	<div>
 		<div class="head">
 			<h2 data-test="title">Watched repositories</h2>
+			<!-- @vue-ignore TODO remove when all underlying component migrated to composition api -->
 			<network-polling data-test="polling" :query="query" @http-update="updateRepositories" />
 		</div>
+		<!-- @vue-ignore TODO remove when all underlying component migrated to composition api -->
 		<repository-line
 			v-for="repository in repositories"
 			:key="repository.name"
@@ -14,21 +16,34 @@
 	</div>
 </template>
 
-<script lang="js" setup>
+<script lang="ts" setup>
 import RepositoryLine from '../repository-line/repository-line.vue'
 import RepositoryAdder from '../repository-adder/repository-adder.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
 import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
 import { useRepositoryStore } from '../../stores/repositories'
 import { computed, ref } from 'vue'
+import type { GDBuildStatus } from '../../services/statuses/extract-statuses'
 import { extractStatuses } from '../../services/statuses/extract-statuses'
+import type { Commit, GitObject, Maybe, Repository } from '@octokit/graphql-schema'
 
-const extractHttpData = ({ httpData }) => {
+type GDRepository = {
+	name: string
+	owner: string
+	repositoryUrl: string
+	branchStatus: string
+	statusesList: GDBuildStatus[]
+}
+
+const extractHttpData = (httpData: Repository): GDRepository[] => {
 	return Object.values(httpData)
-		.filter((repositories) => repositories?.defaultBranchRef)
-		.map(({ name, owner, url, defaultBranchRef }) => {
-			const repositoryData = defaultBranchRef.target.statusCheckRollup || {}
-			const { buildStatus, statuses } = extractStatuses(repositoryData)
+		.filter((repositories: Repository) => repositories?.defaultBranchRef)
+		.map(({ name, owner, url, defaultBranchRef }: Repository): GDRepository | null => {
+			const repositoryData = defaultBranchRef?.target
+			if (!isCommit(repositoryData)) {
+				return null
+			}
+			const { buildStatus, statuses } = extractStatuses(repositoryData.statusCheckRollup)
 			return {
 				name: name,
 				owner: owner.login,
@@ -37,6 +52,11 @@ const extractHttpData = ({ httpData }) => {
 				statusesList: statuses
 			}
 		})
+		.filter((repositories: GDRepository | null): repositories is GDRepository => repositories !== null)
+}
+
+const isCommit = (value?: Maybe<GitObject>): value is Commit => {
+	return Object.prototype.hasOwnProperty.call(value ?? {}, 'statusCheckRollup')
 }
 
 const repositoryListFragment = `fragment repository on Repository {
@@ -70,22 +90,22 @@ const repositoryListFragment = `fragment repository on Repository {
   }
 }`
 
-const props = defineProps({
-	queryBuilder: {
-		type: Function,
-		default: buildRepositoriesQuery(repositoryListFragment)
-	}
-})
+const props = withDefaults(
+	defineProps<{
+		queryBuilder: ReturnType<typeof buildRepositoriesQuery>
+	}>(),
+	{ queryBuilder: buildRepositoriesQuery(repositoryListFragment) }
+)
 
 const repositoryStore = useRepositoryStore()
-const repositories = ref([])
+const repositories = ref<GDRepository[]>([])
 const query = computed(() => {
 	const watchedRepositories = repositoryStore.watched
 	return props.queryBuilder(watchedRepositories)
 })
 
-function updateRepositories(httpData) {
-	repositories.value = extractHttpData({ httpData })
+function updateRepositories(httpData: Repository) {
+	repositories.value = extractHttpData(httpData)
 }
 </script>
 <style src="./repository-list.scss" scoped></style>
