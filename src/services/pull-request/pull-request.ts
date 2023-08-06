@@ -112,7 +112,7 @@ const extractStatusesDetails = (rollupContext: Maybe<StatusCheckRollupContext>):
 	}
 	return {
 		description: status.name,
-		jobStatus: status.conclusion,
+		jobStatus: status.conclusion ?? 'PENDING',
 		jobUrl: status.detailsUrl
 	}
 }

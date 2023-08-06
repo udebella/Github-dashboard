@@ -161,6 +161,34 @@ describe('Pull request service', () => {
 		])
 	})
 
+	it('has a pending status while job is not finished', () => {
+		httpResponse[0].pullRequests.nodes[0].commits.nodes[0].commit.statusCheckRollup.contexts.nodes[0] = {
+			conclusion: null,
+			name: 'build description',
+			detailsUrl: 'http://build-target-url'
+		}
+
+		const response = extractHttp(httpResponse)
+
+		expect(response).toEqual([
+			{
+				prTitle: 'Fix wheel/touch browser locking in IE and Safari',
+				prUrl: 'https://github.com/facebook/react/pull/9333',
+				creationDate: new Date('2018-10-20T00:00:00Z'),
+				updateDate: new Date('2018-10-25T01:36:27Z'),
+				lastEventAuthor: 'udebella',
+				buildStatus: 'SUCCESS',
+				statuses: [
+					{
+						jobStatus: 'PENDING',
+						description: 'build description',
+						jobUrl: 'http://build-target-url'
+					}
+				]
+			}
+		])
+	})
+
 	it('orders pull requests by last update date', () => {
 		httpResponse.push({
 			pullRequests: {
