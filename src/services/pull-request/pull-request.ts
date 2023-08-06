@@ -3,11 +3,11 @@ import type {
 	Maybe,
 	PullRequest,
 	PullRequestCommit,
-	PullRequestCommitConnection,
 	PullRequestReview,
 	PullRequestTimelineItems,
 	PullRequestTimelineItemsConnection,
 	Repository,
+	StatusCheckRollup,
 	StatusCheckRollupContext,
 	StatusContext
 } from '@octokit/graphql-schema'
@@ -101,7 +101,7 @@ const extractPullRequest = (pullRequest: Maybe<PullRequest>): GDPullRequest => {
 		creationDate: new Date(createdAt),
 		updateDate: new Date(updatedAt),
 		...extractLastEventAuthor(timelineItems),
-		...extractStatuses(commits)
+		...extractStatuses(commits.nodes?.[0]?.commit.statusCheckRollup)
 	}
 }
 
@@ -123,11 +123,10 @@ const extractLastEventAuthor = ({ nodes }: PullRequestTimelineItemsConnection): 
 	}
 }
 
-const extractStatuses = ({ nodes }: PullRequestCommitConnection): GDPullRequestStatus => {
-	const { state, contexts } = nodes?.[0]?.commit.statusCheckRollup ?? { state: 'NO_STATUS', contexts: { nodes: [] } }
+const extractStatuses = (check?: Maybe<StatusCheckRollup>): GDPullRequestStatus => {
 	return {
-		buildStatus: state,
-		statuses: contexts?.nodes?.map(extractStatusesDetails) ?? []
+		buildStatus: check?.state ?? 'NO_STATUS',
+		statuses: check?.contexts?.nodes?.map(extractStatusesDetails) ?? []
 	}
 }
 
