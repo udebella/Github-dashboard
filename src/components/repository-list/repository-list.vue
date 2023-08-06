@@ -21,23 +21,20 @@ import NetworkPolling from '../network-polling/network-polling.vue'
 import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
 import { useRepositoryStore } from '../../stores/repositories'
 import { computed, ref } from 'vue'
+import { extractStatuses } from '../../services/statuses/extract-statuses'
 
 const extractHttpData = ({ httpData }) => {
 	return Object.values(httpData)
 		.filter((repositories) => repositories && repositories.defaultBranchRef)
 		.map(({ name, owner, url, defaultBranchRef }) => {
-			const repositoryData = defaultBranchRef.target.status || {}
-			const statusMapper = ({ state, context, targetUrl }) => ({
-				jobStatus: state,
-				description: context,
-				jobUrl: targetUrl
-			})
+			const repositoryData = defaultBranchRef.target.statusCheckRollup || {}
+			const { buildStatus, statuses } = extractStatuses(repositoryData)
 			return {
 				name: name,
 				owner: owner.login,
 				repositoryUrl: url,
-				branchStatus: repositoryData.state || 'NO_STATUS',
-				statusesList: (repositoryData.contexts && repositoryData.contexts.map(statusMapper)) || []
+				branchStatus: buildStatus,
+				statusesList: statuses
 			}
 		})
 }
