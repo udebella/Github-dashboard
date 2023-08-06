@@ -40,24 +40,33 @@ const extractHttpData = ({ httpData }) => {
 }
 
 const repositoryListFragment = `fragment repository on Repository {
-  name,
+  name
   owner {
     login
-  },
-  url,
+  }
+  url
   defaultBranchRef {
-	target {
-	  ... on Commit {
-		status {
-		  contexts {
-			state
-			context
-			targetUrl
-		  }
-		  state
-		}
-	  }
-	}
+    target {
+      ... on Commit {
+        statusCheckRollup {
+          contexts(last: 10) {
+            nodes {
+              ... on StatusContext {
+                state
+                context
+                targetUrl
+              }
+              ... on CheckRun {
+                conclusion
+                name
+                detailsUrl
+              }
+            }
+          }
+          state
+        }
+      }
+    }
   }
 }`
 
