@@ -114,7 +114,7 @@ describe('Pull request service', () => {
 	it('extracts statuses from a response on a pull request that was built', () => {
 		const response = extractHttp(httpResponse)
 
-		expect(response).to.deep.equals([
+		expect(response).toEqual([
 			{
 				prTitle: 'Fix wheel/touch browser locking in IE and Safari',
 				prUrl: 'https://github.com/facebook/react/pull/9333',
