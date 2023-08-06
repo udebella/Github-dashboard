@@ -1,6 +1,7 @@
 import type {
 	CheckRun,
 	Maybe,
+	PullRequest,
 	PullRequestCommit,
 	PullRequestCommitConnection,
 	PullRequestReview,
@@ -11,13 +12,31 @@ import type {
 	StatusContext
 } from '@octokit/graphql-schema'
 
-type BuildStatus = {
+type GDPullRequest = {
+	prTitle: string
+	prUrl: string
+	creationDate: Date
+	updateDate: Date
+} & GDPullRequestStatus &
+	GDLastEventAuthor
+
+type GDLastEventAuthor = {
+	lastEventAuthor: string
+}
+
+type GDPullRequestStatus = {
+	buildStatus: string
+	statuses: GDBuildStatus[]
+}
+
+type GDBuildStatus = {
 	description: string
 	jobStatus: string
 	jobUrl: string
 }
 
-const mostRecentFirst = ({ updateDate: first }, { updateDate: second }) => second.getTime() - first.getTime()
+const mostRecentFirst = ({ updateDate: first }: GDPullRequest, { updateDate: second }: GDPullRequest) =>
+	second.getTime() - first.getTime()
 
 export const pullRequestFragment = `fragment PullRequest on PullRequestConnection {
   nodes {
@@ -74,21 +93,21 @@ export const pullRequestFragment = `fragment PullRequest on PullRequestConnectio
 }`
 
 export const extractHttp = (repositoryList: Repository[]) =>
-	repositoryList
-		.flatMap(
-			({ pullRequests }) =>
-				pullRequests.nodes?.map(({ title, url, createdAt, updatedAt, commits, timelineItems }) => ({
-					prTitle: title,
-					prUrl: url,
-					creationDate: new Date(createdAt),
-					updateDate: new Date(updatedAt),
-					...extractLastEventAuthor(timelineItems),
-					...extractStatuses(commits)
-				}))
-		)
-		.sort(mostRecentFirst)
+	repositoryList.flatMap((repository) => repository.pullRequests.nodes!.map(extractPullRequest)).sort(mostRecentFirst)
 
-const extractLastEventAuthor = ({ nodes }: PullRequestTimelineItemsConnection) => {
+const extractPullRequest = (pullRequest: Maybe<PullRequest>): GDPullRequest => {
+	const { title, url, createdAt, updatedAt, commits, timelineItems } = pullRequest!
+	return {
+		prTitle: title,
+		prUrl: url,
+		creationDate: new Date(createdAt),
+		updateDate: new Date(updatedAt),
+		...extractLastEventAuthor(timelineItems),
+		...extractStatuses(commits)
+	}
+}
+
+const extractLastEventAuthor = ({ nodes }: PullRequestTimelineItemsConnection): GDLastEventAuthor => {
 	const lastEvent = nodes?.[0]
 	if (isReview(lastEvent)) {
 		const { login } = lastEvent.author!
@@ -107,15 +126,15 @@ const extractLastEventAuthor = ({ nodes }: PullRequestTimelineItemsConnection) =
 	}
 }
 
-const extractStatuses = ({ nodes }: PullRequestCommitConnection) => {
+const extractStatuses = ({ nodes }: PullRequestCommitConnection): GDPullRequestStatus => {
 	const { state, contexts } = nodes?.[0]?.commit.statusCheckRollup ?? { state: 'NO_STATUS', contexts: { nodes: [] } }
 	return {
 		buildStatus: state,
-		statuses: contexts?.nodes?.map(extractStatusesDetails)
+		statuses: contexts?.nodes?.map(extractStatusesDetails) ?? []
 	}
 }
 
-const extractStatusesDetails = (rollupContext: Maybe<StatusCheckRollupContext>): BuildStatus => {
+const extractStatusesDetails = (rollupContext: Maybe<StatusCheckRollupContext>): GDBuildStatus => {
 	const status = rollupContext!
 	if (isStatus(status)) {
 		return {
