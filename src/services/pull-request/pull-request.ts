@@ -1,16 +1,14 @@
 import type {
-	CheckRun,
 	Maybe,
 	PullRequest,
 	PullRequestCommit,
-	PullRequestCommitConnection,
 	PullRequestReview,
 	PullRequestTimelineItems,
 	PullRequestTimelineItemsConnection,
-	Repository,
-	StatusCheckRollupContext,
-	StatusContext
+	Repository
 } from '@octokit/graphql-schema'
+import type { GDPullRequestStatus } from '../statuses/extract-statuses'
+import { extractStatuses } from '../statuses/extract-statuses'
 
 type GDPullRequest = {
 	prTitle: string
@@ -22,17 +20,6 @@ type GDPullRequest = {
 
 type GDLastEventAuthor = {
 	lastEventAuthor: string
-}
-
-type GDPullRequestStatus = {
-	buildStatus: string
-	statuses: GDBuildStatus[]
-}
-
-type GDBuildStatus = {
-	description: string
-	jobStatus: string
-	jobUrl: string
 }
 
 const mostRecentFirst = ({ updateDate: first }: GDPullRequest, { updateDate: second }: GDPullRequest) =>
@@ -101,7 +88,7 @@ const extractPullRequest = (pullRequest: Maybe<PullRequest>): GDPullRequest => {
 		creationDate: new Date(createdAt),
 		updateDate: new Date(updatedAt),
 		...extractLastEventAuthor(timelineItems),
-		...extractStatuses(commits)
+		...extractStatuses(commits.nodes?.[0]?.commit.statusCheckRollup)
 	}
 }
 
@@ -121,34 +108,6 @@ const extractLastEventAuthor = ({ nodes }: PullRequestTimelineItemsConnection): 
 	return {
 		lastEventAuthor: ''
 	}
-}
-
-const extractStatuses = ({ nodes }: PullRequestCommitConnection): GDPullRequestStatus => {
-	const { state, contexts } = nodes?.[0]?.commit.statusCheckRollup ?? { state: 'NO_STATUS', contexts: { nodes: [] } }
-	return {
-		buildStatus: state,
-		statuses: contexts?.nodes?.map(extractStatusesDetails) ?? []
-	}
-}
-
-const extractStatusesDetails = (rollupContext: Maybe<StatusCheckRollupContext>): GDBuildStatus => {
-	const status = rollupContext!
-	if (isStatus(status)) {
-		return {
-			description: status.context,
-			jobStatus: status.state,
-			jobUrl: status.targetUrl
-		}
-	}
-	return {
-		description: status.name,
-		jobStatus: status.conclusion ?? 'PENDING',
-		jobUrl: status.detailsUrl
-	}
-}
-
-const isStatus = (context: StatusContext | CheckRun): context is StatusContext => {
-	return 'context' in context
 }
 
 const isReview = (node?: Maybe<PullRequestTimelineItems>): node is PullRequestReview => {

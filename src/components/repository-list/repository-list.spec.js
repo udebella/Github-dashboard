@@ -19,14 +19,16 @@ describe('RepositoryList component', () => {
 				url: 'http://repository-url',
 				defaultBranchRef: {
 					target: {
-						status: {
-							contexts: [
-								{
-									state: 'SUCCESS',
-									context: 'build description',
-									targetUrl: 'http://build-target-url'
-								}
-							],
+						statusCheckRollup: {
+							contexts: {
+								nodes: [
+									{
+										state: 'SUCCESS',
+										context: 'build description',
+										targetUrl: 'http://build-target-url'
+									}
+								]
+							},
 							state: 'SUCCESS'
 						}
 					}
@@ -82,7 +84,7 @@ describe('RepositoryList component', () => {
 
 		it('should display list of repositories even without build status', async () => {
 			// Given
-			stubs.fakeGraphQlResponse.rep_0.defaultBranchRef.target.status = null
+			stubs.fakeGraphQlResponse.rep_0.defaultBranchRef.target.statusCheckRollup = null
 
 			// When
 			repositoryList = shallowMount(RepositoryList, { propsData: stubs })
