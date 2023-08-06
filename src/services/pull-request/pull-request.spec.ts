@@ -3,7 +3,9 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { validate } from '@octokit/graphql-schema'
 
 describe('Pull request service', () => {
-	let httpResponse
+	// TODO Find a way to typecheck responses from graphql properly
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	let httpResponse: any
 
 	beforeEach(() => {
 		httpResponse = [
