@@ -26,7 +26,8 @@ export default {
 	--color-secondary: rgba(255, 255, 255, 0.88);
 	--color-secondaryDark: rgba(255, 255, 255, 0.6);
 	--color-background: #000000;
-	--color-surface: #232323;
+	--color-surface: rgb(35, 35, 35);
+	--color-surface-bright: rgb(42, 42, 42);
 
 	--color-success-bright: rgb(0, 154, 0);
 	--color-success: rgb(0, 128, 0);
