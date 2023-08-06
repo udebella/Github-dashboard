@@ -53,21 +53,21 @@ describe('Pull request service', () => {
 	})
 
 	it('creates valid requests', () => {
-		expect(
-			validate(
-				`${pullRequestFragment} query { repository(name: "toto", owner: "toto") { pullRequests(last: 1) { ...PullRequest } } }`
-			)
-		).toEqual([])
+		const query = `${pullRequestFragment} query { repository(name: "example", owner: "owner") { pullRequests(last: 1) { ...PullRequest } } }`
+
+		const errors = validate(query)
+
+		expect(errors).toEqual([])
 	})
 
-	it('should return an empty array when there is no pull request in http response', () => {
+	it('returns an empty array when there is no pull request in http response', () => {
 		httpResponse[0].pullRequests.nodes = []
 		const response = extractHttp(httpResponse)
 
 		expect(response).toEqual([])
 	})
 
-	it('should return a formatted response when pull request was not build', () => {
+	it('returns a formatted response when pull request was not build', () => {
 		httpResponse[0].pullRequests.nodes[0].commits.nodes[0].commit.statusCheckRollup = null
 
 		const response = extractHttp(httpResponse)
@@ -85,7 +85,7 @@ describe('Pull request service', () => {
 		])
 	})
 
-	it('should return a default lastEventAuthor when the last action is a commit', () => {
+	it('returns a default lastEventAuthor when the last action is a commit', () => {
 		httpResponse[0].pullRequests.nodes[0].timelineItems.nodes[0].author = { login: 'udebella' }
 
 		const response = extractHttp(httpResponse)
@@ -93,7 +93,7 @@ describe('Pull request service', () => {
 		expect(response[0].lastEventAuthor).toBe('udebella')
 	})
 
-	it('should return a default lastEventAuthor when the last action is not tracked', () => {
+	it('returns a default lastEventAuthor when the last action is not tracked', () => {
 		httpResponse[0].pullRequests.nodes[0].timelineItems.nodes[0] = {}
 
 		const response = extractHttp(httpResponse)
@@ -101,7 +101,7 @@ describe('Pull request service', () => {
 		expect(response[0].lastEventAuthor).toBe('')
 	})
 
-	it('should be able to retrieve lastEventAuthor from commits', () => {
+	it('is able to retrieve lastEventAuthor from commits', () => {
 		httpResponse[0].pullRequests.nodes[0].timelineItems.nodes[0] = {
 			commit: { author: { user: { login: 'udebella' } } }
 		}
@@ -111,7 +111,7 @@ describe('Pull request service', () => {
 		expect(response[0].lastEventAuthor).toBe('udebella')
 	})
 
-	it('should extract statuses from a response on a pull request that was built', () => {
+	it('extracts statuses from a response on a pull request that was built', () => {
 		const response = extractHttp(httpResponse)
 
 		expect(response).to.deep.equals([
@@ -133,7 +133,7 @@ describe('Pull request service', () => {
 		])
 	})
 
-	it('should extract statuses from a response on a pull request that was built with github actions', () => {
+	it('extracts statuses from a response on a pull request that was built with github actions', () => {
 		httpResponse[0].pullRequests.nodes[0].commits.nodes[0].commit.statusCheckRollup.contexts.nodes[0] = {
 			conclusion: 'SUCCESS',
 			name: 'build description',
@@ -161,7 +161,7 @@ describe('Pull request service', () => {
 		])
 	})
 
-	it('should order pull requests by last update date', () => {
+	it('orders pull requests by last update date', () => {
 		httpResponse.push({
 			pullRequests: {
 				nodes: [
