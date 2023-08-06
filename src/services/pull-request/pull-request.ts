@@ -1,3 +1,18 @@
+import type {
+	CheckRun,
+	Maybe,
+	PullRequestCommitConnection,
+	Repository,
+	StatusCheckRollupContext,
+	StatusContext
+} from '@octokit/graphql-schema'
+
+type BuildStatus = {
+	description: string
+	jobStatus: string
+	jobUrl: string
+}
+
 const mostRecentFirst = ({ updateDate: first }, { updateDate: second }) => second.getTime() - first.getTime()
 
 export const pullRequestFragment = `fragment PullRequest on PullRequestConnection {
@@ -31,11 +46,20 @@ export const pullRequestFragment = `fragment PullRequest on PullRequestConnectio
       commits(last: 1) {
         nodes {
           commit {
-            status {
-            contexts {
-			    state
-			    context
-			    targetUrl
+            statusCheckRollup {
+            contexts(last: 10) {
+            	nodes {
+					...on StatusContext {
+                      state
+                      context
+                      targetUrl
+                    }
+                    ...on CheckRun {
+                      conclusion
+                      name
+                      detailsUrl
+                    }
+            	}
 			  }
               state
             }
@@ -45,17 +69,18 @@ export const pullRequestFragment = `fragment PullRequest on PullRequestConnectio
     }
 }`
 
-export const extractHttp = (repositoryList) =>
+export const extractHttp = (repositoryList: Repository[]) =>
 	repositoryList
-		.flatMap(({ pullRequests }) =>
-			pullRequests.nodes.map(({ title, url, createdAt, updatedAt, commits, timelineItems }) => ({
-				prTitle: title,
-				prUrl: url,
-				creationDate: new Date(createdAt),
-				updateDate: new Date(updatedAt),
-				...extractLastEventAuthor(timelineItems),
-				...extractStatuses(commits)
-			}))
+		.flatMap(
+			({ pullRequests }) =>
+				pullRequests.nodes?.map(({ title, url, createdAt, updatedAt, commits, timelineItems }) => ({
+					prTitle: title,
+					prUrl: url,
+					creationDate: new Date(createdAt),
+					updateDate: new Date(updatedAt),
+					...extractLastEventAuthor(timelineItems),
+					...extractStatuses(commits)
+				}))
 		)
 		.sort(mostRecentFirst)
 
@@ -68,15 +93,30 @@ const extractLastEventAuthor = ({ nodes: [lastEvent] }) => {
 	}
 }
 
-const extractStatuses = ({ nodes }) => {
-	const { status } = nodes[0].commit
-	const { state, contexts } = status || { state: 'NO_STATUS', contexts: [] }
+const extractStatuses = ({ nodes }: PullRequestCommitConnection) => {
+	const { state, contexts } = nodes?.[0]?.commit.statusCheckRollup ?? { state: 'NO_STATUS', contexts: { nodes: [] } }
 	return {
 		buildStatus: state,
-		statuses: contexts.map(({ context, state, targetUrl }) => ({
-			description: context,
-			jobStatus: state,
-			jobUrl: targetUrl
-		}))
+		statuses: contexts?.nodes?.map(extractStatusesDetails)
 	}
+}
+
+const extractStatusesDetails = (rollupContext: Maybe<StatusCheckRollupContext>): BuildStatus => {
+	const status = rollupContext!
+	if (isStatus(status)) {
+		return {
+			description: status.context,
+			jobStatus: status.state,
+			jobUrl: status.targetUrl
+		}
+	}
+	return {
+		description: status.name,
+		jobStatus: status.conclusion,
+		jobUrl: status.detailsUrl
+	}
+}
+
+const isStatus = (context: StatusContext | CheckRun): context is StatusContext => {
+	return 'context' in context
 }

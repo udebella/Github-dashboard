@@ -28,14 +28,16 @@ describe('Pull request service', () => {
 								nodes: [
 									{
 										commit: {
-											status: {
-												contexts: [
-													{
-														state: 'SUCCESS',
-														context: 'build description',
-														targetUrl: 'http://build-target-url'
-													}
-												],
+											statusCheckRollup: {
+												contexts: {
+													nodes: [
+														{
+															state: 'SUCCESS',
+															context: 'build description',
+															targetUrl: 'http://build-target-url'
+														}
+													]
+												},
 												state: 'SUCCESS'
 											}
 										}
@@ -57,7 +59,7 @@ describe('Pull request service', () => {
 	})
 
 	it('should return a formatted response when pull request was not build', () => {
-		httpResponse[0].pullRequests.nodes[0].commits.nodes[0].commit.status = null
+		httpResponse[0].pullRequests.nodes[0].commits.nodes[0].commit.statusCheckRollup = null
 
 		const response = extractHttp(httpResponse)
 
@@ -136,23 +138,7 @@ describe('Pull request service', () => {
 							nodes: [{}]
 						},
 						commits: {
-							nodes: [
-								{
-									commit: {
-										status: {
-											contexts: [
-												{
-													state: 'FAILURE',
-													context: 'ci/circleci',
-													targetUrl:
-														'https://circleci.com/gh/facebook/react/12397?utm_campaign=vcs-integration-link&utm_medium=referral&utm_source=github-build-link'
-												}
-											],
-											state: 'FAILURE'
-										}
-									}
-								}
-							]
+							nodes: []
 						}
 					}
 				]
