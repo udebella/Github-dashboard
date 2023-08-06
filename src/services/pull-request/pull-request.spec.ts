@@ -1,5 +1,6 @@
-import { extractHttp } from './pull-request'
+import { extractHttp, pullRequestFragment } from './pull-request'
 import { beforeEach, describe, expect, it } from 'vitest'
+import { validate } from '@octokit/graphql-schema'
 
 describe('Pull request service', () => {
 	let httpResponse
@@ -49,6 +50,14 @@ describe('Pull request service', () => {
 				}
 			}
 		]
+	})
+
+	it('creates valid requests', () => {
+		expect(
+			validate(
+				`${pullRequestFragment} query { repository(name: "toto", owner: "toto") { pullRequests(last: 1) { ...PullRequest } } }`
+			)
+		).toEqual([])
 	})
 
 	it('should return an empty array when there is no pull request in http response', () => {
