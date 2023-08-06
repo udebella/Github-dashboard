@@ -26,11 +26,15 @@ export default {
 	--color-secondary: rgba(255, 255, 255, 0.88);
 	--color-secondaryDark: rgba(255, 255, 255, 0.6);
 	--color-background: #000000;
-	--color-surface: #232323;
+	--color-surface: rgb(35, 35, 35);
+	--color-surface-bright: rgb(42, 42, 42);
 
-	--color-success: green;
-	--color-failure: red;
-	--color-pending: #120262;
+	--color-success-bright: rgb(0, 154, 0);
+	--color-success: rgb(0, 128, 0);
+	--color-failure-bright: rgb(154, 0, 0);
+	--color-failure: rgb(128, 0, 0);
+	--color-pending-bright: rgb(0, 0, 154);
+	--color-pending: rgb(0, 0, 128);
 	--color-old: orange;
 }
 </style>

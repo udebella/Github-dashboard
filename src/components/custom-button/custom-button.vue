@@ -24,6 +24,6 @@ defineProps<{
 }
 
 .button:hover {
-	filter: brightness(150%);
+	background-color: var(--color-surface-bright);
 }
 </style>
