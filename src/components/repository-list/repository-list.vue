@@ -14,12 +14,13 @@
 	</div>
 </template>
 
-<script lang="js">
+<script lang="js" setup>
 import RepositoryLine from '../repository-line/repository-line.vue'
 import RepositoryAdder from '../repository-adder/repository-adder.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
 import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
 import { useRepositoryStore } from '../../stores/repositories'
+import { computed, ref } from 'vue'
 
 const extractHttpData = ({ httpData }) => {
 	return Object.values(httpData)
@@ -41,7 +42,7 @@ const extractHttpData = ({ httpData }) => {
 		})
 }
 
-export const repositoryListFragment = `fragment repository on Repository {
+const repositoryListFragment = `fragment repository on Repository {
   name,
   owner {
     login
@@ -63,39 +64,22 @@ export const repositoryListFragment = `fragment repository on Repository {
   }
 }`
 
-export default {
-	setup() {
-		const repositoryStore = useRepositoryStore()
-		return { repositoryStore }
-	},
-	name: 'repository-list',
-	props: {
-		queryBuilder: {
-			type: Function,
-			default: buildRepositoriesQuery(repositoryListFragment)
-		}
-	},
-	data() {
-		return {
-			repositories: []
-		}
-	},
-	computed: {
-		query() {
-			const watchedRepositories = this.repositoryStore.watched
-			return this.queryBuilder(watchedRepositories)
-		}
-	},
-	methods: {
-		updateRepositories(httpData) {
-			this.repositories = extractHttpData({ httpData })
-		}
-	},
-	components: {
-		RepositoryLine,
-		RepositoryAdder,
-		NetworkPolling
+const props = defineProps({
+	queryBuilder: {
+		type: Function,
+		default: buildRepositoriesQuery(repositoryListFragment)
 	}
+})
+
+const repositoryStore = useRepositoryStore()
+const repositories = ref([])
+const query = computed(() => {
+	const watchedRepositories = repositoryStore.watched
+	return props.queryBuilder(watchedRepositories)
+})
+
+function updateRepositories(httpData) {
+	repositories.value = extractHttpData({ httpData })
 }
 </script>
 <style src="./repository-list.scss" scoped></style>
