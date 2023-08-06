@@ -29,16 +29,21 @@ const statusToClass = {
 .green {
 	background-color: var(--color-success);
 }
+.green:hover {
+	background-color: var(--color-success-bright);
+}
 
 .red {
 	background-color: var(--color-failure);
+}
+.red:hover {
+	background-color: var(--color-failure-bright);
 }
 
 .blue {
 	background-color: var(--color-pending);
 }
-
-.badge:hover {
-	filter: brightness(150%);
+.blue:hover {
+	background-color: var(--color-pending-bright);
 }
 </style>
