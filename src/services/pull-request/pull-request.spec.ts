@@ -31,13 +31,7 @@ describe('Pull request service', () => {
 										commit: {
 											statusCheckRollup: {
 												contexts: {
-													nodes: [
-														{
-															state: 'SUCCESS',
-															context: 'build description',
-															targetUrl: 'http://build-target-url'
-														}
-													]
+													nodes: []
 												},
 												state: 'SUCCESS'
 											}
@@ -112,6 +106,12 @@ describe('Pull request service', () => {
 	})
 
 	it('extracts statuses from a response on a pull request that was built', () => {
+		httpResponse[0].pullRequests.nodes[0].commits.nodes[0].commit.statusCheckRollup.contexts.nodes[0] = {
+			state: 'SUCCESS',
+			context: 'build description',
+			targetUrl: 'http://build-target-url'
+		}
+
 		const response = extractHttp(httpResponse)
 
 		expect(response).toEqual([
