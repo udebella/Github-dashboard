@@ -17,13 +17,7 @@ describe('Pull request service', () => {
 							createdAt: '2018-10-20T00:00:00Z',
 							state: 'OPEN',
 							timelineItems: {
-								nodes: [
-									{
-										author: {
-											login: 'udebella'
-										}
-									}
-								]
+								nodes: []
 							},
 							commits: {
 								nodes: [
@@ -72,7 +66,7 @@ describe('Pull request service', () => {
 				prUrl: 'https://github.com/facebook/react/pull/9333',
 				creationDate: new Date('2018-10-20T00:00:00Z'),
 				updateDate: new Date('2018-10-25T01:36:27Z'),
-				lastEventAuthor: 'udebella',
+				lastEventAuthor: '',
 				buildStatus: 'NO_STATUS',
 				statuses: []
 			}
@@ -81,7 +75,7 @@ describe('Pull request service', () => {
 
 	describe('LastEventAuthor read', () => {
 		it('returns a default lastEventAuthor when the last action is a commit', () => {
-			httpResponse[0].pullRequests.nodes[0].timelineItems.nodes[0].author = { login: 'udebella' }
+			httpResponse[0].pullRequests.nodes[0].timelineItems.nodes.push({ author: { login: 'udebella' } })
 
 			const response = extractHttp(httpResponse)
 
@@ -123,7 +117,7 @@ describe('Pull request service', () => {
 					prUrl: 'https://github.com/facebook/react/pull/9333',
 					creationDate: new Date('2018-10-20T00:00:00Z'),
 					updateDate: new Date('2018-10-25T01:36:27Z'),
-					lastEventAuthor: 'udebella',
+					lastEventAuthor: '',
 					buildStatus: 'SUCCESS',
 					statuses: [
 						{
@@ -151,7 +145,7 @@ describe('Pull request service', () => {
 					prUrl: 'https://github.com/facebook/react/pull/9333',
 					creationDate: new Date('2018-10-20T00:00:00Z'),
 					updateDate: new Date('2018-10-25T01:36:27Z'),
-					lastEventAuthor: 'udebella',
+					lastEventAuthor: '',
 					buildStatus: 'SUCCESS',
 					statuses: [
 						{
@@ -179,7 +173,7 @@ describe('Pull request service', () => {
 					prUrl: 'https://github.com/facebook/react/pull/9333',
 					creationDate: new Date('2018-10-20T00:00:00Z'),
 					updateDate: new Date('2018-10-25T01:36:27Z'),
-					lastEventAuthor: 'udebella',
+					lastEventAuthor: '',
 					buildStatus: 'SUCCESS',
 					statuses: [
 						{

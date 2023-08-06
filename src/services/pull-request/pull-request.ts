@@ -1,7 +1,11 @@
 import type {
 	CheckRun,
 	Maybe,
+	PullRequestCommit,
 	PullRequestCommitConnection,
+	PullRequestReview,
+	PullRequestTimelineItems,
+	PullRequestTimelineItemsConnection,
 	Repository,
 	StatusCheckRollupContext,
 	StatusContext
@@ -84,12 +88,22 @@ export const extractHttp = (repositoryList: Repository[]) =>
 		)
 		.sort(mostRecentFirst)
 
-const extractLastEventAuthor = ({ nodes: [lastEvent] }) => {
-	const { login } = lastEvent.author || (lastEvent.commit && lastEvent.commit.author.user) || {}
-	const authorName = login
-	const defaultAuthorName = ''
+const extractLastEventAuthor = ({ nodes }: PullRequestTimelineItemsConnection) => {
+	const lastEvent = nodes?.[0]
+	if (isReview(lastEvent)) {
+		const { login } = lastEvent.author!
+		return {
+			lastEventAuthor: login
+		}
+	}
+	if (isCommit(lastEvent)) {
+		const { login } = lastEvent!.commit.author!.user!
+		return {
+			lastEventAuthor: login
+		}
+	}
 	return {
-		lastEventAuthor: authorName || defaultAuthorName
+		lastEventAuthor: ''
 	}
 }
 
@@ -119,4 +133,12 @@ const extractStatusesDetails = (rollupContext: Maybe<StatusCheckRollupContext>):
 
 const isStatus = (context: StatusContext | CheckRun): context is StatusContext => {
 	return 'context' in context
+}
+
+const isReview = (node?: Maybe<PullRequestTimelineItems>): node is PullRequestReview => {
+	return Object.prototype.hasOwnProperty.call(node ?? {}, 'author')
+}
+
+const isCommit = (node?: Maybe<PullRequestTimelineItems>): node is PullRequestCommit => {
+	return Object.prototype.hasOwnProperty.call(node ?? {}, 'commit')
 }
