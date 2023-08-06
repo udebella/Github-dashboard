@@ -91,9 +91,9 @@ const repositoryListFragment = `fragment repository on Repository {
 
 const props = withDefaults(
 	defineProps<{
-		queryBuilder: ReturnType<typeof buildRepositoriesQuery>
+		queryBuilder?: ReturnType<typeof buildRepositoriesQuery>
 	}>(),
-	{ queryBuilder: buildRepositoriesQuery(repositoryListFragment) }
+	{ queryBuilder: () => buildRepositoriesQuery(repositoryListFragment) }
 )
 
 const repositoryStore = useRepositoryStore()
