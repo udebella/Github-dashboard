@@ -1,16 +1,14 @@
 import type {
-	CheckRun,
 	Maybe,
 	PullRequest,
 	PullRequestCommit,
 	PullRequestReview,
 	PullRequestTimelineItems,
 	PullRequestTimelineItemsConnection,
-	Repository,
-	StatusCheckRollup,
-	StatusCheckRollupContext,
-	StatusContext
+	Repository
 } from '@octokit/graphql-schema'
+import type { GDPullRequestStatus } from '../statuses/extract-statuses'
+import { extractStatuses } from '../statuses/extract-statuses'
 
 type GDPullRequest = {
 	prTitle: string
@@ -22,17 +20,6 @@ type GDPullRequest = {
 
 type GDLastEventAuthor = {
 	lastEventAuthor: string
-}
-
-type GDPullRequestStatus = {
-	buildStatus: string
-	statuses: GDBuildStatus[]
-}
-
-type GDBuildStatus = {
-	description: string
-	jobStatus: string
-	jobUrl: string
 }
 
 const mostRecentFirst = ({ updateDate: first }: GDPullRequest, { updateDate: second }: GDPullRequest) =>
@@ -121,33 +108,6 @@ const extractLastEventAuthor = ({ nodes }: PullRequestTimelineItemsConnection): 
 	return {
 		lastEventAuthor: ''
 	}
-}
-
-export const extractStatuses = (check?: Maybe<StatusCheckRollup>): GDPullRequestStatus => {
-	return {
-		buildStatus: check?.state ?? 'NO_STATUS',
-		statuses: check?.contexts?.nodes?.map(extractStatusesDetails) ?? []
-	}
-}
-
-const extractStatusesDetails = (rollupContext: Maybe<StatusCheckRollupContext>): GDBuildStatus => {
-	const status = rollupContext!
-	if (isStatus(status)) {
-		return {
-			description: status.context,
-			jobStatus: status.state,
-			jobUrl: status.targetUrl
-		}
-	}
-	return {
-		description: status.name,
-		jobStatus: status.conclusion ?? 'PENDING',
-		jobUrl: status.detailsUrl
-	}
-}
-
-const isStatus = (context: StatusContext | CheckRun): context is StatusContext => {
-	return 'context' in context
 }
 
 const isReview = (node?: Maybe<PullRequestTimelineItems>): node is PullRequestReview => {

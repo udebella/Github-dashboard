@@ -103,6 +103,7 @@ describe('Pull request service', () => {
 		})
 	})
 
+	// TODO remove these duplicated tests
 	describe('Statuses read', () => {
 		it('extracts statuses from a response on a pull request that was built', () => {
 			httpResponse[0].pullRequests.nodes[0].commits.nodes[0].commit.statusCheckRollup.contexts.nodes[0] = {

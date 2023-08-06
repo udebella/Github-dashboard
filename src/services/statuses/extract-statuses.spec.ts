@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { extractStatuses } from '../pull-request/pull-request'
+
+import { extractStatuses } from './extract-statuses'
 
 describe('Statuses read', () => {
 	// TODO find a way to properly type graphql responses
