@@ -41,4 +41,24 @@ export default {
 	}
 }
 </script>
-<style src="./build-status.scss" scoped></style>
+
+<style lang="css" scoped>
+.icon {
+	text-decoration: none;
+}
+.icon.SUCCESS {
+	color: var(--color-success);
+}
+
+.icon.FAILURE {
+	color: var(--color-failure);
+}
+
+.icon.ERROR {
+	color: var(--color-failure);
+}
+
+.icon.PENDING {
+	color: var(--color-pending);
+}
+</style>
