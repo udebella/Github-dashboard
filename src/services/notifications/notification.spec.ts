@@ -20,24 +20,6 @@ describe('NotificationAPI', () => {
 		}
 	})
 
-	it('creates a notification when user gave its permission', async () => {
-		notificationsMock.permission = 'granted'
-
-		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
-		await api.notify('Some notification')
-
-		expect(notificationsMock).toHaveBeenCalledWith('Some notification')
-	})
-
-	it('does not create notification when user refused notifications', async () => {
-		notificationsMock.permission = 'denied'
-
-		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
-		await api.notify('Some notification')
-
-		expect(notificationsMock).not.toHaveBeenCalled()
-	})
-
 	it('asks for permission before sending notifications', () => {
 		notificationsMock.permission = 'default'
 
@@ -47,9 +29,19 @@ describe('NotificationAPI', () => {
 	})
 
 	describe('Notify', () => {
+		it('does not create notification when user refused notifications', async () => {
+			notificationsMock.permission = 'denied'
+			const api = notificationApi({ Notification: notificationsMock, document: documentMock })
+
+			await api.notify('Some notification')
+
+			expect(notificationsMock).not.toHaveBeenCalled()
+		})
+
 		it('sends notifications when user accepted notifications after asking', async () => {
 			notificationsMock.requestPermission.mockResolvedValue('granted')
 			const api = notificationApi({ Notification: notificationsMock, document: documentMock })
+			await api.requestNotifications()
 
 			await api.notify('Some notification')
 
@@ -73,6 +65,15 @@ describe('NotificationAPI', () => {
 			await api.notify('Some notification')
 
 			expect(notificationsMock).not.toHaveBeenCalled()
+		})
+
+		it('creates a notification when user gave its permission', async () => {
+			notificationsMock.permission = 'granted'
+
+			const api = notificationApi({ Notification: notificationsMock, document: documentMock })
+			await api.notify('Some notification')
+
+			expect(notificationsMock).toHaveBeenCalledWith('Some notification')
 		})
 	})
 
