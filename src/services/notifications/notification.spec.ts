@@ -46,32 +46,34 @@ describe('NotificationAPI', () => {
 		expect(notificationsMock.requestPermission).toHaveBeenCalled()
 	})
 
-	it('sends notifications when user accepted notifications after asking', async () => {
-		notificationsMock.requestPermission.mockResolvedValue('granted')
-		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
+	describe('Notify', () => {
+		it('sends notifications when user accepted notifications after asking', async () => {
+			notificationsMock.requestPermission.mockResolvedValue('granted')
+			const api = notificationApi({ Notification: notificationsMock, document: documentMock })
 
-		await api.notify('Some notification')
+			await api.notify('Some notification')
 
-		expect(notificationsMock).toHaveBeenCalledWith('Some notification')
-	})
+			expect(notificationsMock).toHaveBeenCalledWith('Some notification')
+		})
 
-	it('does not send notifications when user refused notifications after asking', async () => {
-		notificationsMock.requestPermission.mockResolvedValue('denied')
-		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
+		it('does not send notifications when user refused notifications after asking', async () => {
+			notificationsMock.requestPermission.mockResolvedValue('denied')
+			const api = notificationApi({ Notification: notificationsMock, document: documentMock })
 
-		await api.notify('Some notification')
+			await api.notify('Some notification')
 
-		expect(notificationsMock).not.toHaveBeenCalled()
-	})
+			expect(notificationsMock).not.toHaveBeenCalled()
+		})
 
-	it('does not send notifications when the page is displayed', async () => {
-		notificationsMock.permission = 'granted'
-		documentMock.hidden = false
-		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
+		it('does not send notifications when the page is displayed', async () => {
+			notificationsMock.permission = 'granted'
+			documentMock.hidden = false
+			const api = notificationApi({ Notification: notificationsMock, document: documentMock })
 
-		await api.notify('Some notification')
+			await api.notify('Some notification')
 
-		expect(notificationsMock).not.toHaveBeenCalled()
+			expect(notificationsMock).not.toHaveBeenCalled()
+		})
 	})
 
 	describe('RequestNotifications', () => {
