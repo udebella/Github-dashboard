@@ -1,3 +1,7 @@
-<template></template>
+<template>
+	<custom-button />
+</template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CustomButton from '../../components/custom-button/custom-button.vue'
+</script>

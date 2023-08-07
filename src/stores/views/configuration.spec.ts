@@ -3,9 +3,9 @@ import { shallowMount } from '@vue/test-utils'
 import ConfigurationView from './configuration-view.vue'
 
 describe('Configuration view', () => {
-	it('displays properly', () => {
+	it('displays a button to enable notifications', () => {
 		const wrapper = shallowMount(ConfigurationView)
 
-		expect(wrapper.exists()).toBe(true)
+		expect(wrapper.findComponent({ name: 'custom-button' }).exists()).toBe(true)
 	})
 })
