@@ -1,6 +1,7 @@
 const notificationApi = ({ Notification = window.Notification, document = window.document } = {}) => {
-	let resolve
-	let authorizedNotification = new Promise((r) => {
+	// eslint-disable-next-line
+	let resolve: any
+	const authorizedNotification = new Promise<boolean>((r) => {
 		resolve = r
 	})
 
@@ -18,7 +19,7 @@ const notificationApi = ({ Notification = window.Notification, document = window
 		})
 	}
 
-	const notify = async (notification) => {
+	const notify = async (notification: string) => {
 		if (document.hidden && (await authorizedNotification)) {
 			new Notification(notification)
 		}
