@@ -1,11 +1,11 @@
 import type { PiniaPluginContext } from 'pinia'
 
-type Storage = {
+export type Storage = {
 	getItem: (key: string) => string | null
 	setItem: (key: string, value: string) => void
 }
 
-type Dependencies = {
+export type Dependencies = {
 	storage?: Storage
 } & PiniaPluginContext
 
