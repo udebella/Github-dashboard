@@ -4,7 +4,7 @@
 	</custom-button>
 </template>
 
-<script lang="js" setup>
+<script lang="ts" setup>
 import CustomButton from '../custom-button/custom-button.vue'
 import IconComponent from '../icon/icon-component.vue'
 import { computed } from 'vue'
@@ -14,21 +14,13 @@ const statusToIcon = {
 	ERROR: 'error',
 	PENDING: 'pending',
 	SUCCESS: 'success'
-}
+} as const
 
-const props = defineProps({
-	description: {
-		type: String,
-		required: true
-	},
-	url: {
-		type: String
-	},
-	state: {
-		required: true,
-		type: String
-	}
-})
+const props = defineProps<{
+	description: string
+	url?: string
+	state: 'FAILURE' | 'PENDING' | 'ERROR' | 'SUCCESS'
+}>()
 
 const icon = computed(() => statusToIcon[props.state])
 </script>
