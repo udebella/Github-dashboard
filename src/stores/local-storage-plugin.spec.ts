@@ -28,12 +28,6 @@ describe('Local storage store', () => {
 		}
 	})
 
-	describe('Initialization', () => {
-		it('should be a function to give to vuex', () => {
-			expect(localStoragePlugin).toBeTypeOf('function')
-		})
-	})
-
 	describe('Load store from local storage', () => {
 		it('should retrieve store from local storage', () => {
 			localStoragePlugin({ store: fakeStore, storage: fakeLocalStorage } as unknown as Dependencies)
