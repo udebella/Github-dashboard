@@ -2,7 +2,7 @@ import { shallowMount, VueWrapper } from '@vue/test-utils'
 import RepositoryAdder from './repository-adder.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
-import { useConfigurationStore } from '../../stores/configuration'
+import { useConfigurationStore } from '../../stores/configuration/configuration'
 
 describe('RepositoryAdder component', () => {
 	let repositoryAdder: VueWrapper

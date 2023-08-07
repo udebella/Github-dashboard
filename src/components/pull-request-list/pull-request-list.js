@@ -4,7 +4,7 @@ import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
 import { extractHttp as extractPullRequest, pullRequestFragment } from '../../services/pull-request/pull-request'
 import { buildUserService } from '../../services/user/user'
 import { pullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications'
-import { useRepositoryStore } from '../../stores/repositories'
+import { useRepositoryStore } from '../../stores/repositories/repositories'
 
 const pullRequestListFragment = `${pullRequestFragment}
 fragment repository on Repository {

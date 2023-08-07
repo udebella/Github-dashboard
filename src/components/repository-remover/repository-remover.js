@@ -1,6 +1,6 @@
 import CustomButton from '../custom-button/custom-button.vue'
-import { useRepositoryStore } from '../../stores/repositories'
-import { useConfigurationStore } from '../../stores/configuration'
+import { useRepositoryStore } from '../../stores/repositories/repositories'
+import { useConfigurationStore } from '../../stores/configuration/configuration'
 import IconComponent from '../icon/icon-component.vue'
 
 export default {
