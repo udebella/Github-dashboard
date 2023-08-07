@@ -20,7 +20,7 @@ describe('NotificationAPI', () => {
 		}
 	})
 
-	it('should create a notification when user gave its permission', async () => {
+	it('creates a notification when user gave its permission', async () => {
 		notificationsMock.permission = 'granted'
 
 		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
@@ -29,7 +29,7 @@ describe('NotificationAPI', () => {
 		expect(notificationsMock).toHaveBeenCalledWith('Some notification')
 	})
 
-	it('should not create notification when user refused notifications', async () => {
+	it('does not create notification when user refused notifications', async () => {
 		notificationsMock.permission = 'denied'
 
 		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
@@ -38,7 +38,7 @@ describe('NotificationAPI', () => {
 		expect(notificationsMock).not.toHaveBeenCalled()
 	})
 
-	it('should ask for permission before sending notifications', () => {
+	it('asks for permission before sending notifications', () => {
 		notificationsMock.permission = 'default'
 
 		notificationApi({ Notification: notificationsMock, document: documentMock })
@@ -46,7 +46,7 @@ describe('NotificationAPI', () => {
 		expect(notificationsMock.requestPermission).toHaveBeenCalled()
 	})
 
-	it('should send notifications when user accepted notifications after asking', async () => {
+	it('sends notifications when user accepted notifications after asking', async () => {
 		notificationsMock.requestPermission.mockResolvedValue('granted')
 		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
 
@@ -55,7 +55,7 @@ describe('NotificationAPI', () => {
 		expect(notificationsMock).toHaveBeenCalledWith('Some notification')
 	})
 
-	it('should not send notifications when user refused notifications after asking', async () => {
+	it('does not send notifications when user refused notifications after asking', async () => {
 		notificationsMock.requestPermission.mockResolvedValue('denied')
 		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
 
@@ -64,7 +64,7 @@ describe('NotificationAPI', () => {
 		expect(notificationsMock).not.toHaveBeenCalled()
 	})
 
-	it('should not send notifications when the page is displayed', async () => {
+	it('does not send notifications when the page is displayed', async () => {
 		notificationsMock.permission = 'granted'
 		documentMock.hidden = false
 		const api = notificationApi({ Notification: notificationsMock, document: documentMock })
