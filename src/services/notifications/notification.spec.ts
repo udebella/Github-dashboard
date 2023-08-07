@@ -73,4 +73,15 @@ describe('NotificationAPI', () => {
 
 		expect(notificationsMock).not.toHaveBeenCalled()
 	})
+
+	describe('RequestNotifications', () => {
+		it('exposes a function to ask for notifications', async () => {
+			notificationsMock.permission = 'default'
+			const api = notificationApi({ Notification: notificationsMock, document: documentMock })
+
+			await api.requestNotifications()
+
+			expect(notificationsMock.requestPermission).toHaveBeenCalled()
+		})
+	})
 })

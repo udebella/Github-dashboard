@@ -41,7 +41,8 @@ const notificationApi = ({ Notification = window.Notification, document = window
 	}
 
 	return {
-		notify
+		notify,
+		requestNotifications: Notification.requestPermission
 	}
 }
 
