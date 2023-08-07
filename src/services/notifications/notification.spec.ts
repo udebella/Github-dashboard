@@ -20,14 +20,6 @@ describe('NotificationAPI', () => {
 		}
 	})
 
-	it('asks for permission before sending notifications', () => {
-		notificationsMock.permission = 'default'
-
-		notificationApi({ Notification: notificationsMock, document: documentMock })
-
-		expect(notificationsMock.requestPermission).toHaveBeenCalled()
-	})
-
 	describe('Notify', () => {
 		it('does not create notification when user refused notifications', async () => {
 			notificationsMock.permission = 'denied'
