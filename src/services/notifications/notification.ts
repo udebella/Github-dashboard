@@ -1,4 +1,19 @@
-const notificationApi = ({ Notification = window.Notification, document = window.document } = {}) => {
+type Notification = {
+	new (message: string): {}
+	permission: NotificationPermission
+	requestPermission: () => Promise<NotificationPermission>
+}
+
+type Document = {
+	hidden: boolean
+}
+
+export type Dependencies = {
+	Notification?: Notification
+	document?: Document
+}
+
+const notificationApi = ({ Notification = window.Notification, document = window.document }: Dependencies = {}) => {
 	// eslint-disable-next-line
 	let resolve: any
 	const authorizedNotification = new Promise<boolean>((r) => {
