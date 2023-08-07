@@ -43,6 +43,7 @@ describe('NotificationAPI', () => {
 		it('does not send notifications when user refused notifications after asking', async () => {
 			notificationsMock.requestPermission.mockResolvedValue('denied')
 			const api = notificationApi({ Notification: notificationsMock, document: documentMock })
+			await api.requestNotifications()
 
 			await api.notify('Some notification')
 
