@@ -4,9 +4,10 @@
 	</custom-button>
 </template>
 
-<script lang="js">
+<script lang="js" setup>
 import CustomButton from '../custom-button/custom-button.vue'
 import IconComponent from '../icon/icon-component.vue'
+import { computed } from 'vue'
 
 const statusToIcon = {
 	FAILURE: 'warning',
@@ -15,31 +16,21 @@ const statusToIcon = {
 	SUCCESS: 'success'
 }
 
-export default {
-	name: 'build-status',
-	props: {
-		description: {
-			type: String,
-			required: true
-		},
-		url: {
-			type: String
-		},
-		state: {
-			required: true,
-			type: String
-		}
+const props = defineProps({
+	description: {
+		type: String,
+		required: true
 	},
-	computed: {
-		icon() {
-			return statusToIcon[this.state]
-		}
+	url: {
+		type: String
 	},
-	components: {
-		IconComponent,
-		CustomButton
+	state: {
+		required: true,
+		type: String
 	}
-}
+})
+
+const icon = computed(() => statusToIcon[props.state])
 </script>
 
 <style lang="css" scoped>
