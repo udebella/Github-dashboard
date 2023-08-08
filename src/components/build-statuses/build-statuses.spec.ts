@@ -1,9 +1,9 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, type VueWrapper } from '@vue/test-utils'
 import BuildStatuses from './build-statuses.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('BuildStatuses component', () => {
-	let buildStatuses
+	let buildStatuses: VueWrapper
 
 	describe('without status', () => {
 		beforeEach(() => {
