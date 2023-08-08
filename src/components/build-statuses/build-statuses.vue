@@ -15,9 +15,7 @@ defineProps<{
 }>()
 </script>
 
-<style lang="scss" scoped>
-@import '../../global';
-
+<style lang="css" scoped>
 .build-status {
 	margin: 0 5px;
 }
