@@ -1,5 +1,5 @@
 <template>
-	<custom-button data-test="request-notifications" />
+	<custom-button data-test="request-notifications"> Enable notifications </custom-button>
 </template>
 
 <script setup lang="ts">
