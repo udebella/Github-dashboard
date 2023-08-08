@@ -1,9 +1,8 @@
-import { notificationApi } from '../notifications/notification'
+import notificationService from '../notifications/notification'
 
-const defaults = { notificationApi: notificationApi }
+const defaults = { notificationApi: notificationService }
 const pullRequestNotifications = ({ notificationApi } = defaults) => {
 	let alreadyNotified = []
-	const notificationService = notificationApi()
 
 	const newList = (pullRequests) => {
 		const prToNotify = pullRequests.filter(
@@ -12,7 +11,7 @@ const pullRequestNotifications = ({ notificationApi } = defaults) => {
 		alreadyNotified = [...alreadyNotified, ...prToNotify]
 		const notificationMessage = formatNotificationMessage(prToNotify)
 		if (prToNotify.length !== 0) {
-			notificationService.notify(notificationMessage)
+			notificationApi.notify(notificationMessage)
 		}
 	}
 

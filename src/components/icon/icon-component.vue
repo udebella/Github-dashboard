@@ -17,6 +17,7 @@ type IconsNames =
 	| 'github'
 	| 'deleteBin'
 	| 'configuration'
+	| 'notifications'
 type IconClass = `ri-${string}-fill`
 
 const iconClasses: Record<IconsNames, IconClass> = {
@@ -30,7 +31,8 @@ const iconClasses: Record<IconsNames, IconClass> = {
 	user: 'ri-user-fill',
 	github: 'ri-github-fill',
 	deleteBin: 'ri-delete-bin-fill',
-	configuration: 'ri-settings-5-fill'
+	configuration: 'ri-settings-5-fill',
+	notifications: 'ri-notification-3-fill'
 }
 
 const props = defineProps<{

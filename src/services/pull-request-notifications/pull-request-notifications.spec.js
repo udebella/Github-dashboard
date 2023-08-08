@@ -5,11 +5,10 @@ describe('Pull request notification service', () => {
 	let stubs
 	beforeEach(() => {
 		const notify = vitest.fn()
-		const notificationApi = () => ({
-			notify
-		})
 		stubs = {
-			notificationApi,
+			notificationApi: {
+				notify
+			},
 			notify
 		}
 	})
