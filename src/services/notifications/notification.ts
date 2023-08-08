@@ -24,14 +24,6 @@ const notificationApi = ({ Notification = window.Notification, document = window
 		resolve(false)
 	} else if (Notification.permission === 'granted') {
 		resolve(true)
-	} else {
-		Notification.requestPermission().then((userAnswer) => {
-			if (userAnswer === 'granted') {
-				resolve(true)
-			} else {
-				resolve(false)
-			}
-		})
 	}
 
 	const notify = async (notification: string) => {
@@ -40,9 +32,18 @@ const notificationApi = ({ Notification = window.Notification, document = window
 		}
 	}
 
+	const requestNotifications = () =>
+		Notification.requestPermission().then((userAnswer) => {
+			if (userAnswer === 'granted') {
+				resolve(true)
+			} else {
+				resolve(false)
+			}
+		})
+
 	return {
 		notify,
-		requestNotifications: Notification.requestPermission
+		requestNotifications
 	}
 }
 
