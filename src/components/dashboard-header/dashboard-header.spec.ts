@@ -10,10 +10,6 @@ describe('Dashboard Header component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should mount properly', () => {
-			expect(dashboardHeader.exists()).toBe(true)
-		})
-
 		it('should display the component', () => {
 			expect(dashboardHeader.find('[data-test=title]').text()).toBe('Github Dashboard')
 		})
