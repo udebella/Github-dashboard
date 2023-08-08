@@ -1,12 +1,24 @@
 import { shallowMount, VueWrapper } from '@vue/test-utils'
 import DashboardHeader from './dashboard-header.vue'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import type { Mocks } from '../../test-utils'
+import { notificationApi } from '../../services/notifications/notification'
 
 describe('Dashboard Header component', () => {
 	let dashboardHeader: VueWrapper
+	let fakeNotificationApi: Mocks<ReturnType<typeof notificationApi>>
 
 	beforeEach(() => {
-		dashboardHeader = shallowMount(DashboardHeader, { global: { renderStubDefaultSlot: true } })
+		fakeNotificationApi = {
+			requestNotifications: vitest.fn(),
+			notify: vitest.fn()
+		}
+		dashboardHeader = shallowMount(DashboardHeader, {
+			global: {
+				provide: { notificationApi: fakeNotificationApi },
+				renderStubDefaultSlot: true
+			}
+		})
 	})
 
 	describe('Initialization', () => {
@@ -41,6 +53,14 @@ describe('Dashboard Header component', () => {
 
 			const icon = requestNotifications.findComponent({ name: 'icon-component' })
 			expect(icon.props().icon).toBe('notifications')
+		})
+
+		it('requests notifications when clicked', async () => {
+			const requestNotifications = dashboardHeader.find('[data-test=requestNotifications]')
+
+			await requestNotifications.trigger('click')
+
+			expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
 		})
 	})
 })

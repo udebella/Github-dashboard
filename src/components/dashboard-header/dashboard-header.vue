@@ -2,7 +2,7 @@
 	<header class="header">
 		<div class="title" data-test="title">Github Dashboard</div>
 		<div class="right">
-			<custom-button data-test="requestNotifications">
+			<custom-button data-test="requestNotifications" @click="notifications.requestNotifications">
 				<icon-component icon="notifications" />
 			</custom-button>
 			<configuration-button data-test="configuration" />
@@ -19,6 +19,10 @@ import CustomButton from '../custom-button/custom-button.vue'
 import IconComponent from '../icon/icon-component.vue'
 import LoginInput from '../login-input/login-input.vue'
 import ConfigurationButton from '../configuration-button/configuration-button.vue'
+import { inject } from 'vue'
+import { notificationApi } from '../../services/notifications/notification'
+
+const notifications = inject('notificationApi', notificationApi)
 </script>
 
 <style lang="css" scoped>
