@@ -10,11 +10,11 @@ describe('Dashboard Header component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should display the component', () => {
+		it('displays the component', () => {
 			expect(dashboardHeader.find('[data-test=title]').text()).toBe('Github Dashboard')
 		})
 
-		it('should display a link to the sources', () => {
+		it('displays a link to the sources', () => {
 			const sources = dashboardHeader.find('[data-test=sources]')
 			const icon = sources.findComponent({ name: 'icon-component' })
 
@@ -24,13 +24,13 @@ describe('Dashboard Header component', () => {
 			expect(icon.attributes().icon).toBe('github')
 		})
 
-		it('should display the login component', () => {
+		it('displays the login component', () => {
 			const login = dashboardHeader.find('[data-test=login]')
 
 			expect(login.exists()).toBe(true)
 		})
 
-		it('should display a way to toggle configuration mode', () => {
+		it('displays a way to toggle configuration mode', () => {
 			const configuration = dashboardHeader.find('[data-test=configuration]')
 
 			expect(configuration.exists()).toBe(true)
