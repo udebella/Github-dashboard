@@ -10,7 +10,7 @@ describe('BuildStatuses component', () => {
 	})
 
 	it('does not display when there is no status', () => {
-		expect(buildStatuses.find('div').exists()).toBe(false)
+		expect(buildStatuses.html()).toBe('')
 	})
 
 	it('display statuses', async () => {

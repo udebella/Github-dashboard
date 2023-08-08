@@ -1,9 +1,12 @@
 <template>
-	<div v-if="statuses.length">
-		<span v-for="{ description, jobUrl, jobStatus } in statuses" :key="jobUrl">
-			<build-status :description="description" :url="jobUrl" :state="jobStatus" class="build-status" />
-		</span>
-	</div>
+	<build-status
+		v-for="{ description, jobUrl, jobStatus } in statuses"
+		:key="jobUrl"
+		:description="description"
+		:url="jobUrl"
+		:state="jobStatus"
+		class="build-status"
+	/>
 </template>
 
 <script lang="ts" setup>
