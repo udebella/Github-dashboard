@@ -18,12 +18,6 @@ describe('BuildStatus component', () => {
 		})
 	})
 
-	describe('Initialisation', () => {
-		it('should mount properly', () => {
-			expect(buildStatus.exists()).toBe(true)
-		})
-	})
-
 	describe('Link', () => {
 		it('should display a link to the build', () => {
 			const link = buildStatus.findComponent('[data-test=link]')
