@@ -6,15 +6,13 @@
 	</div>
 </template>
 
-<script lang="js" setup>
+<script lang="ts" setup>
 import BuildStatus from '../build-status/build-status.vue'
+import type { GDBuildStatus } from '../../services/statuses/extract-statuses'
 
-defineProps({
-	statuses: {
-		required: true,
-		type: Array
-	}
-})
+defineProps<{
+	statuses: GDBuildStatus[]
+}>()
 </script>
 
 <style lang="scss" scoped>

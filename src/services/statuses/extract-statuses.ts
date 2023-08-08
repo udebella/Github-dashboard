@@ -11,9 +11,11 @@ export type GDPullRequestStatus = {
 	statuses: GDBuildStatus[]
 }
 
+export type GDJobStatus = 'PENDING' | 'SUCCESS' | 'FAILURE'
+
 export type GDBuildStatus = {
 	description: string
-	jobStatus: string
+	jobStatus: GDJobStatus
 	jobUrl: string
 }
 
@@ -29,13 +31,13 @@ const extractStatusesDetails = (rollupContext: Maybe<StatusCheckRollupContext>):
 	if (isStatus(status)) {
 		return {
 			description: status.context,
-			jobStatus: status.state,
+			jobStatus: status.state as GDJobStatus,
 			jobUrl: status.targetUrl
 		}
 	}
 	return {
 		description: status.name,
-		jobStatus: status.conclusion ?? 'PENDING',
+		jobStatus: (status.conclusion as GDJobStatus) ?? 'PENDING',
 		jobUrl: status.detailsUrl
 	}
 }
