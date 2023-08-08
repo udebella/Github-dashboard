@@ -5,8 +5,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { GDJobStatus } from '../../services/statuses/extract-statuses'
+
 const props = defineProps<{
-	status?: 'SUCCESS' | 'FAILURE' | 'PENDING'
+	status?: GDJobStatus
 }>()
 
 const statusToClass = {

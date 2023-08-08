@@ -1,10 +1,25 @@
 <template>
-	<div v-if="statuses.length">
-		<span v-for="({ description, jobUrl, jobStatus }, index) in statuses" :key="index">
-			<build-status :description="description" :url="jobUrl" :state="jobStatus" class="build-status" />
-		</span>
-	</div>
+	<build-status
+		v-for="{ description, jobUrl, jobStatus } in statuses"
+		:key="jobUrl"
+		:description="description"
+		:url="jobUrl"
+		:state="jobStatus"
+		class="build-status"
+	/>
 </template>
 
-<script src="./build-statuses.js"></script>
-<style src="./build-statuses.scss" scoped></style>
+<script lang="ts" setup>
+import BuildStatus from '../build-status/build-status.vue'
+import type { GDBuildStatus } from '../../services/statuses/extract-statuses'
+
+defineProps<{
+	statuses: GDBuildStatus[]
+}>()
+</script>
+
+<style lang="css" scoped>
+.build-status {
+	margin: 0 5px;
+}
+</style>
