@@ -14,16 +14,12 @@ export type Dependencies = {
 }
 
 const notificationApi = ({ Notification = window.Notification, document = window.document }: Dependencies = {}) => {
-	// eslint-disable-next-line
-	let resolve: any
-	const authorizedNotification = new Promise<boolean>((r) => {
-		resolve = r
-	})
+	let authorizedNotification: Promise<boolean>
 
 	if (Notification.permission === 'denied') {
-		resolve(false)
+		authorizedNotification = Promise.resolve(false)
 	} else if (Notification.permission === 'granted') {
-		resolve(true)
+		authorizedNotification = Promise.resolve(true)
 	}
 
 	const notify = async (notification: string) => {
@@ -32,14 +28,10 @@ const notificationApi = ({ Notification = window.Notification, document = window
 		}
 	}
 
-	const requestNotifications = () =>
-		Notification.requestPermission().then((userAnswer) => {
-			if (userAnswer === 'granted') {
-				resolve(true)
-			} else {
-				resolve(false)
-			}
-		})
+	const requestNotifications = () => {
+		authorizedNotification = Notification.requestPermission().then((userAnswer) => userAnswer === 'granted')
+		return authorizedNotification
+	}
 
 	return {
 		notify,
