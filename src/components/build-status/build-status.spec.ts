@@ -43,20 +43,11 @@ describe('BuildStatus component', () => {
 			expect(link.classes()).toEqual(expect.arrayContaining(['icon', 'SUCCESS']))
 		})
 
-		it("should allow some build status to not have an url (some bot don't add url to statuses on github)", () => {
-			buildStatus = shallowMount(BuildStatus, {
-				propsData: {
-					description: 'a short description',
-					state: 'SUCCESS'
-				},
-				global: {
-					stubs: {
-						fontAwesomeIcon: true
-					}
-				}
-			})
-
+		it("should allow some build status to not have an url (some bot don't add url to statuses on github)", async () => {
 			const link = buildStatus.findComponent('[data-test=link]')
+
+			await buildStatus.setProps({ url: undefined })
+
 			expect(link.attributes().title).toBe('a short description')
 			expect(link.classes()).toContain('SUCCESS')
 		})
