@@ -1,9 +1,9 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, VueWrapper } from '@vue/test-utils'
 import BuildStatus from './build-status.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('BuildStatus component', () => {
-	let buildStatus
+	let buildStatus: VueWrapper
 
 	beforeEach(() => {
 		buildStatus = shallowMount(BuildStatus, {
@@ -18,43 +18,29 @@ describe('BuildStatus component', () => {
 		})
 	})
 
-	describe('Initialisation', () => {
-		it('should mount properly', () => {
-			expect(buildStatus.exists()).toBe(true)
-		})
-	})
-
 	describe('Link', () => {
-		let link
-
-		beforeEach(() => {
-			link = buildStatus.find('[data-test=link]')
-		})
-
 		it('should display a link to the build', () => {
+			const link = buildStatus.findComponent('[data-test=link]')
+
 			expect(link.attributes().href).toBe('http://build-link')
 		})
 
 		it('should display a short description of the build as tooltip', () => {
+			const link = buildStatus.findComponent('[data-test=link]')
+
 			expect(link.attributes().title).toBe('a short description')
 		})
 
 		it('should use the state to display an icon', () => {
+			const link = buildStatus.findComponent('[data-test=link]')
+
 			expect(link.classes()).toEqual(expect.arrayContaining(['icon', 'SUCCESS']))
 		})
 
-		it("should allow some build status to not have an url (some bot don't add url to statuses on github)", () => {
-			buildStatus = shallowMount(BuildStatus, {
-				propsData: {
-					description: 'a short description',
-					state: 'SUCCESS'
-				},
-				global: {
-					stubs: {
-						fontAwesomeIcon: true
-					}
-				}
-			})
+		it("should allow some build status to not have an url (some bot don't add url to statuses on github)", async () => {
+			const link = buildStatus.findComponent('[data-test=link]')
+
+			await buildStatus.setProps({ url: undefined })
 
 			expect(link.attributes().title).toBe('a short description')
 			expect(link.classes()).toContain('SUCCESS')
