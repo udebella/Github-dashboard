@@ -31,31 +31,27 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../../global';
-
+<style lang="css" scoped>
 .header {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	padding: 10px 10px;
-	background-color: $surface;
+	background-color: var(--color-surface);
+}
+.right {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.login {
+	margin-right: 10px;
+	margin-left: 10px;
+}
 
-	.right {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-
-		.login {
-			margin-right: 10px;
-			margin-left: 10px;
-		}
-	}
-
-	.title {
-		font-size: 18px;
-		font-weight: bold;
-	}
+.title {
+	font-size: 18px;
+	font-weight: bold;
 }
 </style>
