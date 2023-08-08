@@ -23,4 +23,10 @@ export default {
 }
 </script>
 
-<style src="./build-statuses.scss" scoped></style>
+<style lang="scss" scoped>
+@import '../../global';
+
+.build-status {
+	margin: 0 5px;
+}
+</style>
