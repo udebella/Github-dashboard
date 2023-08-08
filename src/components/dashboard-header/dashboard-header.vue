@@ -5,7 +5,9 @@
 			<custom-button data-test="requestNotifications" @click="notifications.requestNotifications">
 				<icon-component icon="notifications" />
 			</custom-button>
+			<!-- @vue-ignore TODO remove when migrated to composition api -->
 			<configuration-button data-test="configuration" />
+			<!-- @vue-ignore TODO remove when migrated to composition api -->
 			<login-input class="login" data-test="login" />
 			<custom-button title="View sources" href="https://github.com/udebella/Github-dashboard" data-test="sources">
 				<icon-component icon="github" />
@@ -14,7 +16,7 @@
 	</header>
 </template>
 
-<script lang="js" setup>
+<script lang="ts" setup>
 import CustomButton from '../custom-button/custom-button.vue'
 import IconComponent from '../icon/icon-component.vue'
 import LoginInput from '../login-input/login-input.vue'
