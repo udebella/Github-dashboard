@@ -5,30 +5,17 @@
 			<configuration-button data-test="configuration" />
 			<login-input class="login" data-test="login" />
 			<custom-button title="View sources" href="https://github.com/udebella/Github-dashboard" data-test="sources">
-				<icon-component :icon="icon" />
+				<icon-component icon="github" />
 			</custom-button>
 		</div>
 	</header>
 </template>
 
-<script lang="js">
+<script lang="js" setup>
 import CustomButton from '../custom-button/custom-button.vue'
 import IconComponent from '../icon/icon-component.vue'
 import LoginInput from '../login-input/login-input.vue'
 import ConfigurationButton from '../configuration-button/configuration-button.vue'
-
-export default {
-	name: 'dashboard-header',
-	data: () => ({
-		icon: 'github'
-	}),
-	components: {
-		IconComponent,
-		LoginInput,
-		CustomButton,
-		ConfigurationButton
-	}
-}
 </script>
 
 <style lang="css" scoped>
