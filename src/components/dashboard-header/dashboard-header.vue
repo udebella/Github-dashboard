@@ -31,4 +31,31 @@ export default {
 }
 </script>
 
-<style src="./dashboard-header.scss" scoped></style>
+<style lang="scss" scoped>
+@import '../../global';
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 10px;
+	background-color: $surface;
+
+	.right {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		.login {
+			margin-right: 10px;
+			margin-left: 10px;
+		}
+	}
+
+	.title {
+		font-size: 18px;
+		font-weight: bold;
+	}
+}
+</style>
