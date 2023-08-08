@@ -1,9 +1,9 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, VueWrapper } from '@vue/test-utils'
 import BuildStatus from './build-status.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('BuildStatus component', () => {
-	let buildStatus
+	let buildStatus: VueWrapper
 
 	beforeEach(() => {
 		buildStatus = shallowMount(BuildStatus, {
@@ -25,21 +25,21 @@ describe('BuildStatus component', () => {
 	})
 
 	describe('Link', () => {
-		let link
-
-		beforeEach(() => {
-			link = buildStatus.find('[data-test=link]')
-		})
-
 		it('should display a link to the build', () => {
+			const link = buildStatus.findComponent('[data-test=link]')
+
 			expect(link.attributes().href).toBe('http://build-link')
 		})
 
 		it('should display a short description of the build as tooltip', () => {
+			const link = buildStatus.findComponent('[data-test=link]')
+
 			expect(link.attributes().title).toBe('a short description')
 		})
 
 		it('should use the state to display an icon', () => {
+			const link = buildStatus.findComponent('[data-test=link]')
+
 			expect(link.classes()).toEqual(expect.arrayContaining(['icon', 'SUCCESS']))
 		})
 
@@ -56,6 +56,7 @@ describe('BuildStatus component', () => {
 				}
 			})
 
+			const link = buildStatus.findComponent('[data-test=link]')
 			expect(link.attributes().title).toBe('a short description')
 			expect(link.classes()).toContain('SUCCESS')
 		})
