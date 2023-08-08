@@ -20,7 +20,7 @@ import IconComponent from '../icon/icon-component.vue'
 import LoginInput from '../login-input/login-input.vue'
 import ConfigurationButton from '../configuration-button/configuration-button.vue'
 import { inject } from 'vue'
-import { notificationApi } from '../../services/notifications/notification'
+import notificationApi from '../../services/notifications/notification'
 
 const notifications = inject('notificationApi', notificationApi)
 </script>

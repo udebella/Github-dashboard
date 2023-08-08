@@ -13,7 +13,10 @@ export type Dependencies = {
 	document?: Document
 }
 
-const notificationApi = ({ Notification = window.Notification, document = window.document }: Dependencies = {}) => {
+export const notificationApi = ({
+	Notification = window.Notification,
+	document = window.document
+}: Dependencies = {}) => {
 	let authorizedNotification: Promise<boolean>
 
 	if (Notification.permission === 'denied') {
@@ -39,4 +42,4 @@ const notificationApi = ({ Notification = window.Notification, document = window
 	}
 }
 
-export { notificationApi }
+export default notificationApi()
