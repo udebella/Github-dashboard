@@ -1,6 +1,7 @@
 import type { Dependencies } from './notification'
 import { notificationApi } from './notification'
-import { beforeEach, describe, expect, it, Mock, vitest } from 'vitest'
+import type { Mock } from 'vitest'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 type Notification = {
 	new (message: string): {}
@@ -52,7 +53,7 @@ describe('NotificationAPI', () => {
 
 		it('does not send notifications when the page is displayed', async () => {
 			notificationsMock.permission = 'granted'
-			documentMock.hidden = false
+			documentMock = { hidden: false }
 			const api = notificationApi({ Notification: notificationsMock, document: documentMock })
 
 			await api.notify('Some notification')
