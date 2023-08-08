@@ -1,4 +1,4 @@
-import { createRouter as createVueRouter, createWebHistory } from 'vue-router'
+import { createRouter as createVueRouter, createWebHashHistory } from 'vue-router'
 import App from '../components/App.vue'
 import ConfigurationView from '../stores/views/configuration-view.vue'
 
@@ -19,7 +19,7 @@ export type RoutesNames = (typeof routes)[number]['name']
 
 export const createRouter = () => {
 	return createVueRouter({
-		history: createWebHistory('/Github-dashboard/'),
+		history: createWebHashHistory('/Github-dashboard/'),
 		routes: routes
 	})
 }
