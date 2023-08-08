@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
 import { buildSessionService } from '../session/session'
-import { useConfigurationStore } from '../../stores/configuration'
+import { useConfigurationStore } from '../../stores/configuration/configuration'
 
 // TODO Is it possible to test that?
 const defaultBuilder = (...args) => new GraphQLClient(...args)

@@ -3,7 +3,7 @@ import Configuration from './configuration-button.vue'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
-import { useConfigurationStore } from '../../stores/configuration'
+import { useConfigurationStore } from '../../stores/configuration/configuration'
 
 describe('Configuration component', () => {
 	let configuration, store

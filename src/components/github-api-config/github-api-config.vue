@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { useConfigurationStore } from '../../stores/configuration'
+import { useConfigurationStore } from '../../stores/configuration/configuration'
 
 const store = useConfigurationStore()
 
