@@ -6,6 +6,7 @@ describe('Configuration view', () => {
 	it('displays a button to enable notifications', () => {
 		const wrapper = shallowMount(ConfigurationView)
 
-		expect(wrapper.findComponent({ name: 'custom-button' }).exists()).toBe(true)
+		const requestNotifications = wrapper.findComponent('[data-test=request-notifications]')
+		expect(requestNotifications.exists()).toBe(true)
 	})
 })
