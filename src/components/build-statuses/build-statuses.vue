@@ -1,6 +1,6 @@
 <template>
 	<div v-if="statuses.length">
-		<span v-for="({ description, jobUrl, jobStatus }, index) in statuses" :key="index">
+		<span v-for="{ description, jobUrl, jobStatus } in statuses" :key="jobUrl">
 			<build-status :description="description" :url="jobUrl" :state="jobStatus" class="build-status" />
 		</span>
 	</div>
