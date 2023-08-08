@@ -8,9 +8,11 @@ describe('Configuration view', () => {
 		wrapper = shallowMount(ConfigurationView)
 	})
 
-	it('displays a button to enable notifications', () => {
-		const requestNotifications = wrapper.findComponent('[data-test=request-notifications]')
+	describe('Request notifications button', () => {
+		it('displays a button to enable notifications', () => {
+			const requestNotifications = wrapper.findComponent('[data-test=request-notifications]')
 
-		expect(requestNotifications.exists()).toBe(true)
+			expect(requestNotifications.exists()).toBe(true)
+		})
 	})
 })
