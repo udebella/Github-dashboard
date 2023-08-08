@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { shallowMount, VueWrapper } from '@vue/test-utils'
 import ConfigurationView from './configuration-view.vue'
-import { Mocks } from '../../test-utils'
 import { notificationApi } from '../../services/notifications/notification'
+import type { Mocks } from '../../test-utils'
 
 describe('Configuration view', () => {
 	let wrapper: VueWrapper
