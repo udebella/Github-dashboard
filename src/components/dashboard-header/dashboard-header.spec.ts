@@ -1,9 +1,9 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, VueWrapper } from '@vue/test-utils'
 import DashboardHeader from './dashboard-header.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Dashboard Header component', () => {
-	let dashboardHeader
+	let dashboardHeader: VueWrapper
 
 	beforeEach(() => {
 		dashboardHeader = shallowMount(DashboardHeader, { global: { renderStubDefaultSlot: true } })
