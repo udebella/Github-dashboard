@@ -1,12 +1,19 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { shallowMount, VueWrapper } from '@vue/test-utils'
 import ConfigurationView from './configuration-view.vue'
+import { Mocks } from '../../test-utils'
+import { notificationApi } from '../../services/notifications/notification'
 
 describe('Configuration view', () => {
 	let wrapper: VueWrapper
+	let fakeNotificationApi: Mocks<Partial<ReturnType<typeof notificationApi>>>
 	beforeEach(() => {
+		fakeNotificationApi = {
+			requestNotifications: vitest.fn()
+		}
 		wrapper = shallowMount(ConfigurationView, {
 			global: {
+				provide: { notificationApi: fakeNotificationApi },
 				renderStubDefaultSlot: true
 			}
 		})
@@ -19,6 +26,14 @@ describe('Configuration view', () => {
 
 			expect(requestNotifications.text()).toBe('Enable notifications')
 			expect(icon.props().icon).toBe('notifications')
+		})
+
+		it('requests notifications enabling when clicked', async () => {
+			const requestNotifications = wrapper.findComponent('[data-test=request-notifications]')
+
+			await requestNotifications.trigger('click')
+
+			expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
 		})
 	})
 })
