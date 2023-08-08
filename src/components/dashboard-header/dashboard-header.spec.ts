@@ -35,5 +35,12 @@ describe('Dashboard Header component', () => {
 
 			expect(configuration.exists()).toBe(true)
 		})
+
+		it('displays a button to request notifications', () => {
+			const requestNotifications = dashboardHeader.find('[data-test=requestNotifications]')
+
+			const icon = requestNotifications.findComponent({ name: 'icon-component' })
+			expect(icon.props().icon).toBe('notifications')
+		})
 	})
 })
