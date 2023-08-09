@@ -51,4 +51,15 @@ export default {
 	}
 }
 </script>
-<style src="./login-input.scss" scoped></style>
+
+<style lang="scss" scoped>
+@import '../../global';
+
+.login-success {
+	color: $success;
+}
+
+.login-failed {
+	color: $failure;
+}
+</style>
