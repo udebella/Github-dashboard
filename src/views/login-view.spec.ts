@@ -16,7 +16,9 @@ describe('Login view', () => {
 		expect(wrapper.find('[data-test=helper]').text()).toBe(
 			'You must generate a token to login using the settings of your github instance'
 		)
-		expect(wrapper.find('[data-test=link]').attributes().href).toBe('https://github.com/settings/tokens/new')
+		expect(wrapper.find('[data-test=link]').attributes().href).toBe(
+			'https://github.com/settings/tokens/new?description=Github%20Dashboard&scopes=repo%2Cread%3Auser%2Cuser%3Aemail'
+		)
 	})
 
 	it('displays a login input', () => {
