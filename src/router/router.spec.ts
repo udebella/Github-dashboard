@@ -9,7 +9,7 @@ describe('Router', () => {
 		router = createRouter()
 	})
 
-	const routes: RoutesNames[] = ['home', 'configuration']
+	const routes: RoutesNames[] = ['home', 'configuration', 'login']
 	routes.forEach((name) => {
 		it(`should render the route ${name}`, async () => {
 			await router.push({ name })
