@@ -3,9 +3,10 @@ import { describe, expect, it } from 'vitest'
 import LoginView from './LoginView.vue'
 
 describe('Login view', () => {
-	it('works', () => {
+	it('displays a login input', () => {
 		const wrapper = shallowMount(LoginView)
 
-		expect(wrapper.exists()).toBe(true)
+		const login = wrapper.findComponent({ name: 'login-input' })
+		expect(login.exists()).toBe(true)
 	})
 })
