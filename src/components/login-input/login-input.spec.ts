@@ -1,9 +1,16 @@
-import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import { flushPromises, shallowMount, type VueWrapper } from '@vue/test-utils'
 import Login from './login-input.vue'
 import { beforeEach, describe, expect, it, type Mock, vitest } from 'vitest'
+import { RoutesNames } from '../../router/router'
+import { routerKey } from 'vue-router'
+
+type MockRouter = {
+	push: Mock<[RoutesNames]>
+}
 
 type Mocks = {
 	login: Mock
+	router: MockRouter
 }
 
 describe('Login component', () => {
@@ -12,12 +19,13 @@ describe('Login component', () => {
 
 	beforeEach(() => {
 		mocks = {
-			login: vitest.fn()
+			login: vitest.fn(),
+			router: { push: vitest.fn() }
 		}
 		login = shallowMount(Login, {
 			global: {
 				renderStubDefaultSlot: true,
-				provide: { login: mocks.login }
+				provide: { login: mocks.login, [routerKey as symbol]: mocks.router }
 			}
 		})
 	})
@@ -32,6 +40,15 @@ describe('Login component', () => {
 		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
 
 		expect(mocks.login).toHaveBeenCalledWith('test')
+	})
+
+	it('redirect to home page when login is successful', async () => {
+		mocks.login.mockResolvedValue({})
+
+		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
+		await flushPromises()
+
+		expect(mocks.router.push).toHaveBeenCalledWith('home')
 	})
 
 	it('uses an input of type password to allow autocomplete from password managers', () => {
