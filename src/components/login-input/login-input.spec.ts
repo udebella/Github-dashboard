@@ -65,11 +65,15 @@ describe('Login component', () => {
 	})
 
 	it('displays the error when login failed', async () => {
-		mocks.login.mockRejectedValue('error for tests')
+		mocks.login.mockRejectedValue(new Error('error for tests'))
 
 		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
 		await flushPromises()
 
 		expect(login.find('[data-test=error]').text()).toBe('error for tests')
+	})
+
+	it('does not display error by default', () => {
+		expect(login.find('[data-test=error]').exists()).toBe(false)
 	})
 })

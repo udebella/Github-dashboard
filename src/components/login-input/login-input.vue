@@ -1,21 +1,27 @@
 <template>
 	<debounced-input placeholder="Github token" type="password" @input="onLogin" />
-	<span data-test="error">error for tests</span>
+	<span v-if="errorMessage" data-test="error">{{ errorMessage }}</span>
 </template>
 
 <script setup lang="ts">
 import { buildUserService } from '../../services/user/user'
 import DebouncedInput from '../debounced-input/debounced-input.vue'
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const login = inject('login', buildUserService().login)
 const router = useRouter()
 
+const errorMessage = ref('')
+
 const onLogin = async (token: string) => {
 	try {
 		await login(token)
 		await router.push('home')
-	} catch (e) {}
+	} catch (error) {
+		if (error instanceof Error) {
+			errorMessage.value = error.message
+		}
+	}
 }
 </script>
