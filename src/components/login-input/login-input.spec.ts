@@ -1,10 +1,14 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, type VueWrapper } from '@vue/test-utils'
 import Login from './login-input.vue'
-import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import { beforeEach, describe, expect, it, type Mock, vitest } from 'vitest'
+
+type Mocks = {
+	login: Mock
+}
 
 describe('Login component', () => {
-	let login
-	let mocks
+	let login: VueWrapper
+	let mocks: Mocks
 
 	beforeEach(() => {
 		mocks = {
