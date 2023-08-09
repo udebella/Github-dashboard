@@ -36,6 +36,10 @@ describe('Login component', () => {
 		expect(inputToken.attributes().placeholder).toBe('Github token')
 	})
 
+	it('uses an input of type password to allow autocomplete from password managers', () => {
+		expect(login.findComponent({ name: 'debounced-input' }).attributes().type).toBe('password')
+	})
+
 	it('triggers a login when input changes', async () => {
 		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
 
@@ -67,9 +71,5 @@ describe('Login component', () => {
 		await flushPromises()
 
 		expect(login.find('[data-test=error]').text()).toBe('error for tests')
-	})
-
-	it('uses an input of type password to allow autocomplete from password managers', () => {
-		expect(login.findComponent({ name: 'debounced-input' }).attributes().type).toBe('password')
 	})
 })
