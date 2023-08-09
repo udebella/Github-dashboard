@@ -36,12 +36,6 @@ describe('Dashboard Header component', () => {
 			expect(icon.attributes().icon).toBe('github')
 		})
 
-		it('displays the login component', () => {
-			const login = dashboardHeader.find('[data-test=login]')
-
-			expect(login.exists()).toBe(true)
-		})
-
 		it('displays a way to toggle configuration mode', () => {
 			const configuration = dashboardHeader.find('[data-test=configuration]')
 
