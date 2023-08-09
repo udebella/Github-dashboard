@@ -19,7 +19,13 @@ export default {
 </script>
 <style src="./App.scoped.scss" scoped></style>
 <style src="./App.scss"></style>
-<style>
+<style lang="css" scoped>
+.app {
+	flex-grow: 1;
+}
+</style>
+
+<style lang="css">
 :root {
 	--color-primary: #121212;
 	--color-secondaryLight: #ffffff;
