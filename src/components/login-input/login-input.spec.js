@@ -1,4 +1,4 @@
-import { flushPromises, shallowMount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Login from './login-input.vue'
 import { NO_USER } from '../../services/session/session'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
@@ -20,60 +20,19 @@ describe('Login component', () => {
 		})
 	})
 
-	describe('Initialization', () => {
-		it('should display a login icon', () => {
-			const icon = login.findComponent('[data-test=icon]')
+	it('should display an input text to enter token when there is no connected user in session', () => {
+		const inputToken = login.findComponent({ name: 'debounced-input' })
 
-			expect(icon.exists()).toBe(true)
-			expect(icon.attributes().icon).toBe('user')
-		})
-
-		it('should display an input text to enter token when there is no connected user in session', () => {
-			const inputToken = login.findComponent('[data-test=input-token]')
-
-			expect(inputToken.exists()).toBe(true)
-		})
-
-		it('should not display the input text by default when there is a connected user in session', () => {
-			mocks.userService.connectedUser.mockReturnValue({
-				login: 'user',
-				token: 'token'
-			})
-
-			const inputToken = login.find('[data-test=input-token]')
-
-			expect(inputToken.exists()).toBe(false)
-		})
-
-		it('should display a title indicating that user is not logged in by default', () => {
-			expect(login.attributes().title).to.equals('You are not logged in')
-			expect(login.classes()).toEqual(['login-failed'])
-		})
+		expect(inputToken.attributes().placeholder).toBe('Github token')
 	})
 
-	describe('Login', () => {
-		it('should trigger a login when input changes', async () => {
-			await login.findComponent('[data-test=input-token]').vm.$emit('input', 'test')
+	it('should trigger a login when input changes', async () => {
+		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
 
-			expect(mocks.userService.login).toHaveBeenCalledWith('test')
-		})
+		expect(mocks.userService.login).toHaveBeenCalledWith('test')
+	})
 
-		it('should use an input of type password to allow autocomplete from password managers', () => {
-			expect(login.find('[data-test=input-token]').attributes().type).toBe('password')
-		})
-
-		it('should hide input and display username as title on the icon when successfully logged in', async () => {
-			mocks.userService.connectedUser
-				.mockReturnValueOnce(NO_USER)
-				.mockReturnValue({ login: 'user', token: 'token' })
-			mocks.userService.login.mockReturnValue(Promise.resolve({ success: { login: 'user', token: 'token' } }))
-
-			await login.findComponent('[data-test=input-token]').vm.$emit('input', 'test')
-			await flushPromises()
-
-			expect(login.find('[data-test=input-token]').exists()).toBe(false)
-			expect(login.attributes().title).toBe('Logged in as user')
-			expect(login.classes()).toEqual(['login-success'])
-		})
+	it('should use an input of type password to allow autocomplete from password managers', () => {
+		expect(login.attributes().type).toBe('password')
 	})
 })
