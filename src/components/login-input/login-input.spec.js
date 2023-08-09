@@ -4,6 +4,7 @@ import { NO_USER } from '../../services/session/session'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('Login component', () => {
+	let login
 	let mocks
 
 	beforeEach(() => {
@@ -13,11 +14,14 @@ describe('Login component', () => {
 				connectedUser: vitest.fn().mockReturnValue(NO_USER)
 			}
 		}
+		login = shallowMount(Login, {
+			props: mocks,
+			global: { renderStubDefaultSlot: true }
+		})
 	})
 
 	describe('Initialization', () => {
 		it('should display a login icon', () => {
-			const login = shallowMount(Login, { props: mocks })
 			const icon = login.findComponent('[data-test=icon]')
 
 			expect(icon.exists()).toBe(true)
@@ -25,11 +29,6 @@ describe('Login component', () => {
 		})
 
 		it('should display an input text to enter token when there is no connected user in session', () => {
-			const login = shallowMount(Login, {
-				props: mocks,
-				global: { renderStubDefaultSlot: true }
-			})
-
 			const inputToken = login.findComponent('[data-test=input-token]')
 
 			expect(inputToken.exists()).toBe(true)
@@ -40,7 +39,6 @@ describe('Login component', () => {
 				login: 'user',
 				token: 'token'
 			})
-			const login = shallowMount(Login, { props: mocks })
 
 			const inputToken = login.find('[data-test=input-token]')
 
@@ -48,8 +46,6 @@ describe('Login component', () => {
 		})
 
 		it('should display a title indicating that user is not logged in by default', () => {
-			const login = shallowMount(Login, { props: mocks })
-
 			expect(login.attributes().title).to.equals('You are not logged in')
 			expect(login.classes()).toEqual(['login-failed'])
 		})
@@ -57,16 +53,12 @@ describe('Login component', () => {
 
 	describe('Login', () => {
 		it('should trigger a login when input changes', async () => {
-			const login = shallowMount(Login, { props: mocks })
-
 			await login.findComponent('[data-test=input-token]').vm.$emit('input', 'test')
 
 			expect(mocks.userService.login).toHaveBeenCalledWith('test')
 		})
 
 		it('should use an input of type password to allow autocomplete from password managers', () => {
-			const login = shallowMount(Login, { props: mocks })
-
 			expect(login.find('[data-test=input-token]').attributes().type).toBe('password')
 		})
 
@@ -75,7 +67,6 @@ describe('Login component', () => {
 				.mockReturnValueOnce(NO_USER)
 				.mockReturnValue({ login: 'user', token: 'token' })
 			mocks.userService.login.mockReturnValue(Promise.resolve({ success: { login: 'user', token: 'token' } }))
-			const login = shallowMount(Login, { props: mocks })
 
 			await login.findComponent('[data-test=input-token]').vm.$emit('input', 'test')
 			await flushPromises()
