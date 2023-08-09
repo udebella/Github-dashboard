@@ -52,14 +52,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../../global';
-
+<style lang="css" scoped>
 .login-success {
-	color: $success;
+	color: var(--color-success);
 }
 
 .login-failed {
-	color: $failure;
+	color: var(--color-failure);
 }
 </style>
