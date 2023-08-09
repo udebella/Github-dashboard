@@ -1,5 +1,5 @@
 <template>
-	<debounced-input placeholder="Github token" data-test="input-token" type="password" @input="login" />
+	<debounced-input placeholder="Github token" type="password" @input="login" />
 </template>
 
 <script lang="ts" setup>
