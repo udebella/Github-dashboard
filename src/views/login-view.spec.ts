@@ -10,6 +10,15 @@ describe('Login view', () => {
 		expect(title.text()).toBe('Github Dashboard')
 	})
 
+	it('displays an helper for login', () => {
+		const wrapper = shallowMount(LoginView)
+
+		expect(wrapper.find('[data-test=helper]').text()).toBe(
+			'You must generate a token to login using the settings of your github instance'
+		)
+		expect(wrapper.find('[data-test=link]').attributes().href).toBe('https://github.com/settings/tokens/new')
+	})
+
 	it('displays a login input', () => {
 		const wrapper = shallowMount(LoginView)
 
