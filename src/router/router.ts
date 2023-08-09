@@ -19,7 +19,7 @@ const routes = [
 		name: 'login',
 		component: LoginView
 	}
-]
+] as const
 
 export type RoutesNames = (typeof routes)[number]['name']
 
