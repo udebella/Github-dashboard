@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import LoginView from './LoginView.vue'
+import LoginView from './login-view.vue'
 
 describe('Login view', () => {
 	it('displays a login input', () => {
