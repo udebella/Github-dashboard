@@ -17,13 +17,13 @@ describe('Login component', () => {
 
 	describe('Initialization', () => {
 		it('should mount properly', () => {
-			const login = shallowMount(Login, { propsData: mocks })
+			const login = shallowMount(Login, { props: mocks })
 
 			expect(login.exists()).toBe(true)
 		})
 
 		it('should display a login icon', () => {
-			const login = shallowMount(Login, { propsData: mocks })
+			const login = shallowMount(Login, { props: mocks })
 			const icon = login.findComponent('[data-test=icon]')
 
 			expect(icon.exists()).toBe(true)
@@ -32,7 +32,7 @@ describe('Login component', () => {
 
 		it('should display an input text to enter token when there is no connected user in session', () => {
 			const login = shallowMount(Login, {
-				propsData: mocks,
+				props: mocks,
 				global: { renderStubDefaultSlot: true }
 			})
 
@@ -46,7 +46,7 @@ describe('Login component', () => {
 				login: 'user',
 				token: 'token'
 			})
-			const login = shallowMount(Login, { propsData: mocks })
+			const login = shallowMount(Login, { props: mocks })
 
 			const inputToken = login.find('[data-test=input-token]')
 
@@ -54,7 +54,7 @@ describe('Login component', () => {
 		})
 
 		it('should display a title indicating that user is not logged in by default', () => {
-			const login = shallowMount(Login, { propsData: mocks })
+			const login = shallowMount(Login, { props: mocks })
 
 			expect(login.attributes().title).to.equals('You are not logged in')
 			expect(login.classes()).toEqual(['login-failed'])
@@ -63,7 +63,7 @@ describe('Login component', () => {
 
 	describe('Login', () => {
 		it('should trigger a login when input changes', async () => {
-			const login = shallowMount(Login, { propsData: mocks })
+			const login = shallowMount(Login, { props: mocks })
 
 			await login.findComponent('[data-test=input-token]').vm.$emit('input', 'test')
 
@@ -71,7 +71,7 @@ describe('Login component', () => {
 		})
 
 		it('should use an input of type password to allow autocomplete from password managers', () => {
-			const login = shallowMount(Login, { propsData: mocks })
+			const login = shallowMount(Login, { props: mocks })
 
 			expect(login.find('[data-test=input-token]').attributes().type).toBe('password')
 		})
@@ -81,7 +81,7 @@ describe('Login component', () => {
 				.mockReturnValueOnce(NO_USER)
 				.mockReturnValue({ login: 'user', token: 'token' })
 			mocks.userService.login.mockReturnValue(Promise.resolve({ success: { login: 'user', token: 'token' } }))
-			const login = shallowMount(Login, { propsData: mocks })
+			const login = shallowMount(Login, { props: mocks })
 
 			await login.findComponent('[data-test=input-token]').vm.$emit('input', 'test')
 			await flushPromises()
