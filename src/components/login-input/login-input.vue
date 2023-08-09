@@ -1,5 +1,6 @@
 <template>
 	<debounced-input placeholder="Github token" type="password" @input="onLogin" />
+	<span data-test="error">error for tests</span>
 </template>
 
 <script setup lang="ts">

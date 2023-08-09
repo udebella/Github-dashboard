@@ -60,7 +60,16 @@ describe('Login component', () => {
 		expect(mocks.router.push).not.toHaveBeenCalled()
 	})
 
+	it('displays the error when login failed', async () => {
+		mocks.login.mockRejectedValue('error for tests')
+
+		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
+		await flushPromises()
+
+		expect(login.find('[data-test=error]').text()).toBe('error for tests')
+	})
+
 	it('uses an input of type password to allow autocomplete from password managers', () => {
-		expect(login.attributes().type).toBe('password')
+		expect(login.findComponent({ name: 'debounced-input' }).attributes().type).toBe('password')
 	})
 })
