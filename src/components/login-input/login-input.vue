@@ -5,14 +5,11 @@
 <script lang="js" setup>
 import { buildUserService } from '../../services/user/user'
 import DebouncedInput from '../debounced-input/debounced-input.vue'
+import { inject } from 'vue'
 
-const props = defineProps({
-	userService: {
-		default: buildUserService
-	}
-})
+const login = inject('login', buildUserService().login)
 
 async function performLogin(value) {
-	await props.userService.login(value)
+	await login(value)
 }
 </script>
