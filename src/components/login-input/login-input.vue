@@ -17,7 +17,7 @@ const errorMessage = ref('')
 const onLogin = async (token: string) => {
 	try {
 		await login(token)
-		await router.push('home')
+		await router.push({ name: 'home' })
 	} catch (error) {
 		if (error instanceof Error) {
 			errorMessage.value = error.message

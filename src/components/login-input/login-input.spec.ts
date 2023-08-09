@@ -53,7 +53,7 @@ describe('Login component', () => {
 		await login.findComponent(DebouncedInput).vm.$emit('input', 'test')
 		await flushPromises()
 
-		expect(mocks.router.push).toHaveBeenCalledWith('home')
+		expect(mocks.router.push).toHaveBeenCalledWith({ name: 'home' })
 	})
 
 	it('does not redirect when login failed', async () => {
