@@ -5,6 +5,7 @@
 		<a href="https://github.com/settings/tokens/new" data-test="link">settings</a>
 		of your github instance
 	</div>
+	<!-- @vue-ignore TODO remove when the component is typescript compliant -->
 	<login-input />
 </template>
 
