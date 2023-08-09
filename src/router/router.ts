@@ -1,6 +1,6 @@
 import { createRouter as createVueRouter, createWebHashHistory } from 'vue-router'
 import App from '../components/App.vue'
-import ConfigurationView from '../stores/views/configuration-view.vue'
+import ConfigurationView from '../views/configuration-view.vue'
 
 const routes = [
 	{
