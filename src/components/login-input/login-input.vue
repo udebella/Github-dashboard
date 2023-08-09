@@ -1,6 +1,6 @@
 <template>
+	<span v-if="errorMessage" class="error" data-test="error">{{ errorMessage }}</span>
 	<debounced-input placeholder="Github token" type="password" @input="onLogin" />
-	<span v-if="errorMessage" data-test="error">{{ errorMessage }}</span>
 </template>
 
 <script setup lang="ts">
@@ -25,3 +25,10 @@ const onLogin = async (token: string) => {
 	}
 }
 </script>
+
+<style lang="css">
+.error {
+	background-color: var(--color-failure);
+	padding: 4px;
+}
+</style>

@@ -3,6 +3,7 @@ import Login from './login-input.vue'
 import { beforeEach, describe, expect, it, type Mock, vitest } from 'vitest'
 import { RoutesNames } from '../../router/router'
 import { routerKey } from 'vue-router'
+import DebouncedInput from '../debounced-input/debounced-input.vue'
 
 type MockRouter = {
 	push: Mock<[RoutesNames]>
@@ -37,11 +38,11 @@ describe('Login component', () => {
 	})
 
 	it('uses an input of type password to allow autocomplete from password managers', () => {
-		expect(login.findComponent({ name: 'debounced-input' }).attributes().type).toBe('password')
+		expect(login.findComponent(DebouncedInput).attributes().type).toBe('password')
 	})
 
 	it('triggers a login when input changes', async () => {
-		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
+		await login.findComponent(DebouncedInput).vm.$emit('input', 'test')
 
 		expect(mocks.login).toHaveBeenCalledWith('test')
 	})
@@ -49,7 +50,7 @@ describe('Login component', () => {
 	it('redirect to home page when login is successful', async () => {
 		mocks.login.mockResolvedValue({})
 
-		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
+		await login.findComponent(DebouncedInput).vm.$emit('input', 'test')
 		await flushPromises()
 
 		expect(mocks.router.push).toHaveBeenCalledWith('home')
@@ -58,7 +59,7 @@ describe('Login component', () => {
 	it('does not redirect when login failed', async () => {
 		mocks.login.mockRejectedValue('error for tests')
 
-		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
+		await login.findComponent(DebouncedInput).vm.$emit('input', 'test')
 		await flushPromises()
 
 		expect(mocks.router.push).not.toHaveBeenCalled()
@@ -67,7 +68,7 @@ describe('Login component', () => {
 	it('displays the error when login failed', async () => {
 		mocks.login.mockRejectedValue(new Error('error for tests'))
 
-		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
+		await login.findComponent(DebouncedInput).vm.$emit('input', 'test')
 		await flushPromises()
 
 		expect(login.find('[data-test=error]').text()).toBe('error for tests')
