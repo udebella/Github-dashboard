@@ -1,6 +1,6 @@
 <template>
 	<div :title="title" :class="displayInputToken ? 'login-failed' : 'login-success'">
-		<icon-component :icon="icon" data-test="icon" />
+		<icon-component icon="user" data-test="icon" />
 		<debounced-input
 			v-if="displayInputToken"
 			placeholder="Github token"
@@ -26,7 +26,6 @@ export default {
 	},
 	data() {
 		return {
-			icon: 'user',
 			connectedUser: this.userService.connectedUser(),
 			NO_USER: NO_USER
 		}
