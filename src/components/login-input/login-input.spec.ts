@@ -57,7 +57,12 @@ describe('Login component', () => {
 	})
 
 	it('does not redirect when login failed', async () => {
-		mocks.login.mockRejectedValue('error for tests')
+		mocks.login.mockResolvedValue({
+			error: {
+				message: 'Bad credentials',
+				code: 401
+			}
+		})
 
 		await login.findComponent(DebouncedInput).vm.$emit('input', 'test')
 		await flushPromises()
@@ -66,12 +71,17 @@ describe('Login component', () => {
 	})
 
 	it('displays the error when login failed', async () => {
-		mocks.login.mockRejectedValue(new Error('error for tests'))
+		mocks.login.mockResolvedValue({
+			error: {
+				message: 'Bad credentials',
+				code: 401
+			}
+		})
 
 		await login.findComponent(DebouncedInput).vm.$emit('input', 'test')
 		await flushPromises()
 
-		expect(login.find('[data-test=error]').text()).toBe('error for tests')
+		expect(login.find('[data-test=error]').text()).toBe('Bad credentials')
 	})
 
 	it('does not display error by default', () => {

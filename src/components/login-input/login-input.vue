@@ -15,14 +15,22 @@ const router = useRouter()
 const errorMessage = ref('')
 
 const onLogin = async (token: string) => {
-	try {
-		await login(token)
+	const response = await login(token)
+	if (isError(response)) {
+		errorMessage.value = response.error.message
+	} else {
 		await router.push({ name: 'home' })
-	} catch (error) {
-		if (error instanceof Error) {
-			errorMessage.value = error.message
-		}
 	}
+}
+
+type Error = {
+	error: {
+		message: string
+		code: number
+	}
+}
+const isError = (response: unknown): response is Error => {
+	return Object.prototype.hasOwnProperty.call(response ?? {}, 'error')
 }
 </script>
 
