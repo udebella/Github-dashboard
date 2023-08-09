@@ -51,6 +51,15 @@ describe('Login component', () => {
 		expect(mocks.router.push).toHaveBeenCalledWith('home')
 	})
 
+	it('does not redirect when login failed', async () => {
+		mocks.login.mockRejectedValue('error for tests')
+
+		await login.findComponent({ name: 'debounced-input' }).vm.$emit('input', 'test')
+		await flushPromises()
+
+		expect(mocks.router.push).not.toHaveBeenCalled()
+	})
+
 	it('uses an input of type password to allow autocomplete from password managers', () => {
 		expect(login.attributes().type).toBe('password')
 	})

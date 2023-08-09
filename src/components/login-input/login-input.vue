@@ -12,7 +12,9 @@ const login = inject('login', buildUserService().login)
 const router = useRouter()
 
 const onLogin = async (token: string) => {
-	await login(token)
-	await router.push('home')
+	try {
+		await login(token)
+		await router.push('home')
+	} catch (e) {}
 }
 </script>
