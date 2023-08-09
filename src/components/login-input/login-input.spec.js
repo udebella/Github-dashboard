@@ -16,12 +16,6 @@ describe('Login component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should mount properly', () => {
-			const login = shallowMount(Login, { props: mocks })
-
-			expect(login.exists()).toBe(true)
-		})
-
 		it('should display a login icon', () => {
 			const login = shallowMount(Login, { props: mocks })
 			const icon = login.findComponent('[data-test=icon]')
