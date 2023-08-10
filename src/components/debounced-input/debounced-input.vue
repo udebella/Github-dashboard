@@ -16,5 +16,3 @@ const notifyParent = (event: Event) => {
 
 const debouncedInput = debounce(notifyParent, 1000)
 </script>
-
-<style src="./debounced-input.scss" scoped></style>
