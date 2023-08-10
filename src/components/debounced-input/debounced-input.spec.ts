@@ -16,7 +16,6 @@ describe('DebouncedInput component', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 			const input = debouncedInput.find('input')
 
-			expect(input.exists()).toBe(true)
 			expect(input.attributes().type).toBe('text')
 		})
 	})
