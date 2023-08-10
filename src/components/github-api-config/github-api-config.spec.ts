@@ -13,10 +13,6 @@ describe('GithubApiConfig component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should mount properly', () => {
-			expect(githubApiConfig.exists()).toBe(true)
-		})
-
 		it('should display an input', () => {
 			expect(githubApiConfig.find('input').exists()).toBe(true)
 		})
