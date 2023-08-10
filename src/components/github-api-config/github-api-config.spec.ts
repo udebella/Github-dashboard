@@ -13,22 +13,22 @@ describe('GithubApiConfig component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should display an input', () => {
+		it('displays an input', () => {
 			expect(githubApiConfig.attributes().type).toBe('text')
 		})
 
-		it('should display as default value the one from the store', () => {
+		it('displays as default value the one from the store', () => {
 			useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 			githubApiConfig = shallowMount(GithubApiConfig)
 
 			expect(githubApiConfig.find<HTMLInputElement>('[data-test=input]').element.value).toBe('http://github-api')
 		})
 
-		it('should be displayed when configuration mode is enabled', () => {
+		it('is displayed when configuration mode is enabled', () => {
 			expect(githubApiConfig.find('[data-test=input]').exists()).toBe(true)
 		})
 
-		it('should not be displayed when configuration mode is disabled', () => {
+		it('is not displayed when configuration mode is disabled', () => {
 			useConfigurationStore().$patch({ configurationEnabled: false })
 			githubApiConfig = shallowMount(GithubApiConfig)
 
@@ -37,7 +37,7 @@ describe('GithubApiConfig component', () => {
 	})
 
 	describe('Update github api', () => {
-		it('should save the new api in the store when changed', () => {
+		it('saves the new api in the store when changed', () => {
 			githubApiConfig.find('[data-test=input]').setValue('https://new-api')
 
 			expect(useConfigurationStore().githubApi).toBe('https://new-api')
