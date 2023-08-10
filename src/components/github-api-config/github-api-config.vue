@@ -18,5 +18,3 @@ const updateGithubApi = (event: Event) => {
 	store.updateGithubApi(input.value)
 }
 </script>
-
-<style src="./github-api-config.scss" scoped></style>
