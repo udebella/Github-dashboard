@@ -1,10 +1,12 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, VueWrapper } from '@vue/test-utils'
 import DebouncedInput from './debounced-input.vue'
 import { afterEach, beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('DebouncedInput component', () => {
+	let debouncedInput: VueWrapper
 	beforeEach(() => {
 		vitest.useFakeTimers()
+		debouncedInput = shallowMount(DebouncedInput)
 	})
 
 	afterEach(() => {
@@ -13,7 +15,6 @@ describe('DebouncedInput component', () => {
 
 	describe('Initialization', () => {
 		it('displays a text input', () => {
-			const debouncedInput = shallowMount(DebouncedInput)
 			const input = debouncedInput.find('input')
 
 			expect(input.attributes().type).toBe('text')
@@ -22,8 +23,6 @@ describe('DebouncedInput component', () => {
 
 	describe('Handling input data', () => {
 		it('sends a input event after a while when modifying the input', async () => {
-			const debouncedInput = shallowMount(DebouncedInput)
-
 			await debouncedInput.find('input').setValue('test')
 			vitest.advanceTimersByTime(1000)
 
@@ -31,7 +30,6 @@ describe('DebouncedInput component', () => {
 		})
 
 		it('sends event only once when there is less 1 sec between updates', async () => {
-			const debouncedInput = shallowMount(DebouncedInput)
 			const input = debouncedInput.find('input')
 
 			await input.setValue('test')
