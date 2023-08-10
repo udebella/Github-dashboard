@@ -12,7 +12,7 @@ describe('DebouncedInput component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should display a text input', () => {
+		it('displays a text input', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 			const input = debouncedInput.find('input')
 
@@ -21,7 +21,7 @@ describe('DebouncedInput component', () => {
 	})
 
 	describe('Handling input data', () => {
-		it('should send a input event after a while when modifying the input', async () => {
+		it('sends a input event after a while when modifying the input', async () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 
 			await debouncedInput.find('input').setValue('test')
@@ -30,7 +30,7 @@ describe('DebouncedInput component', () => {
 			expect(debouncedInput.emitted('input')).toEqual([['test']])
 		})
 
-		it('should send event only once when there is less 1 sec between updates', async () => {
+		it('sends event only once when there is less 1 sec between updates', async () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 			const input = debouncedInput.find('input')
 
