@@ -14,7 +14,7 @@ describe('GithubApiConfig component', () => {
 
 	describe('Initialization', () => {
 		it('should display an input', () => {
-			expect(githubApiConfig.find('input').exists()).toBe(true)
+			expect(githubApiConfig.attributes().type).toBe('text')
 		})
 
 		it('should display as default value the one from the store', () => {
