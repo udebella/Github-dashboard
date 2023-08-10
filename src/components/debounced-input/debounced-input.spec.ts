@@ -41,7 +41,7 @@ describe('DebouncedInput component', () => {
 			const debouncedInput = shallowMount(DebouncedInput)
 			const input = debouncedInput.find('input')
 
-			input.setValue('test')
+			await input.setValue('test')
 			vitest.advanceTimersByTime(500)
 			await input.setValue('another test')
 			vitest.advanceTimersByTime(1000)
