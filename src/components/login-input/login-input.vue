@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { buildUserService } from '../../services/user/user'
-import DebouncedInput from '../debounced-input/debounced-input.vue'
+import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
 import { inject, ref } from 'vue'
 import { useRouter } from 'vue-router'
 

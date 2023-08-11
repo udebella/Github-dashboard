@@ -1,5 +1,5 @@
 import { request } from '../../services/graphql/graphql-client'
-import RefreshIndicator from '../refresh-indicator/refresh-indicator.vue'
+import RefreshIndicator from '../ui/refresh-indicator/refresh-indicator.vue'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
 
 export default {

@@ -7,7 +7,7 @@
 
 <script>
 import DashboardHeader from './dashboard-header/dashboard-header.vue'
-import MainContainer from './main-container/main-container.vue'
+import MainContainer from './ui/main-container/main-container.vue'
 
 export default {
 	name: 'App',
