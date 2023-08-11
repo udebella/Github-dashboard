@@ -27,4 +27,3 @@ export default {
 	}
 }
 </script>
-<style src="./living-icon.scss" scoped></style>
