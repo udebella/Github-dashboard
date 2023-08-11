@@ -72,16 +72,14 @@ describe('RepositoryLine component', () => {
 			])
 		})
 
-		it('does not display build statuses when there is no build status associated with the commit', () => {
-			repositoryLine = shallowMount(RepositoryLine, {
-				propsData: {
-					repository: {
-						name: 'repository',
-						owner: 'user',
-						repositoryUrl: 'http://repository-url',
-						branchStatus: 'SUCCESS',
-						statusesList: []
-					}
+		it('does not display build statuses when there is no build status associated with the commit', async () => {
+			await repositoryLine.setProps({
+				repository: {
+					name: 'repository',
+					owner: 'user',
+					repositoryUrl: 'http://repository-url',
+					branchStatus: 'SUCCESS',
+					statusesList: []
 				}
 			})
 
