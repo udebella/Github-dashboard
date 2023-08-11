@@ -107,4 +107,11 @@ function updateRepositories(httpData: Repository) {
 	repositories.value = extractHttpData(httpData)
 }
 </script>
-<style src="./repository-list.scss" scoped></style>
+
+<style lang="css" scoped>
+.head {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+</style>
