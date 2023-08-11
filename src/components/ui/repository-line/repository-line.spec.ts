@@ -30,11 +30,11 @@ describe('RepositoryLine component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should use the color on the line according to the branch status', () => {
+		it('uses the color on the line according to the branch status', () => {
 			expect(repositoryLine.findComponent(BadgeStatus).props().status).toBe('SUCCESS')
 		})
 
-		it('should display a way to remove the repository from watched repositories', () => {
+		it('displays a way to remove the repository from watched repositories', () => {
 			expect(repositoryLine.find('[data-test=trash]').exists()).toBe(true)
 		})
 	})
@@ -46,15 +46,15 @@ describe('RepositoryLine component', () => {
 			repositoryLink = repositoryLine.find('[data-test=link]')
 		})
 
-		it('should display a repository link', () => {
+		it('displays a repository link', () => {
 			expect(repositoryLink.exists()).toBe(true)
 		})
 
-		it('should give a repository name to the component', () => {
+		it('gives a repository name to the component', () => {
 			expect(repositoryLink.text()).toBe('repository')
 		})
 
-		it('should give a repository url to the component', () => {
+		it('gives a repository url to the component', () => {
 			expect(repositoryLink.attributes().href).toBe('http://repository-url')
 		})
 	})
@@ -66,11 +66,11 @@ describe('RepositoryLine component', () => {
 			buildStatuses = repositoryLine.findComponent({ name: 'build-statuses' })
 		})
 
-		it('should display build statuses', () => {
+		it('displays build statuses', () => {
 			expect(buildStatuses.exists()).toBe(true)
 		})
 
-		it('should give the list of statuses to the component', () => {
+		it('gives the list of statuses to the component', () => {
 			expect(buildStatuses.props().statuses).toEqual([
 				{
 					jobStatus: 'SUCCESS',
@@ -80,7 +80,7 @@ describe('RepositoryLine component', () => {
 			])
 		})
 
-		it('should not display build statuses when there is no build status associated with the commit', () => {
+		it('does not display build statuses when there is no build status associated with the commit', () => {
 			repositoryLine = shallowMount(RepositoryLine, {
 				propsData: {
 					repository: {
