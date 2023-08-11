@@ -10,13 +10,13 @@ describe('LivingIcon component', () => {
 		livingIcon = shallowMount(LivingIcon, { propsData: { date: new Date() } })
 	})
 
-	it('should display a living icon', () => {
+	it('displays a living icon', () => {
 		const icon = livingIcon.findComponent('[data-test=icon]')
 
 		expect(icon.attributes().icon).toBe('living')
 	})
 
-	it('should display a skull icon when date is one week before today', async () => {
+	it('displays a skull icon when date is one week before today', async () => {
 		const lastWeekDate = subWeeks(new Date(), 1)
 		await livingIcon.setProps({
 			date: lastWeekDate
@@ -26,7 +26,7 @@ describe('LivingIcon component', () => {
 		expect(icon.attributes().icon).toBe('dead')
 	})
 
-	it('should display a title indicating time since given date', async () => {
+	it('displays a title indicating time since given date', async () => {
 		const lastWeekDate = subWeeks(new Date(), 1)
 		await livingIcon.setProps({
 			date: lastWeekDate
