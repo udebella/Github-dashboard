@@ -1,6 +1,6 @@
 import { request } from '../../services/graphql/graphql-client'
-import DebouncedInput from '../debounced-input/debounced-input.vue'
-import CustomSelect from '../custom-select/custom-select.vue'
+import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
+import CustomSelect from '../ui/custom-select/custom-select.vue'
 import { query } from './repository-picker.query'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
 

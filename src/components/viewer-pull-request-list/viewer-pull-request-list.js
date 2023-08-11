@@ -1,5 +1,5 @@
 import { buildViewerQuery } from '../../services/graphql/query-builder'
-import PullRequestLine from '../pull-request-line/pull-request-line.vue'
+import PullRequestLine from '../ui/pull-request-line/pull-request-line.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
 import { extractHttp as extractPullRequest, pullRequestFragment } from '../../services/pull-request/pull-request'
 import { buildUserService } from '../../services/user/user'

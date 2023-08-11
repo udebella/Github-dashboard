@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import BuildStatus from '../build-status/build-status.vue'
-import type { GDBuildStatus } from '../../services/statuses/extract-statuses'
+import type { GDBuildStatus } from '../../../services/statuses/extract-statuses'
 
 defineProps<{
 	statuses: GDBuildStatus[]

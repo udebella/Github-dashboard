@@ -15,8 +15,8 @@
 </template>
 
 <script lang="ts" setup>
-import CustomButton from '../custom-button/custom-button.vue'
-import IconComponent from '../icon/icon-component.vue'
+import CustomButton from '../ui/custom-button/custom-button.vue'
+import IconComponent from '../ui/icon/icon-component.vue'
 import ConfigurationButton from '../configuration-button/configuration-button.vue'
 import { inject } from 'vue'
 import notificationApi from '../../services/notifications/notification'

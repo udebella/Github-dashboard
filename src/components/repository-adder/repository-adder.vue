@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { useConfigurationStore } from '../../stores/configuration/configuration'
-import BadgeStatus from '../badge-status/badge-status.vue'
+import BadgeStatus from '../ui/badge-status/badge-status.vue'
 import RepositoryPicker from '../repository-picker/repository-picker.vue'
 
 const configurationStore = useConfigurationStore()
