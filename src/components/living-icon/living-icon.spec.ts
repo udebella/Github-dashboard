@@ -5,12 +5,6 @@ import { describe, expect, it } from 'vitest'
 
 describe('LivingIcon component', () => {
 	describe('Initialization', () => {
-		it('should mount properly', () => {
-			const livingIcon = shallowMount(LivingIcon, { propsData: { date: new Date() } })
-
-			expect(livingIcon.exists()).toBe(true)
-		})
-
 		it('should display a living icon', () => {
 			const livingIcon = shallowMount(LivingIcon, { propsData: { date: new Date() } })
 			const icon = livingIcon.findComponent('[data-test=icon]')
