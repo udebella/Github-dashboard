@@ -18,4 +18,8 @@ import RepositoryPicker from '../repository-picker/repository-picker.vue'
 const configurationStore = useConfigurationStore()
 </script>
 
-<style src="./repository-adder.scss" scoped></style>
+<style lang="css" scoped>
+.icon {
+	text-align: center;
+}
+</style>
