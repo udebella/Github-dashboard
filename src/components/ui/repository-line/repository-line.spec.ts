@@ -1,19 +1,19 @@
-import { shallowMount } from '@vue/test-utils'
+import { DOMWrapper, shallowMount, type VueWrapper } from '@vue/test-utils'
 import RepositoryLine from './repository-line.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
+import BadgeStatus from '../badge-status/badge-status.vue'
 
 describe('RepositoryLine component', () => {
-	let repositoryLine
+	let repositoryLine: VueWrapper
 
 	beforeEach(() => {
 		repositoryLine = shallowMount(RepositoryLine, {
-			propsData: {
+			props: {
 				repository: {
 					name: 'repository',
 					owner: 'user',
 					repositoryUrl: 'http://repository-url',
 					branchStatus: 'SUCCESS',
-					defaultBranch: 'master',
 					statusesList: [
 						{
 							jobStatus: 'SUCCESS',
@@ -35,7 +35,7 @@ describe('RepositoryLine component', () => {
 		})
 
 		it('should use the color on the line according to the branch status', () => {
-			expect(repositoryLine.findComponent('[data-test=badge]').props().status).toBe('SUCCESS')
+			expect(repositoryLine.findComponent(BadgeStatus).props().status).toBe('SUCCESS')
 		})
 
 		it('should display a way to remove the repository from watched repositories', () => {
@@ -44,7 +44,7 @@ describe('RepositoryLine component', () => {
 	})
 
 	describe('Repository link', () => {
-		let repositoryLink
+		let repositoryLink: DOMWrapper<Node>
 
 		beforeEach(() => {
 			repositoryLink = repositoryLine.find('[data-test=link]')
@@ -64,7 +64,7 @@ describe('RepositoryLine component', () => {
 	})
 
 	describe('Build statuses', () => {
-		let buildStatuses
+		let buildStatuses: VueWrapper
 
 		beforeEach(() => {
 			buildStatuses = repositoryLine.findComponent({ name: 'build-statuses' })
@@ -92,7 +92,6 @@ describe('RepositoryLine component', () => {
 						owner: 'user',
 						repositoryUrl: 'http://repository-url',
 						branchStatus: 'SUCCESS',
-						defaultBranch: 'master',
 						statusesList: []
 					}
 				}
