@@ -23,18 +23,10 @@ import BadgeStatus from '../badge-status/badge-status.vue'
 import PopOver from '../pop-over/pop-over.vue'
 import RepositoryRemover from '../../repository-remover/repository-remover.vue'
 import BuildStatuses from '../build-statuses/build-statuses.vue'
-import type { GDBuildStatus, GDJobStatus } from '../../../services/statuses/extract-statuses'
-
-type Repository = {
-	repositoryUrl: string
-	branchStatus: GDJobStatus
-	name: string
-	owner: string
-	statusesList: GDBuildStatus[]
-}
+import type { GDRepository } from '../../../types/repository'
 
 defineProps<{
-	repository: Repository
+	repository: GDRepository
 }>()
 </script>
 

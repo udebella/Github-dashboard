@@ -1,9 +1,9 @@
-import type { GDBuildStatus } from '../services/statuses/extract-statuses'
+import type { GDBuildStatus, GDJobStatus } from '../services/statuses/extract-statuses'
 
 export type GDRepository = {
 	name: string
 	owner: string
 	repositoryUrl: string
-	branchStatus: string
+	branchStatus: GDJobStatus
 	statusesList: GDBuildStatus[]
 }
