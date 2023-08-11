@@ -41,4 +41,41 @@ export default {
 	}
 }
 </script>
-<style src="./repository-line.scss" scoped></style>
+
+<style lang="scss" scoped>
+@import '../../../global';
+
+.line {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+
+	.repository-remover {
+		margin-right: 5px;
+		align-self: center;
+	}
+
+	.link {
+		width: 100%;
+		text-decoration: none;
+		text-transform: capitalize;
+
+		.popover {
+			display: flex;
+			flex-direction: column;
+			visibility: hidden;
+			opacity: 0;
+			transition: 300ms ease;
+		}
+
+		@include on-desktop {
+			& :hover .popover,
+			.popover:hover {
+				visibility: visible;
+				opacity: 1;
+				transition: 300ms ease;
+			}
+		}
+	}
+}
+</style>
