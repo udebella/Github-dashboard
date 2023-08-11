@@ -19,27 +19,24 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import BadgeStatus from '../badge-status/badge-status.vue'
 import PopOver from '../pop-over/pop-over.vue'
 import RepositoryRemover from '../../repository-remover/repository-remover.vue'
 import BuildStatuses from '../build-statuses/build-statuses.vue'
+import type { GDBuildStatus, GDJobStatus } from '../../../services/statuses/extract-statuses'
 
-export default {
-	name: 'repository-line',
-	props: {
-		repository: {
-			required: true,
-			type: Object
-		}
-	},
-	components: {
-		BadgeStatus,
-		PopOver,
-		RepositoryRemover,
-		BuildStatuses
-	}
+type Repository = {
+	repositoryUrl: string
+	branchStatus: GDJobStatus
+	name: string
+	owner: string
+	statusesList: GDBuildStatus[]
 }
+
+defineProps<{
+	repository: Repository
+}>()
 </script>
 
 <style lang="scss" scoped>
