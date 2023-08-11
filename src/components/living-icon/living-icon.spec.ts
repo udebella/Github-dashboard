@@ -7,7 +7,7 @@ describe('LivingIcon component', () => {
 	let livingIcon: VueWrapper
 
 	beforeEach(() => {
-		livingIcon = shallowMount(LivingIcon, { propsData: { date: new Date() } })
+		livingIcon = shallowMount(LivingIcon, { props: { date: new Date() } })
 	})
 
 	it('displays a living icon', () => {
