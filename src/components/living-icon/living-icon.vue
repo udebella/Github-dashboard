@@ -4,26 +4,18 @@
 	</div>
 </template>
 
-<script lang="js">
+<script lang="js" setup>
 import { differenceInWeeks, formatDistanceToNow } from 'date-fns'
 import IconComponent from '../icon/icon-component.vue'
+import { computed } from 'vue'
 
-export default {
-	name: 'living-icon',
-	components: { IconComponent },
-	props: {
-		date: {
-			type: Date,
-			required: true
-		}
-	},
-	computed: {
-		title() {
-			return formatDistanceToNow(this.date, { addSuffix: true })
-		},
-		icon() {
-			return differenceInWeeks(new Date(), this.date) < 1 ? 'living' : 'dead'
-		}
+const props = defineProps({
+	date: {
+		type: Date,
+		required: true
 	}
-}
+})
+
+const title = computed(() => formatDistanceToNow(props.date, { addSuffix: true }))
+const icon = computed(() => (differenceInWeeks(new Date(), props.date) < 1 ? 'living' : 'dead'))
 </script>
