@@ -11,7 +11,6 @@
 			<badge-status :status="repository.branchStatus" data-test="badge">
 				<span>{{ repository.name }}</span>
 				<pop-over v-if="repository.statusesList.length" class="popover">
-					<!-- @vue-ignore TODO remove when all underlying component migrated to composition api -->
 					<build-statuses :statuses="repository.statusesList" />
 				</pop-over>
 			</badge-status>
