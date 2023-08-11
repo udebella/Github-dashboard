@@ -46,10 +46,6 @@ describe('RepositoryLine component', () => {
 			repositoryLink = repositoryLine.find('[data-test=link]')
 		})
 
-		it('displays a repository link', () => {
-			expect(repositoryLink.exists()).toBe(true)
-		})
-
 		it('gives a repository name to the component', () => {
 			expect(repositoryLink.text()).toBe('repository')
 		})
@@ -64,10 +60,6 @@ describe('RepositoryLine component', () => {
 
 		beforeEach(() => {
 			buildStatuses = repositoryLine.findComponent({ name: 'build-statuses' })
-		})
-
-		it('displays build statuses', () => {
-			expect(buildStatuses.exists()).toBe(true)
 		})
 
 		it('gives the list of statuses to the component', () => {
