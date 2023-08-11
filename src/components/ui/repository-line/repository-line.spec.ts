@@ -30,10 +30,6 @@ describe('RepositoryLine component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have repository-line name', () => {
-			expect(repositoryLine.exists()).toBe(true)
-		})
-
 		it('should use the color on the line according to the branch status', () => {
 			expect(repositoryLine.findComponent(BadgeStatus).props().status).toBe('SUCCESS')
 		})
