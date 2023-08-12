@@ -7,7 +7,7 @@ import type {
 } from '@octokit/graphql-schema'
 
 export type GDPullRequestStatus = {
-	buildStatus: string
+	buildStatus: GDJobStatus
 	statuses: GDBuildStatus[]
 }
 
@@ -21,7 +21,7 @@ export type GDBuildStatus = {
 
 export const extractStatuses = (check?: Maybe<StatusCheckRollup>): GDPullRequestStatus => {
 	return {
-		buildStatus: check?.state ?? 'NO_STATUS',
+		buildStatus: (check?.state ?? 'NO_STATUS') as GDJobStatus, // TODO remove this typescript bypass
 		statuses: check?.contexts?.nodes?.map(extractStatusesDetails) ?? []
 	}
 }

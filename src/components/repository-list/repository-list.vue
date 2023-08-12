@@ -22,17 +22,9 @@ import NetworkPolling from '../network-polling/network-polling.vue'
 import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
 import { computed, ref } from 'vue'
-import type { GDBuildStatus } from '../../services/statuses/extract-statuses'
 import { extractStatuses } from '../../services/statuses/extract-statuses'
 import type { Commit, GitObject, Maybe, Repository } from '@octokit/graphql-schema'
-
-type GDRepository = {
-	name: string
-	owner: string
-	repositoryUrl: string
-	branchStatus: string
-	statusesList: GDBuildStatus[]
-}
+import type { GDRepository } from '../../types/repository'
 
 const extractHttpData = (httpData: Repository): GDRepository[] => {
 	return Object.values(httpData)

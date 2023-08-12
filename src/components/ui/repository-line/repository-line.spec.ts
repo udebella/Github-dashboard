@@ -1,19 +1,19 @@
-import { shallowMount } from '@vue/test-utils'
+import { DOMWrapper, shallowMount, type VueWrapper } from '@vue/test-utils'
 import RepositoryLine from './repository-line.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
+import BadgeStatus from '../badge-status/badge-status.vue'
 
 describe('RepositoryLine component', () => {
-	let repositoryLine
+	let repositoryLine: VueWrapper
 
 	beforeEach(() => {
 		repositoryLine = shallowMount(RepositoryLine, {
-			propsData: {
+			props: {
 				repository: {
 					name: 'repository',
 					owner: 'user',
 					repositoryUrl: 'http://repository-url',
 					branchStatus: 'SUCCESS',
-					defaultBranch: 'master',
 					statusesList: [
 						{
 							jobStatus: 'SUCCESS',
@@ -30,51 +30,39 @@ describe('RepositoryLine component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should have repository-line name', () => {
-			expect(repositoryLine.exists()).toBe(true)
+		it('uses the color on the line according to the branch status', () => {
+			expect(repositoryLine.findComponent(BadgeStatus).props().status).toBe('SUCCESS')
 		})
 
-		it('should use the color on the line according to the branch status', () => {
-			expect(repositoryLine.findComponent('[data-test=badge]').props().status).toBe('SUCCESS')
-		})
-
-		it('should display a way to remove the repository from watched repositories', () => {
+		it('displays a way to remove the repository from watched repositories', () => {
 			expect(repositoryLine.find('[data-test=trash]').exists()).toBe(true)
 		})
 	})
 
 	describe('Repository link', () => {
-		let repositoryLink
+		let repositoryLink: DOMWrapper<Node>
 
 		beforeEach(() => {
 			repositoryLink = repositoryLine.find('[data-test=link]')
 		})
 
-		it('should display a repository link', () => {
-			expect(repositoryLink.exists()).toBe(true)
-		})
-
-		it('should give a repository name to the component', () => {
+		it('gives a repository name to the component', () => {
 			expect(repositoryLink.text()).toBe('repository')
 		})
 
-		it('should give a repository url to the component', () => {
+		it('gives a repository url to the component', () => {
 			expect(repositoryLink.attributes().href).toBe('http://repository-url')
 		})
 	})
 
 	describe('Build statuses', () => {
-		let buildStatuses
+		let buildStatuses: VueWrapper
 
 		beforeEach(() => {
 			buildStatuses = repositoryLine.findComponent({ name: 'build-statuses' })
 		})
 
-		it('should display build statuses', () => {
-			expect(buildStatuses.exists()).toBe(true)
-		})
-
-		it('should give the list of statuses to the component', () => {
+		it('gives the list of statuses to the component', () => {
 			expect(buildStatuses.props().statuses).toEqual([
 				{
 					jobStatus: 'SUCCESS',
@@ -84,17 +72,14 @@ describe('RepositoryLine component', () => {
 			])
 		})
 
-		it('should not display build statuses when there is no build status associated with the commit', () => {
-			repositoryLine = shallowMount(RepositoryLine, {
-				propsData: {
-					repository: {
-						name: 'repository',
-						owner: 'user',
-						repositoryUrl: 'http://repository-url',
-						branchStatus: 'SUCCESS',
-						defaultBranch: 'master',
-						statusesList: []
-					}
+		it('does not display build statuses when there is no build status associated with the commit', async () => {
+			await repositoryLine.setProps({
+				repository: {
+					name: 'repository',
+					owner: 'user',
+					repositoryUrl: 'http://repository-url',
+					branchStatus: 'SUCCESS',
+					statusesList: []
 				}
 			})
 
