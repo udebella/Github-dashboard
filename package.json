@@ -24,7 +24,6 @@
 	},
 	"devDependencies": {
 		"@pinia/testing": "^0.1.3",
-		"@rushstack/eslint-patch": "^1.2.0",
 		"@tsconfig/node18": "^18.2.0",
 		"@types/jsdom": "^21.1.1",
 		"@types/node": "^20.4.5",
