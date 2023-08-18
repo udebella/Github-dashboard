@@ -14,7 +14,11 @@ export default mergeConfig(
 			transformMode: {
 				web: [/\.[jt]sx$/]
 			},
-			setupFiles: './src/test-setup.js'
+			setupFiles: './src/test-setup.js',
+			coverage: {
+				all: true,
+				reporter: ['text-summary', 'text', 'html', 'cobertura']
+			}
 		}
 	})
 )
