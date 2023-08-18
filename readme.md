@@ -47,7 +47,6 @@ It will generate the bundle in `/dist` repository.
 When commits lands on master branch after the pull request validation, github-action
 will automatically launch a build that will deploy to github-pages when completed.
 
-<!-- TODO Outdated section
 ## Generating component
 
 To generate component, [plop](https://github.com/amwmedia/plop) has been added :
@@ -56,7 +55,6 @@ To generate component, [plop](https://github.com/amwmedia/plop) has been added :
 ```
 
 It will ask for the component name, and will generate a folder with base files to work with.
--->
 --
 
 *Every given path is from project directory

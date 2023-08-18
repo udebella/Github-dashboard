@@ -9,7 +9,8 @@
 		"preview": "vite preview",
 		"test": "vitest",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-		"format": "prettier --write src/"
+		"format": "prettier --write src/",
+		"plop": "plop"
 	},
 	"dependencies": {
 		"@octokit/graphql-schema": "^14.26.1",
