@@ -20,7 +20,7 @@ jobs:
             -   name: Linter
                 run: npm run lint
             -   name: Type-check
-                run: npm run type-check
+                run: npm run prebuild
             -   name: Unit tests
                 run: npm test -- run --coverage
             - name: Code Coverage Report
