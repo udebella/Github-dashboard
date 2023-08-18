@@ -1,4 +1,4 @@
-import { shallowMount, VueWrapper } from '@vue/test-utils'
+import { shallowMount, type VueWrapper } from '@vue/test-utils'
 import DashboardHeader from './dashboard-header.vue'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import type { Mocks } from '../../test-utils'

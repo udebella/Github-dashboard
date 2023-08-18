@@ -1,21 +1,15 @@
-import {expect} from 'chai'
-import {shallowMount} from '@vue/test-utils'
+import { describe, beforeEach, it, expect} from 'vitest'
+import { shallowMount, type VueWrapper } from '@vue/test-utils'
 import {{pascalCase componentName}} from './{{dashCase componentName}}.vue'
 
 describe('{{pascalCase componentName}} component', () => {
-	let {{camelCase componentName}}
+	let {{camelCase componentName}}: VueWrapper;
 
 	beforeEach(() => {
 		{{camelCase componentName}} = shallowMount({{pascalCase componentName}})
 	})
 
-	describe('Initialization', () => {
-		it('should mount properly', () => {
-			expect({{camelCase componentName}}.exists()).to.be.true
-		})
-
-		it('should display the component', () => {
-			expect({{camelCase componentName}}.find('div').text()).to.equal('Test component')
-		})
+	it('should display the component', () => {
+		expect({{camelCase componentName}}.text()).toBe('Test component')
 	})
 })
