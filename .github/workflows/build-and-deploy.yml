@@ -20,7 +20,6 @@ jobs:
             -   name: Build application
                 run: npm run build
             -   name: Deploy on Github-Pages
-                if: ${{ github.event_name == 'push' }}
                 uses: JamesIves/github-pages-deploy-action@v4
                 with:
                     branch: gh-pages
