@@ -7,22 +7,22 @@
 	</select>
 </template>
 
-<script>
-export default {
-	name: 'custom-select',
-	props: {
-		items: {
-			type: Array,
-			default: () => []
-		}
-	},
-	data: () => ({
-		selected: ''
-	}),
-	methods: {
-		notify() {
-			this.$emit('selected', this.selected)
-		}
-	}
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+withDefaults(
+	defineProps<{
+		items?: string[]
+	}>(),
+	{ items: () => [] }
+)
+
+const emit = defineEmits<{
+	selected: [string]
+}>()
+
+const selected = ref('')
+const notify = () => {
+	emit('selected', selected.value)
 }
 </script>
