@@ -22,7 +22,7 @@ describe('Configuration component', () => {
 		})
 
 		it('should display a cog icon', () => {
-			const icon = configuration.find('[data-test=icon]')
+			const icon = configuration.findComponent(IconComponent)
 
 			expect(icon.attributes().icon).toBe('configuration')
 		})
