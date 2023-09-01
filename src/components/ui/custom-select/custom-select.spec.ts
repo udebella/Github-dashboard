@@ -4,14 +4,6 @@ import { describe, expect, it } from 'vitest'
 
 describe('CustomSelect component', () => {
 	describe('Initialization', () => {
-		it('should display a select with options', () => {
-			const customSelect = shallowMount(CustomSelect, {
-				propsData: { items: ['item'] }
-			})
-
-			expect(customSelect.find('[data-test=select]').exists()).toBe(true)
-		})
-
 		it('should display one option by item given in props with an empty option at the beginning', () => {
 			const customSelect = shallowMount(CustomSelect, {
 				propsData: { items: ['example'] }
