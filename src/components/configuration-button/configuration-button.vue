@@ -31,4 +31,15 @@ export default {
 	}
 }
 </script>
-<style src="./configuration-button.scss" scoped></style>
+
+<style lang="scss" scoped>
+@import '../../global';
+
+.enabled {
+	color: $success;
+}
+
+.disabled {
+	color: $failure;
+}
+</style>
