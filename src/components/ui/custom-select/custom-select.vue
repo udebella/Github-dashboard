@@ -26,4 +26,3 @@ export default {
 	}
 }
 </script>
-<style src="./custom-select.scss" scoped></style>
