@@ -25,12 +25,12 @@ describe('CustomSelect component', () => {
 	})
 
 	describe('Select element', () => {
-		it('should send a selected event when an item is selected', () => {
+		it('should send a selected event when an item is selected', async () => {
 			const customSelect = shallowMount(CustomSelect, {
 				propsData: { items: ['example'] }
 			})
 
-			customSelect.find('[data-test=select]').setValue('example')
+			await customSelect.find('[data-test=select]').setValue('example')
 
 			expect(customSelect.emitted().selected).toEqual([['example']])
 		})
