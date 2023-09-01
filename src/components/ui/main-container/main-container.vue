@@ -32,51 +32,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// TODO find a way to migrate media query to native css
 @import '../../../global';
 
 .container {
 	margin: 10px;
 	display: flex;
 	flex-direction: column;
+}
 
-	.configuration {
-		margin-bottom: 10px;
-	}
+.configuration {
+	margin-bottom: 10px;
+}
 
-	.columns {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
+.columns {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 
-		@include on-mobile {
-			flex-direction: column;
+	@include on-mobile {
+		flex-direction: column;
 
-			.repository-list {
-				margin-bottom: 10px;
-			}
-
-			.pull-request-list {
-				margin-bottom: 10px;
-			}
+		.repository-list {
+			margin-bottom: 10px;
 		}
 
-		@include on-desktop {
-			.repository-list {
-				width: 19%;
-			}
-
-			.pull-request-list {
-				width: 39%;
-			}
-
-			.viewer-pull-request-list {
-				width: 39%;
-			}
-		}
-
-		.viewer-pull-request-list *:not(:first-child) {
-			margin-top: 20px;
+		.pull-request-list {
+			margin-bottom: 10px;
 		}
 	}
+
+	@include on-desktop {
+		.repository-list {
+			width: 19%;
+		}
+
+		.pull-request-list {
+			width: 39%;
+		}
+
+		.viewer-pull-request-list {
+			width: 39%;
+		}
+	}
+}
+
+.viewer-pull-request-list *:not(:first-child) {
+	margin-top: 20px;
 }
 </style>
