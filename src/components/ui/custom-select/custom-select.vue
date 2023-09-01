@@ -1,5 +1,5 @@
 <template>
-	<select v-if="items.length" v-model="selected" data-test="select" @change="notify">
+	<select v-if="items.length" data-test="select" @change="notify">
 		<option disabled value="" />
 		<option v-for="item in items" :key="item" :value="item">
 			{{ item }}
@@ -8,8 +8,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-
 withDefaults(
 	defineProps<{
 		items?: string[]
@@ -21,8 +19,8 @@ const emit = defineEmits<{
 	selected: [string]
 }>()
 
-const selected = ref('')
-const notify = () => {
-	emit('selected', selected.value)
+const notify = (event: Event) => {
+	const target = event.target as HTMLSelectElement
+	emit('selected', target.value)
 }
 </script>
