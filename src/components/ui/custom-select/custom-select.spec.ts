@@ -5,9 +5,7 @@ import { describe, expect, it } from 'vitest'
 describe('CustomSelect component', () => {
 	describe('Initialization', () => {
 		it('should display one option by item given in props with an empty option at the beginning', () => {
-			const customSelect = shallowMount(CustomSelect, {
-				propsData: { items: ['example'] }
-			})
+			const customSelect = shallowMount(CustomSelect, { props: { items: ['example'] } })
 
 			const options = customSelect.findAll('[data-test=select] option')
 			expect(options.length).toBe(2)
@@ -26,9 +24,7 @@ describe('CustomSelect component', () => {
 
 	describe('Select element', () => {
 		it('should send a selected event when an item is selected', async () => {
-			const customSelect = shallowMount(CustomSelect, {
-				propsData: { items: ['example'] }
-			})
+			const customSelect = shallowMount(CustomSelect, { props: { items: ['example'] } })
 
 			await customSelect.find('[data-test=select]').setValue('example')
 
