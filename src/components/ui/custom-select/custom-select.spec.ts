@@ -1,15 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
 import CustomSelect from './custom-select.vue'
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 describe('CustomSelect component', () => {
 	describe('Initialization', () => {
-		it('should mount properly', () => {
-			const customSelect = shallowMount(CustomSelect)
-
-			expect(customSelect.exists()).toBe(true)
-		})
-
 		it('should display a select with options', () => {
 			const customSelect = shallowMount(CustomSelect, {
 				propsData: { items: ['item'] }
@@ -23,11 +17,12 @@ describe('CustomSelect component', () => {
 				propsData: { items: ['example'] }
 			})
 
-			expect(customSelect.findAll('[data-test=select] option').length).toBe(2)
-			expect(customSelect.findAll('[data-test=select] option').at(0).text()).toBe('')
-			expect(customSelect.findAll('[data-test=select] option').at(0).attributes().value).toBe('')
-			expect(customSelect.findAll('[data-test=select] option').at(1).text()).toBe('example')
-			expect(customSelect.findAll('[data-test=select] option').at(1).attributes().value).toBe('example')
+			const options = customSelect.findAll('[data-test=select] option')
+			expect(options.length).toBe(2)
+			expect(options[0].text()).toBe('')
+			expect(options[0].attributes().value).toBe('')
+			expect(options[1].text()).toBe('example')
+			expect(options[1].attributes().value).toBe('example')
 		})
 
 		it('should not display anything when there is no items in the list', () => {
@@ -43,7 +38,7 @@ describe('CustomSelect component', () => {
 				propsData: { items: ['example'] }
 			})
 
-			customSelect.findAll('[data-test=select] option').at(1).setSelected()
+			customSelect.find('[data-test=select]').setValue('example')
 
 			expect(customSelect.emitted().selected).toEqual([['example']])
 		})
