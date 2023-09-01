@@ -1,5 +1,5 @@
 <template>
-	<select v-if="items.length" v-model="selected" data-test="select" @change="notify">
+	<select v-if="items.length" data-test="select" @change="notify">
 		<option disabled value="" />
 		<option v-for="item in items" :key="item" :value="item">
 			{{ item }}
@@ -7,5 +7,20 @@
 	</select>
 </template>
 
-<script src="./custom-select.js"></script>
-<style src="./custom-select.scss" scoped></style>
+<script lang="ts" setup>
+withDefaults(
+	defineProps<{
+		items?: string[]
+	}>(),
+	{ items: () => [] }
+)
+
+const emit = defineEmits<{
+	selected: [string]
+}>()
+
+const notify = (event: Event) => {
+	const target = event.target as HTMLSelectElement
+	emit('selected', target.value)
+}
+</script>

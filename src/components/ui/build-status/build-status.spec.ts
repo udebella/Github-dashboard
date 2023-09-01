@@ -7,7 +7,7 @@ describe('BuildStatus component', () => {
 
 	beforeEach(() => {
 		buildStatus = shallowMount(BuildStatus, {
-			propsData: {
+			props: {
 				url: 'http://build-link',
 				description: 'a short description',
 				state: 'SUCCESS'
