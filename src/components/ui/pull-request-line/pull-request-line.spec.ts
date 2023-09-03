@@ -58,23 +58,8 @@ describe('PullRequestLine component', () => {
 			expect(updateIcon.exists()).toBe(true)
 		})
 
-		it('should not display the update icon when there are no updates', () => {
-			pullRequestLine = shallowMount(PullRequestLine, {
-				propsData: {
-					title: 'Pull request name',
-					url: 'http://pull-request-url',
-					buildStatus: 'SUCCESS',
-					creationDate: today,
-					hasUpdates: false,
-					statusesList: [
-						{
-							jobStatus: 'SUCCESS',
-							description: 'build description',
-							jobUrl: 'http://build-target-url'
-						}
-					]
-				}
-			})
+		it('should not display the update icon when there are no updates', async () => {
+			await pullRequestLine.setProps({ hasUpdates: false })
 			const updateIcon = pullRequestLine.findComponent(UpdateIcon)
 
 			expect(updateIcon.exists()).toBe(false)
@@ -102,16 +87,8 @@ describe('PullRequestLine component', () => {
 			])
 		})
 
-		it('should not display build statuses when there is no build status associated with the commit', () => {
-			pullRequestLine = shallowMount(PullRequestLine, {
-				propsData: {
-					title: 'Pull request name',
-					url: 'http://pull-request-url',
-					buildStatus: 'SUCCESS',
-					creationDate: today,
-					hasUpdates: true
-				}
-			})
+		it('should not display build statuses when there is no build status associated with the commit', async () => {
+			await pullRequestLine.setProps({ statusesList: undefined })
 
 			buildStatuses = pullRequestLine.findComponent(BuildStatuses)
 			expect(buildStatuses.exists()).toBe(false)
