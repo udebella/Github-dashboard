@@ -1,9 +1,13 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, VueWrapper } from '@vue/test-utils'
 import PullRequestLine from './pull-request-line.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
+import BadgeStatus from '../badge-status/badge-status.vue'
+import LivingIcon from '../living-icon/living-icon.vue'
+import BuildStatuses from '../build-statuses/build-statuses.vue'
+import UpdateIcon from '../update-icon/update-icon.vue'
 
 describe('PullRequestLine component', () => {
-	let pullRequestLine
+	let pullRequestLine: VueWrapper
 	const today = new Date()
 
 	beforeEach(() => {
@@ -36,7 +40,7 @@ describe('PullRequestLine component', () => {
 
 	describe('Display', () => {
 		it('should display the pull request name', () => {
-			expect(pullRequestLine.find('[data-test=name]').text()).toBe('Pull request name')
+			expect(pullRequestLine.findComponent(BadgeStatus).text()).toBe('Pull request name')
 		})
 
 		it('should display a link to the pull request', () => {
@@ -44,18 +48,18 @@ describe('PullRequestLine component', () => {
 		})
 
 		it('should display the build status of the pull request', () => {
-			expect(pullRequestLine.findComponent('[data-test=name]').props().status).toBe('SUCCESS')
+			expect(pullRequestLine.findComponent(BadgeStatus).props().status).toBe('SUCCESS')
 		})
 
 		it('should display a living icon', () => {
-			const livingIcon = pullRequestLine.findComponent('[data-test=living-icon]')
+			const livingIcon = pullRequestLine.findComponent(LivingIcon)
 
 			expect(livingIcon.exists()).toBe(true)
 			expect(livingIcon.props().date).toBe(today)
 		})
 
 		it('should display an update icon', () => {
-			const updateIcon = pullRequestLine.find('[data-test=update-icon]')
+			const updateIcon = pullRequestLine.findComponent(UpdateIcon)
 
 			expect(updateIcon.exists()).toBe(true)
 		})
@@ -77,17 +81,17 @@ describe('PullRequestLine component', () => {
 					]
 				}
 			})
-			const updateIcon = pullRequestLine.find('[data-test=update-icon]')
+			const updateIcon = pullRequestLine.findComponent(UpdateIcon)
 
 			expect(updateIcon.exists()).toBe(false)
 		})
 	})
 
 	describe('Build statuses', () => {
-		let buildStatuses
+		let buildStatuses: VueWrapper
 
 		beforeEach(() => {
-			buildStatuses = pullRequestLine.findComponent({ name: 'build-statuses' })
+			buildStatuses = pullRequestLine.findComponent(BuildStatuses)
 		})
 
 		it('should display build statuses', () => {
@@ -115,7 +119,7 @@ describe('PullRequestLine component', () => {
 				}
 			})
 
-			buildStatuses = pullRequestLine.findComponent({ name: 'build-statuses' })
+			buildStatuses = pullRequestLine.findComponent(BuildStatuses)
 			expect(buildStatuses.exists()).toBe(false)
 		})
 	})
