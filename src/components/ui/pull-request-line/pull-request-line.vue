@@ -59,4 +59,49 @@ export default {
 	}
 }
 </script>
-<style src="./pull-request-line.scss" scoped></style>
+<style lang="scss" scoped>
+@import '../../../global';
+
+.link {
+	text-decoration: none;
+
+	.line {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		.title {
+			max-width: 90%;
+		}
+
+		.icons {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			*:not(:first-child) {
+				margin-left: 5px;
+			}
+		}
+
+		.popover {
+			display: flex;
+			flex-direction: column;
+			visibility: hidden;
+			opacity: 0;
+			transition: 300ms ease;
+		}
+
+		@include on-desktop {
+			&:hover .popover,
+			.popover:hover {
+				visibility: visible;
+				opacity: 1;
+				transition: 300ms ease;
+			}
+		}
+	}
+}
+</style>
