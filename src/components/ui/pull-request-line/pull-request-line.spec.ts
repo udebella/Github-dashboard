@@ -32,12 +32,6 @@ describe('PullRequestLine component', () => {
 		})
 	})
 
-	describe('Initialization', () => {
-		it('should mount properly', () => {
-			expect(pullRequestLine.exists()).toBe(true)
-		})
-	})
-
 	describe('Display', () => {
 		it('should display the pull request name', () => {
 			expect(pullRequestLine.findComponent(BadgeStatus).text()).toBe('Pull request name')
