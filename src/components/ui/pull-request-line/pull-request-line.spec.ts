@@ -12,7 +12,7 @@ describe('PullRequestLine component', () => {
 
 	beforeEach(() => {
 		pullRequestLine = shallowMount(PullRequestLine, {
-			propsData: {
+			props: {
 				title: 'Pull request name',
 				url: 'http://pull-request-url',
 				buildStatus: 'SUCCESS',
