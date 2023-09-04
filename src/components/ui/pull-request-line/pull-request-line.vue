@@ -21,13 +21,13 @@ import UpdateIcon from '../update-icon/update-icon.vue'
 import BuildStatuses from '../build-statuses/build-statuses.vue'
 import BadgeStatus from '../badge-status/badge-status.vue'
 import PopOver from '../pop-over/pop-over.vue'
-import type { GDBuildStatus } from '../../../services/statuses/extract-statuses'
+import type { GDBuildStatus, GDJobStatus } from '../../../services/statuses/extract-statuses'
 
 withDefaults(
 	defineProps<{
 		title: string
 		url: string
-		buildStatus: string
+		buildStatus: GDJobStatus
 		creationDate: Date
 		hasUpdates: boolean
 		statusesList?: GDBuildStatus[]
