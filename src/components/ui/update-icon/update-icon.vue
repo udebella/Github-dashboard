@@ -1,8 +1,9 @@
 <template>
 	<div title="There are new updates">
-		<icon-component icon="hasUpdates" data-test="icon" />
+		<icon-component icon="hasUpdates" />
 	</div>
 </template>
 
-<script src="./update-icon.js"></script>
-<style src="./update-icon.scss" scoped></style>
+<script lang="ts" setup>
+import IconComponent from '../icon/icon-component.vue'
+</script>
