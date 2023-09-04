@@ -4,14 +4,6 @@ import { describe, expect, it } from 'vitest'
 import IconComponent from '../icon/icon-component.vue'
 
 describe('UpdateIcon component', () => {
-	describe('Initialization', () => {
-		it('should mount properly', () => {
-			const updateIcon = shallowMount(UpdateIcon)
-
-			expect(updateIcon.exists()).toBe(true)
-		})
-	})
-
 	describe('Display', () => {
 		it('should display an update icon', () => {
 			const updateIcon = shallowMount(UpdateIcon)
