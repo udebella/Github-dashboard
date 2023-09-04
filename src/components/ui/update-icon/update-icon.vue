@@ -7,5 +7,3 @@
 <script lang="ts" setup>
 import IconComponent from '../icon/icon-component.vue'
 </script>
-
-<style src="./update-icon.scss" scoped></style>
