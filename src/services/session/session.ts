@@ -14,24 +14,16 @@ type User = {
 	token: string
 }
 
-export const buildSessionService = (storage: Storage = window.sessionStorage) => {
-	const setUser = (item: User) => {
+export const buildSessionService = (storage: Storage = window.sessionStorage) => ({
+	setUser: (item: User) => {
 		storage.setItem(USER_KEY, JSON.stringify(item))
-	}
-
-	const getUser = (): User | NO_USER => {
+	},
+	getUser: (): User | NO_USER => {
 		const user = storage.getItem(USER_KEY)
 		if (user === null) {
 			return NO_USER
 		}
 		return JSON.parse(user)
-	}
-
-	const removeUser = () => storage.removeItem(USER_KEY)
-
-	return {
-		setUser,
-		getUser,
-		removeUser
-	}
-}
+	},
+	removeUser: () => storage.removeItem(USER_KEY)
+})
