@@ -15,6 +15,13 @@ describe('CustomSelect component', () => {
 			expect(options[1].attributes().value).toBe('example')
 		})
 
+		it('should select the empty option by default', async () => {
+			const customSelect = shallowMount(CustomSelect, { props: { items: ['example'] } })
+
+			const select = customSelect.find<HTMLSelectElement>('[data-test=select]')
+			expect(select.element.value).toBe('')
+		})
+
 		it('should not display anything when there is no items in the list', () => {
 			const customSelect = shallowMount(CustomSelect)
 
