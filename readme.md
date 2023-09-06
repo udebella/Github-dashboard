@@ -1,5 +1,17 @@
 # Github dashboard
 
+Follow multiple repositories and get notifications when someone opens a new pull requests.
+Get in one view, build statuses for the repositories and associated pull requests.
+
+Really helpful when working with multiple repositories in microservice architecture for example.
+
+Here is an example of the dashboard in action :
+![screenshot from the application](documentation/screenshot.png)
+
+Notes:
+* Data consumes only github api (works with private instances of github enterprise)
+* Everything is stored locally in your browser
+
 ## Contributing
 
 ## Install dependencies
