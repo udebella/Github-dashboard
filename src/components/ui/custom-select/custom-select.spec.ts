@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 
 describe('CustomSelect component', () => {
 	describe('Initialization', () => {
-		it('should display one option by item given in props with an empty option at the beginning', () => {
+		it('displays one option by item given in props with an empty option at the beginning', () => {
 			const customSelect = shallowMount(CustomSelect, { props: { items: ['example'] } })
 
 			const options = customSelect.findAll('[data-test=select] option')
@@ -15,7 +15,14 @@ describe('CustomSelect component', () => {
 			expect(options[1].attributes().value).toBe('example')
 		})
 
-		it('should not display anything when there is no items in the list', () => {
+		it('selects the empty option by default', async () => {
+			const customSelect = shallowMount(CustomSelect, { props: { items: ['example'] } })
+
+			const select = customSelect.find<HTMLSelectElement>('[data-test=select]')
+			expect(select.element.value).toBe('')
+		})
+
+		it('does not display anything when there is no items in the list', () => {
 			const customSelect = shallowMount(CustomSelect)
 
 			expect(customSelect.find('[data-test=select]').exists()).toBe(false)
@@ -23,7 +30,7 @@ describe('CustomSelect component', () => {
 	})
 
 	describe('Select element', () => {
-		it('should send a selected event when an item is selected', async () => {
+		it('sends a selected event when an item is selected', async () => {
 			const customSelect = shallowMount(CustomSelect, { props: { items: ['example'] } })
 
 			await customSelect.find('[data-test=select]').setValue('example')
