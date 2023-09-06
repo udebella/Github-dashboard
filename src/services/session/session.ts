@@ -1,10 +1,9 @@
 type NO_USER = typeof NO_USER
 export const NO_USER = {}
 
-type USER_KEY = typeof USER_KEY
 const USER_KEY = 'user'
 
-type Storage = {
+export type Storage = {
 	setItem: (key: string, item: string) => void
 	getItem: (key: string) => string | null
 	removeItem: (key: string) => void

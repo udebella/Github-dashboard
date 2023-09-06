@@ -1,8 +1,10 @@
-import { buildSessionService, NO_USER } from './session'
+import { buildSessionService, NO_USER, type Storage } from './session'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import type { Mocks } from '../../test-utils'
 
 describe('Session service', () => {
-	let sessionService, fakeSessionStorage
+	let sessionService: ReturnType<typeof buildSessionService>
+	let fakeSessionStorage: Mocks<Storage>
 
 	beforeEach(() => {
 		fakeSessionStorage = {
@@ -22,7 +24,7 @@ describe('Session service', () => {
 
 	describe('Store user in session', () => {
 		it('should allow to store user in session', () => {
-			sessionService.setUser('token')
+			sessionService.setUser({ login: 'test', token: 'token' })
 
 			expect(fakeSessionStorage.setItem).toHaveBeenCalled()
 		})
@@ -30,11 +32,11 @@ describe('Session service', () => {
 
 	describe('Retrieve user from session', () => {
 		it('should allow to retrieve user in session', () => {
-			fakeSessionStorage.getItem.mockReturnValue('"token"')
+			fakeSessionStorage.getItem.mockReturnValue('{ "login": "test", "token": "token" }')
 
 			const token = sessionService.getUser()
 
-			expect(token).toBe('token')
+			expect(token).toEqual({ login: 'test', token: 'token' })
 		})
 
 		it('should handle the case where there is no logged user in session', () => {
