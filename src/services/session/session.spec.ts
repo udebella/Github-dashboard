@@ -16,12 +16,6 @@ describe('Session service', () => {
 		sessionService = buildSessionService(fakeSessionStorage)
 	})
 
-	describe('Initialization', () => {
-		it('should init properly', () => {
-			expect(sessionService).toBeDefined()
-		})
-	})
-
 	describe('Store user in session', () => {
 		it('should allow to store user in session', () => {
 			sessionService.setUser({ login: 'test', token: 'token' })
