@@ -19,7 +19,13 @@ export const buildSessionService = (storage: Storage = window.sessionStorage) =>
 		storage.setItem(USER_KEY, JSON.stringify(item))
 	}
 
-	const getUser = (): User | NO_USER => JSON.parse(storage.getItem(USER_KEY)) || NO_USER
+	const getUser = (): User | NO_USER => {
+		const user = storage.getItem(USER_KEY)
+		if (user === null) {
+			return NO_USER
+		}
+		return JSON.parse(user)
+	}
 
 	const removeUser = () => storage.removeItem(USER_KEY)
 
