@@ -36,6 +36,9 @@ export const pullRequestFragment = `fragment PullRequest on PullRequestConnectio
       createdAt
       updatedAt
       state
+      repository {
+      	name
+      }
       timelineItems(last: 1, itemTypes: [PULL_REQUEST_COMMIT, PULL_REQUEST_REVIEW]) {
         nodes {
 		  ...on PullRequestCommit {
