@@ -262,7 +262,7 @@ describe('Pull request service', () => {
 						createdAt: '2018-10-31T22:17:12Z',
 						updatedAt: '2018-11-07T20:10:15Z',
 						state: 'OPEN',
-						repository: { name: 'truc' },
+						repository: { name: 'repo-name' },
 						timelineItems: {
 							nodes: [{}]
 						},
