@@ -1,9 +1,10 @@
 <template>
 	<a :href="url" data-test="link" class="link">
 		<badge-status :status="buildStatus" class="line">
-			<div class="title">
+			<div data-testid="title" class="title">
 				{{ title }}
 			</div>
+			<span data-testid="repository-name">{{ repositoryName }}</span>
 			<div class="icons">
 				<update-icon v-if="hasUpdates" />
 				<living-icon :date="creationDate" />
@@ -30,6 +31,7 @@ withDefaults(
 		buildStatus: GDJobStatus
 		creationDate: Date
 		hasUpdates: boolean
+		repositoryName: string
 		statusesList?: GDBuildStatus[]
 	}>(),
 	{ statusesList: () => [] }

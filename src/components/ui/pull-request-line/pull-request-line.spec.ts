@@ -18,6 +18,7 @@ describe('PullRequestLine component', () => {
 				buildStatus: 'SUCCESS',
 				creationDate: today,
 				hasUpdates: true,
+				repositoryName: 'repo-name',
 				statusesList: [
 					{
 						jobStatus: 'SUCCESS',
@@ -34,7 +35,7 @@ describe('PullRequestLine component', () => {
 
 	describe('Display', () => {
 		it('should display the pull request name', () => {
-			expect(pullRequestLine.findComponent(BadgeStatus).text()).toBe('Pull request name')
+			expect(pullRequestLine.find('[data-testid=title]').text()).toBe('Pull request name')
 		})
 
 		it('should display a link to the pull request', () => {
@@ -56,6 +57,12 @@ describe('PullRequestLine component', () => {
 			const updateIcon = pullRequestLine.findComponent(UpdateIcon)
 
 			expect(updateIcon.exists()).toBe(true)
+		})
+
+		it('should display repository name', () => {
+			const prName = pullRequestLine.find('[data-testid=repository-name]')
+
+			expect(prName.text()).toBe('repo-name')
 		})
 
 		it('should not display the update icon when there are no updates', async () => {
