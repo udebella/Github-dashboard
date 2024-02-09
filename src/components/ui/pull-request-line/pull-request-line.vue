@@ -4,7 +4,7 @@
 			<div data-testid="title" class="title">
 				{{ title }}
 			</div>
-			<span data-testid="repository-name">{{ repositoryName }}</span>
+			<span class="repository-name" data-testid="repository-name">{{ repositoryName }}</span>
 			<div class="icons">
 				<update-icon v-if="hasUpdates" />
 				<living-icon :date="creationDate" />
@@ -52,6 +52,15 @@ withDefaults(
 
 		.title {
 			max-width: 90%;
+			flex-grow: 1;
+		}
+
+		.repository-name {
+			margin-right: 5px;
+			font-size: smaller;
+			background-color: #005569;
+			padding: 1px 6px 1px 6px;
+			border-radius: 5px;
 		}
 
 		.icons {
