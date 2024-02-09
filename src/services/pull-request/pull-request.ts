@@ -15,6 +15,7 @@ type GDPullRequest = {
 	prUrl: string
 	creationDate: Date
 	updateDate: Date
+	repositoryName: string
 } & GDPullRequestStatus &
 	GDLastEventAuthor
 
@@ -81,10 +82,11 @@ export const extractHttp = (repositoryList: Repository[]) =>
 	repositoryList.flatMap((repository) => repository.pullRequests.nodes!.map(extractPullRequest)).sort(mostRecentFirst)
 
 const extractPullRequest = (pullRequest: Maybe<PullRequest>): GDPullRequest => {
-	const { title, url, createdAt, updatedAt, commits, timelineItems } = pullRequest!
+	const { title, url, createdAt, updatedAt, commits, timelineItems, repository } = pullRequest!
 	return {
 		prTitle: title,
 		prUrl: url,
+		repositoryName: repository.name,
 		creationDate: new Date(createdAt),
 		updateDate: new Date(updatedAt),
 		...extractLastEventAuthor(timelineItems),
