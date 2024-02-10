@@ -16,6 +16,7 @@ describe('RecentlyClosedPullRequests component', () => {
 				updateDate: new Date('2018-10-25T01:36:27Z'),
 				lastEventAuthor: 'udebella',
 				buildStatus: 'FAILURE',
+				repositoryName: 'repo-name',
 				statuses: [
 					{
 						jobStatus: 'SUCCESS',
@@ -98,6 +99,7 @@ describe('RecentlyClosedPullRequests component', () => {
 				buildStatus: 'FAILURE',
 				creationDate: new Date('2018-10-20T00:00:00Z'),
 				hasUpdates: false,
+				repositoryName: 'repo-name',
 				statusesList: [
 					{
 						jobStatus: 'SUCCESS',
