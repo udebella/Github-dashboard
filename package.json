@@ -19,7 +19,7 @@
 		"debounce": "^2.0.0",
 		"graphql-request": "^6.1.0",
 		"pinia": "^2.1.3",
-		"remixicon": "^3.5.0",
+		"remixicon": "^4.1.0",
 		"vue": "^3.3.4",
 		"vue-router": "^4.2.4"
 	},
