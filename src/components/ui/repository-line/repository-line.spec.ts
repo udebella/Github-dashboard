@@ -63,13 +63,15 @@ describe('RepositoryLine component', () => {
 		})
 
 		it('gives the list of statuses to the component', () => {
-			expect(buildStatuses.props().statuses).toEqual([
-				{
-					jobStatus: 'SUCCESS',
-					description: 'build description',
-					jobUrl: 'http://build-target-url'
-				}
-			])
+			expect(buildStatuses.props()).toEqual({
+				statuses: [
+					{
+						jobStatus: 'SUCCESS',
+						description: 'build description',
+						jobUrl: 'http://build-target-url'
+					}
+				]
+			})
 		})
 
 		it('does not display build statuses when there is no build status associated with the commit', async () => {

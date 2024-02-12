@@ -85,13 +85,15 @@ describe('PullRequestLine component', () => {
 		})
 
 		it('should give the list of statuses to the component', () => {
-			expect(buildStatuses.props().statuses).toEqual([
-				{
-					jobStatus: 'SUCCESS',
-					description: 'build description',
-					jobUrl: 'http://build-target-url'
-				}
-			])
+			expect(buildStatuses.props()).toEqual({
+				statuses: [
+					{
+						jobStatus: 'SUCCESS',
+						description: 'build description',
+						jobUrl: 'http://build-target-url'
+					}
+				]
+			})
 		})
 
 		it('should not display build statuses when there is no build status associated with the commit', async () => {
