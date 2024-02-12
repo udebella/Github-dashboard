@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { debounce } from 'debounce'
+import debounce from 'debounce'
 
 const emit = defineEmits<{
 	input: [string]
