@@ -41,6 +41,7 @@ describe('PullRequestList component', () => {
 				updateDate: new Date('2018-12-16T21:05:45Z'),
 				lastEventAuthor: 'anUser',
 				buildStatus: 'FAILURE',
+				repositoryName: 'repo-name',
 				statuses: [
 					{
 						jobStatus: 'SUCCESS',
@@ -56,6 +57,7 @@ describe('PullRequestList component', () => {
 				updateDate: new Date('2018-10-25T01:36:27Z'),
 				lastEventAuthor: 'udebella',
 				buildStatus: 'FAILURE',
+				repositoryName: 'repo-name',
 				statuses: [
 					{
 						jobStatus: 'SUCCESS',
@@ -104,6 +106,7 @@ describe('PullRequestList component', () => {
 				buildStatus: 'FAILURE',
 				creationDate: new Date('2018-12-16T18:26:59Z'),
 				hasUpdates: true,
+				repositoryName: 'repo-name',
 				statusesList: [
 					{
 						jobStatus: 'SUCCESS',
@@ -118,6 +121,7 @@ describe('PullRequestList component', () => {
 				buildStatus: 'FAILURE',
 				creationDate: new Date('2018-10-20T00:00:00Z'),
 				hasUpdates: false,
+				repositoryName: 'repo-name',
 				statusesList: [
 					{
 						jobStatus: 'SUCCESS',

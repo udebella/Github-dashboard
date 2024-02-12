@@ -5,13 +5,14 @@
 			<network-polling data-test="network-polling" :query="query" @http-update="updatePullRequests" />
 		</div>
 		<pull-request-line
-			v-for="{ buildStatus, creationDate, statuses, prTitle, prUrl } in pullRequests"
+			v-for="{ buildStatus, creationDate, statuses, prTitle, prUrl, repositoryName } in pullRequests"
 			:key="prTitle"
 			:has-updates="false"
 			:build-status="buildStatus"
 			:creation-date="creationDate"
 			:title="prTitle"
 			:url="prUrl"
+			:repository-name="repositoryName"
 			:statuses-list="statuses"
 			data-test="line"
 		/>

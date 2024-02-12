@@ -18,6 +18,7 @@ describe('Pull request service', () => {
 							updatedAt: '2018-10-25T01:36:27Z',
 							createdAt: '2018-10-20T00:00:00Z',
 							state: 'OPEN',
+							repository: { name: 'repo-name' },
 							timelineItems: {
 								nodes: []
 							},
@@ -50,6 +51,63 @@ describe('Pull request service', () => {
 		expect(errors).toEqual([])
 	})
 
+	it('should match pull request fragment', () => {
+		expect(pullRequestFragment).toEqual(`fragment PullRequest on PullRequestConnection {
+  nodes {
+      title
+      url
+      comments {
+        totalCount
+      }
+      createdAt
+      updatedAt
+      state
+      repository {
+      	name
+      }
+      timelineItems(last: 1, itemTypes: [PULL_REQUEST_COMMIT, PULL_REQUEST_REVIEW]) {
+        nodes {
+		  ...on PullRequestCommit {
+			commit {
+			  author {
+				name
+			  }
+			}
+		  }
+		  ...on PullRequestReview {
+			author {
+			  login
+			}
+		  }
+        }
+      }
+      commits(last: 1) {
+        nodes {
+          commit {
+            statusCheckRollup {
+            contexts(last: 10) {
+            	nodes {
+					...on StatusContext {
+                      state
+                      context
+                      targetUrl
+                    }
+                    ...on CheckRun {
+                      conclusion
+                      name
+                      detailsUrl
+                    }
+            	}
+			  }
+              state
+            }
+          }
+        }
+      }
+    }
+}`)
+	})
+
 	it('returns an empty array when there is no pull request in http response', () => {
 		httpResponse[0].pullRequests.nodes = []
 		const response = extractHttp(httpResponse)
@@ -65,6 +123,7 @@ describe('Pull request service', () => {
 		expect(response).toEqual([
 			{
 				prTitle: 'Fix wheel/touch browser locking in IE and Safari',
+				repositoryName: 'repo-name',
 				prUrl: 'https://github.com/facebook/react/pull/9333',
 				creationDate: new Date('2018-10-20T00:00:00Z'),
 				updateDate: new Date('2018-10-25T01:36:27Z'),
@@ -121,6 +180,7 @@ describe('Pull request service', () => {
 					creationDate: new Date('2018-10-20T00:00:00Z'),
 					updateDate: new Date('2018-10-25T01:36:27Z'),
 					lastEventAuthor: '',
+					repositoryName: 'repo-name',
 					buildStatus: 'SUCCESS',
 					statuses: [
 						{
@@ -149,6 +209,7 @@ describe('Pull request service', () => {
 					creationDate: new Date('2018-10-20T00:00:00Z'),
 					updateDate: new Date('2018-10-25T01:36:27Z'),
 					lastEventAuthor: '',
+					repositoryName: 'repo-name',
 					buildStatus: 'SUCCESS',
 					statuses: [
 						{
@@ -177,6 +238,7 @@ describe('Pull request service', () => {
 					creationDate: new Date('2018-10-20T00:00:00Z'),
 					updateDate: new Date('2018-10-25T01:36:27Z'),
 					lastEventAuthor: '',
+					repositoryName: 'repo-name',
 					buildStatus: 'SUCCESS',
 					statuses: [
 						{
@@ -200,6 +262,7 @@ describe('Pull request service', () => {
 						createdAt: '2018-10-31T22:17:12Z',
 						updatedAt: '2018-11-07T20:10:15Z',
 						state: 'OPEN',
+						repository: { name: 'repo-name' },
 						timelineItems: {
 							nodes: [{}]
 						},
