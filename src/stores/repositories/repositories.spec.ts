@@ -14,7 +14,7 @@ describe('Repositories store', () => {
 	})
 
 	describe('addRepository', () => {
-		it('should add a repository to watch for the username', () => {
+		it('adds a repository to watch for the username', () => {
 			const store = useRepositoryStore()
 			const repository = { owner: 'username', name: 'repository' }
 
@@ -23,7 +23,7 @@ describe('Repositories store', () => {
 			expect(store.watched).toEqual([repository])
 		})
 
-		it('should allow to add multiple repositories for an user ordered by name', () => {
+		it('allows to add multiple repositories for an user ordered by name', () => {
 			const store = useRepositoryStore()
 
 			const firstRepository = { owner: 'user', name: 'repository' }
@@ -33,10 +33,20 @@ describe('Repositories store', () => {
 
 			expect(store.watched).toEqual([repository, firstRepository])
 		})
+
+		it('does not allow to add twice the same repository', () => {
+			const store = useRepositoryStore()
+
+			const repository = { owner: 'user', name: 'repository' }
+			store.addRepository(repository)
+			store.addRepository(repository)
+
+			expect(store.watched).toEqual([repository])
+		})
 	})
 
 	describe('removeRepository', () => {
-		it('should remove watched repository for the username', () => {
+		it('removes watched repository for the username', () => {
 			const store = useRepositoryStore()
 			store.addRepository({ owner: 'user', name: 'repository' })
 
@@ -45,7 +55,7 @@ describe('Repositories store', () => {
 			expect(store.watched).toEqual([])
 		})
 
-		it('should only remove the specified repository and keep the others', () => {
+		it('only removes the specified repository and keep the others', () => {
 			const store = useRepositoryStore()
 			store.addRepository({ owner: 'user', name: 'repository' })
 			store.addRepository({ owner: 'user', name: 'secondRepository' })
