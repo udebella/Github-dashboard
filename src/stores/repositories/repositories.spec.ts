@@ -33,6 +33,16 @@ describe('Repositories store', () => {
 
 			expect(store.watched).toEqual([repository, firstRepository])
 		})
+
+		it('should not allow to add twice the same repository', () => {
+			const store = useRepositoryStore()
+
+			const repository = { owner: 'user', name: 'repository' }
+			store.addRepository(repository)
+			store.addRepository(repository)
+
+			expect(store.watched).toEqual([repository])
+		})
 	})
 
 	describe('removeRepository', () => {
