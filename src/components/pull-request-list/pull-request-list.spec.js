@@ -84,10 +84,6 @@ describe('PullRequestList component', () => {
 	})
 
 	describe('Initialization', () => {
-		it('should mount properly', () => {
-			expect(pullRequestList.exists()).toBe(true)
-		})
-
 		it('should display a title', () => {
 			expect(pullRequestList.find('[data-test=title]').text()).toBe('Pull requests on watched repositories')
 		})
