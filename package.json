@@ -2,6 +2,7 @@
 	"name": "github-dashboard",
 	"version": "0.0.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"start": "vite",
 		"prebuild": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
