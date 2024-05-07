@@ -69,7 +69,9 @@ import RecentlyClosedPullRequests from '../../recently-closed-pull-requests/rece
 	}
 }
 
-.viewer-pull-request-list *:not(:first-child) {
-	margin-top: 20px;
+.viewer-pull-request-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 </style>
