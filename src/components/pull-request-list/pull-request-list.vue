@@ -103,4 +103,13 @@ export default {
 	}
 }
 </script>
-<style src="./pull-request-list.scss" scoped></style>
+
+<style lang="scss" scoped>
+@import '../../global';
+
+.head {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+</style>
