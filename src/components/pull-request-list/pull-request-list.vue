@@ -104,9 +104,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../../global';
-
+<style lang="css" scoped>
 .head {
 	display: flex;
 	flex-direction: row;
