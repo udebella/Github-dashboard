@@ -16,7 +16,7 @@
 	"dependencies": {
 		"@octokit/graphql-schema": "^14.26.1",
 		"@types/debounce": "^1.2.1",
-		"date-fns": "^2.30.0",
+		"date-fns": "^3.6.0",
 		"debounce": "^2.0.0",
 		"graphql-request": "^6.1.0",
 		"pinia": "^2.1.3",
