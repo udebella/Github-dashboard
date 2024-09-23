@@ -5,7 +5,7 @@ export type Mocks<Type> = {
 }
 
 type MockFunction<Type> = Type extends (...arg: infer Params) => infer ReturnType
-	? Mock<Params, ReturnType>
+	? Mock<(...args: Params) => ReturnType>
 	: Type extends object
-	? Mocks<Type>
-	: Type
+		? Mocks<Type>
+		: Type
