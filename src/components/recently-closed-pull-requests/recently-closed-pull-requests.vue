@@ -19,5 +19,5 @@
 	</div>
 </template>
 
-<script src="./recently-closed-pull-requests.js"></script>
+<script lang="ts" src="./recently-closed-pull-requests.js"></script>
 <style src="./recently-closed-pull-requests.scss" scoped></style>

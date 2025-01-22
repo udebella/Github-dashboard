@@ -5,7 +5,7 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 import DashboardHeader from './dashboard-header/dashboard-header.vue'
 import MainContainer from './ui/main-container/main-container.vue'
 

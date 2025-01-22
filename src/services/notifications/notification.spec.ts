@@ -4,7 +4,7 @@ import type { Mock } from 'vitest'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 type Notification = {
-	new (message: string): {}
+	new (message: string): object
 	permission: NotificationPermission
 	requestPermission: Mock
 }

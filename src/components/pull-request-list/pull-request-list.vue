@@ -27,7 +27,7 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 import PullRequestLine from '../ui/pull-request-line/pull-request-line.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
 import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
@@ -84,10 +84,10 @@ export default {
 		}
 	},
 	methods: {
-		hasUpdates(lastEventAuthor) {
+		hasUpdates(lastEventAuthor: string) {
 			return this.userService.connectedUser().login !== lastEventAuthor
 		},
-		updatePullRequests(httpResponse) {
+		updatePullRequests(httpResponse: object) {
 			const repositories = Object.values(httpResponse).filter(
 				(repositories) => repositories && repositories.pullRequests
 			)

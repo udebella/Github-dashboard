@@ -6,6 +6,6 @@ describe('User component test', () => {
 		// TODO test also login here
 		const userService = buildUserService()
 
-		expect(userService).to.exist
+		expect(userService).toBeDefined()
 	})
 })
