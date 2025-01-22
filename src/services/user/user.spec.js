@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { buildUserService } from './user'
-import { describe, it, beforeEach, vitest } from 'vitest'
+import { beforeEach, describe, it, vitest } from 'vitest'
 
 describe('User service', () => {
 	let userService, mocks
@@ -18,12 +18,6 @@ describe('User service', () => {
 			request: vitest.fn()
 		}
 		userService = buildUserService(mocks)
-	})
-
-	describe('Initialization', () => {
-		it('should init properly', () => {
-			expect(userService).to.exist
-		})
 	})
 
 	describe('Login', () => {

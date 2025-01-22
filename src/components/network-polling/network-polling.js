@@ -34,7 +34,7 @@ export default {
 				this.promise = this.request(this.query)
 				const response = await this.promise
 				this.$emit('http-update', response)
-			} catch (ex) {
+			} catch {
 				// Request will be retried in a few sec
 			}
 		}

@@ -5,5 +5,5 @@
 	</div>
 </template>
 
-<script src="./repository-picker.js"></script>
+<script lang="ts" src="./repository-picker.js"></script>
 <style src="./repository-picker.scss" scoped></style>

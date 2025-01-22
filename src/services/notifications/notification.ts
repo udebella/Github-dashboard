@@ -1,5 +1,5 @@
 type Notification = {
-	new (message: string): {}
+	new (message: string): object
 	permission: NotificationPermission
 	requestPermission: () => Promise<NotificationPermission>
 }
