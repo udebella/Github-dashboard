@@ -37,7 +37,7 @@
 		"@vue/test-utils": "^2.3.2",
 		"@vue/tsconfig": "^0.7.0",
 		"eslint": "^9.18.0",
-		"eslint-plugin-vue": "^9.16.0",
+		"eslint-plugin-vue": "^10.0.0",
 		"jsdom": "^26.0.0",
 		"plop": "^4.0.1",
 		"prettier": "^3.0.0",
