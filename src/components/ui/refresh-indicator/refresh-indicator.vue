@@ -54,4 +54,16 @@ export default {
 }
 </script>
 
-<style src="./refresh-indicator.scss" scoped></style>
+<style lang="scss" scoped>
+@import '../../../global.scss';
+
+.fresh {
+	color: $success;
+}
+.old {
+	color: $old;
+}
+.outdated {
+	color: $failure;
+}
+</style>
