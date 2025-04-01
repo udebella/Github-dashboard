@@ -54,16 +54,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../../../global.scss';
-
+<style lang="postcss" scoped>
 .fresh {
-	color: $success;
+	color: var(--color-success);
 }
 .old {
-	color: $old;
+	color: var(--color-old);
 }
 .outdated {
-	color: $failure;
+	color: var(--color-failure);
 }
 </style>
