@@ -2,56 +2,39 @@
 	<div data-test="counter" :class="freshness">{{ counter }}s ago</div>
 </template>
 
-<script lang="ts">
-export default {
-	name: 'refresh-indicator',
-	props: {
-		promise: {
-			type: Promise,
-			required: true
-		},
-		timeBetweenRefresh: {
-			type: Number,
-			required: true
-		}
-	},
-	data() {
-		return {
-			interval: setTimeout(() => undefined, 0),
-			counter: 0
-		}
-	},
-	watch: {
-		promise() {
-			this.promise.then(this.resetCounter)
-		}
-	},
-	created() {
-		this.interval = setInterval(this.incrementCounter, 1000)
-	},
-	computed: {
-		freshness() {
-			if (this.counter < this.timeBetweenRefresh) {
-				return 'fresh'
-			}
-			if (this.counter > 2 * this.timeBetweenRefresh) {
-				return 'outdated'
-			}
-			return 'old'
-		}
-	},
-	methods: {
-		incrementCounter() {
-			this.counter++
-		},
-		resetCounter() {
-			this.counter = 0
-		}
-	},
-	unmounted() {
-		clearInterval(this.interval)
+<script lang="ts" setup>
+import { computed, onUnmounted, ref, watch } from 'vue'
+
+const props = defineProps<{
+	promise: Promise<unknown>
+	timeBetweenRefresh: number
+}>()
+
+const counter = ref(0)
+
+const incrementCounter = () => counter.value++
+const resetCounter = () => (counter.value = 0)
+
+const freshness = computed(() => {
+	if (counter.value < props.timeBetweenRefresh) {
+		return 'fresh'
 	}
-}
+	if (counter.value > 2 * props.timeBetweenRefresh) {
+		return 'outdated'
+	}
+	return 'old'
+})
+
+const interval = setInterval(incrementCounter, 1000)
+watch(
+	() => props.promise,
+	() => props.promise.then(resetCounter),
+	{ immediate: true }
+)
+
+onUnmounted(() => {
+	clearInterval(interval)
+})
 </script>
 
 <style lang="postcss" scoped>
