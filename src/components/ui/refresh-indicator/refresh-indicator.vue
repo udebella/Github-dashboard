@@ -12,9 +12,6 @@ const props = defineProps<{
 
 const counter = ref(0)
 
-const incrementCounter = () => counter.value++
-const resetCounter = () => (counter.value = 0)
-
 const freshness = computed(() => {
 	if (counter.value < props.timeBetweenRefresh) {
 		return 'fresh'
@@ -25,10 +22,10 @@ const freshness = computed(() => {
 	return 'old'
 })
 
-const interval = setInterval(incrementCounter, 1000)
+const interval = setInterval(() => counter.value++, 1000)
 watch(
 	() => props.promise,
-	() => props.promise.then(resetCounter),
+	() => props.promise.then(() => (counter.value = 0)),
 	{ immediate: true }
 )
 
