@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
 import RepositoryLine from '../ui/repository-line/repository-line.vue'
+import NetworkPolling from '../network-polling/network-polling.js'
 
 describe('RepositoryList component', () => {
 	let repositoryList, stubs
@@ -114,7 +115,7 @@ describe('RepositoryList component', () => {
 			shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
 
 			// Then
-			expect(repositoryList.find('[data-test=polling]').attributes().query).toBe('graphql query')
+			expect(repositoryList.findComponent(NetworkPolling).props().query).toBe('graphql query')
 		})
 
 		it('should not display anything if the list is empty', () => {
@@ -135,7 +136,7 @@ describe('RepositoryList component', () => {
 		})
 
 		const triggerNetworkResponse = async () => {
-			const networkPolling = repositoryList.findComponent('[data-test=polling]')
+			const networkPolling = repositoryList.findComponent(NetworkPolling)
 			await networkPolling.vm.$emit('http-update', stubs.fakeGraphQlResponse)
 		}
 	})
