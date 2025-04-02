@@ -88,7 +88,6 @@ describe('RepositoryList component', () => {
 			// Then
 			await triggerNetworkResponse()
 			const repositoryLine = repositoryList.findComponent(RepositoryLine)
-			expect(repositoryLine.exists()).toBe(true)
 			expect(repositoryLine.props().repository).toEqual({
 				name: 'repository',
 				owner: 'user',
