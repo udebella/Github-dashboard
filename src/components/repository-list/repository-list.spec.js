@@ -43,7 +43,6 @@ describe('RepositoryList component', () => {
 		}
 		stubs = {
 			queryBuilder: vitest.fn().mockReturnValue('graphql query'),
-			request: vitest.fn().mockResolvedValue(fakeGraphQlResponse),
 			fakeGraphQlResponse
 		}
 
