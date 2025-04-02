@@ -3,14 +3,9 @@
 		<div class="head">
 			<h2 data-test="title">Watched repositories</h2>
 			<!-- @vue-ignore TODO remove when all underlying component migrated to composition api -->
-			<network-polling data-test="polling" :query="query" @http-update="updateRepositories" />
+			<network-polling :query="query" @http-update="updateRepositories" />
 		</div>
-		<repository-line
-			v-for="repository in repositories"
-			:key="repository.name"
-			:repository="repository"
-			data-test="repository-line"
-		/>
+		<repository-line v-for="repository in repositories" :key="repository.name" :repository="repository" />
 		<repository-adder data-test="repository-adder" />
 	</div>
 </template>
@@ -21,7 +16,7 @@ import RepositoryAdder from '../repository-adder/repository-adder.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
 import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
-import { computed, ref } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { extractStatuses } from '../../services/statuses/extract-statuses'
 import type { Commit, GitObject, Maybe, Repository } from '@octokit/graphql-schema'
 import type { GDRepository } from '../../types/repository'
@@ -81,18 +76,13 @@ const repositoryListFragment = `fragment repository on Repository {
   }
 }`
 
-const props = withDefaults(
-	defineProps<{
-		queryBuilder?: ReturnType<typeof buildRepositoriesQuery>
-	}>(),
-	{ queryBuilder: () => buildRepositoriesQuery(repositoryListFragment) }
-)
+const queryBuilder = inject('queryBuilder', buildRepositoriesQuery(repositoryListFragment))
 
 const repositoryStore = useRepositoryStore()
 const repositories = ref<GDRepository[]>([])
 const query = computed(() => {
 	const watchedRepositories = repositoryStore.watched
-	return props.queryBuilder(watchedRepositories)
+	return queryBuilder(watchedRepositories)
 })
 
 function updateRepositories(httpData: Repository) {
