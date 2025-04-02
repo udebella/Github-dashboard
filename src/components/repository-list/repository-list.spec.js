@@ -57,11 +57,8 @@ describe('RepositoryList component', () => {
 		})
 
 		it('should display a list of repositories', async () => {
-			// When
-			repositoryList = shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
-
-			// Then
 			await triggerNetworkResponse()
+
 			const repositoryLine = repositoryList.findComponent(RepositoryLine)
 			expect(repositoryLine.props().repository).toEqual({
 				name: 'repository',
@@ -79,14 +76,10 @@ describe('RepositoryList component', () => {
 		})
 
 		it('should display list of repositories even without build status', async () => {
-			// Given
 			stubs.fakeGraphQlResponse.rep_0.defaultBranchRef.target.statusCheckRollup = null
 
-			// When
-			repositoryList = shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
-
-			// Then
 			await triggerNetworkResponse()
+
 			const repositoryLine = repositoryList.findComponent(RepositoryLine)
 			expect(repositoryLine.props().repository).toEqual({
 				name: 'repository',
@@ -97,36 +90,19 @@ describe('RepositoryList component', () => {
 			})
 		})
 
-		it('should display list of repositories even without build status', async () => {
-			// Given
+		it('should display list of repositories even without rate limit', async () => {
 			stubs.fakeGraphQlResponse.rateLimit = null
 
-			// When
-			repositoryList = shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
-
-			// Then
 			await triggerNetworkResponse()
+
 			expect(repositoryList.findComponent(RepositoryLine).exists()).toBe(true)
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
-			// When
-			shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
-
-			// Then
 			expect(repositoryList.findComponent(NetworkPolling).props().query).toBe('graphql query')
 		})
 
-		it('should not display anything if the list is empty', () => {
-			// Given
-			useRepositoryStore().$patch({ watched: [] })
-
-			// When
-			const repositoryList = shallowMount(RepositoryList, {
-				global: { provide: { queryBuilder: stubs.queryBuilder } }
-			})
-
-			// Then
+		it('should not display repositories by default', () => {
 			expect(repositoryList.findComponent(RepositoryLine).exists()).toBe(false)
 		})
 
