@@ -47,7 +47,7 @@ describe('RepositoryList component', () => {
 			fakeGraphQlResponse
 		}
 
-		repositoryList = shallowMount(RepositoryList, { propsData: stubs })
+		repositoryList = shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
 	})
 
 	describe('Initialisation', () => {
@@ -61,7 +61,7 @@ describe('RepositoryList component', () => {
 
 		it('should display a list of repositories', async () => {
 			// When
-			repositoryList = shallowMount(RepositoryList, { propsData: stubs })
+			repositoryList = shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
 
 			// Then
 			await triggerNetworkResponse()
@@ -87,7 +87,7 @@ describe('RepositoryList component', () => {
 			stubs.fakeGraphQlResponse.rep_0.defaultBranchRef.target.statusCheckRollup = null
 
 			// When
-			repositoryList = shallowMount(RepositoryList, { propsData: stubs })
+			repositoryList = shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
 
 			// Then
 			await triggerNetworkResponse()
@@ -107,7 +107,7 @@ describe('RepositoryList component', () => {
 			stubs.fakeGraphQlResponse.rateLimit = null
 
 			// When
-			repositoryList = shallowMount(RepositoryList, { propsData: stubs })
+			repositoryList = shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
 
 			// Then
 			await triggerNetworkResponse()
@@ -116,7 +116,7 @@ describe('RepositoryList component', () => {
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
 			// When
-			shallowMount(RepositoryList, { propsData: stubs })
+			shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
 
 			// Then
 			expect(repositoryList.find('[data-test=polling]').attributes().query).toBe('graphql query')
@@ -127,7 +127,9 @@ describe('RepositoryList component', () => {
 			useRepositoryStore().$patch({ watched: [] })
 
 			// When
-			const repositoryList = shallowMount(RepositoryList, { propsData: stubs })
+			const repositoryList = shallowMount(RepositoryList, {
+				global: { provide: { queryBuilder: stubs.queryBuilder } }
+			})
 
 			// Then
 			expect(repositoryList.find('[data-test=repository-line]').exists()).toBe(false)
