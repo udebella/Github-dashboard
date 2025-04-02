@@ -50,10 +50,6 @@ describe('RepositoryList component', () => {
 	})
 
 	describe('Initialisation', () => {
-		it('should mount properly', () => {
-			expect(repositoryList.exists()).toBe(true)
-		})
-
 		it('should display a title', () => {
 			expect(repositoryList.find('[data-test=title]').text()).toBe('Watched repositories')
 		})
