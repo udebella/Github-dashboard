@@ -3,6 +3,7 @@ import RepositoryList from './repository-list.vue'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
+import RepositoryLine from '../ui/repository-line/repository-line.vue'
 
 describe('RepositoryList component', () => {
 	let repositoryList, stubs
@@ -60,8 +61,7 @@ describe('RepositoryList component', () => {
 
 			// Then
 			await triggerNetworkResponse()
-			const repositoryLine = repositoryList.findComponent('[data-test=repository-line]')
-			expect(repositoryLine.exists()).toBe(true)
+			const repositoryLine = repositoryList.findComponent(RepositoryLine)
 			expect(repositoryLine.props().repository).toEqual({
 				name: 'repository',
 				owner: 'user',
@@ -86,7 +86,7 @@ describe('RepositoryList component', () => {
 
 			// Then
 			await triggerNetworkResponse()
-			const repositoryLine = repositoryList.findComponent('[data-test=repository-line]')
+			const repositoryLine = repositoryList.findComponent(RepositoryLine)
 			expect(repositoryLine.exists()).toBe(true)
 			expect(repositoryLine.props().repository).toEqual({
 				name: 'repository',
@@ -106,7 +106,7 @@ describe('RepositoryList component', () => {
 
 			// Then
 			await triggerNetworkResponse()
-			expect(repositoryList.find('[data-test=repository-line]').exists()).toBe(true)
+			expect(repositoryList.findComponent(RepositoryLine).exists()).toBe(true)
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
@@ -127,7 +127,7 @@ describe('RepositoryList component', () => {
 			})
 
 			// Then
-			expect(repositoryList.find('[data-test=repository-line]').exists()).toBe(false)
+			expect(repositoryList.findComponent(RepositoryLine).exists()).toBe(false)
 		})
 
 		it('should display a repository adder component', () => {
