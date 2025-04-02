@@ -58,71 +58,69 @@ describe('RepositoryList component', () => {
 		repositoryList = shallowMount(RepositoryList, { global: { provide: { queryBuilder: stubs.queryBuilder } } })
 	})
 
-	describe('Initialisation', () => {
-		it('should display a title', () => {
-			expect(repositoryList.find('[data-test=title]').text()).toBe('Watched repositories')
-		})
-
-		it('should display a list of repositories', async () => {
-			await triggerNetworkResponse()
-
-			const repositoryLine = repositoryList.findComponent(RepositoryLine)
-			expect(repositoryLine.props().repository).toEqual({
-				name: 'repository',
-				owner: 'user',
-				repositoryUrl: 'http://repository-url',
-				branchStatus: 'SUCCESS',
-				statusesList: [
-					{
-						jobStatus: 'SUCCESS',
-						description: 'build description',
-						jobUrl: 'http://build-target-url'
-					}
-				]
-			})
-		})
-
-		it('should display list of repositories even without build status', async () => {
-			stubs.fakeGraphQlResponse.rep_0.defaultBranchRef.target.statusCheckRollup = null
-
-			await triggerNetworkResponse()
-
-			const repositoryLine = repositoryList.findComponent(RepositoryLine)
-			expect(repositoryLine.props().repository).toEqual({
-				name: 'repository',
-				owner: 'user',
-				repositoryUrl: 'http://repository-url',
-				branchStatus: 'NO_STATUS',
-				statusesList: []
-			})
-		})
-
-		it('should display list of repositories even without rate limit', async () => {
-			stubs.fakeGraphQlResponse.rateLimit = null
-
-			await triggerNetworkResponse()
-
-			expect(repositoryList.findComponent(RepositoryLine).exists()).toBe(true)
-		})
-
-		it('should call graphql api to retrieve data over the list of repositories', async () => {
-			expect(repositoryList.findComponent(NetworkPolling).props()).toEqual({
-				query: 'graphql query',
-				request: expect.any(Function) // TODO remove when NetworkPolling moved to script setup notation
-			})
-		})
-
-		it('should not display repositories by default', () => {
-			expect(repositoryList.findComponent(RepositoryLine).exists()).toBe(false)
-		})
-
-		it('should display a repository adder component', () => {
-			expect(repositoryList.find('[data-test=repository-adder]').exists()).toBe(true)
-		})
-
-		const triggerNetworkResponse = async () => {
-			const networkPolling = repositoryList.findComponent(NetworkPolling)
-			await networkPolling.vm.$emit('http-update', stubs.fakeGraphQlResponse)
-		}
+	it('should display a title', () => {
+		expect(repositoryList.find('[data-test=title]').text()).toBe('Watched repositories')
 	})
+
+	it('should display a list of repositories', async () => {
+		await triggerNetworkResponse()
+
+		const repositoryLine = repositoryList.findComponent(RepositoryLine)
+		expect(repositoryLine.props().repository).toEqual({
+			name: 'repository',
+			owner: 'user',
+			repositoryUrl: 'http://repository-url',
+			branchStatus: 'SUCCESS',
+			statusesList: [
+				{
+					jobStatus: 'SUCCESS',
+					description: 'build description',
+					jobUrl: 'http://build-target-url'
+				}
+			]
+		})
+	})
+
+	it('should display list of repositories even without build status', async () => {
+		stubs.fakeGraphQlResponse.rep_0.defaultBranchRef.target.statusCheckRollup = null
+
+		await triggerNetworkResponse()
+
+		const repositoryLine = repositoryList.findComponent(RepositoryLine)
+		expect(repositoryLine.props().repository).toEqual({
+			name: 'repository',
+			owner: 'user',
+			repositoryUrl: 'http://repository-url',
+			branchStatus: 'NO_STATUS',
+			statusesList: []
+		})
+	})
+
+	it('should display list of repositories even without rate limit', async () => {
+		stubs.fakeGraphQlResponse.rateLimit = null
+
+		await triggerNetworkResponse()
+
+		expect(repositoryList.findComponent(RepositoryLine).exists()).toBe(true)
+	})
+
+	it('should call graphql api to retrieve data over the list of repositories', async () => {
+		expect(repositoryList.findComponent(NetworkPolling).props()).toEqual({
+			query: 'graphql query',
+			request: expect.any(Function) // TODO remove when NetworkPolling moved to script setup notation
+		})
+	})
+
+	it('should not display repositories by default', () => {
+		expect(repositoryList.findComponent(RepositoryLine).exists()).toBe(false)
+	})
+
+	it('should display a repository adder component', () => {
+		expect(repositoryList.find('[data-test=repository-adder]').exists()).toBe(true)
+	})
+
+	const triggerNetworkResponse = async () => {
+		const networkPolling = repositoryList.findComponent(NetworkPolling)
+		await networkPolling.vm.$emit('http-update', stubs.fakeGraphQlResponse)
+	}
 })
