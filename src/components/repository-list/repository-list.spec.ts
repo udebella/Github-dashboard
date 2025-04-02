@@ -1,13 +1,20 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, type VueWrapper } from '@vue/test-utils'
 import RepositoryList from './repository-list.vue'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
 import RepositoryLine from '../ui/repository-line/repository-line.vue'
 import NetworkPolling from '../network-polling/network-polling.js'
+import type { Mocks } from '../../test-utils.ts'
+import type { buildRepositoriesQuery } from '../../services/graphql/query-builder'
 
 describe('RepositoryList component', () => {
-	let repositoryList, stubs
+	let repositoryList: VueWrapper
+	let stubs: {
+		queryBuilder: Mocks<ReturnType<typeof buildRepositoriesQuery>>
+		// eslint-disable-next-line
+		fakeGraphQlResponse: any // TODO find a way to type this
+	}
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
@@ -99,7 +106,10 @@ describe('RepositoryList component', () => {
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
-			expect(repositoryList.findComponent(NetworkPolling).props().query).toBe('graphql query')
+			expect(repositoryList.findComponent(NetworkPolling).props()).toEqual({
+				query: 'graphql query',
+				request: expect.any(Function) // TODO remove when NetworkPolling moved to script setup notation
+			})
 		})
 
 		it('should not display repositories by default', () => {
