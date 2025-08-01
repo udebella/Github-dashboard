@@ -20,4 +20,10 @@
 </template>
 
 <script lang="ts" src="./recently-closed-pull-requests.js"></script>
-<style src="./recently-closed-pull-requests.scss" scoped></style>
+<style lang="css" scoped>
+.head {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+</style>
