@@ -28,4 +28,10 @@
 </template>
 
 <script lang="ts" src="./viewer-pull-request-list.js"></script>
-<style src="./viewer-pull-request-list.scss" scoped></style>
+<style lang="css" scoped>
+.head {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+</style>
