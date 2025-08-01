@@ -17,7 +17,6 @@ export default {
 	}
 }
 </script>
-<style src="./App.scoped.scss" scoped></style>
 <style src="./App.scss"></style>
 <style lang="css" scoped>
 .app {
