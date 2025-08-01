@@ -38,7 +38,7 @@ withDefaults(
 )
 </script>
 <style lang="scss" scoped>
-@import '../../../global';
+@use '../../../global';
 
 .link {
 	text-decoration: none;
@@ -81,7 +81,7 @@ withDefaults(
 			transition: 300ms ease;
 		}
 
-		@include on-desktop {
+		@include global.on-desktop {
 			&:hover .popover,
 			.popover:hover {
 				visibility: visible;

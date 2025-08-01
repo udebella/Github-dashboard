@@ -25,7 +25,7 @@ import RecentlyClosedPullRequests from '../../recently-closed-pull-requests/rece
 
 <style lang="scss" scoped>
 // TODO find a way to migrate media query to native css
-@import '../../../global';
+@use '../../../global';
 
 .container {
 	margin: 10px;
@@ -42,7 +42,7 @@ import RecentlyClosedPullRequests from '../../recently-closed-pull-requests/rece
 	flex-direction: row;
 	justify-content: space-between;
 
-	@include on-mobile {
+	@include global.on-mobile {
 		flex-direction: column;
 
 		.repository-list {
@@ -54,7 +54,7 @@ import RecentlyClosedPullRequests from '../../recently-closed-pull-requests/rece
 		}
 	}
 
-	@include on-desktop {
+	@include global.on-desktop {
 		.repository-list {
 			width: 19%;
 		}

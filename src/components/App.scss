@@ -1,13 +1,13 @@
-@import '../global';
+@use '../global';
 
 body {
 	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-	color: $secondaryLight;
-	background-color: $primary;
+	color: global.$secondaryLight;
+	background-color: global.$primary;
 	font-size: 14px;
 	margin: 0;
 
 	a {
-		color: $secondary;
+		color: global.$secondary;
 	}
 }
