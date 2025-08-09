@@ -6,20 +6,6 @@ $secondaryDark: rgba(255, 255, 255, 0.6);
 $background: #000000;
 $surface: #232323;
 
-// Statuses
-$success: green;
-$failure: red;
-$pending: #120262;
-$old: orange;
-
-@mixin lightenOnHover($color) {
-	background-color: $color;
-
-	&:hover {
-		background-color: lighten($color, 5%);
-	}
-}
-
 @mixin on-desktop {
 	@media (min-width: 1200px) {
 		@content;
