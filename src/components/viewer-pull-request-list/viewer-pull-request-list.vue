@@ -14,7 +14,7 @@
 				lastEventAuthor,
 				repositoryName
 			} in pullRequests"
-			:key="prTitle"
+			:key="prUrl"
 			:has-updates="hasUpdates(lastEventAuthor)"
 			:build-status="buildStatus"
 			:creation-date="creationDate"
