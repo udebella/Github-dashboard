@@ -7,6 +7,7 @@ import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
 import TimeBetweenRefresh from '../components/time-between-refresh/time-between-refresh.vue'
 import GithubApiConfig from '../components/github-api-config/github-api-config.vue'
+import ShareConfiguration from '../components/share-configuration/share-configuration.vue'
 
 describe('Configuration view', () => {
 	let wrapper: VueWrapper
@@ -55,6 +56,14 @@ describe('Configuration view', () => {
 			const timeBetweenRefresh = wrapper.findComponent(TimeBetweenRefresh)
 
 			expect(timeBetweenRefresh.exists()).toBe(true)
+		})
+	})
+
+	describe('Share configuration', () => {
+		it('displays share configuration section', async () => {
+			const shareConfiguration = wrapper.findComponent(ShareConfiguration)
+
+			expect(shareConfiguration.exists()).toBe(true)
 		})
 	})
 })

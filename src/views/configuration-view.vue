@@ -5,6 +5,7 @@
 		</custom-button>
 		<github-api-config />
 		<time-between-refresh />
+		<share-configuration />
 	</div>
 </template>
 
@@ -15,6 +16,7 @@ import notification from '../services/notifications/notification'
 import { inject } from 'vue'
 import TimeBetweenRefresh from '../components/time-between-refresh/time-between-refresh.vue'
 import GithubApiConfig from '../components/github-api-config/github-api-config.vue'
+import ShareConfiguration from '../components/share-configuration/share-configuration.vue'
 
 const notificationApi = inject('notificationApi', notification)
 </script>
