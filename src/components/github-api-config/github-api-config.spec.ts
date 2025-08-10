@@ -13,26 +13,22 @@ describe('GithubApiConfig component', () => {
 		githubApiConfig = shallowMount(GithubApiConfig)
 	})
 
-	describe('Initialization', () => {
-		it('displays a label for the input', () => {
-			expect(githubApiConfig.find('label').text()).toBe('Github api url')
-		})
+	it('displays a label for the input', () => {
+		expect(githubApiConfig.find('label').text()).toBe('Github api url')
+	})
 
-		it('displays an input', async () => {
-			await useConfigurationStore().$patch({ githubApi: 'http://github-api' })
+	it('displays an input', async () => {
+		await useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 
-			expect(githubApiConfig.find('input').attributes()).toEqual({
-				type: 'text',
-				value: 'http://github-api'
-			})
+		expect(githubApiConfig.find('input').attributes()).toEqual({
+			type: 'text',
+			value: 'http://github-api'
 		})
 	})
 
-	describe('Update github api', () => {
-		it('saves the new api in the store when changed', () => {
-			githubApiConfig.find('input').setValue('https://new-api')
+	it('saves the new api in the store when changed', () => {
+		githubApiConfig.find('input').setValue('https://new-api')
 
-			expect(useConfigurationStore().githubApi).toBe('https://new-api')
-		})
+		expect(useConfigurationStore().githubApi).toBe('https://new-api')
 	})
 })
