@@ -3,9 +3,9 @@ import { shallowMount, VueWrapper } from '@vue/test-utils'
 import ConfigurationView from './configuration-view.vue'
 import { notificationApi } from '../services/notifications/notification'
 import type { Mocks } from '../test-utils'
-import { useConfigurationStore } from '../stores/configuration/configuration.ts'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
+import TimeBetweenRefresh from '../components/time-between-refresh/time-between-refresh.vue'
 
 describe('Configuration view', () => {
 	let wrapper: VueWrapper
@@ -42,26 +42,10 @@ describe('Configuration view', () => {
 	})
 
 	describe('Time between refresh input', () => {
-		it('displays a label for the input', async () => {
-			const label = wrapper.find('label[data-test=time-between-refresh]')
+		it('displays time between refresh input', async () => {
+			const timeBetweenRefresh = wrapper.findComponent(TimeBetweenRefresh)
 
-			expect(label.text()).toBe('Time to wait between refreshes (in seconds)')
-		})
-
-		it('displays an input for setting time between refreshes', async () => {
-			useConfigurationStore().$patch({ timeBetweenRefresh: 30 })
-
-			const timeBetweenRefresh = wrapper.find('[data-test=time-between-refresh]').find('input')
-
-			expect(timeBetweenRefresh.attributes()).toEqual({ type: 'number', value: '30' })
-		})
-
-		it('updates time between refresh', async () => {
-			const timeBetweenRefresh = wrapper.find('[data-test=time-between-refresh]').find('input')
-
-			await timeBetweenRefresh.setValue(60)
-
-			expect(useConfigurationStore().updateTimeBetweenRefresh).toHaveBeenCalledWith(60)
+			expect(timeBetweenRefresh.exists()).toBe(true)
 		})
 	})
 })
