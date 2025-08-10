@@ -1,13 +1,13 @@
 <template>
 	<custom-button @click="pasteFromClipboard">
 		Import from clipboard
-		<icon icon="success" />
+		<icon v-if="pasteComplete" icon="success" />
 	</custom-button>
 </template>
 
 <script lang="ts" setup>
 import CustomButton from '../custom-button/custom-button.vue'
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 import Icon from '../icon/icon-component.vue'
 
 const emit = defineEmits<{
@@ -15,9 +15,11 @@ const emit = defineEmits<{
 }>()
 
 const clipboard = inject('clipboard', navigator.clipboard)
+const pasteComplete = ref(false)
 
 const pasteFromClipboard = async () => {
 	emit('paste', await clipboard.readText())
+	pasteComplete.value = true
 }
 </script>
 

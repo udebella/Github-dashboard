@@ -33,4 +33,8 @@ describe('PasteButton component', () => {
 
 		expect(pasteButton.findComponent(Icon).props()).toEqual({ icon: 'success' })
 	})
+
+	it('does not display a success icon by default', async () => {
+		expect(pasteButton.findComponent(Icon).exists()).toBe(false)
+	})
 })
