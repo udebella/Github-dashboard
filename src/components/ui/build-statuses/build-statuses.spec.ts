@@ -19,7 +19,7 @@ describe('BuildStatuses component', () => {
 			description: 'description',
 			jobUrl: 'http://build-url',
 			jobStatus: 'SUCCESS'
-		}
+		} as const
 		await buildStatuses.setProps({ statuses: [status] })
 
 		const buildStatus = buildStatuses.findComponent({ name: 'build-status' })
