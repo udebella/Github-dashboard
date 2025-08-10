@@ -1,5 +1,5 @@
 <template>
-	<div>Test component</div>
+	<div>Copy to clipboard</div>
 </template>
 
 <script lang="ts" setup></script>
