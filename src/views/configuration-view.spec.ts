@@ -6,6 +6,7 @@ import type { Mocks } from '../test-utils'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
 import TimeBetweenRefresh from '../components/time-between-refresh/time-between-refresh.vue'
+import GithubApiConfig from '../components/github-api-config/github-api-config.vue'
 
 describe('Configuration view', () => {
 	let wrapper: VueWrapper
@@ -38,6 +39,14 @@ describe('Configuration view', () => {
 			await requestNotifications.trigger('click')
 
 			expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
+		})
+	})
+
+	describe('Github api config', () => {
+		it('displays github api configuration', async () => {
+			const githubApiConfig = wrapper.findComponent(GithubApiConfig)
+
+			expect(githubApiConfig.exists()).toBe(true)
 		})
 	})
 
