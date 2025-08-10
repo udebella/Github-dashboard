@@ -1,7 +1,7 @@
 <template>
 	<custom-button @click="copyToClipboard">
 		Copy to clipboard
-		<icon-component :icon="copied ? 'success' : 'clipboard'" :class="copied ? 'success' : ''" />
+		<icon-component :icon="state" :class="state" />
 	</custom-button>
 </template>
 
@@ -14,11 +14,11 @@ const props = defineProps<{ value: string }>()
 
 const clipboard = inject('clipboard', navigator.clipboard)
 
-const copied = ref(false)
+const state = ref<'clipboard' | 'success'>('clipboard')
 const copyToClipboard = () => {
 	clipboard.writeText(props.value)
-	copied.value = true
-	setTimeout(() => (copied.value = false), 5_000)
+	state.value = 'success'
+	setTimeout(() => (state.value = 'clipboard'), 5_000)
 }
 </script>
 
