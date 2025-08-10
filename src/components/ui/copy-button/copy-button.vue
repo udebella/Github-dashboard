@@ -22,4 +22,8 @@ const copyToClipboard = () => {
 }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.success {
+	color: var(--color-success);
+}
+</style>
