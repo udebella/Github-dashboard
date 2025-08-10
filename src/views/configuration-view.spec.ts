@@ -9,18 +9,23 @@ import TimeBetweenRefresh from '../components/time-between-refresh/time-between-
 import GithubApiConfig from '../components/github-api-config/github-api-config.vue'
 import ShareConfiguration from '../components/share-configuration/share-configuration.vue'
 import CustomButton from '../components/ui/custom-button/custom-button.vue'
+import { routerKey } from 'vue-router'
 
 describe('Configuration view', () => {
 	let wrapper: Wrapper<typeof ConfigurationView>
-	let fakeNotificationApi: Mocks<Partial<ReturnType<typeof notificationApi>>>
+	let mocks: Mocks<{
+		router: { push: (name: string) => void }
+		notificationApi: Pick<ReturnType<typeof notificationApi>, 'requestNotifications'>
+	}>
 	beforeEach(() => {
 		setActivePinia(createTestingPinia())
-		fakeNotificationApi = {
-			requestNotifications: vitest.fn()
+		mocks = {
+			router: { push: vitest.fn() },
+			notificationApi: { requestNotifications: vitest.fn() }
 		}
 		wrapper = shallowMount(ConfigurationView, {
 			global: {
-				provide: { notificationApi: fakeNotificationApi },
+				provide: { notificationApi: mocks.notificationApi, [routerKey]: mocks.router },
 				renderStubDefaultSlot: true
 			}
 		})
@@ -40,7 +45,7 @@ describe('Configuration view', () => {
 
 			await requestNotifications.trigger('click')
 
-			expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
+			expect(mocks.notificationApi.requestNotifications).toHaveBeenCalled()
 		})
 	})
 
@@ -71,6 +76,12 @@ describe('Configuration view', () => {
 	describe('Back button', () => {
 		it('displays a back button', async () => {
 			expect(wrapper.findComponent<typeof CustomButton>('[data-test=back]').text()).toBe('Go back')
+		})
+
+		it('navigates back to home on click', async () => {
+			await wrapper.findComponent<typeof CustomButton>('[data-test=back]').trigger('click')
+
+			expect(mocks.router.push).toHaveBeenCalledWith({ name: 'home' })
 		})
 	})
 })
