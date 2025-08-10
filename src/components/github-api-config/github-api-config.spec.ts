@@ -14,8 +14,12 @@ describe('GithubApiConfig component', () => {
 	})
 
 	describe('Initialization', () => {
+		it('displays a label for the input', () => {
+			expect(githubApiConfig.find('label').text()).toBe('Github api url')
+		})
+
 		it('displays an input', () => {
-			expect(githubApiConfig.attributes().type).toBe('text')
+			expect(githubApiConfig.find('input').attributes().type).toBe('text')
 		})
 
 		it('displays as default value the one from the store', () => {

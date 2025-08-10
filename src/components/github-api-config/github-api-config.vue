@@ -1,4 +1,5 @@
 <template>
+	<label>Github api url</label>
 	<input :value="store.githubApi" type="text" @input="updateGithubApi" />
 </template>
 
