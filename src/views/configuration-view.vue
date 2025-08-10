@@ -8,7 +8,7 @@
 		<github-api-config />
 		<time-between-refresh class="line" />
 		<share-configuration />
-		<custom-button data-test="back" @click="router.push({ name: 'home' })">Go back</custom-button>
+		<custom-button class="line back" data-test="back" @click="router.push({ name: 'home' })">Go back</custom-button>
 	</div>
 </template>
 
@@ -37,5 +37,8 @@ const router = useRouter()
 .line {
 	display: flex;
 	justify-content: space-between;
+}
+.back {
+	align-self: flex-end;
 }
 </style>
