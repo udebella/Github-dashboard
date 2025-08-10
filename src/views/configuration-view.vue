@@ -1,9 +1,11 @@
 <template>
-	<custom-button data-test="request-notifications" @click="notificationApi.requestNotifications">
-		<icon-component icon="notifications" /> Enable notifications
-	</custom-button>
-	<github-api-config />
-	<time-between-refresh />
+	<div class="container">
+		<custom-button data-test="request-notifications" @click="notificationApi.requestNotifications">
+			<icon-component icon="notifications" /> Enable notifications
+		</custom-button>
+		<github-api-config />
+		<time-between-refresh />
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -16,3 +18,11 @@ import GithubApiConfig from '../components/github-api-config/github-api-config.v
 
 const notificationApi = inject('notificationApi', notification)
 </script>
+
+<style lang="css" scoped>
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+</style>
