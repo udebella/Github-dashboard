@@ -4,19 +4,24 @@ import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import type { Mocks, Wrapper } from '../../test-utils'
 import { notificationApi } from '../../services/notifications/notification'
 import Icon from '../ui/icon/icon-component.vue'
+import { routerKey } from 'vue-router'
 
 describe('Dashboard Header component', () => {
 	let dashboardHeader: Wrapper<typeof DashboardHeader>
 	let fakeNotificationApi: Mocks<ReturnType<typeof notificationApi>>
+	let mocks: Mocks<{ router: { push: (name: string) => void } }>
 
 	beforeEach(() => {
+		mocks = {
+			router: { push: vitest.fn() }
+		}
 		fakeNotificationApi = {
 			requestNotifications: vitest.fn(),
 			notify: vitest.fn()
 		}
 		dashboardHeader = shallowMount(DashboardHeader, {
 			global: {
-				provide: { notificationApi: fakeNotificationApi },
+				provide: { notificationApi: fakeNotificationApi, [routerKey]: mocks.router },
 				renderStubDefaultSlot: true
 			}
 		})
@@ -61,5 +66,11 @@ describe('Dashboard Header component', () => {
 		const icon = dashboardHeader.findComponent('[data-test=configuration]').findComponent(Icon)
 
 		expect(icon.props().icon).toBe('tools')
+	})
+
+	it('navigates to configuration page on click', () => {
+		dashboardHeader.findComponent('[data-test=configuration]').trigger('click')
+
+		expect(mocks.router.push).toHaveBeenCalledWith({ name: 'configuration' })
 	})
 })

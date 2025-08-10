@@ -2,7 +2,7 @@
 	<header class="header">
 		<div class="title" data-test="title">Github Dashboard</div>
 		<div class="right">
-			<custom-button data-test="configuration">
+			<custom-button data-test="configuration" @click="router.push({ name: 'configuration' })">
 				<icon icon="tools" />
 			</custom-button>
 			<custom-button data-test="requestNotifications" @click="notifications.requestNotifications">
@@ -23,8 +23,10 @@ import Icon from '../ui/icon/icon-component.vue'
 import ConfigurationButton from '../configuration-button/configuration-button.vue'
 import { inject } from 'vue'
 import notificationApi from '../../services/notifications/notification'
+import { useRouter } from 'vue-router'
 
 const notifications = inject('notificationApi', notificationApi)
+const router = useRouter()
 </script>
 
 <style lang="css" scoped>
