@@ -21,40 +21,38 @@ describe('Dashboard Header component', () => {
 		})
 	})
 
-	describe('Initialization', () => {
-		it('displays the component', () => {
-			expect(dashboardHeader.find('[data-test=title]').text()).toBe('Github Dashboard')
-		})
+	it('displays the component', () => {
+		expect(dashboardHeader.find('[data-test=title]').text()).toBe('Github Dashboard')
+	})
 
-		it('displays a link to the sources', () => {
-			const sources = dashboardHeader.find('[data-test=sources]')
-			const icon = sources.findComponent({ name: 'icon-component' })
+	it('displays a link to the sources', () => {
+		const sources = dashboardHeader.find('[data-test=sources]')
+		const icon = sources.findComponent({ name: 'icon-component' })
 
-			expect(sources.attributes().href).toBe('https://github.com/udebella/Github-dashboard')
-			expect(sources.attributes().title).toBe('View sources')
-			expect(icon.exists()).toBe(true)
-			expect(icon.attributes().icon).toBe('github')
-		})
+		expect(sources.attributes().href).toBe('https://github.com/udebella/Github-dashboard')
+		expect(sources.attributes().title).toBe('View sources')
+		expect(icon.exists()).toBe(true)
+		expect(icon.attributes().icon).toBe('github')
+	})
 
-		it('displays a way to toggle configuration mode', () => {
-			const configuration = dashboardHeader.find('[data-test=configuration]')
+	it('displays a way to toggle configuration mode', () => {
+		const configuration = dashboardHeader.find('[data-test=configuration]')
 
-			expect(configuration.exists()).toBe(true)
-		})
+		expect(configuration.exists()).toBe(true)
+	})
 
-		it('displays a button to request notifications', () => {
-			const requestNotifications = dashboardHeader.find('[data-test=requestNotifications]')
+	it('displays a button to request notifications', () => {
+		const requestNotifications = dashboardHeader.find('[data-test=requestNotifications]')
 
-			const icon = requestNotifications.findComponent({ name: 'icon-component' })
-			expect(icon.props().icon).toBe('notifications')
-		})
+		const icon = requestNotifications.findComponent({ name: 'icon-component' })
+		expect(icon.props().icon).toBe('notifications')
+	})
 
-		it('requests notifications when clicked', async () => {
-			const requestNotifications = dashboardHeader.find('[data-test=requestNotifications]')
+	it('requests notifications when clicked', async () => {
+		const requestNotifications = dashboardHeader.find('[data-test=requestNotifications]')
 
-			await requestNotifications.trigger('click')
+		await requestNotifications.trigger('click')
 
-			expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
-		})
+		expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
 	})
 })
