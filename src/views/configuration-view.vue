@@ -5,7 +5,7 @@
 				<icon-component icon="notifications" /> Enable notifications
 			</custom-button>
 		</div>
-		<github-api-config />
+		<github-api-config class="line" />
 		<time-between-refresh class="line" />
 		<share-configuration />
 		<custom-button class="line back" data-test="back" @click="router.push({ name: 'home' })">Go back</custom-button>
