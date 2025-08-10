@@ -1,17 +1,29 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import PasteButton from './paste-button.vue'
-import type { Wrapper } from '../../../test-utils.ts'
+import type { Mocks, Wrapper } from '../../../test-utils.ts'
 import CustomButton from '../custom-button/custom-button.vue'
 
 describe('PasteButton component', () => {
 	let pasteButton: Wrapper<typeof PasteButton>
+	let mocks: Mocks<{ clipboard: { readText: () => string } }>
 
 	beforeEach(() => {
-		pasteButton = shallowMount(PasteButton, { global: { renderStubDefaultSlot: true } })
+		mocks = { clipboard: { readText: vi.fn() } }
+		pasteButton = shallowMount(PasteButton, {
+			global: { renderStubDefaultSlot: true, provide: { clipboard: mocks.clipboard } }
+		})
 	})
 
 	it('displays the component', () => {
 		expect(pasteButton.findComponent(CustomButton).text()).toBe('Import from clipboard')
+	})
+
+	it('emits a value pasted from clipboard', async () => {
+		mocks.clipboard.readText.mockResolvedValue('copied from clipboard')
+
+		await pasteButton.trigger('click')
+
+		expect(pasteButton.emitted('paste')).toContainEqual(['copied from clipboard'])
 	})
 })
