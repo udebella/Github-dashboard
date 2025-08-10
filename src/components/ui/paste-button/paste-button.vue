@@ -20,6 +20,7 @@ const pasteComplete = ref(false)
 const pasteFromClipboard = async () => {
 	emit('paste', await clipboard.readText())
 	pasteComplete.value = true
+	setTimeout(() => (pasteComplete.value = false), 5_000)
 }
 </script>
 

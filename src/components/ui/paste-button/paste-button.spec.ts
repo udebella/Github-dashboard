@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import PasteButton from './paste-button.vue'
 import type { Mocks, Wrapper } from '../../../test-utils.ts'
@@ -14,6 +14,14 @@ describe('PasteButton component', () => {
 		pasteButton = shallowMount(PasteButton, {
 			global: { renderStubDefaultSlot: true, provide: { clipboard: mocks.clipboard } }
 		})
+	})
+
+	beforeEach(() => {
+		vi.useFakeTimers()
+	})
+
+	afterEach(() => {
+		vi.useRealTimers()
 	})
 
 	it('displays the component', () => {
@@ -35,6 +43,13 @@ describe('PasteButton component', () => {
 	})
 
 	it('does not display a success icon by default', async () => {
+		expect(pasteButton.findComponent(Icon).exists()).toBe(false)
+	})
+
+	it('hides the success icon after 5 seconds', async () => {
+		await pasteButton.trigger('click')
+		await vi.advanceTimersByTime(5_000)
+
 		expect(pasteButton.findComponent(Icon).exists()).toBe(false)
 	})
 })
