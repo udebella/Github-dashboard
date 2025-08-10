@@ -1,18 +1,24 @@
 <template>
-	<custom-button @click="clipboard.writeText(value)">
+	<custom-button @click="copyToClipboard">
 		Copy to clipboard
-		<icon-component icon="clipboard" />
+		<icon-component :icon="copied ? 'success' : 'clipboard'" />
 	</custom-button>
 </template>
 
 <script lang="ts" setup>
 import CustomButton from '../custom-button/custom-button.vue'
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 import IconComponent from '../icon/icon-component.vue'
 
-defineProps<{ value: string }>()
+const props = defineProps<{ value: string }>()
 
 const clipboard = inject('clipboard', navigator.clipboard)
+
+const copied = ref(false)
+const copyToClipboard = () => {
+	clipboard.writeText(props.value)
+	copied.value = true
+}
 </script>
 
 <style lang="css" scoped></style>
