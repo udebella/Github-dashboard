@@ -3,11 +3,15 @@ import { shallowMount, VueWrapper } from '@vue/test-utils'
 import ConfigurationView from './configuration-view.vue'
 import { notificationApi } from '../services/notifications/notification'
 import type { Mocks } from '../test-utils'
+import { useConfigurationStore } from '../stores/configuration/configuration.ts'
+import { setActivePinia } from 'pinia'
+import { createTestingPinia } from '@pinia/testing'
 
 describe('Configuration view', () => {
 	let wrapper: VueWrapper
 	let fakeNotificationApi: Mocks<Partial<ReturnType<typeof notificationApi>>>
 	beforeEach(() => {
+		setActivePinia(createTestingPinia({ createSpy: vitest.fn }))
 		fakeNotificationApi = {
 			requestNotifications: vitest.fn()
 		}
@@ -34,6 +38,19 @@ describe('Configuration view', () => {
 			await requestNotifications.trigger('click')
 
 			expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
+		})
+	})
+
+	describe('Time between refresh input', () => {
+		it('displays an input for setting time between refreshes', async () => {
+			useConfigurationStore().$patch({ timeBetweenRefresh: 30 })
+
+			const timeBetweenRefresh = wrapper.find('[data-test=time-between-refresh]').find('input')
+
+			expect(timeBetweenRefresh.attributes()).toEqual({
+				type: 'text',
+				value: '30'
+			})
 		})
 	})
 })
