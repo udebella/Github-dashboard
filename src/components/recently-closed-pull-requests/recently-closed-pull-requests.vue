@@ -6,7 +6,7 @@
 		</div>
 		<pull-request-line
 			v-for="{ buildStatus, creationDate, statuses, prTitle, prUrl, repositoryName } in pullRequests"
-			:key="prTitle"
+			:key="prUrl"
 			:has-updates="false"
 			:build-status="buildStatus"
 			:creation-date="creationDate"
