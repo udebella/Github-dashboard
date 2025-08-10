@@ -1,15 +1,15 @@
-import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import RepositoryList from './repository-list.vue'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
 import RepositoryLine from '../ui/repository-line/repository-line.vue'
 import NetworkPolling from '../network-polling/network-polling.js'
-import type { Mocks } from '../../test-utils.ts'
+import type { Mocks, Wrapper } from '../../test-utils.ts'
 import type { buildRepositoriesQuery } from '../../services/graphql/query-builder'
 
 describe('RepositoryList component', () => {
-	let repositoryList: VueWrapper
+	let repositoryList: Wrapper<typeof RepositoryList>
 	let stubs: {
 		queryBuilder: Mocks<ReturnType<typeof buildRepositoriesQuery>>
 		// eslint-disable-next-line

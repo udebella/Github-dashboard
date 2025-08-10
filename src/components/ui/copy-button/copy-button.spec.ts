@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import CopyButton from './copy-button.vue'
 import CustomButton from '../custom-button/custom-button.vue'
-import type { Mocks } from '../../../test-utils.ts'
+import type { Mocks, Wrapper } from '../../../test-utils.ts'
 import Icon from '../icon/icon-component.vue'
 
 describe('CopyButton component', () => {
-	let copyButton: VueWrapper
+	let copyButton: Wrapper<typeof CopyButton>
 	let mocks: Mocks<{ clipboard: { writeText: (text: string) => void } }>
 
 	beforeEach(() => {

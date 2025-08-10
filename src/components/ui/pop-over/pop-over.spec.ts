@@ -1,9 +1,10 @@
-import { shallowMount, VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it } from 'vitest'
 import PopOver from './pop-over.vue'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('Popover component', () => {
-	let popover: VueWrapper
+	let popover: Wrapper<typeof PopOver>
 
 	beforeEach(() => {
 		popover = shallowMount(PopOver, {

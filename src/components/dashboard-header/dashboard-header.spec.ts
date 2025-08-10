@@ -1,11 +1,11 @@
-import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import DashboardHeader from './dashboard-header.vue'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
-import type { Mocks } from '../../test-utils'
+import type { Mocks, Wrapper } from '../../test-utils'
 import { notificationApi } from '../../services/notifications/notification'
 
 describe('Dashboard Header component', () => {
-	let dashboardHeader: VueWrapper
+	let dashboardHeader: Wrapper<typeof DashboardHeader>
 	let fakeNotificationApi: Mocks<ReturnType<typeof notificationApi>>
 
 	beforeEach(() => {

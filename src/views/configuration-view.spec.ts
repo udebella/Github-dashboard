@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
-import { shallowMount, VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import ConfigurationView from './configuration-view.vue'
 import { notificationApi } from '../services/notifications/notification'
-import type { Mocks } from '../test-utils'
+import type { Mocks, Wrapper } from '../test-utils'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
 import TimeBetweenRefresh from '../components/time-between-refresh/time-between-refresh.vue'
@@ -10,7 +10,7 @@ import GithubApiConfig from '../components/github-api-config/github-api-config.v
 import ShareConfiguration from '../components/share-configuration/share-configuration.vue'
 
 describe('Configuration view', () => {
-	let wrapper: VueWrapper
+	let wrapper: Wrapper<typeof ConfigurationView>
 	let fakeNotificationApi: Mocks<Partial<ReturnType<typeof notificationApi>>>
 	beforeEach(() => {
 		setActivePinia(createTestingPinia())

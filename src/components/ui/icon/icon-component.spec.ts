@@ -1,9 +1,10 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import IconComponent from './icon-component.vue'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('Icon component', () => {
-	let wrapper: VueWrapper
+	let wrapper: Wrapper<typeof IconComponent>
 
 	beforeEach(() => {
 		wrapper = shallowMount(IconComponent, { props: { icon: 'warning' } })

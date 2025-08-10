@@ -1,12 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import TimeBetweenRefresh from './time-between-refresh.vue'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
+import type { Wrapper } from '../../test-utils.ts'
 
 describe('TimeBetweenRefresh component', () => {
-	let wrapper: VueWrapper
+	let wrapper: Wrapper<typeof TimeBetweenRefresh>
 
 	beforeEach(() => {
 		setActivePinia(createTestingPinia())

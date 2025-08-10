@@ -1,10 +1,11 @@
-import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import LivingIcon from './living-icon.vue'
 import { subWeeks } from 'date-fns'
 import { beforeEach, describe, expect, it } from 'vitest'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('LivingIcon component', () => {
-	let livingIcon: VueWrapper
+	let livingIcon: Wrapper<typeof LivingIcon>
 
 	beforeEach(() => {
 		livingIcon = shallowMount(LivingIcon, { props: { date: new Date() } })

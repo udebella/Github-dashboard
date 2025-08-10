@@ -1,10 +1,12 @@
-import { DOMWrapper, shallowMount, type VueWrapper } from '@vue/test-utils'
+import { DOMWrapper, shallowMount } from '@vue/test-utils'
 import RepositoryLine from './repository-line.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 import BadgeStatus from '../badge-status/badge-status.vue'
+import type BuildStatuses from '../build-statuses/build-statuses.vue'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('RepositoryLine component', () => {
-	let repositoryLine: VueWrapper
+	let repositoryLine: Wrapper<typeof RepositoryLine>
 
 	beforeEach(() => {
 		repositoryLine = shallowMount(RepositoryLine, {
@@ -56,7 +58,7 @@ describe('RepositoryLine component', () => {
 	})
 
 	describe('Build statuses', () => {
-		let buildStatuses: VueWrapper
+		let buildStatuses: Wrapper<typeof BuildStatuses>
 
 		beforeEach(() => {
 			buildStatuses = repositoryLine.findComponent({ name: 'build-statuses' })

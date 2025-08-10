@@ -1,10 +1,10 @@
-import type { VueWrapper } from '@vue/test-utils'
 import { shallowMount } from '@vue/test-utils'
 import CustomButton from './custom-button.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('CustomButton component', () => {
-	let customButton: VueWrapper
+	let customButton: Wrapper<typeof CustomButton>
 
 	beforeEach(() => {
 		customButton = shallowMount(CustomButton, {

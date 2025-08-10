@@ -1,13 +1,14 @@
-import { shallowMount, VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import MainContainer from './main-container.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 import GithubApiConfig from '../../github-api-config/github-api-config.vue'
 import RepositoryList from '../../repository-list/repository-list.vue'
 import PullRequestList from '../../pull-request-list/pull-request-list.vue'
 import RecentlyClosedPullRequests from '../../recently-closed-pull-requests/recently-closed-pull-requests.vue'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('MainContainer component', () => {
-	let mainContainer: VueWrapper
+	let mainContainer: Wrapper<typeof MainContainer>
 
 	beforeEach(() => {
 		mainContainer = shallowMount(MainContainer)
