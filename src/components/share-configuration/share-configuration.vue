@@ -1,5 +1,6 @@
 <template>
 	<copy-button :value="store.shareString" />
+	<pre data-test="repositories">{{ store.watched }}</pre>
 </template>
 
 <script lang="ts" setup>
