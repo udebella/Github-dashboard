@@ -18,15 +18,13 @@ describe('GithubApiConfig component', () => {
 			expect(githubApiConfig.find('label').text()).toBe('Github api url')
 		})
 
-		it('displays an input', () => {
-			expect(githubApiConfig.find('input').attributes().type).toBe('text')
-		})
+		it('displays an input', async () => {
+			await useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 
-		it('displays as default value the one from the store', () => {
-			useConfigurationStore().$patch({ githubApi: 'http://github-api' })
-			githubApiConfig = shallowMount(GithubApiConfig)
-
-			expect(githubApiConfig.find<HTMLInputElement>('input').element.value).toBe('http://github-api')
+			expect(githubApiConfig.find('input').attributes()).toEqual({
+				type: 'text',
+				value: 'http://github-api'
+			})
 		})
 	})
 
