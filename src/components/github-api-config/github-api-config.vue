@@ -1,6 +1,8 @@
 <template>
-	<label>Github api url</label>
-	<input :value="store.githubApi" type="text" @input="updateGithubApi" />
+	<label>
+		Github api url
+		<input :value="store.githubApi" type="text" @input="updateGithubApi" />
+	</label>
 </template>
 
 <script setup lang="ts">

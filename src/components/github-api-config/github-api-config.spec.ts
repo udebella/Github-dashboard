@@ -20,7 +20,7 @@ describe('GithubApiConfig component', () => {
 	it('displays an input', async () => {
 		await useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 
-		expect(githubApiConfig.find('input').attributes()).toEqual({
+		expect(githubApiConfig.find('label').find('input').attributes()).toEqual({
 			type: 'text',
 			value: 'http://github-api'
 		})
