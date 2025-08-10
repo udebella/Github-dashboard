@@ -13,6 +13,9 @@ export const useRepositoryStore = defineStore('repository', {
 	state: (): State => ({
 		watched: []
 	}),
+	getters: {
+		shareString: (state) => btoa(JSON.stringify(state.watched))
+	},
 	actions: {
 		addRepository(repository: Repository) {
 			if (this.watched.every(differentFrom(repository))) {

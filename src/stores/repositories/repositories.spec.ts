@@ -65,4 +65,13 @@ describe('Repositories store', () => {
 			expect(store.watched).toEqual([{ owner: 'user', name: 'secondRepository' }])
 		})
 	})
+
+	describe('shareConfiguration', () => {
+		it('exposes a string in base64 to share configuration', () => {
+			const store = useRepositoryStore()
+			store.addRepository({ owner: 'user', name: 'repository' })
+
+			expect(store.shareString).toBe('W3sib3duZXIiOiJ1c2VyIiwibmFtZSI6InJlcG9zaXRvcnkifV0=')
+		})
+	})
 })
