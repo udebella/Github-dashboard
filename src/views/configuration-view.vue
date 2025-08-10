@@ -8,6 +8,7 @@
 		<github-api-config />
 		<time-between-refresh class="line" />
 		<share-configuration />
+		<custom-button data-test="back">Go back</custom-button>
 	</div>
 </template>
 

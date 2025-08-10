@@ -8,6 +8,7 @@ import { createTestingPinia } from '@pinia/testing'
 import TimeBetweenRefresh from '../components/time-between-refresh/time-between-refresh.vue'
 import GithubApiConfig from '../components/github-api-config/github-api-config.vue'
 import ShareConfiguration from '../components/share-configuration/share-configuration.vue'
+import CustomButton from '../components/ui/custom-button/custom-button.vue'
 
 describe('Configuration view', () => {
 	let wrapper: Wrapper<typeof ConfigurationView>
@@ -64,6 +65,12 @@ describe('Configuration view', () => {
 			const shareConfiguration = wrapper.findComponent(ShareConfiguration)
 
 			expect(shareConfiguration.exists()).toBe(true)
+		})
+	})
+
+	describe('Back button', () => {
+		it('displays a back button', async () => {
+			expect(wrapper.findComponent<typeof CustomButton>('[data-test=back]').text()).toBe('Go back')
 		})
 	})
 })
