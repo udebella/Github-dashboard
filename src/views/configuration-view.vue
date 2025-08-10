@@ -3,7 +3,7 @@
 		<icon-component icon="notifications" /> Enable notifications
 	</custom-button>
 	<div data-test="time-between-refresh">
-		<input type="text" :value="store.timeBetweenRefresh" @input="updateTimeBetweenRefresh" />
+		<input type="number" :value="store.timeBetweenRefresh" @input="updateTimeBetweenRefresh" />
 	</div>
 </template>
 

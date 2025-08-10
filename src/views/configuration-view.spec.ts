@@ -47,10 +47,7 @@ describe('Configuration view', () => {
 
 			const timeBetweenRefresh = wrapper.find('[data-test=time-between-refresh]').find('input')
 
-			expect(timeBetweenRefresh.attributes()).toEqual({
-				type: 'text',
-				value: '30'
-			})
+			expect(timeBetweenRefresh.attributes()).toEqual({ type: 'number', value: '30' })
 		})
 
 		it('updates time between refresh', async () => {
