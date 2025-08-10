@@ -1,7 +1,11 @@
 <template>
-	<copy-button :value="store.shareString" />
-	<paste-button @paste="store.import($event)" />
-	<pre data-test="repositories">{{ store.watched }}</pre>
+	<div>
+		<div class="line">
+			<copy-button :value="store.shareString" />
+			<paste-button @paste="store.import($event)" />
+		</div>
+		<pre data-test="repositories" class="preview">{{ store.watched }}</pre>
+	</div>
 </template>
 
 <script lang="ts" setup>
@@ -12,4 +16,15 @@ import PasteButton from '../ui/paste-button/paste-button.vue'
 const store = useRepositoryStore()
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.preview {
+	background-color: var(--color-surface);
+	max-height: 400px;
+	overflow: auto;
+}
+
+.line {
+	display: flex;
+	justify-content: space-between;
+}
+</style>

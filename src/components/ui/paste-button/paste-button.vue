@@ -1,7 +1,7 @@
 <template>
 	<custom-button @click="pasteFromClipboard">
-		Import from clipboard
 		<icon v-if="pasteComplete" icon="success" class="success" />
+		Import from clipboard
 	</custom-button>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
 	<custom-button @click="copyToClipboard">
-		Copy to clipboard
 		<icon-component :icon="state" :class="state" />
+		Copy to clipboard
 	</custom-button>
 </template>
 

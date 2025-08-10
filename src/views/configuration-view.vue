@@ -1,10 +1,12 @@
 <template>
 	<div class="container">
-		<custom-button data-test="request-notifications" @click="notificationApi.requestNotifications">
-			<icon-component icon="notifications" /> Enable notifications
-		</custom-button>
+		<div class="line">
+			<custom-button data-test="request-notifications" @click="notificationApi.requestNotifications">
+				<icon-component icon="notifications" /> Enable notifications
+			</custom-button>
+		</div>
 		<github-api-config />
-		<time-between-refresh />
+		<time-between-refresh class="line" />
 		<share-configuration />
 	</div>
 </template>
@@ -23,8 +25,14 @@ const notificationApi = inject('notificationApi', notification)
 
 <style lang="css" scoped>
 .container {
+	padding: 16px;
+	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: 16px;
+}
+.line {
+	display: flex;
+	justify-content: space-between;
 }
 </style>
