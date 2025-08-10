@@ -2,9 +2,10 @@
 	<custom-button data-test="request-notifications" @click="notificationApi.requestNotifications">
 		<icon-component icon="notifications" /> Enable notifications
 	</custom-button>
-	<div data-test="time-between-refresh">
+	<label data-test="time-between-refresh">
+		Time to wait between refreshes (in seconds)
 		<input type="number" :value="store.timeBetweenRefresh" @input="updateTimeBetweenRefresh" />
-	</div>
+	</label>
 </template>
 
 <script setup lang="ts">

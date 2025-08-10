@@ -42,6 +42,12 @@ describe('Configuration view', () => {
 	})
 
 	describe('Time between refresh input', () => {
+		it('displays a label for the input', async () => {
+			const label = wrapper.find('label[data-test=time-between-refresh]')
+
+			expect(label.text()).toBe('Time to wait between refreshes (in seconds)')
+		})
+
 		it('displays an input for setting time between refreshes', async () => {
 			useConfigurationStore().$patch({ timeBetweenRefresh: 30 })
 
