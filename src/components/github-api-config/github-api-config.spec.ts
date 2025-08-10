@@ -24,17 +24,6 @@ describe('GithubApiConfig component', () => {
 
 			expect(githubApiConfig.find<HTMLInputElement>('[data-test=input]').element.value).toBe('http://github-api')
 		})
-
-		it('is displayed when configuration mode is enabled', () => {
-			expect(githubApiConfig.find('[data-test=input]').exists()).toBe(true)
-		})
-
-		it('is not displayed when configuration mode is disabled', () => {
-			useConfigurationStore().$patch({ configurationEnabled: false })
-			githubApiConfig = shallowMount(GithubApiConfig)
-
-			expect(githubApiConfig.find('[data-test=input]').exists()).toBe(false)
-		})
 	})
 
 	describe('Update github api', () => {
