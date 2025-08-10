@@ -6,6 +6,7 @@ import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
 import type { Wrapper } from '../../test-utils.ts'
 import { useRepositoryStore } from '../../stores/repositories/repositories.ts'
+import PasteButton from '../ui/paste-button/paste-button.vue'
 
 describe('ShareConfiguration component', () => {
 	let shareConfiguration: Wrapper<typeof ShareConfiguration>
@@ -17,6 +18,10 @@ describe('ShareConfiguration component', () => {
 
 	it('displays copy to clipboard component with share-string', () => {
 		expect(shareConfiguration.findComponent(CopyButton).props()).toEqual({ value: 'W10=' })
+	})
+
+	it('displays paste from clipboard component', () => {
+		expect(shareConfiguration.findComponent(PasteButton).exists()).toBe(true)
 	})
 
 	it('displays the list of repositories', async () => {
