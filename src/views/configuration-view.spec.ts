@@ -11,7 +11,7 @@ describe('Configuration view', () => {
 	let wrapper: VueWrapper
 	let fakeNotificationApi: Mocks<Partial<ReturnType<typeof notificationApi>>>
 	beforeEach(() => {
-		setActivePinia(createTestingPinia({ createSpy: vitest.fn }))
+		setActivePinia(createTestingPinia())
 		fakeNotificationApi = {
 			requestNotifications: vitest.fn()
 		}

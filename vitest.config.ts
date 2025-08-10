@@ -11,6 +11,7 @@ export default mergeConfig(
 			include: [...configDefaults.include, '**/*.feature.[jt]s'],
 			exclude: [...configDefaults.exclude, 'e2e/*'],
 			root: fileURLToPath(new URL('./', import.meta.url)),
+			globals: true,
 			setupFiles: './src/test-setup.js',
 			coverage: {
 				all: true,

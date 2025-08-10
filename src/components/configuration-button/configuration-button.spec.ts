@@ -11,7 +11,7 @@ describe('Configuration component', () => {
 	let configuration: VueWrapper
 
 	beforeEach(() => {
-		setActivePinia(createTestingPinia({ createSpy: vitest.fn }))
+		setActivePinia(createTestingPinia())
 		useConfigurationStore().$patch({ configurationEnabled: true })
 		configuration = shallowMount(Configuration, { global: { renderStubDefaultSlot: true } })
 	})
