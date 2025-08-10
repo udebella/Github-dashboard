@@ -22,13 +22,13 @@ describe('GithubApiConfig component', () => {
 			useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 			githubApiConfig = shallowMount(GithubApiConfig)
 
-			expect(githubApiConfig.find<HTMLInputElement>('[data-test=input]').element.value).toBe('http://github-api')
+			expect(githubApiConfig.find<HTMLInputElement>('input').element.value).toBe('http://github-api')
 		})
 	})
 
 	describe('Update github api', () => {
 		it('saves the new api in the store when changed', () => {
-			githubApiConfig.find('[data-test=input]').setValue('https://new-api')
+			githubApiConfig.find('input').setValue('https://new-api')
 
 			expect(useConfigurationStore().githubApi).toBe('https://new-api')
 		})

@@ -1,5 +1,5 @@
 <template>
-	<input :value="store.githubApi" type="text" data-test="input" @input="updateGithubApi" />
+	<input :value="store.githubApi" type="text" @input="updateGithubApi" />
 </template>
 
 <script setup lang="ts">
