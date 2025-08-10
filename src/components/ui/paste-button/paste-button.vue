@@ -1,10 +1,14 @@
 <template>
-	<custom-button @click="pasteFromClipboard">Import from clipboard</custom-button>
+	<custom-button @click="pasteFromClipboard">
+		Import from clipboard
+		<icon icon="success" />
+	</custom-button>
 </template>
 
 <script lang="ts" setup>
 import CustomButton from '../custom-button/custom-button.vue'
 import { inject } from 'vue'
+import Icon from '../icon/icon-component.vue'
 
 const emit = defineEmits<{
 	paste: [string]

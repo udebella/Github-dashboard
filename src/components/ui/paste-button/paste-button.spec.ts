@@ -3,6 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 import PasteButton from './paste-button.vue'
 import type { Mocks, Wrapper } from '../../../test-utils.ts'
 import CustomButton from '../custom-button/custom-button.vue'
+import Icon from '../icon/icon-component.vue'
 
 describe('PasteButton component', () => {
 	let pasteButton: Wrapper<typeof PasteButton>
@@ -25,5 +26,11 @@ describe('PasteButton component', () => {
 		await pasteButton.trigger('click')
 
 		expect(pasteButton.emitted('paste')).toContainEqual(['copied from clipboard'])
+	})
+
+	it('displays a success icon when pasting is complete', async () => {
+		await pasteButton.trigger('click')
+
+		expect(pasteButton.findComponent(Icon).props()).toEqual({ icon: 'success' })
 	})
 })
