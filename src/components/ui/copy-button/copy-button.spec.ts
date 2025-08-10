@@ -43,7 +43,9 @@ describe('CopyButton component', () => {
 		it('switches to success icon when copied', async () => {
 			await copyButton.trigger('click')
 
-			expect(copyButton.findComponent(CustomButton).findComponent(Icon).props()).toEqual({ icon: 'success' })
+			const icon = copyButton.findComponent(CustomButton).findComponent(Icon)
+			expect(icon.props()).toEqual({ icon: 'success' })
+			expect(icon.classes()).toEqual(['success'])
 		})
 
 		it('flips back to clipboard icon after 10 seconds', async () => {
