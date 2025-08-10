@@ -4,6 +4,7 @@
 
 <script lang="ts" setup>
 import 'remixicon/fonts/remixicon.css'
+import { computed } from 'vue'
 
 type IconsNames =
 	| 'success'
@@ -41,5 +42,5 @@ const props = defineProps<{
 	icon: IconsNames
 }>()
 
-const iconClass = iconClasses[props.icon]
+const iconClass = computed(() => iconClasses[props.icon])
 </script>
