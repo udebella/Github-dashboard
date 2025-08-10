@@ -73,5 +73,13 @@ describe('Repositories store', () => {
 
 			expect(store.shareString).toBe('W3sib3duZXIiOiJ1c2VyIiwibmFtZSI6InJlcG9zaXRvcnkifV0=')
 		})
+
+		it('can import a share string configuration', () => {
+			const store = useRepositoryStore()
+
+			store.import('W3sib3duZXIiOiJ1c2VyIiwibmFtZSI6InJlcG9zaXRvcnkifV0=')
+
+			expect(store.watched).toEqual([{ owner: 'user', name: 'repository' }])
+		})
 	})
 })

@@ -26,6 +26,9 @@ export const useRepositoryStore = defineStore('repository', {
 		},
 		removeRepository(repository: Repository) {
 			this.watched = this.watched.filter(differentFrom(repository))
+		},
+		import(shareString: string) {
+			this.watched = JSON.parse(atob(shareString))
 		}
 	}
 })
