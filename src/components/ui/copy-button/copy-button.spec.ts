@@ -3,6 +3,7 @@ import { shallowMount, type VueWrapper } from '@vue/test-utils'
 import CopyButton from './copy-button.vue'
 import CustomButton from '../custom-button/custom-button.vue'
 import type { Mocks } from '../../../test-utils.ts'
+import Icon from '../icon/icon-component.vue'
 
 describe('CopyButton component', () => {
 	let copyButton: VueWrapper
@@ -18,6 +19,10 @@ describe('CopyButton component', () => {
 
 	it('should display the component', () => {
 		expect(copyButton.findComponent(CustomButton).text()).toBe('Copy to clipboard')
+	})
+
+	it('should display a clipboard icon', async () => {
+		expect(copyButton.findComponent(CustomButton).findComponent(Icon).props()).toEqual({ icon: 'clipboard' })
 	})
 
 	it('should copy value prop to clipboard', async () => {
