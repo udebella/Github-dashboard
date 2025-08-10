@@ -10,6 +10,9 @@ export const useConfigurationStore = defineStore('configuration', {
 		updateGithubApi(newApi: string) {
 			this.githubApi = newApi
 		},
+		updateTimeBetweenRefresh(timeBetweenRefresh: number) {
+			this.timeBetweenRefresh = timeBetweenRefresh
+		},
 		toggleConfiguration() {
 			this.configurationEnabled = !this.configurationEnabled
 		}

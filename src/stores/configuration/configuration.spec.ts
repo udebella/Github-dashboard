@@ -35,6 +35,16 @@ describe('Configuration store', () => {
 		})
 	})
 
+	describe('updateTimeBetweenRefresh', () => {
+		it('should update the time between each call', () => {
+			const store = useConfigurationStore()
+
+			store.updateTimeBetweenRefresh(60)
+
+			expect(store.timeBetweenRefresh).toBe(60)
+		})
+	})
+
 	describe('toggleConfiguration', () => {
 		it('should enable configuration mode when configuration is disabled', () => {
 			const store = useConfigurationStore()

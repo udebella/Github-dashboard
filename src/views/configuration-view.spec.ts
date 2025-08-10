@@ -3,11 +3,16 @@ import { shallowMount, VueWrapper } from '@vue/test-utils'
 import ConfigurationView from './configuration-view.vue'
 import { notificationApi } from '../services/notifications/notification'
 import type { Mocks } from '../test-utils'
+import { setActivePinia } from 'pinia'
+import { createTestingPinia } from '@pinia/testing'
+import TimeBetweenRefresh from '../components/time-between-refresh/time-between-refresh.vue'
+import GithubApiConfig from '../components/github-api-config/github-api-config.vue'
 
 describe('Configuration view', () => {
 	let wrapper: VueWrapper
 	let fakeNotificationApi: Mocks<Partial<ReturnType<typeof notificationApi>>>
 	beforeEach(() => {
+		setActivePinia(createTestingPinia())
 		fakeNotificationApi = {
 			requestNotifications: vitest.fn()
 		}
@@ -34,6 +39,22 @@ describe('Configuration view', () => {
 			await requestNotifications.trigger('click')
 
 			expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
+		})
+	})
+
+	describe('Github api config', () => {
+		it('displays github api configuration', async () => {
+			const githubApiConfig = wrapper.findComponent(GithubApiConfig)
+
+			expect(githubApiConfig.exists()).toBe(true)
+		})
+	})
+
+	describe('Time between refresh input', () => {
+		it('displays time between refresh input', async () => {
+			const timeBetweenRefresh = wrapper.findComponent(TimeBetweenRefresh)
+
+			expect(timeBetweenRefresh.exists()).toBe(true)
 		})
 	})
 })
