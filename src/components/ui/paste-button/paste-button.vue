@@ -1,7 +1,7 @@
 <template>
 	<custom-button @click="pasteFromClipboard">
 		Import from clipboard
-		<icon v-if="pasteComplete" icon="success" />
+		<icon v-if="pasteComplete" icon="success" class="success" />
 	</custom-button>
 </template>
 
@@ -24,4 +24,8 @@ const pasteFromClipboard = async () => {
 }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.success {
+	color: var(--color-success);
+}
+</style>
