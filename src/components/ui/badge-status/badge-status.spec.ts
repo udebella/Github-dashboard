@@ -1,10 +1,10 @@
-import type { VueWrapper } from '@vue/test-utils'
 import { shallowMount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it } from 'vitest'
 import BadgeStatus from './badge-status.vue'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('Badge Status component', () => {
-	let badge: VueWrapper
+	let badge: Wrapper<typeof BadgeStatus>
 
 	beforeEach(() => {
 		badge = shallowMount(BadgeStatus, {

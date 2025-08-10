@@ -1,9 +1,10 @@
-import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BuildStatuses from './build-statuses.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('BuildStatuses component', () => {
-	let buildStatuses: VueWrapper
+	let buildStatuses: Wrapper<typeof BuildStatuses>
 
 	beforeEach(() => {
 		buildStatuses = shallowMount(BuildStatuses, { props: { statuses: [] } })
@@ -18,7 +19,7 @@ describe('BuildStatuses component', () => {
 			description: 'description',
 			jobUrl: 'http://build-url',
 			jobStatus: 'SUCCESS'
-		}
+		} as const
 		await buildStatuses.setProps({ statuses: [status] })
 
 		const buildStatus = buildStatuses.findComponent({ name: 'build-status' })

@@ -17,7 +17,7 @@ defineProps<{
 .button {
 	background-color: var(--color-surface);
 
-	padding: 5px;
+	padding: 8px;
 	cursor: pointer;
 	display: block;
 	text-decoration: none;

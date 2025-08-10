@@ -1,4 +1,4 @@
-import { shallowMount, VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Configuration from './configuration-button.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { setActivePinia } from 'pinia'
@@ -6,9 +6,10 @@ import { createTestingPinia } from '@pinia/testing'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
 import CustomButton from '../ui/custom-button/custom-button.vue'
 import IconComponent from '../ui/icon/icon-component.vue'
+import type { Wrapper } from '../../test-utils.ts'
 
 describe('Configuration component', () => {
-	let configuration: VueWrapper
+	let configuration: Wrapper<typeof Configuration>
 
 	beforeEach(() => {
 		setActivePinia(createTestingPinia())

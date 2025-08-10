@@ -1,13 +1,14 @@
-import { shallowMount, VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import PullRequestLine from './pull-request-line.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
 import BadgeStatus from '../badge-status/badge-status.vue'
 import LivingIcon from '../living-icon/living-icon.vue'
 import BuildStatuses from '../build-statuses/build-statuses.vue'
 import UpdateIcon from '../update-icon/update-icon.vue'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('PullRequestLine component', () => {
-	let pullRequestLine: VueWrapper
+	let pullRequestLine: Wrapper<typeof PullRequestLine>
 	const today = new Date()
 
 	beforeEach(() => {
@@ -74,7 +75,7 @@ describe('PullRequestLine component', () => {
 	})
 
 	describe('Build statuses', () => {
-		let buildStatuses: VueWrapper
+		let buildStatuses: Wrapper<typeof BuildStatuses>
 
 		beforeEach(() => {
 			buildStatuses = pullRequestLine.findComponent(BuildStatuses)

@@ -1,8 +1,9 @@
-import { flushPromises, shallowMount, type VueWrapper } from '@vue/test-utils'
+import { flushPromises, shallowMount } from '@vue/test-utils'
 import Login from './login-input.vue'
 import { beforeEach, describe, expect, it, type Mock, vitest } from 'vitest'
 import { routerKey } from 'vue-router'
 import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
+import type { Wrapper } from '../../test-utils.ts'
 
 type MockRouter = {
 	push: Mock
@@ -14,7 +15,7 @@ type Mocks = {
 }
 
 describe('Login component', () => {
-	let login: VueWrapper
+	let login: Wrapper<typeof Login>
 	let mocks: Mocks
 
 	beforeEach(() => {

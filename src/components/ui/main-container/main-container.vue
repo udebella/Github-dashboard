@@ -1,6 +1,5 @@
 <template>
 	<div class="container">
-		<github-api-config class="configuration" />
 		<div class="columns">
 			<repository-list class="repository-list" />
 			<!-- @vue-ignore TODO remove when migrated to composition api -->
@@ -16,7 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-import GithubApiConfig from '../../github-api-config/github-api-config.vue'
 import RepositoryList from '../../repository-list/repository-list.vue'
 import PullRequestList from '../../pull-request-list/pull-request-list.vue'
 import ViewerPullRequestList from '../../viewer-pull-request-list/viewer-pull-request-list.vue'
@@ -31,10 +29,6 @@ import RecentlyClosedPullRequests from '../../recently-closed-pull-requests/rece
 	margin: 10px;
 	display: flex;
 	flex-direction: column;
-}
-
-.configuration {
-	margin-bottom: 10px;
 }
 
 .columns {

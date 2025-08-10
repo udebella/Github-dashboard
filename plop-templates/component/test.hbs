@@ -1,15 +1,16 @@
 import { describe, beforeEach, it, expect} from 'vitest'
-import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import {{pascalCase componentName}} from './{{dashCase componentName}}.vue'
+import type { Wrapper } from '../../test-utils.ts'
 
 describe('{{pascalCase componentName}} component', () => {
-	let {{camelCase componentName}}: VueWrapper;
+	let {{camelCase componentName}}: Wrapper<typeof {{pascalCase componentName}}>;
 
 	beforeEach(() => {
 		{{camelCase componentName}} = shallowMount({{pascalCase componentName}})
 	})
 
-	it('should display the component', () => {
+	it('displays the component', () => {
 		expect({{camelCase componentName}}.text()).toBe('Test component')
 	})
 })

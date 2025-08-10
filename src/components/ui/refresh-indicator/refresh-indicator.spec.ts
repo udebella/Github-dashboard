@@ -1,9 +1,10 @@
-import { flushPromises, shallowMount, type VueWrapper } from '@vue/test-utils'
+import { flushPromises, shallowMount } from '@vue/test-utils'
 import RefreshIndicator from './refresh-indicator.vue'
 import { afterEach, beforeEach, describe, expect, it, vitest } from 'vitest'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('RefreshIndicator component', () => {
-	let refreshIndicator: VueWrapper
+	let refreshIndicator: Wrapper<typeof RefreshIndicator>
 
 	beforeEach(() => {
 		vitest.useFakeTimers()

@@ -1,11 +1,8 @@
 <template>
-	<input
-		v-if="store.configurationEnabled"
-		:value="store.githubApi"
-		type="text"
-		data-test="input"
-		@input="updateGithubApi"
-	/>
+	<label>
+		Github api url
+		<input :value="store.githubApi" type="text" @input="updateGithubApi" />
+	</label>
 </template>
 
 <script setup lang="ts">

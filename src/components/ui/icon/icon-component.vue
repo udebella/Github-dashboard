@@ -4,6 +4,7 @@
 
 <script lang="ts" setup>
 import 'remixicon/fonts/remixicon.css'
+import { computed } from 'vue'
 
 type IconsNames =
 	| 'success'
@@ -17,7 +18,9 @@ type IconsNames =
 	| 'github'
 	| 'deleteBin'
 	| 'configuration'
+	| 'tools' // TODO use configuration when everything is migrated on configuration page
 	| 'notifications'
+	| 'clipboard'
 type IconClass = `ri-${string}-fill`
 
 const iconClasses: Record<IconsNames, IconClass> = {
@@ -32,12 +35,14 @@ const iconClasses: Record<IconsNames, IconClass> = {
 	github: 'ri-github-fill',
 	deleteBin: 'ri-delete-bin-fill',
 	configuration: 'ri-settings-5-fill',
-	notifications: 'ri-notification-3-fill'
+	tools: 'ri-tools-fill',
+	notifications: 'ri-notification-3-fill',
+	clipboard: 'ri-clipboard-fill'
 }
 
 const props = defineProps<{
 	icon: IconsNames
 }>()
 
-const iconClass = iconClasses[props.icon]
+const iconClass = computed(() => iconClasses[props.icon])
 </script>

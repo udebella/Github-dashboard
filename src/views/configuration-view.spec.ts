@@ -1,24 +1,31 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
-import { shallowMount, VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import ConfigurationView from './configuration-view.vue'
 import { notificationApi } from '../services/notifications/notification'
-import type { Mocks } from '../test-utils'
+import type { Mocks, Wrapper } from '../test-utils'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
 import TimeBetweenRefresh from '../components/time-between-refresh/time-between-refresh.vue'
 import GithubApiConfig from '../components/github-api-config/github-api-config.vue'
+import ShareConfiguration from '../components/share-configuration/share-configuration.vue'
+import CustomButton from '../components/ui/custom-button/custom-button.vue'
+import { routerKey } from 'vue-router'
 
 describe('Configuration view', () => {
-	let wrapper: VueWrapper
-	let fakeNotificationApi: Mocks<Partial<ReturnType<typeof notificationApi>>>
+	let wrapper: Wrapper<typeof ConfigurationView>
+	let mocks: Mocks<{
+		router: { push: (name: string) => void }
+		notificationApi: Pick<ReturnType<typeof notificationApi>, 'requestNotifications'>
+	}>
 	beforeEach(() => {
 		setActivePinia(createTestingPinia())
-		fakeNotificationApi = {
-			requestNotifications: vitest.fn()
+		mocks = {
+			router: { push: vitest.fn() },
+			notificationApi: { requestNotifications: vitest.fn() }
 		}
 		wrapper = shallowMount(ConfigurationView, {
 			global: {
-				provide: { notificationApi: fakeNotificationApi },
+				provide: { notificationApi: mocks.notificationApi, [routerKey]: mocks.router },
 				renderStubDefaultSlot: true
 			}
 		})
@@ -38,7 +45,7 @@ describe('Configuration view', () => {
 
 			await requestNotifications.trigger('click')
 
-			expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
+			expect(mocks.notificationApi.requestNotifications).toHaveBeenCalled()
 		})
 	})
 
@@ -55,6 +62,26 @@ describe('Configuration view', () => {
 			const timeBetweenRefresh = wrapper.findComponent(TimeBetweenRefresh)
 
 			expect(timeBetweenRefresh.exists()).toBe(true)
+		})
+	})
+
+	describe('Share configuration', () => {
+		it('displays share configuration section', async () => {
+			const shareConfiguration = wrapper.findComponent(ShareConfiguration)
+
+			expect(shareConfiguration.exists()).toBe(true)
+		})
+	})
+
+	describe('Back button', () => {
+		it('displays a back button', async () => {
+			expect(wrapper.findComponent<typeof CustomButton>('[data-test=back]').text()).toBe('Go back')
+		})
+
+		it('navigates back to home on click', async () => {
+			await wrapper.findComponent<typeof CustomButton>('[data-test=back]').trigger('click')
+
+			expect(mocks.router.push).toHaveBeenCalledWith({ name: 'home' })
 		})
 	})
 })

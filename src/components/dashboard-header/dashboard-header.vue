@@ -2,13 +2,13 @@
 	<header class="header">
 		<div class="title" data-test="title">Github Dashboard</div>
 		<div class="right">
-			<custom-button data-test="requestNotifications" @click="notifications.requestNotifications">
-				<icon-component icon="notifications" />
+			<custom-button data-test="configuration" @click="router.push({ name: 'configuration' })">
+				<icon icon="tools" />
 			</custom-button>
 			<!-- @vue-ignore TODO remove when migrated to composition api -->
 			<configuration-button data-test="configuration" />
 			<custom-button title="View sources" href="https://github.com/udebella/Github-dashboard" data-test="sources">
-				<icon-component icon="github" />
+				<icon icon="github" />
 			</custom-button>
 		</div>
 	</header>
@@ -16,12 +16,11 @@
 
 <script lang="ts" setup>
 import CustomButton from '../ui/custom-button/custom-button.vue'
-import IconComponent from '../ui/icon/icon-component.vue'
+import Icon from '../ui/icon/icon-component.vue'
 import ConfigurationButton from '../configuration-button/configuration-button.vue'
-import { inject } from 'vue'
-import notificationApi from '../../services/notifications/notification'
+import { useRouter } from 'vue-router'
 
-const notifications = inject('notificationApi', notificationApi)
+const router = useRouter()
 </script>
 
 <style lang="css" scoped>

@@ -1,9 +1,10 @@
-import { shallowMount, VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import BuildStatus from './build-status.vue'
 import { beforeEach, describe, expect, it } from 'vitest'
+import type { Wrapper } from '../../../test-utils.ts'
 
 describe('BuildStatus component', () => {
-	let buildStatus: VueWrapper
+	let buildStatus: Wrapper<typeof BuildStatus>
 
 	beforeEach(() => {
 		buildStatus = shallowMount(BuildStatus, {
