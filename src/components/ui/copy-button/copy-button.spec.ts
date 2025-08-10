@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount, type VueWrapper } from '@vue/test-utils'
 import CopyButton from './copy-button.vue'
 import CustomButton from '../custom-button/custom-button.vue'
@@ -15,6 +15,14 @@ describe('CopyButton component', () => {
 			props: { value: 'value to copy' },
 			global: { provide: { clipboard: mocks.clipboard }, renderStubDefaultSlot: true }
 		})
+	})
+
+	beforeEach(() => {
+		vi.useFakeTimers()
+	})
+
+	afterEach(() => {
+		vi.useRealTimers()
 	})
 
 	it('should display the component', () => {
@@ -36,6 +44,13 @@ describe('CopyButton component', () => {
 			await copyButton.trigger('click')
 
 			expect(copyButton.findComponent(CustomButton).findComponent(Icon).props()).toEqual({ icon: 'success' })
+		})
+
+		it('should flip back to clipboard icon after 10 seconds', async () => {
+			await copyButton.trigger('click')
+			await vi.advanceTimersByTime(10_000)
+
+			expect(copyButton.findComponent(CustomButton).findComponent(Icon).props().icon).toBe('clipboard')
 		})
 	})
 })

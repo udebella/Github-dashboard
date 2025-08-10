@@ -18,6 +18,7 @@ const copied = ref(false)
 const copyToClipboard = () => {
 	clipboard.writeText(props.value)
 	copied.value = true
+	setTimeout(() => (copied.value = false), 10_000)
 }
 </script>
 
