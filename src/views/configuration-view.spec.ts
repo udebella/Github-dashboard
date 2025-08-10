@@ -52,5 +52,13 @@ describe('Configuration view', () => {
 				value: '30'
 			})
 		})
+
+		it('updates time between refresh', async () => {
+			const timeBetweenRefresh = wrapper.find('[data-test=time-between-refresh]').find('input')
+
+			await timeBetweenRefresh.setValue(60)
+
+			expect(useConfigurationStore().updateTimeBetweenRefresh).toHaveBeenCalledWith(60)
+		})
 	})
 })

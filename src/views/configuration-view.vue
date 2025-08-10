@@ -3,7 +3,7 @@
 		<icon-component icon="notifications" /> Enable notifications
 	</custom-button>
 	<div data-test="time-between-refresh">
-		<input type="text" :value="store.timeBetweenRefresh" />
+		<input type="text" :value="store.timeBetweenRefresh" @input="updateTimeBetweenRefresh" />
 	</div>
 </template>
 
@@ -16,4 +16,9 @@ import { useConfigurationStore } from '../stores/configuration/configuration.ts'
 
 const notificationApi = inject('notificationApi', notification)
 const store = useConfigurationStore()
+
+const updateTimeBetweenRefresh = (event: Event) => {
+	const { value } = event.target as HTMLInputElement
+	store.updateTimeBetweenRefresh(parseInt(value))
+}
 </script>
