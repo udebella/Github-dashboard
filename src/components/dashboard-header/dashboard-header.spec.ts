@@ -3,6 +3,7 @@ import DashboardHeader from './dashboard-header.vue'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import type { Mocks, Wrapper } from '../../test-utils'
 import { notificationApi } from '../../services/notifications/notification'
+import Icon from '../ui/icon/icon-component.vue'
 
 describe('Dashboard Header component', () => {
 	let dashboardHeader: Wrapper<typeof DashboardHeader>
@@ -27,7 +28,7 @@ describe('Dashboard Header component', () => {
 
 	it('displays a link to the sources', () => {
 		const sources = dashboardHeader.find('[data-test=sources]')
-		const icon = sources.findComponent({ name: 'icon-component' })
+		const icon = sources.findComponent(Icon)
 
 		expect(sources.attributes().href).toBe('https://github.com/udebella/Github-dashboard')
 		expect(sources.attributes().title).toBe('View sources')
@@ -44,7 +45,7 @@ describe('Dashboard Header component', () => {
 	it('displays a button to request notifications', () => {
 		const requestNotifications = dashboardHeader.find('[data-test=requestNotifications]')
 
-		const icon = requestNotifications.findComponent({ name: 'icon-component' })
+		const icon = requestNotifications.findComponent(Icon)
 		expect(icon.props().icon).toBe('notifications')
 	})
 
@@ -54,5 +55,11 @@ describe('Dashboard Header component', () => {
 		await requestNotifications.trigger('click')
 
 		expect(fakeNotificationApi.requestNotifications).toHaveBeenCalled()
+	})
+
+	it('displays a button to navigate to configuration', () => {
+		const icon = dashboardHeader.findComponent('[data-test=configuration]').findComponent(Icon)
+
+		expect(icon.props().icon).toBe('tools')
 	})
 })

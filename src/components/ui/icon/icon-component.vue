@@ -18,6 +18,7 @@ type IconsNames =
 	| 'github'
 	| 'deleteBin'
 	| 'configuration'
+	| 'tools' // TODO use configuration when everything is migrated on configuration page
 	| 'notifications'
 	| 'clipboard'
 type IconClass = `ri-${string}-fill`
@@ -34,6 +35,7 @@ const iconClasses: Record<IconsNames, IconClass> = {
 	github: 'ri-github-fill',
 	deleteBin: 'ri-delete-bin-fill',
 	configuration: 'ri-settings-5-fill',
+	tools: 'ri-tools-fill',
 	notifications: 'ri-notification-3-fill',
 	clipboard: 'ri-clipboard-fill'
 }
