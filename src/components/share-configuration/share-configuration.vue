@@ -1,6 +1,6 @@
 <template>
 	<copy-button :value="store.shareString" />
-	<paste-button />
+	<paste-button @paste="store.import($event)" />
 	<pre data-test="repositories">{{ store.watched }}</pre>
 </template>
 

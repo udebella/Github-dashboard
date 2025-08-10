@@ -24,6 +24,12 @@ describe('ShareConfiguration component', () => {
 		expect(shareConfiguration.findComponent(PasteButton).exists()).toBe(true)
 	})
 
+	it('load shared configuration when clicking the paste button', async () => {
+		await shareConfiguration.findComponent(PasteButton).vm.$emit('paste', 'share-string')
+
+		expect(useRepositoryStore().import).toHaveBeenCalledWith('share-string')
+	})
+
 	it('displays the list of repositories', async () => {
 		await useRepositoryStore().$patch({ watched: [{ name: 'repository', owner: 'owner' }] })
 
