@@ -48,7 +48,7 @@ describe('CopyButton component', () => {
 
 		it('flips back to clipboard icon after 10 seconds', async () => {
 			await copyButton.trigger('click')
-			await vi.advanceTimersByTime(10_000)
+			await vi.advanceTimersByTime(5_000)
 
 			expect(copyButton.findComponent(CustomButton).findComponent(Icon).props().icon).toBe('clipboard')
 		})
