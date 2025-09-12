@@ -42,7 +42,7 @@ describe('CustomButton component', () => {
 		it('should emit a click event when the component is clicked', async () => {
 			await customButton.find('[data-test=button]').trigger('click')
 
-			expect(customButton.emitted().click.length).toBe(1)
+			expect(customButton.emitted().click).toHaveLength(1)
 		})
 	})
 })
