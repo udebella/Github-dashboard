@@ -9,10 +9,10 @@ describe('CustomSelect component', () => {
 
 			const options = customSelect.findAll('[data-test=select] option')
 			expect(options.length).toBe(2)
-			expect(options[0].text()).toBe('')
-			expect(options[0].attributes().value).toBe('')
-			expect(options[1].text()).toBe('example')
-			expect(options[1].attributes().value).toBe('example')
+			expect(options[0]?.text()).toBe('')
+			expect(options[0]?.attributes().value).toBe('')
+			expect(options[1]?.text()).toBe('example')
+			expect(options[1]?.attributes().value).toBe('example')
 		})
 
 		it('selects the empty option by default', async () => {

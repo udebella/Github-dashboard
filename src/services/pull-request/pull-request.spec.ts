@@ -140,7 +140,7 @@ describe('Pull request service', () => {
 
 			const response = extractHttp(httpResponse)
 
-			expect(response[0].lastEventAuthor).toBe('udebella')
+			expect(response[0]?.lastEventAuthor).toBe('udebella')
 		})
 
 		it('returns a default lastEventAuthor when the last action is not tracked', () => {
@@ -148,7 +148,7 @@ describe('Pull request service', () => {
 
 			const response = extractHttp(httpResponse)
 
-			expect(response[0].lastEventAuthor).toBe('')
+			expect(response[0]?.lastEventAuthor).toBe('')
 		})
 
 		it('is able to retrieve lastEventAuthor from commits', () => {
@@ -158,7 +158,7 @@ describe('Pull request service', () => {
 
 			const response = extractHttp(httpResponse)
 
-			expect(response[0].lastEventAuthor).toBe('udebella')
+			expect(response[0]?.lastEventAuthor).toBe('udebella')
 		})
 	})
 
@@ -276,7 +276,7 @@ describe('Pull request service', () => {
 
 		const response = extractHttp(httpResponse)
 
-		expect(response[0].prTitle).toBe('Implement pauseExecution, continueExecution, dumpQueue for Scheduler')
-		expect(response[1].prTitle).toBe('Fix wheel/touch browser locking in IE and Safari')
+		expect(response[0]?.prTitle).toBe('Implement pauseExecution, continueExecution, dumpQueue for Scheduler')
+		expect(response[1]?.prTitle).toBe('Fix wheel/touch browser locking in IE and Safari')
 	})
 })
