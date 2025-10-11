@@ -38,7 +38,7 @@
 		"@vue/tsconfig": "^0.8.1",
 		"eslint": "^9.18.0",
 		"eslint-plugin-vue": "^10.0.0",
-		"happy-dom": "^18.0.1",
+		"happy-dom": "^20.0.0",
 		"plop": "^4.0.1",
 		"prettier": "^3.0.0",
 		"sass": "^1.63.6",
