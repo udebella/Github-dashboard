@@ -18,7 +18,7 @@
 		"@tsconfig/node24": "^24.0.1",
 		"@types/debounce": "^1.2.1",
 		"date-fns": "^4.1.0",
-		"debounce": "^2.0.0",
+		"debounce": "^3.0.0",
 		"graphql-request": "^7.0.1",
 		"pinia": "^3.0.1",
 		"remixicon": "^4.1.0",
