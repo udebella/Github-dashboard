@@ -1,5 +1,5 @@
 <template>
-	<div class="badge" :class="statusToClass[props.status ?? 'NONE']">
+	<div class="badge" :class="statusToClass[props.status ?? 'NO_STATUS']">
 		<slot />
 	</div>
 </template>
@@ -12,7 +12,7 @@ const props = defineProps<{
 }>()
 
 const statusToClass = {
-	NONE: undefined,
+	NO_STATUS: undefined,
 	SUCCESS: 'green',
 	FAILURE: 'red',
 	PENDING: 'blue'
