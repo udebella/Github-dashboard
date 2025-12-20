@@ -2,6 +2,7 @@ import { flushPromises, shallowMount } from '@vue/test-utils'
 import PullRequestList from './pull-request-list.vue'
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import NetworkPolling from '../network-polling/network-polling.js'
 
 describe('PullRequestList component', () => {
 	let pullRequestList, stubs
@@ -171,13 +172,10 @@ describe('PullRequestList component', () => {
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
-			stubs.queryBuilder.mockReturnValue('queryBuilt')
-
-			const pullRequestList = shallowMount(PullRequestList, { global: { provide: stubs } })
-			const networkPolling = pullRequestList.find('[data-test=network-polling]')
+			const networkPolling = pullRequestList.findComponent(NetworkPolling)
 
 			expect(networkPolling.exists()).toBe(true)
-			expect(networkPolling.attributes().query).toBe('queryBuilt')
+			expect(networkPolling.attributes().query).toBe('graphql query')
 		})
 
 		it('should call reader service to read data from graphql api', async () => {
