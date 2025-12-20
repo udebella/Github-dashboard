@@ -196,8 +196,7 @@ describe('PullRequestList component', () => {
 		})
 
 		const triggerFakeNetworkResponse = async (pullRequestList) => {
-			const networkPolling = pullRequestList.findComponent('[data-test=network-polling]')
-			await networkPolling.vm.$emit('http-update', stubs.fakeGraphqlResponse)
+			await pullRequestList.findComponent(NetworkPolling).vm.$emit('http-update', stubs.fakeGraphqlResponse)
 			await flushPromises()
 		}
 	})

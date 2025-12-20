@@ -2,7 +2,7 @@
 	<div>
 		<div class="head">
 			<h2 data-test="title">Pull requests on watched repositories</h2>
-			<network-polling data-test="network-polling" :query="query" @http-update="updatePullRequests" />
+			<network-polling :query="query" @http-update="updatePullRequests" />
 		</div>
 		<pull-request-line
 			v-for="{
@@ -22,7 +22,6 @@
 			:build-status="buildStatus"
 			:creation-date="creationDate"
 			:statuses-list="statuses"
-			data-test="line"
 		/>
 	</div>
 </template>
