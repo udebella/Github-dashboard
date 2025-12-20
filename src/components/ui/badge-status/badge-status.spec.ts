@@ -26,27 +26,27 @@ describe('Badge Status component', () => {
 		})
 
 		it('displays the badge in green when its status is success', async () => {
-			await badge.setProps({
-				status: 'SUCCESS'
-			})
+			await badge.setProps({ status: 'SUCCESS' })
 
 			expect(badge.classes()).toContain('green')
 		})
 
 		it('displays the badge in red when its status is failure', async () => {
-			await badge.setProps({
-				status: 'FAILURE'
-			})
+			await badge.setProps({ status: 'FAILURE' })
 
 			expect(badge.classes()).toContain('red')
 		})
 
 		it('displays the badge in blue when its status is pending', async () => {
-			await badge.setProps({
-				status: 'PENDING'
-			})
+			await badge.setProps({ status: 'PENDING' })
 
 			expect(badge.classes()).toContain('blue')
+		})
+
+		it('displays the badge as default when no status', async () => {
+			await badge.setProps({ status: 'NO_STATUS' })
+
+			expect(badge.classes()).toEqual(['badge'])
 		})
 	})
 })
