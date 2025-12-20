@@ -80,12 +80,7 @@ describe('PullRequestList component', () => {
 		pullRequestList = shallowMount(PullRequestList, {
 			global: {
 				renderStubDefaultSlot: true,
-				provide: {
-					queryBuilder: stubs.queryBuilder,
-					userService: stubs.userService,
-					pullRequestReader: stubs.pullRequestReader,
-					pullRequestNotifications: stubs.pullRequestNotifications
-				}
+				provide: stubs
 			}
 		})
 	})
