@@ -3,6 +3,7 @@ import PullRequestList from './pull-request-list.vue'
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import NetworkPolling from '../network-polling/network-polling.js'
+import PullRequestLine from '../ui/pull-request-line/pull-request-line.vue'
 
 describe('PullRequestList component', () => {
 	let pullRequestList, stubs
@@ -94,7 +95,7 @@ describe('PullRequestList component', () => {
 		it('should display a list of pull request', async () => {
 			await triggerFakeNetworkResponse(pullRequestList)
 
-			const pullRequestLine = pullRequestList.findAllComponents('[data-test=line]')
+			const pullRequestLine = pullRequestList.findAllComponents(PullRequestLine)
 			expect(pullRequestLine.length).toBe(2)
 			expect(pullRequestLine.at(0).props()).toEqual({
 				title: 'WIP - feat(ivy): implement listing lazy routes in `ngtsc`',
@@ -134,7 +135,7 @@ describe('PullRequestList component', () => {
 
 			await triggerFakeNetworkResponse(pullRequestList)
 
-			expect(pullRequestList.find('[data-test=line]').exists()).toBe(false)
+			expect(pullRequestList.findComponent(PullRequestLine).exists()).toBe(false)
 		})
 
 		it('should display a list of pull request even when there is no build status on the pull request', async () => {
@@ -143,9 +144,7 @@ describe('PullRequestList component', () => {
 
 			await triggerFakeNetworkResponse(pullRequestList)
 
-			const pullRequestLine = pullRequestList.findComponent('[data-test=line]')
-			expect(pullRequestLine.exists()).toBe(true)
-			expect(pullRequestLine.props().buildStatus).toBe('NO_STATUS')
+			expect(pullRequestList.findComponent(PullRequestLine).props().buildStatus).toBe('NO_STATUS')
 		})
 
 		it('should send notification about new pull requests', async () => {
@@ -168,14 +167,11 @@ describe('PullRequestList component', () => {
 
 			await triggerFakeNetworkResponse(pullRequestList)
 
-			expect(pullRequestList.find('[data-test=line]').exists()).toBe(true)
+			expect(pullRequestList.findComponent(PullRequestLine).exists()).toBe(true)
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
-			const networkPolling = pullRequestList.findComponent(NetworkPolling)
-
-			expect(networkPolling.exists()).toBe(true)
-			expect(networkPolling.attributes().query).toBe('graphql query')
+			expect(pullRequestList.findComponent(NetworkPolling).attributes().query).toBe('graphql query')
 		})
 
 		it('should call reader service to read data from graphql api', async () => {
