@@ -76,5 +76,12 @@ describe('BuildStatus component', () => {
 
 			expect(icon.attributes().icon).toBe('pending')
 		})
+
+		it('should map no status to clock icon', async () => {
+			await buildStatus.setProps({ state: 'NO_STATUS' })
+			const icon = buildStatus.find('[data-test=icon]')
+
+			expect(icon.attributes().icon).toBe('pending')
+		})
 	})
 })

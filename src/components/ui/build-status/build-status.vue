@@ -13,13 +13,14 @@ const statusToIcon = {
 	FAILURE: 'warning',
 	ERROR: 'error',
 	PENDING: 'pending',
+	NO_STATUS: 'pending',
 	SUCCESS: 'success'
 } as const
 
 const props = defineProps<{
 	description: string
 	url?: string
-	state: 'FAILURE' | 'PENDING' | 'ERROR' | 'SUCCESS'
+	state: 'FAILURE' | 'PENDING' | 'ERROR' | 'SUCCESS' | 'NO_STATUS'
 }>()
 
 const icon = computed(() => statusToIcon[props.state])
