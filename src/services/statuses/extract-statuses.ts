@@ -11,7 +11,7 @@ export type GDPullRequestStatus = {
 	statuses: GDBuildStatus[]
 }
 
-export type GDJobStatus = 'PENDING' | 'SUCCESS' | 'FAILURE'
+export type GDJobStatus = 'PENDING' | 'SUCCESS' | 'FAILURE' | 'NO_STATUS'
 
 export type GDBuildStatus = {
 	description: string

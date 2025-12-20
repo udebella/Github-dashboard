@@ -4,9 +4,25 @@ import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import NetworkPolling from '../network-polling/network-polling.js'
 import PullRequestLine from '../ui/pull-request-line/pull-request-line.vue'
+import type { Mocks, Wrapper } from '../../test-utils.ts'
+import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
+import { extractHttp as extractPullRequest, type GDPullRequest } from '../../services/pull-request/pull-request.ts'
+import type { pullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications'
+import type { buildUserService } from '../../services/user/user'
+
+type Stubs = {
+	queryBuilder: ReturnType<typeof buildRepositoriesQuery>
+	pullRequestReader: typeof extractPullRequest
+	pullRequestNotifications: ReturnType<typeof pullRequestNotifications>
+	userService: Pick<ReturnType<typeof buildUserService>, 'connectedUser'>
+}
 
 describe('PullRequestList component', () => {
-	let pullRequestList, stubs
+	let pullRequestList: Wrapper<typeof PullRequestList>
+	let stubs: Mocks<Stubs> & {
+		fakeGraphqlResponse: { rateLimit: unknown }
+		fakeResponseRead: GDPullRequest[]
+	}
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
@@ -42,11 +58,11 @@ describe('PullRequestList component', () => {
 				creationDate: new Date('2018-12-16T18:26:59.000Z'),
 				updateDate: new Date('2018-12-16T21:05:45Z'),
 				lastEventAuthor: 'anUser',
-				buildStatus: 'FAILURE',
+				buildStatus: 'FAILURE' as const,
 				repositoryName: 'repo-name',
 				statuses: [
 					{
-						jobStatus: 'SUCCESS',
+						jobStatus: 'SUCCESS' as const,
 						description: 'continuous-integration/travis-ci/pr',
 						jobUrl: 'https://travis-ci.org/angular/angular/builds/468759214?utm_source=github_status&utm_medium=notification'
 					}
@@ -58,11 +74,11 @@ describe('PullRequestList component', () => {
 				creationDate: new Date('2018-10-20T00:00:00Z'),
 				updateDate: new Date('2018-10-25T01:36:27Z'),
 				lastEventAuthor: 'udebella',
-				buildStatus: 'FAILURE',
+				buildStatus: 'FAILURE' as const,
 				repositoryName: 'repo-name',
 				statuses: [
 					{
-						jobStatus: 'SUCCESS',
+						jobStatus: 'SUCCESS' as const,
 						description: 'build description',
 						jobUrl: 'http://build-target-url'
 					}
@@ -93,9 +109,9 @@ describe('PullRequestList component', () => {
 	it('should display a list of pull request', async () => {
 		await triggerFakeNetworkResponse(pullRequestList)
 
-		const pullRequestLine = pullRequestList.findAllComponents(PullRequestLine)
-		expect(pullRequestLine.length).toBe(2)
-		expect(pullRequestLine.at(0).props()).toEqual({
+		const lines = pullRequestList.findAllComponents(PullRequestLine)
+		expect(lines.length).toBe(2)
+		expect(lines[0]!.props()).toEqual({
 			title: 'WIP - feat(ivy): implement listing lazy routes in `ngtsc`',
 			url: 'https://github.com/angular/angular/pull/27697',
 			buildStatus: 'FAILURE',
@@ -110,7 +126,7 @@ describe('PullRequestList component', () => {
 				}
 			]
 		})
-		expect(pullRequestLine.at(1).props()).toEqual({
+		expect(lines[1]!.props()).toEqual({
 			title: 'Fix wheel/touch browser locking in IE and Safari',
 			url: 'https://github.com/facebook/react/pull/9333',
 			buildStatus: 'FAILURE',
@@ -137,8 +153,8 @@ describe('PullRequestList component', () => {
 	})
 
 	it('should display a list of pull request even when there is no build status on the pull request', async () => {
-		stubs.fakeResponseRead[0].buildStatus = 'NO_STATUS'
-		stubs.fakeResponseRead[0].statuses = []
+		stubs.fakeResponseRead[0]!.buildStatus = 'NO_STATUS'
+		stubs.fakeResponseRead[0]!.statuses = []
 
 		await triggerFakeNetworkResponse(pullRequestList)
 
@@ -193,7 +209,7 @@ describe('PullRequestList component', () => {
 		])
 	})
 
-	const triggerFakeNetworkResponse = async (pullRequestList) => {
+	const triggerFakeNetworkResponse = async (pullRequestList: Wrapper<typeof PullRequestList>) => {
 		await pullRequestList.findComponent(NetworkPolling).vm.$emit('http-update', stubs.fakeGraphqlResponse)
 		await flushPromises()
 	}
