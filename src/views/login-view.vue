@@ -10,7 +10,6 @@
 			>
 			of your github instance
 		</div>
-		<!-- @vue-ignore TODO remove when the component is typescript compliant -->
 		<login-input />
 	</div>
 </template>

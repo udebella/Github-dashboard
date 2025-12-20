@@ -1,6 +1,5 @@
 <template>
 	<div class="line">
-		<!-- @vue-ignore TODO remove when all underlying component migrated to composition api -->
 		<repository-remover
 			:name="repository.name"
 			:owner="repository.owner"
