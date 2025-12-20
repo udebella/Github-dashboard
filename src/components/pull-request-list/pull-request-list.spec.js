@@ -78,8 +78,15 @@ describe('PullRequestList component', () => {
 		}
 
 		pullRequestList = shallowMount(PullRequestList, {
-			propsData: stubs,
-			global: { renderStubDefaultSlot: true }
+			global: {
+				renderStubDefaultSlot: true,
+				provide: {
+					queryBuilder: stubs.queryBuilder,
+					userService: stubs.userService,
+					pullRequestReader: stubs.pullRequestReader,
+					pullRequestNotifications: stubs.pullRequestNotifications
+				}
+			}
 		})
 	})
 
@@ -89,11 +96,8 @@ describe('PullRequestList component', () => {
 		})
 
 		it('should display a list of pull request', async () => {
-			// When
-			const pullRequestList = shallowMount(PullRequestList, { propsData: stubs })
-
-			// Then
 			await triggerFakeNetworkResponse(pullRequestList)
+
 			const pullRequestLine = pullRequestList.findAllComponents('[data-test=line]')
 			expect(pullRequestLine.length).toBe(2)
 			expect(pullRequestLine.at(0).props()).toEqual({
@@ -129,39 +133,28 @@ describe('PullRequestList component', () => {
 		})
 
 		it('should not display pull requests when graphql api returns an empty array of pull request for a repository', async () => {
-			// Given
 			stubs.fakeResponseRead = []
 			stubs.pullRequestReader.mockReturnValue(stubs.fakeResponseRead)
 
-			// When
-			const pullRequestList = shallowMount(PullRequestList, { propsData: stubs })
-
-			// Then
 			await triggerFakeNetworkResponse(pullRequestList)
+
 			expect(pullRequestList.find('[data-test=line]').exists()).toBe(false)
 		})
 
 		it('should display a list of pull request even when there is no build status on the pull request', async () => {
-			// Given
 			stubs.fakeResponseRead[0].buildStatus = 'NO_STATUS'
 			stubs.fakeResponseRead[0].statuses = []
 
-			// When
-			const pullRequestList = shallowMount(PullRequestList, { propsData: stubs })
-
-			// Then
 			await triggerFakeNetworkResponse(pullRequestList)
+
 			const pullRequestLine = pullRequestList.findComponent('[data-test=line]')
 			expect(pullRequestLine.exists()).toBe(true)
 			expect(pullRequestLine.props().buildStatus).toBe('NO_STATUS')
 		})
 
 		it('should send notification about new pull requests', async () => {
-			// When
-			const pullRequestList = shallowMount(PullRequestList, { propsData: stubs })
-
-			// Then
 			await triggerFakeNetworkResponse(pullRequestList)
+
 			expect(stubs.pullRequestNotifications.newList).toHaveBeenCalledWith([
 				{
 					title: 'WIP - feat(ivy): implement listing lazy routes in `ngtsc`',
@@ -175,36 +168,26 @@ describe('PullRequestList component', () => {
 		})
 
 		it('should work on api that are not limited', async () => {
-			// Given
 			stubs.fakeGraphqlResponse.rateLimit = null
 
-			// When
-			const pullRequestList = shallowMount(PullRequestList, { propsData: stubs })
-
-			// Then
 			await triggerFakeNetworkResponse(pullRequestList)
+
 			expect(pullRequestList.find('[data-test=line]').exists()).toBe(true)
 		})
 
 		it('should call graphql api to retrieve data over the list of repositories', async () => {
-			// Given
 			stubs.queryBuilder.mockReturnValue('queryBuilt')
 
-			// When
-			const pullRequestList = shallowMount(PullRequestList, { propsData: stubs })
+			const pullRequestList = shallowMount(PullRequestList, { global: { provide: stubs } })
 			const networkPolling = pullRequestList.find('[data-test=network-polling]')
 
-			// Then
 			expect(networkPolling.exists()).toBe(true)
 			expect(networkPolling.attributes().query).toBe('queryBuilt')
 		})
 
 		it('should call reader service to read data from graphql api', async () => {
-			// When
-			const pullRequestList = shallowMount(PullRequestList, { propsData: stubs })
-
-			// Then
 			await triggerFakeNetworkResponse(pullRequestList)
+
 			expect(stubs.pullRequestReader).toHaveBeenCalledWith([
 				{
 					name: 'react',

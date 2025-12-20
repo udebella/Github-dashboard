@@ -10,7 +10,7 @@ import type {
 import type { GDPullRequestStatus } from '../statuses/extract-statuses'
 import { extractStatuses } from '../statuses/extract-statuses'
 
-type GDPullRequest = {
+export type GDPullRequest = {
 	prTitle: string
 	prUrl: string
 	creationDate: Date

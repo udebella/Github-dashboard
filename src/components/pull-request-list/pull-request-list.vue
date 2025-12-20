@@ -27,14 +27,20 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import PullRequestLine from '../ui/pull-request-line/pull-request-line.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
 import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
-import { extractHttp as extractPullRequest, pullRequestFragment } from '../../services/pull-request/pull-request'
+import {
+	extractHttp as extractPullRequest,
+	type GDPullRequest,
+	pullRequestFragment
+} from '../../services/pull-request/pull-request'
 import { buildUserService } from '../../services/user/user'
-import { pullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
+import { computed, inject, ref } from 'vue'
+import { pullRequestNotifications as defaultPullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications'
+import { NO_USER } from '../../services/session/session.ts'
 
 const pullRequestListFragment = `${pullRequestFragment}
 fragment repository on Repository {
@@ -48,59 +54,28 @@ fragment repository on Repository {
   }
 }`
 
-export default {
-	setup() {
-		const repositoryStore = useRepositoryStore()
-		return { repositoryStore }
-	},
-	name: 'pull-request-list',
-	props: {
-		queryBuilder: {
-			type: Function,
-			default: buildRepositoriesQuery(pullRequestListFragment)
-		},
-		pullRequestReader: {
-			type: Function,
-			default: extractPullRequest
-		},
-		userService: {
-			type: Object,
-			default: () => buildUserService()
-		},
-		pullRequestNotifications: {
-			type: Object,
-			default: () => pullRequestNotifications()
-		}
-	},
-	data() {
-		return {
-			pullRequests: []
-		}
-	},
-	computed: {
-		query() {
-			const watchedRepositories = this.repositoryStore.watched
-			return this.queryBuilder(watchedRepositories)
-		}
-	},
-	methods: {
-		hasUpdates(lastEventAuthor: string) {
-			return this.userService.connectedUser().login !== lastEventAuthor
-		},
-		updatePullRequests(httpResponse: object) {
-			const repositories = Object.values(httpResponse).filter(
-				(repositories) => repositories && repositories.pullRequests
-			)
-			this.pullRequests = this.pullRequestReader(repositories)
-			this.pullRequestNotifications.newList(
-				this.pullRequests.map(({ prTitle, prUrl }) => ({ title: prTitle, url: prUrl }))
-			)
-		}
-	},
-	components: {
-		PullRequestLine,
-		NetworkPolling
-	}
+const queryBuilder = inject('queryBuilder', buildRepositoriesQuery(pullRequestListFragment))
+const userService = inject('userService', buildUserService())
+const pullRequestReader = inject('pullRequestReader', extractPullRequest)
+const pullRequestNotifications = inject('pullRequestNotifications', defaultPullRequestNotifications())
+
+const repositoryStore = useRepositoryStore()
+
+const query = computed(() => {
+	const watchedRepositories = repositoryStore.watched
+	return queryBuilder(watchedRepositories)
+})
+
+const hasUpdates = (lastEventAuthor: string) => {
+	const connectedUser = userService.connectedUser()
+	return connectedUser !== NO_USER && connectedUser.login !== lastEventAuthor
+}
+
+const pullRequests = ref<GDPullRequest[]>([])
+const updatePullRequests = (httpResponse: object) => {
+	const repositories = Object.values(httpResponse).filter((repositories) => repositories && repositories.pullRequests)
+	pullRequests.value = pullRequestReader(repositories)
+	pullRequestNotifications.newList(pullRequests.value.map(({ prTitle, prUrl }) => ({ title: prTitle, url: prUrl })))
 }
 </script>
 

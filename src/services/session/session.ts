@@ -1,5 +1,5 @@
 type NO_USER = typeof NO_USER
-export const NO_USER = {}
+export const NO_USER = 'NO_USER'
 
 const USER_KEY = 'user'
 
