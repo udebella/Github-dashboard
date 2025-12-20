@@ -4,34 +4,30 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
+import type { Wrapper } from '../../test-utils.ts'
+import Icon from '../ui/icon/icon-component.vue'
 
 describe('RepositoryRemover component', () => {
-	let repositoryRemover
+	let repositoryRemover: Wrapper<typeof RepositoryRemover>
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
 		repositoryRemover = shallowMount(RepositoryRemover, {
-			propsData: { name: 'example', owner: 'user' },
+			props: { name: 'example', owner: 'user' },
 			global: { renderStubDefaultSlot: true }
 		})
 	})
 
-	describe('Initialization', () => {
-		it('should mount properly', () => {
-			expect(repositoryRemover.exists()).toBe(true)
-		})
+	it('should display a remove icon', async () => {
+		await useConfigurationStore().$patch({ configurationEnabled: true })
 
-		it('should display a remove icon', async () => {
-			await useConfigurationStore().$patch({ configurationEnabled: true })
+		expect(repositoryRemover.findComponent(Icon).attributes().icon).toBe('deleteBin')
+	})
 
-			expect(repositoryRemover.findComponent('[data-test=icon]').attributes().icon).toBe('deleteBin')
-		})
+	it('should hide the remove icon when configuration mode is disabled', async () => {
+		await useConfigurationStore().$patch({ configurationEnabled: false })
 
-		it('should hide the remove icon when configuration mode is disabled', async () => {
-			await useConfigurationStore().$patch({ configurationEnabled: false })
-
-			expect(repositoryRemover.find('[data-test=icon]').exists()).toBe(false)
-		})
+		expect(repositoryRemover.find('[data-test=icon]').exists()).toBe(false)
 	})
 
 	describe('Removing a repository', () => {
