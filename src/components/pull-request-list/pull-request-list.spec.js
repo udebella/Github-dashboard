@@ -70,7 +70,6 @@ describe('PullRequestList component', () => {
 			}
 		]
 		stubs = {
-			request: vitest.fn().mockReturnValue(Promise.resolve(fakeGraphqlResponse)),
 			queryBuilder: vitest.fn().mockReturnValue('graphql query'),
 			pullRequestReader: vitest.fn().mockReturnValue(fakeResponseRead),
 			pullRequestNotifications: { newList: vitest.fn() },
