@@ -5,7 +5,6 @@
 			<custom-button data-test="configuration" @click="router.push({ name: 'configuration' })">
 				<icon icon="tools" />
 			</custom-button>
-			<!-- @vue-ignore TODO remove when migrated to composition api -->
 			<configuration-button data-test="configuration" />
 			<custom-button title="View sources" href="https://github.com/udebella/Github-dashboard" data-test="sources">
 				<icon icon="github" />

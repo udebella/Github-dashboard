@@ -2,7 +2,6 @@
 	<div class="container">
 		<div class="columns">
 			<repository-list class="repository-list" />
-			<!-- @vue-ignore TODO remove when migrated to composition api -->
 			<pull-request-list class="pull-request-list" />
 			<div class="viewer-pull-request-list">
 				<!-- @vue-ignore TODO remove when migrated to composition api -->
