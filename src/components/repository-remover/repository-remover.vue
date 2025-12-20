@@ -3,7 +3,7 @@
 		v-if="configurationStore.configurationEnabled"
 		@click="repositoryStore.removeRepository({ name, owner })"
 	>
-		<icon-component :icon="icon" data-test="icon" />
+		<icon-component icon="deleteBin" data-test="icon" />
 	</custom-button>
 </template>
 
@@ -15,8 +15,6 @@ import CustomButton from '../ui/custom-button/custom-button.vue'
 
 const repositoryStore = useRepositoryStore()
 const configurationStore = useConfigurationStore()
-
-const icon = 'deleteBin'
 
 defineProps<{
 	name: string
