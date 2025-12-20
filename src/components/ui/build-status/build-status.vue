@@ -1,6 +1,6 @@
 <template>
-	<custom-button :href="url" :title="description" :class="state" class="icon" data-test="link">
-		<icon-component :icon="icon" data-test="icon" />
+	<custom-button :href="url" :title="description" :class="state" class="icon">
+		<icon-component :icon="icon" />
 	</custom-button>
 </template>
 
