@@ -18,25 +18,23 @@ describe('RepositoryRemover component', () => {
 		})
 	})
 
-	it('should display a remove icon', async () => {
+	it('displays a remove icon', async () => {
 		await useConfigurationStore().$patch({ configurationEnabled: true })
 
 		expect(repositoryRemover.findComponent(Icon).attributes().icon).toBe('deleteBin')
 	})
 
-	it('should hide the remove icon when configuration mode is disabled', async () => {
+	it('hides the remove icon when configuration mode is disabled', async () => {
 		await useConfigurationStore().$patch({ configurationEnabled: false })
 
-		expect(repositoryRemover.find('[data-test=icon]').exists()).toBe(false)
+		expect(repositoryRemover.findComponent(Icon).exists()).toBe(false)
 	})
 
-	describe('Removing a repository', () => {
-		it('should remove the repository from watched repository when clicked', async () => {
-			await useRepositoryStore().$patch({ watched: [{ name: 'example', owner: 'user' }] })
+	it('removes the repository from watched repository when clicked', async () => {
+		await useRepositoryStore().$patch({ watched: [{ name: 'example', owner: 'user' }] })
 
-			await repositoryRemover.findComponent({ name: 'custom-button' }).vm.$emit('click')
+		await repositoryRemover.findComponent({ name: 'custom-button' }).vm.$emit('click')
 
-			expect(useRepositoryStore().watched).toEqual([])
-		})
+		expect(useRepositoryStore().watched).toEqual([])
 	})
 })
