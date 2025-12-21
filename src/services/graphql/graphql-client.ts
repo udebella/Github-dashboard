@@ -11,8 +11,12 @@ export type Dependencies = {
 	session: Pick<ReturnType<typeof buildSessionService>, 'getUser'>
 }
 
+const defaultDependencies = {
+	builder: defaultBuilder,
+	session: buildSessionService()
+}
 export const buildRequest =
-	({ builder = defaultBuilder, session = buildSessionService() }: Dependencies) =>
+	({ builder, session }: Dependencies = defaultDependencies) =>
 	<Result extends object>(query: string) => {
 		const user = session.getUser()
 		if (user === 'NO_USER') {
@@ -24,5 +28,3 @@ export const buildRequest =
 
 		return client.request<Result>(query)
 	}
-
-export const request = buildRequest({ builder: defaultBuilder, session: buildSessionService() })

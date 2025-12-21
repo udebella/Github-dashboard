@@ -1,4 +1,4 @@
-import { request } from '../../services/graphql/graphql-client.ts'
+import { buildRequest } from '../../services/graphql/graphql-client.ts'
 import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
 import CustomSelect from '../ui/custom-select/custom-select.vue'
 import { query } from './repository-picker.query'
@@ -23,7 +23,7 @@ export default {
 	name: 'repository-picker',
 	props: {
 		request: {
-			default: () => request
+			default: () => buildRequest()
 		}
 	},
 	data: () => ({

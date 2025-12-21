@@ -1,5 +1,5 @@
 import { buildSessionService } from '../session/session'
-import { request as defaultRequest } from '../graphql/graphql-client.ts'
+import { buildRequest } from '../graphql/graphql-client.ts'
 
 // TODO find a way to test this
 const query = `{
@@ -8,7 +8,7 @@ const query = `{
   }
 }`
 
-export const buildUserService = ({ sessionBuilder = buildSessionService, request = defaultRequest } = {}) => {
+export const buildUserService = ({ sessionBuilder = buildSessionService, request = buildRequest() } = {}) => {
 	const { setUser, getUser, removeUser } = sessionBuilder()
 
 	const login = async (token) => {
