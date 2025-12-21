@@ -3,8 +3,6 @@ import { buildSessionService } from '../session/session'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
 import type { RequestConfig } from 'node_modules/graphql-request/build/legacy/helpers/types'
 
-const defaultBuilder = (url: string, options: RequestConfig) => new GraphQLClient(url, options)
-
 type GraphqlClient = { request: <Result extends object>(query: string) => Promise<Result> }
 export type Dependencies = {
 	builder: (url: string, options: RequestConfig) => GraphqlClient
@@ -12,7 +10,7 @@ export type Dependencies = {
 }
 
 const defaultDependencies = {
-	builder: defaultBuilder,
+	builder: (url: string, options: RequestConfig) => new GraphQLClient(url, options),
 	session: buildSessionService()
 }
 export const buildRequest =
