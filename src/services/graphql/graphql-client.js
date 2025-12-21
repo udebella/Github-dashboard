@@ -5,6 +5,11 @@ import { useConfigurationStore } from '../../stores/configuration/configuration'
 // TODO Is it possible to test that?
 const defaultBuilder = (...args) => new GraphQLClient(...args)
 
+export const buildRequest =
+	({ builder = defaultBuilder, session = buildSessionService(), store = useConfigurationStore() }) =>
+	(query) =>
+		request(query, { builder, session, store })
+
 export const request = async (
 	query,
 	{ builder = defaultBuilder, session = buildSessionService(), store = useConfigurationStore() } = {}

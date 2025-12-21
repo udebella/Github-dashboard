@@ -1,10 +1,11 @@
-import { request } from './graphql-client'
+import { buildRequest } from './graphql-client'
 import { NO_USER } from '../session/session'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
 
 describe('Service: graphql-client', () => {
+	let request
 	let mocks
 
 	beforeEach(() => {
@@ -19,11 +20,12 @@ describe('Service: graphql-client', () => {
 				getUser: vitest.fn().mockReturnValue(NO_USER)
 			}
 		}
+		request = buildRequest(mocks)
 	})
 
 	describe('Method request', () => {
 		it('should retrieve user from session before making a request', async () => {
-			await request('someQuery', mocks)
+			await request('someQuery')
 
 			expect(mocks.session.getUser).toHaveBeenCalled()
 		})
@@ -31,7 +33,7 @@ describe('Service: graphql-client', () => {
 		it('should build a graphqlClient properly', async () => {
 			mocks.session.getUser.mockReturnValue({ token: 'userToken' })
 
-			await request('someQuery', mocks)
+			await request('someQuery')
 
 			expect(mocks.builder).toHaveBeenCalledWith('http://github-api', {
 				headers: {
@@ -41,7 +43,7 @@ describe('Service: graphql-client', () => {
 		})
 
 		it('should call request method from graphql client', async () => {
-			await request('fakeQuery', mocks)
+			await request('fakeQuery')
 
 			expect(mocks.fakeRequest).toHaveBeenCalledWith('fakeQuery')
 		})
@@ -49,7 +51,7 @@ describe('Service: graphql-client', () => {
 		it('should return a promise', async () => {
 			mocks.fakeRequest.mockResolvedValue('value')
 
-			const response = await request('fakeQuery', mocks)
+			const response = await request('fakeQuery')
 
 			expect(response).toBe('value')
 		})
