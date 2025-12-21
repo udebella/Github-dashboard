@@ -6,9 +6,9 @@ import type { RequestConfig } from 'node_modules/graphql-request/build/legacy/he
 const defaultBuilder = (url: string, options: RequestConfig) => new GraphQLClient(url, options)
 
 type GraphqlClient = { request: <Result extends object>(query: string) => Promise<Result> }
-type Dependencies = {
+export type Dependencies = {
 	builder: (url: string, options: RequestConfig) => GraphqlClient
-	session: ReturnType<typeof buildSessionService>
+	session: Pick<ReturnType<typeof buildSessionService>, 'getUser'>
 }
 
 export const buildRequest =

@@ -1,25 +1,25 @@
-import { buildRequest } from './graphql-client.ts'
+import { buildRequest, type Dependencies } from './graphql-client.ts'
 import { NO_USER } from '../session/session'
-import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import { beforeEach, describe, expect, it, type Mock, vitest } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
+import type { Mocks } from '../../test-utils.ts'
 
 describe('Service: graphql-client', () => {
-	let request
-	let mocks
+	let request: ReturnType<typeof buildRequest>
+	let mocks: Mocks<Dependencies> & { fakeRequest: Mock }
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
 		useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 		mocks = {
-			builder: vitest.fn(() => ({
-				request: mocks.fakeRequest
-			})),
+			builder: vitest.fn(),
 			fakeRequest: vitest.fn(),
 			session: {
 				getUser: vitest.fn().mockReturnValue({ token: 'userToken' })
 			}
 		}
+		mocks.builder.mockReturnValue({ request: mocks.fakeRequest })
 		request = buildRequest(mocks)
 	})
 
