@@ -36,9 +36,7 @@ describe('Service: graphql-client', () => {
 			await request('someQuery')
 
 			expect(mocks.builder).toHaveBeenCalledWith('http://github-api', {
-				headers: {
-					Authorization: 'token userToken'
-				}
+				headers: { Authorization: 'token userToken' }
 			})
 		})
 
