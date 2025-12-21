@@ -17,7 +17,7 @@ describe('Service: graphql-client', () => {
 			})),
 			fakeRequest: vitest.fn(),
 			session: {
-				getUser: vitest.fn().mockReturnValue(NO_USER)
+				getUser: vitest.fn().mockReturnValue({ token: 'userToken' })
 			}
 		}
 		request = buildRequest(mocks)
@@ -31,13 +31,17 @@ describe('Service: graphql-client', () => {
 		})
 
 		it('should build a graphqlClient properly', async () => {
-			mocks.session.getUser.mockReturnValue({ token: 'userToken' })
-
 			await request('someQuery')
 
 			expect(mocks.builder).toHaveBeenCalledWith('http://github-api', {
 				headers: { Authorization: 'token userToken' }
 			})
+		})
+
+		it('should throw an error when user is not logged', async () => {
+			mocks.session.getUser.mockReturnValue(NO_USER)
+
+			expect(() => request('someQuery')).toThrow('User is not connected')
 		})
 
 		it('should call request method from graphql client', async () => {

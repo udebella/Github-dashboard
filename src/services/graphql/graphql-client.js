@@ -8,9 +8,12 @@ const defaultBuilder = (...args) => new GraphQLClient(...args)
 export const buildRequest =
 	({ builder = defaultBuilder, session = buildSessionService() }) =>
 	(query) => {
-		const { token } = session.getUser()
+		const user = session.getUser()
+		if (user === 'NO_USER') {
+			throw new Error('User is not connected')
+		}
 		const client = builder(useConfigurationStore().githubApi, {
-			headers: { Authorization: `token ${token}` }
+			headers: { Authorization: `token ${user.token}` }
 		})
 
 		return client.request(query)
