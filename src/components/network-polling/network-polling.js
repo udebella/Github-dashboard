@@ -1,4 +1,4 @@
-import { request } from '../../services/graphql/graphql-client'
+import { buildRequest } from '../../services/graphql/graphql-client.ts'
 import RefreshIndicator from '../ui/refresh-indicator/refresh-indicator.vue'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
 
@@ -15,7 +15,7 @@ export default {
 		},
 		request: {
 			type: Function,
-			default: request
+			default: buildRequest()
 		}
 	},
 	data() {

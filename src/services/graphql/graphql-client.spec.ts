@@ -1,47 +1,51 @@
-import { request } from './graphql-client'
+import { buildRequest, type Dependencies } from './graphql-client.ts'
 import { NO_USER } from '../session/session'
-import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import { beforeEach, describe, expect, it, type Mock, vitest } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
+import type { Mocks } from '../../test-utils.ts'
 
 describe('Service: graphql-client', () => {
-	let mocks
+	let request: ReturnType<typeof buildRequest>
+	let mocks: Mocks<Dependencies> & { fakeRequest: Mock }
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
 		useConfigurationStore().$patch({ githubApi: 'http://github-api' })
 		mocks = {
-			builder: vitest.fn(() => ({
-				request: mocks.fakeRequest
-			})),
+			builder: vitest.fn(),
 			fakeRequest: vitest.fn(),
 			session: {
-				getUser: vitest.fn().mockReturnValue(NO_USER)
+				getUser: vitest.fn().mockReturnValue({ token: 'userToken' })
 			}
 		}
+		mocks.builder.mockReturnValue({ request: mocks.fakeRequest })
+		request = buildRequest(mocks)
 	})
 
 	describe('Method request', () => {
 		it('should retrieve user from session before making a request', async () => {
-			await request('someQuery', mocks)
+			await request('someQuery')
 
 			expect(mocks.session.getUser).toHaveBeenCalled()
 		})
 
 		it('should build a graphqlClient properly', async () => {
-			mocks.session.getUser.mockReturnValue({ token: 'userToken' })
-
-			await request('someQuery', mocks)
+			await request('someQuery')
 
 			expect(mocks.builder).toHaveBeenCalledWith('http://github-api', {
-				headers: {
-					Authorization: 'token userToken'
-				}
+				headers: { Authorization: 'token userToken' }
 			})
 		})
 
+		it('should throw an error when user is not logged', async () => {
+			mocks.session.getUser.mockReturnValue(NO_USER)
+
+			expect(() => request('someQuery')).toThrow('User is not connected')
+		})
+
 		it('should call request method from graphql client', async () => {
-			await request('fakeQuery', mocks)
+			await request('fakeQuery')
 
 			expect(mocks.fakeRequest).toHaveBeenCalledWith('fakeQuery')
 		})
@@ -49,7 +53,7 @@ describe('Service: graphql-client', () => {
 		it('should return a promise', async () => {
 			mocks.fakeRequest.mockResolvedValue('value')
 
-			const response = await request('fakeQuery', mocks)
+			const response = await request('fakeQuery')
 
 			expect(response).toBe('value')
 		})
