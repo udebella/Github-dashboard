@@ -24,10 +24,7 @@ describe('Configuration view', () => {
 			notificationApi: { requestNotifications: vitest.fn() }
 		}
 		wrapper = shallowMount(ConfigurationView, {
-			global: {
-				provide: { notificationApi: mocks.notificationApi, [routerKey]: mocks.router },
-				renderStubDefaultSlot: true
-			}
+			global: { provide: { notificationApi: mocks.notificationApi, [routerKey]: mocks.router } }
 		})
 	})
 

@@ -13,7 +13,7 @@ describe('CopyButton component', () => {
 		mocks = { clipboard: { writeText: vi.fn() } }
 		copyButton = shallowMount(CopyButton, {
 			props: { value: 'value to copy' },
-			global: { provide: { clipboard: mocks.clipboard }, renderStubDefaultSlot: true }
+			global: { provide: { clipboard: mocks.clipboard } }
 		})
 	})
 

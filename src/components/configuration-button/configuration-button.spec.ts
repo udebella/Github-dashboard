@@ -14,7 +14,7 @@ describe('Configuration component', () => {
 	beforeEach(() => {
 		setActivePinia(createTestingPinia())
 		useConfigurationStore().$patch({ configurationEnabled: true })
-		configuration = shallowMount(Configuration, { global: { renderStubDefaultSlot: true } })
+		configuration = shallowMount(Configuration)
 	})
 
 	describe('Initialization', () => {
@@ -42,7 +42,7 @@ describe('Configuration component', () => {
 
 		it('should display the icon as red when the configuration mode is disabled', () => {
 			useConfigurationStore().$patch({ configurationEnabled: false })
-			configuration = shallowMount(Configuration, { global: { renderStubDefaultSlot: true } })
+			configuration = shallowMount(Configuration)
 			const icon = configuration.findComponent(IconComponent)
 
 			expect(icon.classes()).toContain('disabled')

@@ -94,12 +94,7 @@ describe('PullRequestList component', () => {
 			fakeResponseRead
 		}
 
-		pullRequestList = shallowMount(PullRequestList, {
-			global: {
-				renderStubDefaultSlot: true,
-				provide: stubs
-			}
-		})
+		pullRequestList = shallowMount(PullRequestList, { global: { provide: stubs } })
 	})
 
 	it('should display a title', () => {

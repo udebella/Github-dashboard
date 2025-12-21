@@ -27,9 +27,6 @@ describe('PullRequestLine component', () => {
 						jobUrl: 'http://build-target-url'
 					}
 				]
-			},
-			global: {
-				renderStubDefaultSlot: true
 			}
 		})
 	})

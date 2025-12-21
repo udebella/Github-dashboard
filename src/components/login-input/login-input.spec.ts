@@ -25,7 +25,6 @@ describe('Login component', () => {
 		}
 		login = shallowMount(Login, {
 			global: {
-				renderStubDefaultSlot: true,
 				provide: { login: mocks.login, [routerKey as symbol]: mocks.router }
 			}
 		})
