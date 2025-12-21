@@ -1,4 +1,4 @@
-import { buildRequest } from './graphql-client'
+import { buildRequest } from './graphql-client.ts'
 import { NO_USER } from '../session/session'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
