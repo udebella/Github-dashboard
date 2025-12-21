@@ -10,7 +10,7 @@ import { extractHttp as extractPullRequest, type GDPullRequest } from '../../ser
 import type { pullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications'
 import type { buildUserService } from '../../services/user/user'
 
-type Stubs = {
+type Dependencies = {
 	queryBuilder: ReturnType<typeof buildRepositoriesQuery>
 	pullRequestReader: typeof extractPullRequest
 	pullRequestNotifications: ReturnType<typeof pullRequestNotifications>
@@ -19,7 +19,7 @@ type Stubs = {
 
 describe('PullRequestList component', () => {
 	let pullRequestList: Wrapper<typeof PullRequestList>
-	let stubs: Mocks<Stubs> & {
+	let stubs: Mocks<Dependencies> & {
 		fakeGraphqlResponse: { rateLimit: unknown }
 		fakeResponseRead: GDPullRequest[]
 	}
@@ -94,12 +94,7 @@ describe('PullRequestList component', () => {
 			fakeResponseRead
 		}
 
-		pullRequestList = shallowMount(PullRequestList, {
-			global: {
-				renderStubDefaultSlot: true,
-				provide: stubs
-			}
-		})
+		pullRequestList = shallowMount(PullRequestList, { global: { provide: stubs } })
 	})
 
 	it('should display a title', () => {

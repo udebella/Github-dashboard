@@ -12,10 +12,7 @@ describe('RepositoryRemover component', () => {
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
-		repositoryRemover = shallowMount(RepositoryRemover, {
-			props: { name: 'example', owner: 'user' },
-			global: { renderStubDefaultSlot: true }
-		})
+		repositoryRemover = shallowMount(RepositoryRemover, { props: { name: 'example', owner: 'user' } })
 	})
 
 	it('displays a remove icon', async () => {

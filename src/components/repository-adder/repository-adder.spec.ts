@@ -10,7 +10,7 @@ describe('RepositoryAdder component', () => {
 
 	beforeEach(() => {
 		setActivePinia(createPinia())
-		repositoryAdder = shallowMount(RepositoryAdder, { global: { renderStubDefaultSlot: true } })
+		repositoryAdder = shallowMount(RepositoryAdder)
 	})
 
 	describe('Initialization', () => {

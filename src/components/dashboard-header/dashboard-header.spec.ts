@@ -14,10 +14,7 @@ describe('Dashboard Header component', () => {
 			router: { push: vitest.fn() }
 		}
 		dashboardHeader = shallowMount(DashboardHeader, {
-			global: {
-				provide: { [routerKey]: mocks.router },
-				renderStubDefaultSlot: true
-			}
+			global: { provide: { [routerKey]: mocks.router } }
 		})
 	})
 

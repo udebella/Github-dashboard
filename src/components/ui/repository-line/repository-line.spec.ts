@@ -24,9 +24,6 @@ describe('RepositoryLine component', () => {
 						}
 					]
 				}
-			},
-			global: {
-				renderStubDefaultSlot: true
 			}
 		})
 	})

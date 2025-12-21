@@ -12,7 +12,7 @@ describe('PasteButton component', () => {
 	beforeEach(() => {
 		mocks = { clipboard: { readText: vi.fn() } }
 		pasteButton = shallowMount(PasteButton, {
-			global: { renderStubDefaultSlot: true, provide: { clipboard: mocks.clipboard } }
+			global: { provide: { clipboard: mocks.clipboard } }
 		})
 	})
 

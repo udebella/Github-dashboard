@@ -14,9 +14,6 @@ describe('BuildStatus component', () => {
 				url: 'http://build-link',
 				description: 'a short description',
 				state: 'SUCCESS'
-			},
-			global: {
-				renderStubDefaultSlot: true
 			}
 		})
 	})
