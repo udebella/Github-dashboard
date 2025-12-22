@@ -11,11 +11,19 @@ jobs:
             -   name: Checkout
                 uses: actions/checkout@v6
             -   name: Setup latest NodeJS
+                id: setup-node
                 uses: actions/setup-node@v6
                 with:
                     node-version: lts/*
                     cache: 'npm'
+            -   name: Cache dependencies
+                id: cache-npm-dependencies
+                uses: actions/cache@v5
+                with:
+                    key: ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-${{ hashFiles('**/package-lock.json') }}
+                    path: './node_modules'
             -   name: Install dependencies
+                if: steps.cache-npm-dependencies.outputs.cache-hit != 'true'
                 run: npm ci
             -   name: Build application
                 run: npm run build
