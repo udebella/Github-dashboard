@@ -4,6 +4,6 @@ import { config } from '@vue/test-utils'
 // see https://github.com/jsdom/jsdom/issues/1862
 window.Notification = {
 	permission: 'denied'
-}
+} as never
 
 config.global.renderStubDefaultSlot = true

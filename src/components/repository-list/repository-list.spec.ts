@@ -6,7 +6,7 @@ import { useRepositoryStore } from '../../stores/repositories/repositories'
 import RepositoryLine from '../ui/repository-line/repository-line.vue'
 import NetworkPolling from '../network-polling/network-polling.js'
 import type { Mocks, Wrapper } from '../../test-utils.ts'
-import type { buildRepositoriesQuery } from '../../services/graphql/query-builder'
+import type { buildRepositoriesQuery } from '../../services/graphql/query-builder.ts'
 
 describe('RepositoryList component', () => {
 	let repositoryList: Wrapper<typeof RepositoryList>

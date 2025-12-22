@@ -14,7 +14,7 @@
 import RepositoryLine from '../ui/repository-line/repository-line.vue'
 import RepositoryAdder from '../repository-adder/repository-adder.vue'
 import NetworkPolling from '../network-polling/network-polling.vue'
-import { buildRepositoriesQuery } from '../../services/graphql/query-builder'
+import { buildRepositoriesQuery } from '../../services/graphql/query-builder.ts'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
 import { computed, inject, ref } from 'vue'
 import { extractStatuses } from '../../services/statuses/extract-statuses'
