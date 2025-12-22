@@ -2,49 +2,47 @@ import { buildRepositoriesQuery, buildViewerQuery } from './query-builder.ts'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Query builder', () => {
-	describe('buildRepositoriesQuery', () => {
-		describe('Query generator', () => {
-			it('should return a function that will use the list of repositories to generate the query', () => {
-				const emptyFragment = ''
+	describe('Query generator', () => {
+		it('should return a function that will use the list of repositories to generate the query', () => {
+			const emptyFragment = ''
 
-				expect(buildRepositoriesQuery(emptyFragment)).toBeTypeOf('function')
-			})
+			expect(buildRepositoriesQuery(emptyFragment)).toBeTypeOf('function')
+		})
+	})
+
+	describe('Repository Query generation', () => {
+		let queryGenerator: ReturnType<typeof buildRepositoriesQuery>
+
+		beforeEach(() => {
+			queryGenerator = buildRepositoriesQuery(simpleRepositoryFragment)
 		})
 
-		describe('Repository Query generation', () => {
-			let queryGenerator: ReturnType<typeof buildRepositoriesQuery>
-
-			beforeEach(() => {
-				queryGenerator = buildRepositoriesQuery(simpleRepositoryFragment)
-			})
-
-			it('should create an empty working query when given an empty repository list', () => {
-				expect(queryGenerator([])).toBe(emptyQuery)
-			})
-
-			it('should create a simple query when given one repository', () => {
-				expect(queryGenerator([{ owner: 'facebook', name: 'react' }])).toBe(simpleRepositoryQuery)
-			})
-
-			it('should create a query when given multiple repositories', () => {
-				expect(
-					queryGenerator([
-						{ owner: 'facebook', name: 'react' },
-						{ owner: 'angular', name: 'angular' }
-					])
-				).toBe(multipleRepositoryQuery)
-			})
+		it('should create an empty working query when given an empty repository list', () => {
+			expect(queryGenerator([])).toBe(emptyQuery)
 		})
 
-		describe('Viewer Query generation', () => {
-			it('should create an empty working query when an empty fragment', () => {
-				const emptyFragment = ''
+		it('should create a simple query when given one repository', () => {
+			expect(queryGenerator([{ owner: 'facebook', name: 'react' }])).toBe(simpleRepositoryQuery)
+		})
 
-				expect(buildViewerQuery(emptyFragment)).toBe(emptyQuery)
-			})
-			it('should create the query when using the given fragment', () => {
-				expect(buildViewerQuery(simpleViewerFragment)).toBe(simpleViewerQuery)
-			})
+		it('should create a query when given multiple repositories', () => {
+			expect(
+				queryGenerator([
+					{ owner: 'facebook', name: 'react' },
+					{ owner: 'angular', name: 'angular' }
+				])
+			).toBe(multipleRepositoryQuery)
+		})
+	})
+
+	describe('Viewer Query generation', () => {
+		it('should create an empty working query when an empty fragment', () => {
+			const emptyFragment = ''
+
+			expect(buildViewerQuery(emptyFragment)).toBe(emptyQuery)
+		})
+		it('should create the query when using the given fragment', () => {
+			expect(buildViewerQuery(simpleViewerFragment)).toBe(simpleViewerQuery)
 		})
 	})
 })
