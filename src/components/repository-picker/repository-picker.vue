@@ -5,17 +5,27 @@
 	</div>
 </template>
 
-<!-- eslint-disable-next-line vue/block-lang -->
-<script lang="js">
+<script lang="ts" setup>
 import { buildRequest } from '../../services/graphql/graphql-client.ts'
 import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
 import CustomSelect from '../ui/custom-select/custom-select.vue'
 import { query } from './repository-picker.query.ts'
-import { useRepositoryStore } from '../../stores/repositories/repositories'
+import { type Repository, useRepositoryStore } from '../../stores/repositories/repositories'
+import { computed, ref } from 'vue'
 
-const extract = (response) => {
-	const repositories = (response && response.search && response.search.nodes) || []
-	// FIXME defaultBranchRef can be null on new projects
+type Response = {
+	search?: {
+		nodes?: ResponseRepository[]
+	}
+}
+type ResponseRepository = {
+	name: string
+	owner: { login: string }
+	url: string
+	defaultBranchRef: { name: string } // FIXME defaultBranchRef can be null on new projects
+}
+const extract = (response?: Response): Repository[] => {
+	const repositories = (response && response.search && response.search.nodes) ?? []
 	return repositories.map(({ name, owner, url, defaultBranchRef }) => ({
 		name,
 		owner: owner.login,
@@ -24,40 +34,26 @@ const extract = (response) => {
 	}))
 }
 
-export default {
-	setup() {
-		const repositoryStore = useRepositoryStore()
-		return { repositoryStore }
-	},
-	name: 'repository-picker',
-	props: {
-		request: {
-			default: () => buildRequest()
-		}
-	},
-	data: () => ({
-		repositories: []
-	}),
-	computed: {
-		repositoriesNames() {
-			return this.repositories.map(({ name }) => name)
-		}
-	},
-	methods: {
-		async retrieveRepositoriesFor(searchQuery) {
-			if (searchQuery) {
-				const response = await this.request(query(searchQuery))
-				this.repositories = extract(response)
-			}
-		},
-		pickRepository(value) {
-			const selectedRepository = this.repositories.find(({ name }) => name === value)
-			this.repositoryStore.addRepository(selectedRepository)
-		}
-	},
-	components: {
-		DebouncedInput,
-		CustomSelect
+const repositoryStore = useRepositoryStore()
+
+const props = defineProps<{
+	request: ReturnType<typeof buildRequest>
+}>()
+
+const repositories = ref<Repository[]>([])
+const repositoriesNames = computed(() => repositories.value.map(({ name }) => name))
+
+const retrieveRepositoriesFor = async (searchQuery: string) => {
+	if (searchQuery) {
+		const response = await props.request(query(searchQuery))
+		repositories.value = extract(response)
+	}
+}
+
+const pickRepository = (value: string) => {
+	const selectedRepository = repositories.value.find(({ name }) => name === value)
+	if (selectedRepository) {
+		repositoryStore.addRepository(selectedRepository)
 	}
 }
 </script>
