@@ -1,4 +1,4 @@
-import { buildRepositoriesQuery, buildViewerQuery } from './query-builder'
+import { buildRepositoriesQuery, buildViewerQuery } from './query-builder.ts'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Query builder', () => {
