@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
 
-type Repository = {
+export type Repository = {
 	name: string
 	owner: string
+	url: string
+	defaultBranch: string
 }
 
 type State = {
