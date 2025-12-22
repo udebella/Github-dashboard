@@ -12,7 +12,7 @@ describe('Query builder', () => {
 		})
 
 		describe('Repository Query generation', () => {
-			let queryGenerator
+			let queryGenerator: ReturnType<typeof buildRepositoriesQuery>
 
 			beforeEach(() => {
 				queryGenerator = buildRepositoriesQuery(simpleRepositoryFragment)

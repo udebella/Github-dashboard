@@ -1,6 +1,9 @@
-import type { GDRepository } from '../../types/repository.ts'
+type Repository = {
+	name: string
+	owner: string
+}
 
-export const buildRepositoriesQuery = (fragment: string) => (repositoryList: GDRepository[]) => {
+export const buildRepositoriesQuery = (fragment: string) => (repositoryList: Repository[]) => {
 	const fragments = repositoryList.length > 0 ? `\n\n${fragment}\n\n${repositoryListFragment(repositoryList)}` : ''
 	const query = repositoryList.length > 0 ? '\n\t...repositoryList' : ''
 	return `${rateLimitFragment}${fragments}\n\nquery {\n\t...rateLimit${query}\n}`
@@ -21,7 +24,7 @@ const rateLimitFragment = `fragment rateLimit on Query {
 	}
 }`
 
-const repositoryListFragment = (repositoryList: GDRepository[]) => {
+const repositoryListFragment = (repositoryList: Repository[]) => {
 	const fragmentContent = repositoryList
 		.map(
 			({ owner, name }, index) => `\trep_${index}: repository(owner: "${owner}", name: "${name}") {...repository}`
