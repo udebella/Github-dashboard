@@ -10,7 +10,7 @@
 import { buildRequest } from '../../services/graphql/graphql-client.ts'
 import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
 import CustomSelect from '../ui/custom-select/custom-select.vue'
-import { query } from './repository-picker.query'
+import { query } from './repository-picker.query.ts'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
 
 const extract = (response) => {

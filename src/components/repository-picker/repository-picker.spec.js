@@ -1,6 +1,6 @@
 import { flushPromises, shallowMount } from '@vue/test-utils'
 import RepositoryPicker from './repository-picker.vue'
-import { query } from './repository-picker.query'
+import { query } from './repository-picker.query.ts'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
