@@ -78,15 +78,48 @@ describe('RepositoryPicker component', () => {
 
 	describe('Pick a repository', () => {
 		it('should put in the store the repository picked', async () => {
-			const first = { name: 'first repository' }
-			const second = { name: 'second repository' }
-			repositoryPicker.setData({ repositories: [first, second] })
+			mocks.request.mockReturnValue({
+				search: {
+					nodes: [
+						{
+							name: 'first repository',
+							owner: {
+								login: 'mary'
+							},
+							url: 'https://first',
+							defaultBranchRef: {
+								name: 'main'
+							}
+						},
+						{
+							name: 'second repository',
+							owner: {
+								login: 'john'
+							},
+							url: 'https://second',
+							defaultBranchRef: {
+								name: 'main'
+							}
+						}
+					]
+				}
+			})
+			repositoryPicker = shallowMount(RepositoryPicker, {
+				propsData: mocks
+			})
+
+			await repositoryPicker.findComponent('[data-test=search-input]').vm.$emit('input', 'test')
 
 			await repositoryPicker
 				.findComponent('[data-test=repository-input]')
 				.vm.$emit('selected', 'second repository')
 
-			expect(useRepositoryStore().addRepository).toHaveBeenCalledWith(second)
+			expect(useRepositoryStore().addRepository).toHaveBeenCalledWith({
+				defaultBranch: 'main',
+				name: 'second repository',
+				owner: 'john',
+				url: 'https://second'
+			})
 		})
 	})
 })
