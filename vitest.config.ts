@@ -12,7 +12,7 @@ export default mergeConfig(
 			exclude: [...configDefaults.exclude, 'e2e/*'],
 			root: fileURLToPath(new URL('./', import.meta.url)),
 			globals: true,
-			setupFiles: './src/test-setup.js',
+			setupFiles: './src/test-setup.ts',
 			coverage: {
 				all: true,
 				reporter: ['text-summary', 'text', 'html', 'cobertura']
