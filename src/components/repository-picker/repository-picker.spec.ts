@@ -42,9 +42,9 @@ describe('RepositoryPicker component', () => {
 			})
 		)
 		mocks = {
-			request: vitest.fn()
+			request: vitest.fn().mockReturnValue(fakeResponse)
 		}
-		repositoryPicker = shallowMount(RepositoryPicker, { propsData: mocks })
+		repositoryPicker = shallowMount(RepositoryPicker, { global: { provide: mocks } })
 	})
 
 	describe('Initialization', () => {
@@ -66,11 +66,6 @@ describe('RepositoryPicker component', () => {
 		})
 
 		it('should display a select to allow user to pick a repository', async () => {
-			mocks.request.mockReturnValue(fakeResponse)
-			repositoryPicker = shallowMount(RepositoryPicker, {
-				propsData: mocks
-			})
-
 			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
 
 			await flushPromises()
@@ -112,9 +107,7 @@ describe('RepositoryPicker component', () => {
 					]
 				}
 			})
-			repositoryPicker = shallowMount(RepositoryPicker, {
-				propsData: mocks
-			})
+			repositoryPicker = shallowMount(RepositoryPicker, { global: { provide: mocks } })
 
 			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
 

@@ -11,7 +11,7 @@ import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
 import CustomSelect from '../ui/custom-select/custom-select.vue'
 import { query } from './repository-picker.query.ts'
 import { type Repository, useRepositoryStore } from '../../stores/repositories/repositories'
-import { computed, ref } from 'vue'
+import { computed, inject, ref } from 'vue'
 
 type Response = {
 	search?: {
@@ -36,16 +36,14 @@ const extract = (response?: Response): Repository[] => {
 
 const repositoryStore = useRepositoryStore()
 
-const props = defineProps<{
-	request: ReturnType<typeof buildRequest>
-}>()
+const request = inject('request', buildRequest())
 
 const repositories = ref<Repository[]>([])
 const repositoriesNames = computed(() => repositories.value.map(({ name }) => name))
 
 const retrieveRepositoriesFor = async (searchQuery: string) => {
 	if (searchQuery) {
-		const response = await props.request(query(searchQuery))
+		const response = await request(query(searchQuery))
 		repositories.value = extract(response)
 	}
 }
