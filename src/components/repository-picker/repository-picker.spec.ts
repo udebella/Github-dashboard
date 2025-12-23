@@ -1,13 +1,14 @@
 import { flushPromises, shallowMount } from '@vue/test-utils'
 import RepositoryPicker from './repository-picker.vue'
 import { query } from './repository-picker.query.ts'
-import { beforeEach, describe, expect, it, type Mock, vitest } from 'vitest'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
 import type { Mocks, Wrapper } from '../../test-utils.ts'
 import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
 import CustomSelect from '../ui/custom-select/custom-select.vue'
+import { buildRequest } from '../../services/graphql/graphql-client.ts'
 
 const fakeResponse = {
 	search: {
@@ -24,7 +25,7 @@ const fakeResponse = {
 }
 
 type Dependencies = {
-	request: Mock
+	request: ReturnType<typeof buildRequest>
 }
 
 describe('RepositoryPicker component', () => {
@@ -71,7 +72,7 @@ describe('RepositoryPicker component', () => {
 
 	describe('Pick a repository', () => {
 		it('should put in the store the repository picked', async () => {
-			mocks.request.mockReturnValue({
+			mocks.request.mockResolvedValue({
 				search: {
 					nodes: [
 						{
