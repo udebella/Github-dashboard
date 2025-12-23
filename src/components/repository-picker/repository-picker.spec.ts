@@ -1,10 +1,13 @@
 import { flushPromises, shallowMount } from '@vue/test-utils'
 import RepositoryPicker from './repository-picker.vue'
 import { query } from './repository-picker.query.ts'
-import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import { beforeEach, describe, expect, it, type Mock, vitest } from 'vitest'
 import { setActivePinia } from 'pinia'
 import { createTestingPinia } from '@pinia/testing'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
+import type { Mocks, Wrapper } from '../../test-utils.ts'
+import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
+import CustomSelect from '../ui/custom-select/custom-select.vue'
 
 const fakeResponse = {
 	search: {
@@ -24,8 +27,13 @@ const fakeResponse = {
 	}
 }
 
+type Dependencies = {
+	request: Mock
+}
+
 describe('RepositoryPicker component', () => {
-	let repositoryPicker, mocks
+	let repositoryPicker: Wrapper<typeof RepositoryPicker>
+	let mocks: Mocks<Dependencies>
 
 	beforeEach(() => {
 		setActivePinia(
@@ -45,14 +53,14 @@ describe('RepositoryPicker component', () => {
 		})
 
 		it('should display a input to enter repository owner', () => {
-			expect(repositoryPicker.find('[data-test=search-input]').exists()).toBe(true)
+			expect(repositoryPicker.findComponent(DebouncedInput).exists()).toBe(true)
 		})
 	})
 
 	describe('Enter repository owner', () => {
 		it('should make a request to retrieve repositories of the owner', async () => {
 			expect(mocks.request).not.toHaveBeenCalled()
-			await repositoryPicker.findComponent('[data-test=search-input]').vm.$emit('input', 'test')
+			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
 
 			expect(mocks.request).toHaveBeenCalledWith(query('test'))
 		})
@@ -63,14 +71,14 @@ describe('RepositoryPicker component', () => {
 				propsData: mocks
 			})
 
-			await repositoryPicker.findComponent('[data-test=search-input]').vm.$emit('input', 'test')
+			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
 
 			await flushPromises()
-			expect(repositoryPicker.find('[data-test=repository-input]').attributes().items).toEqual('react')
+			expect(repositoryPicker.findComponent(CustomSelect).attributes().items).toEqual('react')
 		})
 
 		it('should not make queries when update value is empty', async () => {
-			await repositoryPicker.findComponent('[data-test=search-input]').vm.$emit('input', '')
+			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', '')
 
 			expect(mocks.request).not.toHaveBeenCalled()
 		})
@@ -108,11 +116,9 @@ describe('RepositoryPicker component', () => {
 				propsData: mocks
 			})
 
-			await repositoryPicker.findComponent('[data-test=search-input]').vm.$emit('input', 'test')
+			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
 
-			await repositoryPicker
-				.findComponent('[data-test=repository-input]')
-				.vm.$emit('selected', 'second repository')
+			await repositoryPicker.findComponent(CustomSelect).vm.$emit('selected', 'second repository')
 
 			expect(useRepositoryStore().addRepository).toHaveBeenCalledWith({
 				defaultBranch: 'main',
