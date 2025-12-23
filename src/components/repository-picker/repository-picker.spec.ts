@@ -33,11 +33,7 @@ describe('RepositoryPicker component', () => {
 	let mocks: Mocks<Dependencies>
 
 	beforeEach(() => {
-		setActivePinia(
-			createTestingPinia({
-				createSpy: vitest.fn
-			})
-		)
+		setActivePinia(createTestingPinia())
 		mocks = {
 			request: vitest.fn().mockReturnValue(fakeResponse)
 		}
