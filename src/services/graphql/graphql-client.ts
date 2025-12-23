@@ -14,8 +14,8 @@ const defaultDependencies = {
 	session: buildSessionService()
 }
 export const buildRequest =
-	({ builder, session }: Dependencies = defaultDependencies) =>
-	<Result extends object>(query: string) => {
+	<Result extends object>({ builder, session }: Dependencies = defaultDependencies) =>
+	(query: string) => {
 		const user = session.getUser()
 		if (user === 'NO_USER') {
 			throw new Error('User is not connected')

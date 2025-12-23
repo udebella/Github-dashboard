@@ -9,7 +9,7 @@ describe('RefreshIndicator component', () => {
 	beforeEach(() => {
 		vitest.useFakeTimers()
 		refreshIndicator = shallowMount(RefreshIndicator, {
-			propsData: {
+			props: {
 				promise: Promise.resolve('first resolution'),
 				timeBetweenRefresh: 30
 			}

@@ -1,0 +1,85 @@
+import { flushPromises, shallowMount } from '@vue/test-utils'
+import RepositoryPicker, { type Response, type ResponseRepository } from './repository-picker.vue'
+import { query } from './repository-picker.query.ts'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
+import { setActivePinia } from 'pinia'
+import { createTestingPinia } from '@pinia/testing'
+import { useRepositoryStore } from '../../stores/repositories/repositories'
+import type { Mocks, Wrapper } from '../../test-utils.ts'
+import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
+import CustomSelect from '../ui/custom-select/custom-select.vue'
+import { buildRequest } from '../../services/graphql/graphql-client.ts'
+
+type Dependencies = {
+	request: ReturnType<typeof buildRequest<Response>>
+}
+
+describe('RepositoryPicker component', () => {
+	let repositoryPicker: Wrapper<typeof RepositoryPicker>
+	let mocks: Mocks<Dependencies>
+
+	beforeEach(() => {
+		setActivePinia(createTestingPinia())
+		mocks = {
+			request: vitest.fn().mockReturnValue({
+				search: {
+					nodes: [
+						createRepository({ name: 'first' }),
+						createRepository({ name: 'second', owner: { login: 'john' } })
+					]
+				}
+			})
+		}
+		repositoryPicker = shallowMount(RepositoryPicker, { global: { provide: mocks } })
+	})
+
+	it('should display a input to enter repository owner', () => {
+		expect(repositoryPicker.findComponent(DebouncedInput).exists()).toBe(true)
+	})
+
+	describe('Enter repository owner', () => {
+		it('should make a request to retrieve repositories of the owner', async () => {
+			expect(mocks.request).not.toHaveBeenCalled()
+			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
+
+			expect(mocks.request).toHaveBeenCalledWith(query('test'))
+		})
+
+		it('should display a select to allow user to pick a repository', async () => {
+			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
+
+			await flushPromises()
+			expect(repositoryPicker.findComponent(CustomSelect).props().items).toEqual(['first', 'second'])
+		})
+
+		it('should not make queries when update value is empty', async () => {
+			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', '')
+
+			expect(mocks.request).not.toHaveBeenCalled()
+		})
+	})
+
+	describe('Pick a repository', () => {
+		it('should put in the store the repository picked', async () => {
+			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
+
+			await repositoryPicker.findComponent(CustomSelect).vm.$emit('selected', 'second')
+
+			expect(useRepositoryStore().addRepository).toHaveBeenCalledWith({
+				defaultBranch: 'main',
+				name: 'second',
+				owner: 'john',
+				url: 'https://github.com/repository'
+			})
+		})
+	})
+})
+
+const createRepository = (options: Partial<ResponseRepository> = {}) => ({
+	nameWithOwner: 'owner/repository',
+	name: 'repository',
+	owner: { login: 'owner' },
+	url: 'https://github.com/repository',
+	defaultBranchRef: { name: 'main' },
+	...options
+})
