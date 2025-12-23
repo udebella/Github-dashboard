@@ -40,7 +40,7 @@ describe('RepositoryPicker component', () => {
 			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
 
 			await flushPromises()
-			expect(repositoryPicker.findComponent(CustomSelect).attributes().items).toEqual('repository')
+			expect(repositoryPicker.findComponent(CustomSelect).props().items).toEqual(['repository'])
 		})
 
 		it('should not make queries when update value is empty', async () => {
