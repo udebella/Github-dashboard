@@ -15,13 +15,9 @@ const fakeResponse = {
 			{
 				nameWithOwner: 'facebook/react',
 				name: 'react',
-				owner: {
-					login: 'facebook'
-				},
+				owner: { login: 'facebook' },
 				url: 'https://github.com/facebook/react',
-				defaultBranchRef: {
-					name: 'master'
-				}
+				defaultBranchRef: { name: 'master' }
 			}
 		]
 	}
