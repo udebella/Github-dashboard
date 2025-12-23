@@ -13,7 +13,7 @@ import { query } from './repository-picker.query.ts'
 import { type Repository, useRepositoryStore } from '../../stores/repositories/repositories'
 import { computed, inject, ref } from 'vue'
 
-type Response = {
+export type Response = {
 	search?: {
 		nodes?: ResponseRepository[]
 	}
@@ -36,7 +36,7 @@ const extract = (response?: Response): Repository[] => {
 
 const repositoryStore = useRepositoryStore()
 
-const request = inject('request', buildRequest())
+const request = inject('request', buildRequest<Response>())
 
 const repositories = ref<Repository[]>([])
 const repositoriesNames = computed(() => repositories.value.map(({ name }) => name))

@@ -1,5 +1,5 @@
 import { flushPromises, shallowMount } from '@vue/test-utils'
-import RepositoryPicker from './repository-picker.vue'
+import RepositoryPicker, { type Response } from './repository-picker.vue'
 import { query } from './repository-picker.query.ts'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { setActivePinia } from 'pinia'
@@ -25,7 +25,7 @@ const fakeResponse = {
 }
 
 type Dependencies = {
-	request: ReturnType<typeof buildRequest>
+	request: ReturnType<typeof buildRequest<Response>>
 }
 
 describe('RepositoryPicker component', () => {
