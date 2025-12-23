@@ -1,5 +1,5 @@
 import { flushPromises, shallowMount } from '@vue/test-utils'
-import RepositoryPicker, { type Response } from './repository-picker.vue'
+import RepositoryPicker, { type Response, type ResponseRepository } from './repository-picker.vue'
 import { query } from './repository-picker.query.ts'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { setActivePinia } from 'pinia'
@@ -9,20 +9,6 @@ import type { Mocks, Wrapper } from '../../test-utils.ts'
 import DebouncedInput from '../ui/debounced-input/debounced-input.vue'
 import CustomSelect from '../ui/custom-select/custom-select.vue'
 import { buildRequest } from '../../services/graphql/graphql-client.ts'
-
-const fakeResponse = {
-	search: {
-		nodes: [
-			{
-				nameWithOwner: 'facebook/react',
-				name: 'react',
-				owner: { login: 'facebook' },
-				url: 'https://github.com/facebook/react',
-				defaultBranchRef: { name: 'master' }
-			}
-		]
-	}
-}
 
 type Dependencies = {
 	request: ReturnType<typeof buildRequest<Response>>
@@ -34,9 +20,7 @@ describe('RepositoryPicker component', () => {
 
 	beforeEach(() => {
 		setActivePinia(createTestingPinia())
-		mocks = {
-			request: vitest.fn().mockReturnValue(fakeResponse)
-		}
+		mocks = { request: vitest.fn().mockReturnValue(createResponse()) }
 		repositoryPicker = shallowMount(RepositoryPicker, { global: { provide: mocks } })
 	})
 
@@ -56,7 +40,7 @@ describe('RepositoryPicker component', () => {
 			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
 
 			await flushPromises()
-			expect(repositoryPicker.findComponent(CustomSelect).attributes().items).toEqual('react')
+			expect(repositoryPicker.findComponent(CustomSelect).attributes().items).toEqual('repository')
 		})
 
 		it('should not make queries when update value is empty', async () => {
@@ -68,32 +52,12 @@ describe('RepositoryPicker component', () => {
 
 	describe('Pick a repository', () => {
 		it('should put in the store the repository picked', async () => {
-			mocks.request.mockResolvedValue({
-				search: {
-					nodes: [
-						{
-							name: 'first repository',
-							owner: {
-								login: 'mary'
-							},
-							url: 'https://first',
-							defaultBranchRef: {
-								name: 'main'
-							}
-						},
-						{
-							name: 'second repository',
-							owner: {
-								login: 'john'
-							},
-							url: 'https://second',
-							defaultBranchRef: {
-								name: 'main'
-							}
-						}
-					]
-				}
-			})
+			mocks.request.mockResolvedValue(
+				createResponse([
+					createRepository({ name: 'first repository' }),
+					createRepository({ name: 'second repository', owner: { login: 'john' } })
+				])
+			)
 			repositoryPicker = shallowMount(RepositoryPicker, { global: { provide: mocks } })
 
 			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
@@ -104,8 +68,23 @@ describe('RepositoryPicker component', () => {
 				defaultBranch: 'main',
 				name: 'second repository',
 				owner: 'john',
-				url: 'https://second'
+				url: 'https://github.com/repository'
 			})
 		})
 	})
+})
+
+const createResponse = (repositories: ResponseRepository[] = [createRepository()]) => ({
+	search: {
+		nodes: repositories
+	}
+})
+
+const createRepository = (options: Partial<ResponseRepository> = {}) => ({
+	nameWithOwner: 'owner/repository',
+	name: 'repository',
+	owner: { login: 'owner' },
+	url: 'https://github.com/repository',
+	defaultBranchRef: { name: 'main' },
+	...options
 })

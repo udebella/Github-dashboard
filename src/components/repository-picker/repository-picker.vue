@@ -18,7 +18,7 @@ export type Response = {
 		nodes?: ResponseRepository[]
 	}
 }
-type ResponseRepository = {
+export type ResponseRepository = {
 	name: string
 	owner: { login: string }
 	url: string
