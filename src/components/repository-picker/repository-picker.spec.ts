@@ -47,14 +47,8 @@ describe('RepositoryPicker component', () => {
 		repositoryPicker = shallowMount(RepositoryPicker, { global: { provide: mocks } })
 	})
 
-	describe('Initialization', () => {
-		it('should mount properly', () => {
-			expect(repositoryPicker.exists()).toBe(true)
-		})
-
-		it('should display a input to enter repository owner', () => {
-			expect(repositoryPicker.findComponent(DebouncedInput).exists()).toBe(true)
-		})
+	it('should display a input to enter repository owner', () => {
+		expect(repositoryPicker.findComponent(DebouncedInput).exists()).toBe(true)
 	})
 
 	describe('Enter repository owner', () => {
