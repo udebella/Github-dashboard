@@ -20,7 +20,16 @@ describe('RepositoryPicker component', () => {
 
 	beforeEach(() => {
 		setActivePinia(createTestingPinia())
-		mocks = { request: vitest.fn().mockReturnValue(createResponse()) }
+		mocks = {
+			request: vitest.fn().mockReturnValue({
+				search: {
+					nodes: [
+						createRepository({ name: 'first' }),
+						createRepository({ name: 'second', owner: { login: 'john' } })
+					]
+				}
+			})
+		}
 		repositoryPicker = shallowMount(RepositoryPicker, { global: { provide: mocks } })
 	})
 
@@ -40,7 +49,7 @@ describe('RepositoryPicker component', () => {
 			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
 
 			await flushPromises()
-			expect(repositoryPicker.findComponent(CustomSelect).props().items).toEqual(['repository'])
+			expect(repositoryPicker.findComponent(CustomSelect).props().items).toEqual(['first', 'second'])
 		})
 
 		it('should not make queries when update value is empty', async () => {
@@ -52,32 +61,18 @@ describe('RepositoryPicker component', () => {
 
 	describe('Pick a repository', () => {
 		it('should put in the store the repository picked', async () => {
-			mocks.request.mockResolvedValue(
-				createResponse([
-					createRepository({ name: 'first repository' }),
-					createRepository({ name: 'second repository', owner: { login: 'john' } })
-				])
-			)
-			repositoryPicker = shallowMount(RepositoryPicker, { global: { provide: mocks } })
-
 			await repositoryPicker.findComponent(DebouncedInput).vm.$emit('input', 'test')
 
-			await repositoryPicker.findComponent(CustomSelect).vm.$emit('selected', 'second repository')
+			await repositoryPicker.findComponent(CustomSelect).vm.$emit('selected', 'second')
 
 			expect(useRepositoryStore().addRepository).toHaveBeenCalledWith({
 				defaultBranch: 'main',
-				name: 'second repository',
+				name: 'second',
 				owner: 'john',
 				url: 'https://github.com/repository'
 			})
 		})
 	})
-})
-
-const createResponse = (repositories: ResponseRepository[] = [createRepository()]) => ({
-	search: {
-		nodes: repositories
-	}
 })
 
 const createRepository = (options: Partial<ResponseRepository> = {}) => ({
