@@ -2,7 +2,8 @@ import notificationService from '../notifications/notification'
 
 type PullRequest = { title: string; url: string }
 const defaults = { notificationApi: notificationService }
-const pullRequestNotifications = ({ notificationApi } = defaults) => {
+export type Dependencies = { notificationApi: typeof notificationService }
+const pullRequestNotifications = ({ notificationApi }: Dependencies = defaults) => {
 	let alreadyNotified: PullRequest[] = []
 
 	const newList = (pullRequests: PullRequest[]) => {
@@ -17,7 +18,7 @@ const pullRequestNotifications = ({ notificationApi } = defaults) => {
 	}
 
 	const formatNotificationMessage = (prToNotify: PullRequest[]) => {
-		if (prToNotify[0]) {
+		if (prToNotify.length === 1 && prToNotify[0]) {
 			const [{ title }] = prToNotify
 			return `A new pull request was opened: ${title}`
 		} else {
