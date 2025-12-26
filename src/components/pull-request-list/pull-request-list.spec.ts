@@ -7,7 +7,7 @@ import PullRequestLine from '../ui/pull-request-line/pull-request-line.vue'
 import type { Mocks, Wrapper } from '../../test-utils.ts'
 import { buildRepositoriesQuery } from '../../services/graphql/query-builder.ts'
 import { extractHttp as extractPullRequest, type GDPullRequest } from '../../services/pull-request/pull-request.ts'
-import type { pullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications'
+import type { pullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications.ts'
 import type { buildUserService } from '../../services/user/user'
 
 type Dependencies = {
