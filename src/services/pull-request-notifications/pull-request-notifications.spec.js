@@ -1,4 +1,4 @@
-import { pullRequestNotifications } from './pull-request-notifications'
+import { pullRequestNotifications } from './pull-request-notifications.ts'
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('Pull request notification service', () => {

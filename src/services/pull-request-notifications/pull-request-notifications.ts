@@ -1,10 +1,11 @@
 import notificationService from '../notifications/notification'
 
+type PullRequest = { title: string; url: string }
 const defaults = { notificationApi: notificationService }
 const pullRequestNotifications = ({ notificationApi } = defaults) => {
-	let alreadyNotified = []
+	let alreadyNotified: PullRequest[] = []
 
-	const newList = (pullRequests) => {
+	const newList = (pullRequests: PullRequest[]) => {
 		const prToNotify = pullRequests.filter(
 			({ title }) => !alreadyNotified.find((notifiedPr) => notifiedPr.title === title)
 		)
@@ -15,8 +16,8 @@ const pullRequestNotifications = ({ notificationApi } = defaults) => {
 		}
 	}
 
-	const formatNotificationMessage = (prToNotify) => {
-		if (prToNotify.length === 1) {
+	const formatNotificationMessage = (prToNotify: PullRequest[]) => {
+		if (prToNotify[0]) {
 			const [{ title }] = prToNotify
 			return `A new pull request was opened: ${title}`
 		} else {

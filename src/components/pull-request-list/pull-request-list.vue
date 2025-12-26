@@ -38,7 +38,7 @@ import {
 import { buildUserService } from '../../services/user/user'
 import { useRepositoryStore } from '../../stores/repositories/repositories'
 import { computed, inject, ref } from 'vue'
-import { pullRequestNotifications as defaultPullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications'
+import { pullRequestNotifications as defaultPullRequestNotifications } from '../../services/pull-request-notifications/pull-request-notifications.ts'
 import { NO_USER } from '../../services/session/session.ts'
 
 const pullRequestListFragment = `${pullRequestFragment}
