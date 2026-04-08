@@ -41,7 +41,7 @@
 		"plop": "^4.0.5",
 		"prettier": "^3.8.1",
 		"sass": "^1.97.3",
-		"typescript": "^5.9.3",
+		"typescript": "^6.0.2",
 		"vite": "^8.0.1",
 		"vitest": "^4.0.6",
 		"vue-tsc": "^3.2.5"
