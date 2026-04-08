@@ -1,9 +1,9 @@
 import { GraphQLClient } from 'graphql-request'
 import { buildSessionService } from '../session/session'
 import { useConfigurationStore } from '../../stores/configuration/configuration'
-import type { RequestConfig } from 'node_modules/graphql-request/build/legacy/helpers/types'
 
 type GraphqlClient = { request: <Result extends object>(query: string) => Promise<Result> }
+type RequestConfig = { headers: { Authorization: `token ${string}` } }
 export type Dependencies = {
 	builder: (url: string, options: RequestConfig) => GraphqlClient
 	session: Pick<ReturnType<typeof buildSessionService>, 'getUser'>
