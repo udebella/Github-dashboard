@@ -22,28 +22,28 @@
 		"graphql-request": "^7.3.5",
 		"pinia": "^3.0.1",
 		"remixicon": "^4.9.1",
-		"vue": "^3.5.29",
-		"vue-router": "^5.0.3"
+		"vue": "^3.5.33",
+		"vue-router": "^5.0.6"
 	},
 	"devDependencies": {
 		"@pinia/testing": "^1.0.0",
-		"@types/node": "^25.3.3",
-		"@vitejs/plugin-vue": "^6.0.4",
-		"@vitest/coverage-v8": "^4.0.18",
-		"@vitest/eslint-plugin": "^1.6.9",
+		"@types/node": "^25.6.0",
+		"@vitejs/plugin-vue": "^6.0.6",
+		"@vitest/coverage-v8": "^4.1.5",
+		"@vitest/eslint-plugin": "^1.6.16",
 		"@vue/eslint-config-prettier": "^10.2.0",
 		"@vue/eslint-config-typescript": "^14.7.0",
-		"@vue/test-utils": "^2.3.2",
+		"@vue/test-utils": "^2.4.10",
 		"@vue/tsconfig": "^0.9.0",
-		"eslint": "^10.0.2",
-		"eslint-plugin-vue": "^10.8.0",
-		"happy-dom": "^20.7.0",
+		"eslint": "^10.3.0",
+		"eslint-plugin-vue": "^10.9.0",
+		"happy-dom": "^20.9.0",
 		"plop": "^4.0.5",
-		"prettier": "^3.8.1",
+		"prettier": "^3.8.3",
 		"sass": "^1.97.3",
-		"typescript": "^6.0.2",
-		"vite": "^8.0.1",
+		"typescript": "^6.0.3",
+		"vite": "^8.0.10",
 		"vitest": "^4.0.6",
-		"vue-tsc": "^3.2.5"
+		"vue-tsc": "^3.2.7"
 	}
 }
