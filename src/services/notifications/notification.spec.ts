@@ -14,7 +14,7 @@ describe('NotificationAPI', () => {
 	let documentMock: Dependencies['document']
 
 	beforeEach(() => {
-		notificationsMock = vitest.fn() as unknown as Notification
+		notificationsMock = vitest.fn<Notification>()
 		notificationsMock.requestPermission = vitest.fn().mockResolvedValue('denied')
 		documentMock = {
 			hidden: true
