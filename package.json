@@ -20,13 +20,13 @@
 		"date-fns": "^4.4.0",
 		"debounce": "^3.0.0",
 		"graphql-request": "^7.3.5",
-		"pinia": "^3.0.1",
+		"pinia": "^4.0.2",
 		"remixicon": "^4.9.1",
 		"vue": "^3.5.39",
 		"vue-router": "^5.1.0"
 	},
 	"devDependencies": {
-		"@pinia/testing": "^1.0.0",
+		"@pinia/testing": "^2.0.1",
 		"@types/node": "^26.1.0",
 		"@vitejs/plugin-vue": "^6.0.6",
 		"@vitest/coverage-v8": "^4.1.9",

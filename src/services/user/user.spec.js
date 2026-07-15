@@ -1,6 +1,5 @@
-import { expect } from 'chai'
 import { buildUserService } from './user'
-import { beforeEach, describe, it, vitest } from 'vitest'
+import { beforeEach, describe, expect, it, vitest } from 'vitest'
 
 describe('User service', () => {
 	let userService, mocks
