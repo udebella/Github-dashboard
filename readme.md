@@ -21,20 +21,20 @@ The first time, you checkout the project, you will need to use npm to install de
 ```bash
 # nvm install // install node version
 # nvm use // use right node version
-# npm ci // install dependencies for the project
+# pnpm ci // install dependencies for the project
 ```
 
 ## Running tests
 
 To run tests, you need to
 ```bash
-# npm test
+# pnpm test
 ```
 
 ## Generate coverage report
 
 ```bash
-# npm test -- --coverage
+# pnpm test -- --coverage
 ```
 It will generate a coverage report in `/coverage` repository
 
@@ -42,14 +42,14 @@ It will generate a coverage report in `/coverage` repository
 
 To run the project, you need to
 ```bash
-# npm start
+# pnpm start
 ```
 
 ## Building the project
 
 The project can be built with the following command
 ```bash
-# npm run build
+# pnpm run build
 ```
 
 It will generate the bundle in `/dist` repository.
@@ -63,7 +63,7 @@ will automatically launch a build that will deploy to github-pages when complete
 
 To generate component, [plop](https://github.com/amwmedia/plop) has been added :
 ```bash
-# npm run plop
+# pnpm run plop
 ```
 
 It will ask for the component name, and will generate a folder with base files to work with.
