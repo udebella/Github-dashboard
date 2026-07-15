@@ -10,23 +10,32 @@ jobs:
         steps:
             -   name: Checkout
                 uses: actions/checkout@v7
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v6
+              with:
+                  version: latest
+
             -   name: Setup latest NodeJS
                 id: setup-node
                 uses: actions/setup-node@v6
                 with:
                     node-version: lts/*
-                    cache: 'pnpm'
-            -   name: Cache dependencies
-                id: cache-npm-dependencies
-                uses: actions/cache@v6
-                with:
-                    key: ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-${{ hashFiles('**/pnpm-lock.json') }}
-                    path: './node_modules'
+
+            - name : Cache node modules
+              id: cache-node-modules
+              uses: actions/cache@v6
+              with:
+                  path: node_modules
+                  key: node_modules-dev-${{ runner.os }}-node-${{ steps.node-setup.outputs.node-version }}-${{ hashFiles('pnpm-lock.yaml') }}
+
             -   name: Install dependencies
                 if: steps.cache-npm-dependencies.outputs.cache-hit != 'true'
-                run: pnpm ci
+                run: pnpm install --frozen-lockfile
+
             -   name: Build application
                 run: pnpm build
+
             -   name: Deploy on Github-Pages
                 uses: JamesIves/github-pages-deploy-action@v4
                 with:
