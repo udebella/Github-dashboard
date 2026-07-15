@@ -43,7 +43,7 @@ jobs:
                 run: pnpm prebuild
 
             -   name: Unit tests
-                run: pnpm test -- run --coverage
+                run: pnpm test --run --coverage
 
             - name: Code Coverage Report
               uses: irongut/CodeCoverageSummary@v1.3.0
