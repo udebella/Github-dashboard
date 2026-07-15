@@ -18,22 +18,22 @@ jobs:
                 uses: actions/setup-node@v6
                 with:
                     node-version: lts/*
-                    cache: 'npm'
+                    cache: 'pnpm'
             -   name: Cache dependencies
                 id: cache-npm-dependencies
                 uses: actions/cache@v6
                 with:
-                    key: ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-${{ hashFiles('**/package-lock.json') }}
+                    key: ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-${{ hashFiles('**/pnpm-lock.json') }}
                     path: './node_modules'
             -   name: Install dependencies
                 if: steps.cache-npm-dependencies.outputs.cache-hit != 'true'
-                run: npm ci
+                run: pnpm ci
             -   name: Linter
-                run: npm run lint
+                run: pnpm lint
             -   name: Type-check
-                run: npm run prebuild
+                run: pnpm prebuild
             -   name: Unit tests
-                run: npm test -- run --coverage
+                run: pnpm test -- run --coverage
             - name: Code Coverage Report
               uses: irongut/CodeCoverageSummary@v1.3.0
               with:

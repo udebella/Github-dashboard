@@ -15,18 +15,18 @@ jobs:
                 uses: actions/setup-node@v6
                 with:
                     node-version: lts/*
-                    cache: 'npm'
+                    cache: 'pnpm'
             -   name: Cache dependencies
                 id: cache-npm-dependencies
                 uses: actions/cache@v6
                 with:
-                    key: ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-${{ hashFiles('**/package-lock.json') }}
+                    key: ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-${{ hashFiles('**/pnpm-lock.json') }}
                     path: './node_modules'
             -   name: Install dependencies
                 if: steps.cache-npm-dependencies.outputs.cache-hit != 'true'
-                run: npm ci
+                run: pnpm ci
             -   name: Build application
-                run: npm run build
+                run: pnpm build
             -   name: Deploy on Github-Pages
                 uses: JamesIves/github-pages-deploy-action@v4
                 with:
