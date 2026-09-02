@@ -1,5 +1,2 @@
 allowBuilds:
   '@parcel/watcher': false
-minimumReleaseAgeExclude:
-    - '@pinia/testing@2.0.1'
-    - pinia@4.0.2
